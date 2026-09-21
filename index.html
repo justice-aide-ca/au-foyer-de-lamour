@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Au Foyer de l'Amour – Discernement et la petite lumière</title>
+    <meta name="description" content="Au Foyer de l'Amour est un outil d'aide au discernement enraciné dans la foi chrétienne, pour ceux qui cherchent la paix, la justice et un sens à leur vie.">
+    <meta name="keywords" content="discernement, spiritualité, foi chrétienne, prière, examen de conscience, paix intérieure, justice, amour, vérité">
+    <link rel="canonical" href="https://amour-et-verite-app.netlify.app">
+
+    <meta property="og:title" content="Au Foyer de l'Amour – Discernement et la petite lumière" />
+    <meta property="og:description" content="Un espace de discernement et d'écoute. Une petite lumière dans ta nuit." />
+    <meta property="og:image" content="https://amour-et-verite-app.netlify.app/ekklesia-og-image.png" />
+    <meta property="og:url" content="https://amour-et-verite-app.netlify.app" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Au Foyer de l'Amour" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Au Foyer de l'Amour – Discernement et la petite lumière" />
+    <meta name="twitter:description" content="Un espace de discernement et d'écoute. Une petite lumière dans ta nuit." />
+    <meta name="twitter:image" content="https://amour-et-verite-app.netlify.app/ekklesia-og-image.png" />
+
+    <style>
+        body { font-family: Georgia, serif; background: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200') no-repeat center center fixed; background-size: cover; padding: 20px; }
+        .container { max-width: 800px; margin: auto; background: rgba(255, 255, 255, 0.92); padding: 2rem; border-radius: 16px; }
+        h1, h2, h3 { color: #4a3b2c; }
+        h1 { text-align: center; margin-bottom: 0; }
+        .sous-titre { text-align: center; color: #7a6b5a; font-style: italic; margin-top: 0.2rem; margin-bottom: 1.5rem; }
+
+        .nav-menu { display: flex; justify-content: center; flex-wrap: wrap; gap: 0.8rem; margin: 1rem 0 1.5rem; padding: 0.5rem 0; border-top: 1px solid #e6e4e0; border-bottom: 1px solid #e6e4e0; }
+        .nav-menu a { color: #4a3b2c; text-decoration: none; font-size: 0.9rem; padding: 0.3rem 0.6rem; border-radius: 30px; transition: background 0.2s; }
+        .nav-menu a:hover { background: #f0ede8; color: #4a6f5e; }
+
+        .language-selector { display: flex; justify-content: center; flex-wrap: wrap; gap: 0.4rem; margin: 0.5rem 0 1.5rem; }
+        .lang-btn { background: #f0ede8; border: 1px solid #c4b8a8; padding: 0.2rem 0.6rem; border-radius: 30px; cursor: pointer; font-size: 0.75rem; color: #2c2b28; }
+        .lang-btn:hover { background: #e0d8cc; }
+        .lang-btn.active { background: #4a6f5e; color: white; border-color: #4a6f5e; }
+
+        .mode-selector { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem; margin: 1rem 0; }
+        .mode-btn { background: #f0ede8; border: 1px solid #c4b8a8; padding: 0.4rem 1rem; border-radius: 30px; cursor: pointer; font-size: 0.85rem; color: #2c2b28; }
+        .mode-btn:hover { background: #e0d8cc; }
+        .mode-btn.active { background: #4a6f5e; color: white; border-color: #4a6f5e; }
+
+        textarea, input[type="text"] { width: 100%; padding: 8px; margin: 10px 0; border: 1px solid #ddd; border-radius: 8px; font-family: inherit; box-sizing: border-box; }
+        button { background: #4a6f5e; color: white; padding: 10px 20px; border: none; border-radius: 40px; cursor: pointer; font-size: 1rem; }
+        .reponse-card { background: #fefaf5; padding: 15px; border-left: 4px solid #4a6f5e; margin-top: 20px; line-height: 1.5; }
+        .loading { text-align: center; color: #4a6f5e; margin-top: 20px; }
+        .error { color: #c0392b; background: #fdecea; padding: 10px; border-radius: 8px; margin-top: 20px; }
+
+        .situations-container { margin: 1.5rem 0; padding: 1.2rem; background: #f6f3ef; border-radius: 12px; }
+        .situations-container p:first-child { font-weight: bold; color: #4a3b2c; margin-top: 0; margin-bottom: 0.8rem; }
+        .situations-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.4rem 1rem; }
+        .situations-grid label { display: flex; align-items: center; gap: 0.4rem; font-size: 0.9rem; color: #4a3b2c; cursor: pointer; padding: 0.3rem 0; }
+        .situations-grid input[type="radio"] { width: auto; margin: 0; }
+        #precision-situation { margin-top: 0.8rem; width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 8px; font-size: 0.9rem; }
+
+        #response-container { margin-top: 2rem; display: none; }
+        #response-lecture { display: none; }
+
+        /* Carnet */
+        #carnet-container { display: none; margin-top: 2rem; text-align: center; }
+        .silence-message { font-size: 1.2rem; color: #4a3b2c; margin: 1rem 0; }
+        .carnet-box { background: #f6f3ef; padding: 1.5rem; border-radius: 12px; margin: 1rem 0; }
+        .carnet-box textarea { width: 100%; height: 100px; margin: 0.5rem 0; }
+        .carnet-actions { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-top: 1rem; }
+        .btn-carnet { background: #4a6f5e; color: white; border: none; padding: 0.5rem 1rem; border-radius: 40px; cursor: pointer; font-size: 0.9rem; }
+        .btn-carnet.outline { background: transparent; color: #4a6f5e; border: 1px solid #4a6f5e; }
+        .btn-carnet:hover { opacity: 0.9; }
+        .carnet-info { font-size: 0.8rem; color: #7a6b5a; margin-top: 0.8rem; }
+
+        /* Ressources */
+        #ressources-container { display: none; margin-top: 2rem; }
+        .ressources-section { background: #f6f3ef; padding: 1.2rem; border-radius: 12px; margin: 1rem 0; }
+        .ressources-section h3 { margin-top: 0; }
+        .ressources-section ul { list-style: none; padding-left: 0; }
+        .ressources-section li { margin: 0.4rem 0; }
+        .ressources-section a { color: #4a6f5e; text-decoration: none; }
+        .ressources-section a:hover { text-decoration: underline; }
+        .btn-ressources { background: #4a6f5e; color: white; border: none; padding: 0.8rem 1.5rem; border-radius: 40px; cursor: pointer; font-size: 1rem; margin-top: 1rem; }
+
+        /* Avertissement IA */
+        .ai-warning { margin-top: 1rem; padding: 0.6rem 1rem; background: #fefaf5; border: 1px solid #e6e4e0; border-radius: 8px; font-size: 0.85rem; color: #5a4f42; text-align: center; line-height: 1.5; }
+        .ai-warning a { color: #4a6f5e; text-decoration: underline; cursor: pointer; }
+        .emergency-numbers { display: none; margin-top: 0.5rem; font-size: 0.8rem; color: #4a3b2c; }
+        .emergency-numbers.visible { display: block; }
+
+        footer { text-align: center; margin-top: 2rem; font-size: 0.8rem; color: #aaa39a; line-height: 2; }
+        footer a { color: #7a6b5a; text-decoration: none; margin: 0 0.4rem; }
+        footer a:hover { text-decoration: underline; }
+        .footer-credit { font-size: 0.7rem; color: #aaa39a; display: block; margin-top: 0.2rem; }
+        .footer-sep { color: #ddd; }
+        .clause { margin-top: 1.5rem; padding: 0.8rem 1rem; background: #f6f3ef; border-radius: 8px; border-left: 4px solid #4a6f5e; font-size: 0.8rem; color: #5a4f42; line-height: 1.6; text-align: left; }
+        .clause p { margin: 0; }
+
+        .section-card { background: #f6f3ef; padding: 1.2rem; border-radius: 12px; margin: 1.5rem 0; }
+        .section-card h3 { margin-top: 0; }
+        .examen-step { display: none; margin-top: 1rem; }
+        .examen-step.active { display: block; }
+        .btn-examen { background: #4a6f5e; color: white; border: none; padding: 0.4rem 1.2rem; border-radius: 40px; cursor: pointer; margin-right: 0.5rem; }
+        .temoignage-affiche { background: #fefaf5; padding: 0.8rem 1.2rem; border-radius: 12px; border-left: 4px solid #4a6f5e; margin: 0.5rem 0; font-style: italic; }
+        .encart-projets { margin-top: 2rem; padding: 1.2rem; background: #f6f3ef; border-radius: 16px; text-align: center; }
+        .share-buttons { display: flex; justify-content: center; flex-wrap: wrap; gap: 0.8rem; margin: 1.5rem 0; }
+        .share-btn { display: inline-block; padding: 0.4rem 1rem; border-radius: 40px; text-decoration: none; font-size: 0.9rem; color: white; }
+        .share-btn.facebook { background: #1877f2; }
+        .share-btn.twitter { background: #000; }
+        .share-btn.linkedin { background: #0a66c2; }
+        .share-btn.whatsapp { background: #25d366; }
+
+        @media (max-width: 600px) {
+            .situations-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1 id="mainTitle">🕯️ Au Foyer de l'Amour</h1>
+    <div class="sous-titre" id="mainSubtitle">Discernement et la petite lumière</div>
+
+    <div class="nav-menu">
+        <a href='/' id='navHome'>🏠 Accueil</a>
+        <a href='/sagesse' id='navSagesse'>📖 Sagesse</a>
+        <a href='/about' id='navAbout'>📖 À propos</a>
+        <a href='/examen' id='navExamen'>🕯️ Examen</a>
+        <a href='/contact' id='navContact'>✉️ Contact</a>
+        <a href='/admin' id='navAdmin'>📊 Admin</a>
+        <a href='/privacy' id='navPrivacy'>🔒 Confidentialité</a>
+    </div>
+
+    <div class="language-selector">
+        <button class="lang-btn active" data-lang="fr">🇫🇷 Français</button>
+        <button class="lang-btn" data-lang="en">🇬🇧 English</button>
+        <button class="lang-btn" data-lang="zh">🇨🇳 中文</button>
+        <button class="lang-btn" data-lang="hi">🇮🇳 हिन्दी</button>
+        <button class="lang-btn" data-lang="es">🇪🇸 Español</button>
+        <button class="lang-btn" data-lang="ar">🇸🇦 العربية</button>
+    </div>
+
+    <div class="mode-selector">
+        <button class="mode-btn active" data-mode="discernement" id="mode-discernement">🤲 Discernement</button>
+        <button class="mode-btn" data-mode="consolation" id="mode-consolation">🙏 Consolation</button>
+        <button class="mode-btn" data-mode="lecture" id="mode-lecture">📖 Lecture biblique</button>
+        <button class="mode-btn" data-mode="priere" id="mode-priere">❤️ Prière</button>
+    </div>
+
+    <textarea id="situation" rows="6" placeholder="Décrivez votre situation..."></textarea>
+    <input type="text" id="role" placeholder="Qui êtes-vous ? (optionnel)">
+
+    <div class="situations-container">
+        <p id="situations-title">Ou choisissez ce qui correspond le mieux à ce que vous vivez :</p>
+        <div class="situations-grid" id="situations-list">
+            <!-- Généré dynamiquement -->
+        </div>
+        <textarea id="precision-situation" rows="2" placeholder="Tu peux préciser ce que tu vis, si tu le souhaites..."></textarea>
+    </div>
+
+    <button id="submitBtn">Recevoir une aide au discernement →</button>
+
+    <div id="response-container">
+        <div id="response-lecture">
+            <div id="reponse" class="reponse-card"></div>
+        </div>
+    </div>
+
+    <div id="loading" class="loading" style="display:none;">🕯️ Un instant...</div>
+    <div id="error" class="error" style="display:none;"></div>
+
+    <!-- Carnet de petites lumières -->
+    <div id="carnet-container">
+        <div class="silence-message" id="carnet-prompt">✨<br><br>« Et toi, quelle petite lumière pourrais-tu noter aujourd'hui ? »</div>
+        <div class="carnet-box">
+            <textarea id="carnet-entry" placeholder="Ma petite lumière..."></textarea>
+            <div class="carnet-actions">
+                <button class="btn-carnet" id="save-carnet">💾 Sauvegarder</button>
+                <button class="btn-carnet outline" id="copy-carnet-link">🔗 Copier mon lien</button>
+                <button class="btn-carnet outline" id="share-carnet">📤 Partager</button>
+            </div>
+            <div id="carnet-feedback" class="carnet-info"></div>
+            <div class="carnet-info" id="carnet-info-text">Tu pourras revenir plus tard avec ton lien. Rien n'est lié à un compte.</div>
+        </div>
+        <button class="btn-ressources" id="btn-continuer-discernement">🌿 Continuer le discernement</button>
+    </div>
+
+    <!-- Ressources -->
+    <div id="ressources-container">
+        <h2 id="ressources-title" style="text-align:center;">Pour continuer...</h2>
+        <div class="ressources-section">
+            <h3 id="ressources-textes-title">📖 Textes à méditer</h3>
+            <ul id="ressources-textes-list"></ul>
+        </div>
+        <div class="ressources-section">
+            <h3 id="ressources-prieres-title">🙏 Prières</h3>
+            <ul id="ressources-prieres-list"></ul>
+        </div>
+        <div class="ressources-section">
+            <h3 id="ressources-contacts-title">👤 Contacts humains</h3>
+            <ul>
+                <li><a id="ressources-contact-pretre-link" target="_blank"><span id="ressources-contact-pretre-text"></span></a></li>
+                <li><a id="ressources-contact-communaute-link" target="_blank"><span id="ressources-contact-communaute-text"></span></a></li>
+            </ul>
+        </div>
+        <div class="ressources-section">
+            <h3 id="ressources-ecoute-title">🆘 Services d'écoute</h3>
+            <ul id="ressources-ecoute-list"></ul>
+        </div>
+        <div class="ressources-section">
+            <h3 id="ressources-exercices-title">✨ Exercices spirituels</h3>
+            <ul id="ressources-exercices-list"></ul>
+        </div>
+        <div class="ressources-section">
+            <h3>🕯️ Exercices ignatiens</h3>
+            <ul id="ressources-ignaciens-list"></ul>
+        </div>
+        <div class="ressources-section">
+            <h3 id="ressources-revenir-title">🔄 Revenir</h3>
+            <p>
+                <a href='/' id='ressources-revenir-recommencer'>Recommencer</a> |
+                <a href="#" id="save-link-ressources">Sauvegarder mon lien</a>
+            </p>
+        </div>
+    </div>
+
+    <div class="section-card">
+        <h3 id="priere-title">📖 Prière du jour</h3>
+        <div id="priereDuJour" style="font-style:italic; color:#4a3b2c;">« Seigneur, apprends-moi à écouter le silence. »</div>
+    </div>
+
+    <div class="section-card">
+        <h3 id="temoignages-title">💬 Vous avez utilisé Au Foyer de l'Amour ?</h3>
+        <p id="temoignages-intro">Partagez votre expérience (anonyme) :</p>
+        <textarea id="temoignage" rows="3" placeholder="Votre témoignage..."></textarea>
+        <button id="envoyerTemoignage">Envoyer</button>
+        <div id="merciTemoignage" style="display:none; color:#4a6f5e;">🙏 Merci !</div>
+        <div style="margin-top:1rem;">
+            <h4 id="temoignages-recus-title">💬 Témoignages reçus</h4>
+            <div id="temoignagesListe">
+                <!-- Rempli dynamiquement -->
+            </div>
+        </div>
+    </div>
+
+    <div class="encart-projets">
+        <p id="projets-psaume">🌱 « La justice et la paix s'embrassent. » — Psaume 85,11</p>
+        <a href="https://justice-ai-anonyme-u4sn.onrender.com">⚖️ Justice AI</a> |
+        <a href="https://bridge-your-project.lovable.app" target="_blank">🌍 ONBRIDGE AI</a> |
+        <a href="https://cartepastorale-v5-jsow.onrender.com">📜 Carta Pastorale</a>
+        <a href="https://le-bon-alignement-horizon.netlify.app/" target="_blank" style="color: #4a6f5e; text-decoration: none; border-bottom: 1px dotted #c4b8a8; padding-bottom: 0.1rem;">📐 Le Bon Alignement</a>
+        <p class="encart-credit" id="projets-credit">Des outils pour la justice, la paix et le discernement.</p>
+    </div>
+
+    <footer id="mainFooter">
+        <span id="footer-nothing">🔒 Rien n'est enregistré · 🕊️ Un compagnon silencieux</span><br>
+        <a href='/' id='footer-home'>🏠 Accueil</a> |
+        <a href='/sagesse' id='footer-sagesse'>📖 Sagesse</a> |
+        <a href='/about' id='footer-about'>📖 À propos</a> |
+        <a href='/contact' id='footer-contact'>✉️ Contact</a>
+        <div class="ai-warning">
+            <span id="ai-warning-text">Je suis une intelligence artificielle. Je ne remplace pas un accompagnement humain, un prêtre, un psychologue ou un médecin. Si ta situation est grave, je t'encourage à chercher un soutien humain.</span><br>
+            <a id="toggle-urgence">Voir les numéros d'urgence</a>
+            <div id="urgence-list" class="emergency-numbers"></div>
+        </div>
+        <div class="clause">
+            <p id="clause-text">🙏 <strong>À propos d'Au Foyer de l'Amour</strong><br>
+            Cet outil offre une <strong>première écoute</strong> et une <strong>aide au discernement</strong>, sans remplacer un accompagnement humain.</p>
+        </div>
+    </footer>
+</div>
+
+<script>
+// ============================================================
+// TRADUCTIONS COMPLÈTES 6 LANGUES
+// ============================================================
+const translations = {
+    fr: {
+        title: "🕯️ Au Foyer de l'Amour", subtitle: "Discernement et la petite lumière",
+        placeholder: "Décrivez votre situation...", role: "Qui êtes-vous ? (optionnel)",
+        submit: "Recevoir une aide au discernement →", loading: "🕯️ Un instant...",
+        situationsTitle: "Ou choisissez ce qui correspond le mieux à ce que vous vivez :",
+        precisionPlaceholder: "Tu peux préciser ce que tu vis, si tu le souhaites...",
+        responseReady: "Ta réponse est prête.",
+        btnContinuer: "🌿 Continuer le discernement",
+        ressourcesTitle: "Pour continuer...",
+        textesTitle: "📖 Textes à méditer", prieresTitle: "🙏 Prières", contactsTitle: "👤 Contacts humains",
+        ecouteTitle: "🆘 Services d'écoute", exercicesTitle: "✨ Exercices spirituels",
+        revenirTitle: "🔄 Revenir", revenirRecommencer: "Recommencer", saveLink: "Sauvegarder mon lien",
+        priereJourTitle: "📖 Prière du jour",
+        temoignagesTitle: "💬 Vous avez utilisé Au Foyer de l'Amour ?",
+        temoignagesIntro: "Partagez votre expérience (anonyme) :",
+        temoignagesPlaceholder: "Votre témoignage...", envoyer: "Envoyer", merci: "🙏 Merci !",
+        temoignagesRecus: "💬 Témoignages reçus",
+        projetsPsaume: "🌱 « La justice et la paix s'embrassent. » — Psaume 85,11",
+        projetsCredit: "Des outils pour la justice, la paix et le discernement.",
+        footerNothing: "🔒 Rien n'est enregistré · 🕊️ Un compagnon silencieux",
+        footerHome: "🏠 Accueil", footerSagesse: "📖 Sagesse", footerAbout: "📖 À propos", footerContact: "✉️ Contact",
+        aiWarning: "Je suis une intelligence artificielle. Je ne remplace pas un accompagnement humain, un prêtre, un psychologue ou un médecin. Si ta situation est grave, je t'encourage à chercher un soutien humain.",
+        toggleUrgence: "Voir les numéros d'urgence",
+        clauseText: "🙏 <strong>À propos d'Au Foyer de l'Amour</strong><br>Cet outil offre une <strong>première écoute</strong> et une <strong>aide au discernement</strong>, sans remplacer un accompagnement humain.",
+        navHome: "🏠 Accueil", navSagesse: "📖 Sagesse", navAbout: "📖 À propos", navExamen: "🕯️ Examen", navContact: "✉️ Contact", navAdmin: "📊 Admin", navPrivacy: "🔒 Confidentialité",
+        situations: [
+            "Je traverse une grande souffrance", "Je ne vois plus de sens à ma vie", "Mon couple va mal", "J'ai perdu un être cher",
+            "Je me sens seul(e)", "Je suis en colère contre Dieu", "Je ne sais plus quoi croire", "Je dois prendre une décision difficile",
+            "Je vis une maladie ou un handicap", "J'ai peur de l'avenir", "Je suis épuisé(e)", "Je vis un conflit familial",
+            "J'accompagne une personne en souffrance", "Je cherche un sens à ma vie", "Autre chose"
+        ],
+        prieres: ["Seigneur, apprends-moi à écouter le silence.", "Donne-moi la force d'accueillir ce que je ne comprends pas.", "Que Ta paix habite mon cœur."],
+        defaultTestimonials: ["« Une paix profonde. »", "« Un espace de silence précieux. »"],
+        textesParSituation: {
+            "Je traverse une grande souffrance": [
+                { ref: "Psaume 22", texte: "Mon Dieu, mon Dieu, pourquoi m'as-tu abandonné ?", lien: "https://www.aelf.org/bible/Ps/22" },
+                { ref: "Isaïe 53", texte: "C'étaient nos souffrances qu'il portait", lien: "https://www.aelf.org/bible/Is/53" },
+                { ref: "Matthieu 5,4", texte: "Heureux ceux qui pleurent, ils seront consolés", lien: "https://www.aelf.org/bible/Mt/5" }
+            ],
+            "Je ne vois plus de sens à ma vie": [
+                { ref: "Qohélet 3,1-8", texte: "Il y a un temps pour tout", lien: "https://www.aelf.org/bible/Qo/3" },
+                { ref: "Jérémie 29,11", texte: "Je connais les projets que j'ai formés sur vous", lien: "https://www.aelf.org/bible/Jr/29" },
+                { ref: "Jean 10,10", texte: "Je suis venu pour qu'ils aient la vie en abondance", lien: "https://www.aelf.org/bible/Jn/10" }
+            ],
+            "Mon couple va mal": [
+                { ref: "1 Corinthiens 13", texte: "L'amour est patient, l'amour est bon", lien: "https://www.aelf.org/bible/1Co/13" },
+                { ref: "Éphésiens 5,25-33", texte: "Maris, aimez vos femmes comme le Christ a aimé l'Église", lien: "https://www.aelf.org/bible/Ep/5" },
+                { ref: "Colossiens 3,12-14", texte: "Revêtez-vous de l'amour, lien de la perfection", lien: "https://www.aelf.org/bible/Col/3" }
+            ],
+            "J'ai perdu un être cher": [
+                { ref: "Psaume 23", texte: "Le Seigneur est mon berger, je ne manque de rien", lien: "https://www.aelf.org/bible/Ps/23" },
+                { ref: "Jean 11,25-26", texte: "Je suis la résurrection et la vie", lien: "https://www.aelf.org/bible/Jn/11" },
+                { ref: "Apocalypse 21,4", texte: "Il essuiera toute larme de leurs yeux", lien: "https://www.aelf.org/bible/Ap/21" }
+            ],
+            "Je me sens seul(e)": [
+                { ref: "Psaume 27", texte: "Le Seigneur est ma lumière et mon salut", lien: "https://www.aelf.org/bible/Ps/27" },
+                { ref: "Isaïe 41,10", texte: "Ne crains rien, je suis avec toi", lien: "https://www.aelf.org/bible/Is/41" },
+                { ref: "Matthieu 28,20", texte: "Je suis avec vous tous les jours", lien: "https://www.aelf.org/bible/Mt/28" }
+            ],
+            "Je suis en colère contre Dieu": [
+                { ref: "Psaume 13", texte: "Jusqu'à quand, Seigneur, m'oublieras-tu ?", lien: "https://www.aelf.org/bible/Ps/13" },
+                { ref: "Job 7", texte: "Job crie sa souffrance", lien: "https://www.aelf.org/bible/Jb/7" },
+                { ref: "Matthieu 27,46", texte: "Mon Dieu, pourquoi m'as-tu abandonné ?", lien: "https://www.aelf.org/bible/Mt/27" }
+            ],
+            "Je ne sais plus quoi croire": [
+                { ref: "Marc 9,24", texte: "Je crois, viens au secours de mon incrédulité", lien: "https://www.aelf.org/bible/Mc/9" },
+                { ref: "Jean 20,24-29", texte: "Thomas et le doute", lien: "https://www.aelf.org/bible/Jn/20" },
+                { ref: "1 Corinthiens 13,12", texte: "Nous voyons comme dans un miroir, de façon confuse", lien: "https://www.aelf.org/bible/1Co/13" }
+            ],
+            "Je dois prendre une décision difficile": [
+                { ref: "Proverbes 3,5-6", texte: "Confie-toi en Dieu de tout ton cœur", lien: "https://www.aelf.org/bible/Pr/3" },
+                { ref: "Matthieu 7,7-8", texte: "Demandez, on vous donnera", lien: "https://www.aelf.org/bible/Mt/7" },
+                { ref: "Jacques 1,5", texte: "Si l'un de vous manque de sagesse, qu'il la demande à Dieu", lien: "https://www.aelf.org/bible/Jc/1" }
+            ],
+            "Je vis une maladie ou un handicap": [
+                { ref: "Psaume 41", texte: "Heureux celui qui pense au pauvre et au malade", lien: "https://www.aelf.org/bible/Ps/41" },
+                { ref: "2 Corinthiens 12,9", texte: "Ma grâce te suffit, ma puissance s'accomplit dans la faiblesse", lien: "https://www.aelf.org/bible/2Co/12" },
+                { ref: "Matthieu 11,28-30", texte: "Venez à moi, vous qui peinez", lien: "https://www.aelf.org/bible/Mt/11" }
+            ],
+            "J'ai peur de l'avenir": [
+                { ref: "Jérémie 29,11", texte: "Je connais les projets que j'ai formés sur vous", lien: "https://www.aelf.org/bible/Jr/29" },
+                { ref: "Matthieu 6,25-34", texte: "Ne vous inquiétez pas pour demain", lien: "https://www.aelf.org/bible/Mt/6" },
+                { ref: "Philippiens 4,6-7", texte: "La paix de Dieu gardera vos cœurs", lien: "https://www.aelf.org/bible/Ph/4" }
+            ],
+            "Je suis épuisé(e)": [
+                { ref: "Psaume 62", texte: "En Dieu seul mon repos", lien: "https://www.aelf.org/bible/Ps/62" },
+                { ref: "Isaïe 40,28-31", texte: "Ceux qui espèrent en Dieu reprennent des forces", lien: "https://www.aelf.org/bible/Is/40" },
+                { ref: "Matthieu 11,28-30", texte: "Venez à moi, vous qui peinez, et je vous donnerai le repos", lien: "https://www.aelf.org/bible/Mt/11" }
+            ],
+            "Je vis un conflit familial": [
+                { ref: "Éphésiens 4,31-32", texte: "Soyez bons les uns envers les autres, pardonnez-vous", lien: "https://www.aelf.org/bible/Ep/4" },
+                { ref: "Colossiens 3,12-14", texte: "Revêtez-vous de patience et d'amour", lien: "https://www.aelf.org/bible/Col/3" },
+                { ref: "Matthieu 18,21-22", texte: "Je ne te dis pas jusqu'à sept fois, mais jusqu'à soixante-dix fois sept fois", lien: "https://www.aelf.org/bible/Mt/18" }
+            ],
+            "J'accompagne une personne en souffrance": [
+                { ref: "Galates 6,2", texte: "Portez les fardeaux les uns des autres", lien: "https://www.aelf.org/bible/Ga/6" },
+                { ref: "Luc 10,25-37", texte: "La parabole du Bon Samaritain", lien: "https://www.aelf.org/bible/Lc/10" },
+                { ref: "Matthieu 25,40", texte: "Ce que vous avez fait au plus petit, c'est à moi que vous l'avez fait", lien: "https://www.aelf.org/bible/Mt/25" }
+            ],
+            "Je cherche un sens à ma vie": [
+                { ref: "Qohélet 3,11", texte: "Dieu a fait toute chose belle en son temps", lien: "https://www.aelf.org/bible/Qo/3" },
+                { ref: "Jean 14,6", texte: "Je suis le chemin, la vérité, la vie", lien: "https://www.aelf.org/bible/Jn/14" },
+                { ref: "Éphésiens 2,10", texte: "Nous sommes l'ouvrage de Dieu, créés pour des œuvres bonnes", lien: "https://www.aelf.org/bible/Ep/2" }
+            ],
+            "Autre chose": [
+                { ref: "Psaume 62", texte: "En Dieu seul mon repos", lien: "https://www.aelf.org/bible/Ps/62" },
+                { ref: "Isaïe 41,10", texte: "Ne crains rien, je suis avec toi", lien: "https://www.aelf.org/bible/Is/41" },
+                { ref: "Matthieu 11,28", texte: "Venez à moi, vous qui peinez", lien: "https://www.aelf.org/bible/Mt/11" }
+            ]
+        },
+        prieresParSituation: {
+            defaut: [
+                { titre: "Prière du matin", texte: "Seigneur, en ce matin, je te confie ma journée. Apprends-moi à écouter le silence et à y trouver ta voix. Donne-moi la force d'accueillir ce que je ne comprends pas et de marcher avec confiance sur le chemin que tu me proposes. Amen." },
+                { titre: "Prière pour les jours difficiles", texte: "Seigneur, je te confie mes peurs et mes doutes. Quand la nuit est profonde et que je ne vois plus la lumière, tiens-moi par la main. Fais de ma faiblesse un lieu où ta grâce peut agir. Amen." },
+                { titre: "Prière du soir", texte: "Seigneur, je te remercie pour ce jour qui s'achève. J'en dépose les joies et les peines entre tes mains. Accorde-moi le repos du corps et du cœur, et la grâce de commencer demain avec confiance. Amen." },
+                { titre: "Prière pour apprendre à pardonner", texte: "Seigneur, toi qui pardonne toujours, dépose en moi la force du pardon. Guéris les blessures qui m'empêchent d'ouvrir les mains et le cœur. Quand la colère ou la jalousie m'envahissent, rappelle-moi que tu m'as aimé le premier, et que ton amour est plus grand que mes enfermements. Amen." }
+            ]
+        },
+        exercicesIgnatiens: [
+            { titre: "L'examen de conscience", texte: "Prends quelques minutes en silence. Passe en revue ta journée. Où as-tu ressenti de la paix (consolation) ? Où as-tu ressenti du trouble (désolation) ? Remercie Dieu pour les moments de lumière, et confie-lui les moments plus sombres." },
+            { titre: "La relecture de vie", texte: "Choisis un événement récent, heureux ou difficile. Relis-le à la lumière de Dieu : qu'as-tu ressenti ? Qu'as-tu appris ? Où Dieu était-il présent, même de façon discrète ?" },
+            { titre: "Le discernement des esprits", texte: "Face à un choix ou à une situation, observe ce qui monte en toi. Ce qui t'apporte une paix profonde et durable vient de Dieu. Ce qui provoque un trouble persistant, une agitation sans issue, peut venir d'un autre esprit. Apprends à reconnaître ces mouvements intérieurs." },
+            { titre: "L'oraison silencieuse", texte: "Assieds-toi calmement. Respire profondément. Choisis un mot (Jésus, paix, lumière) ou un verset biblique. Répète-le doucement dans ton cœur. Quand des pensées surviennent, laisse-les passer et reviens doucement à ton mot. Reste ainsi quelques minutes, simplement en présence de Dieu." }
+        ],
+        ecouteList: ["SOS Amitié (France) : 09 72 39 40 50", "Suicide Écoute (France) : 01 45 39 40 00", "Tel-Aide (Québec) : 514 935-1101", "Ligne de prévention du suicide (Québec) : 1 866 APPELLE (277-3553)"],
+        contactPretreText: "Trouver un prêtre ou un accompagnant", contactPretreUrl: "https://www.cccb.ca/fr/dioceses/",
+        contactCommunauteText: "Communauté près de chez vous", contactCommunauteUrl: "https://www.cccb.ca/fr/paroisses/",
+        carnetPrompt: "✨<br><br>« Et toi, quelle petite lumière pourrais-tu noter aujourd'hui ? »",
+        carnetPlaceholder: "Ma petite lumière...", saveBtn: "💾 Sauvegarder", copyBtn: "🔗 Copier mon lien", shareBtn: "📤 Partager",
+        carnetInfo: "Tu pourras revenir plus tard avec ton lien. Rien n'est lié à un compte.",
+        modes: { discernement: "🤲 Discernement", consolation: "🙏 Consolation", lecture: "📖 Lecture biblique", priere: "❤️ Prière" }
+    },
+    en: {
+        title: "🕯️ Home of Love", subtitle: "Discernment and the little light",
+        placeholder: "Describe your situation...", role: "Who are you? (optional)",
+        submit: "Receive discernment help →", loading: "🕯️ One moment...",
+        situationsTitle: "Or choose what best matches what you are experiencing:",
+        precisionPlaceholder: "You can specify what you are experiencing, if you wish...",
+        responseReady: "Your answer is ready.",
+        btnContinuer: "🌿 Continue discernment",
+        ressourcesTitle: "To continue...",
+        textesTitle: "📖 Texts to meditate on", prieresTitle: "🙏 Prayers", contactsTitle: "👤 Human contacts",
+        ecouteTitle: "🆘 Listening services", exercicesTitle: "✨ Spiritual exercises",
+        revenirTitle: "🔄 Return", revenirRecommencer: "Start over", saveLink: "Save my link",
+        priereJourTitle: "📖 Prayer of the day",
+        temoignagesTitle: "💬 Have you used Home of Love?",
+        temoignagesIntro: "Share your experience (anonymous):",
+        temoignagesPlaceholder: "Your testimony...", envoyer: "Send", merci: "🙏 Thank you!",
+        temoignagesRecus: "💬 Testimonials received",
+        projetsPsaume: "🌱 « Justice and peace embrace. » — Psalm 85:11",
+        projetsCredit: "Tools for justice, peace and discernment.",
+        footerNothing: "🔒 Nothing is recorded · 🕊️ A silent companion",
+        footerHome: "🏠 Home", footerSagesse: "📖 Wisdom", footerAbout: "📖 About", footerContact: "✉️ Contact",
+        aiWarning: "I am an artificial intelligence. I do not replace human support, a priest, a psychologist or a doctor. If your situation is serious, I encourage you to seek human support.",
+        toggleUrgence: "See emergency numbers",
+        clauseText: "🙏 <strong>About Home of Love</strong><br>This tool offers <strong>initial listening</strong> and <strong>discernment help</strong>, without replacing human support.",
+        navHome: "🏠 Home", navSagesse: "📖 Wisdom", navAbout: "📖 About", navExamen: "🕯️ Examination", navContact: "✉️ Contact", navAdmin: "📊 Admin", navPrivacy: "🔒 Privacy",
+        situations: [
+            "I am going through great suffering", "I no longer see meaning in my life", "My relationship is in trouble", "I have lost a loved one",
+            "I feel alone", "I am angry with God", "I don't know what to believe anymore", "I have a difficult decision to make",
+            "I am living with illness or disability", "I am afraid of the future", "I am exhausted", "I am experiencing family conflict",
+            "I am accompanying someone in suffering", "I am searching for meaning in my life", "Something else"
+        ],
+        prieres: ["Lord, teach me to listen to silence.", "Give me strength to embrace what I do not understand.", "Let Your peace dwell in my heart."],
+        defaultTestimonials: ["« A deep peace. »", "« A precious space of silence. »"],
+        textesParSituation: {
+            "I am going through great suffering": [
+                { ref: "Psalm 22", texte: "My God, my God, why have you forsaken me?", lien: "https://www.biblegateway.com/passage/?search=Psalm+22" },
+                { ref: "Isaiah 53", texte: "He bore our sufferings", lien: "https://www.biblegateway.com/passage/?search=Isaiah+53" },
+                { ref: "Matthew 5:4", texte: "Blessed are those who mourn, for they shall be comforted", lien: "https://www.biblegateway.com/passage/?search=Matthew+5" }
+            ],
+            "I no longer see meaning in my life": [
+                { ref: "Ecclesiastes 3:1-8", texte: "There is a time for everything", lien: "https://www.biblegateway.com/passage/?search=Ecclesiastes+3" },
+                { ref: "Jeremiah 29:11", texte: "I know the plans I have for you", lien: "https://www.biblegateway.com/passage/?search=Jeremiah+29" },
+                { ref: "John 10:10", texte: "I have come that they may have life in abundance", lien: "https://www.biblegateway.com/passage/?search=John+10" }
+            ],
+            "My relationship is in trouble": [
+                { ref: "1 Corinthians 13", texte: "Love is patient, love is kind", lien: "https://www.biblegateway.com/passage/?search=1+Corinthians+13" },
+                { ref: "Ephesians 5:25-33", texte: "Husbands, love your wives as Christ loved the Church", lien: "https://www.biblegateway.com/passage/?search=Ephesians+5" },
+                { ref: "Colossians 3:12-14", texte: "Put on love, which binds everything together", lien: "https://www.biblegateway.com/passage/?search=Colossians+3" }
+            ],
+            "I have lost a loved one": [
+                { ref: "Psalm 23", texte: "The Lord is my shepherd", lien: "https://www.biblegateway.com/passage/?search=Psalm+23" },
+                { ref: "John 11:25-26", texte: "I am the resurrection and the life", lien: "https://www.biblegateway.com/passage/?search=John+11" },
+                { ref: "Revelation 21:4", texte: "He will wipe every tear from their eyes", lien: "https://www.biblegateway.com/passage/?search=Revelation+21" }
+            ],
+            "I feel alone": [
+                { ref: "Psalm 27", texte: "The Lord is my light and my salvation", lien: "https://www.biblegateway.com/passage/?search=Psalm+27" },
+                { ref: "Isaiah 41:10", texte: "Fear not, I am with you", lien: "https://www.biblegateway.com/passage/?search=Isaiah+41" },
+                { ref: "Matthew 28:20", texte: "I am with you always", lien: "https://www.biblegateway.com/passage/?search=Matthew+28" }
+            ],
+            "I am angry with God": [
+                { ref: "Psalm 13", texte: "How long, Lord? Will you forget me forever?", lien: "https://www.biblegateway.com/passage/?search=Psalm+13" },
+                { ref: "Job 7", texte: "Job cries out in suffering", lien: "https://www.biblegateway.com/passage/?search=Job+7" },
+                { ref: "Matthew 27:46", texte: "My God, why have you forsaken me?", lien: "https://www.biblegateway.com/passage/?search=Matthew+27" }
+            ],
+            "I don't know what to believe anymore": [
+                { ref: "Mark 9:24", texte: "I believe; help my unbelief", lien: "https://www.biblegateway.com/passage/?search=Mark+9" },
+                { ref: "John 20:24-29", texte: "Thomas and doubt", lien: "https://www.biblegateway.com/passage/?search=John+20" },
+                { ref: "1 Corinthians 13:12", texte: "Now we see only a reflection as in a mirror", lien: "https://www.biblegateway.com/passage/?search=1+Corinthians+13" }
+            ],
+            "I have a difficult decision to make": [
+                { ref: "Proverbs 3:5-6", texte: "Trust in the Lord with all your heart", lien: "https://www.biblegateway.com/passage/?search=Proverbs+3" },
+                { ref: "Matthew 7:7-8", texte: "Ask and it will be given to you", lien: "https://www.biblegateway.com/passage/?search=Matthew+7" },
+                { ref: "James 1:5", texte: "If any of you lacks wisdom, you should ask God", lien: "https://www.biblegateway.com/passage/?search=James+1" }
+            ],
+            "I am living with illness or disability": [
+                { ref: "Psalm 41", texte: "Blessed are those who have regard for the weak", lien: "https://www.biblegateway.com/passage/?search=Psalm+41" },
+                { ref: "2 Corinthians 12:9", texte: "My grace is sufficient for you", lien: "https://www.biblegateway.com/passage/?search=2+Corinthians+12" },
+                { ref: "Matthew 11:28-30", texte: "Come to me, all you who are weary and burdened", lien: "https://www.biblegateway.com/passage/?search=Matthew+11" }
+            ],
+            "I am afraid of the future": [
+                { ref: "Jeremiah 29:11", texte: "I know the plans I have for you", lien: "https://www.biblegateway.com/passage/?search=Jeremiah+29" },
+                { ref: "Matthew 6:25-34", texte: "Do not worry about tomorrow", lien: "https://www.biblegateway.com/passage/?search=Matthew+6" },
+                { ref: "Philippians 4:6-7", texte: "The peace of God will guard your hearts", lien: "https://www.biblegateway.com/passage/?search=Philippians+4" }
+            ],
+            "I am exhausted": [
+                { ref: "Psalm 62", texte: "Truly my soul finds rest in God", lien: "https://www.biblegateway.com/passage/?search=Psalm+62" },
+                { ref: "Isaiah 40:28-31", texte: "Those who hope in the Lord will renew their strength", lien: "https://www.biblegateway.com/passage/?search=Isaiah+40" },
+                { ref: "Matthew 11:28-30", texte: "Come to me, and I will give you rest", lien: "https://www.biblegateway.com/passage/?search=Matthew+11" }
+            ],
+            "I am experiencing family conflict": [
+                { ref: "Ephesians 4:31-32", texte: "Be kind to one another, forgiving each other", lien: "https://www.biblegateway.com/passage/?search=Ephesians+4" },
+                { ref: "Colossians 3:12-14", texte: "Clothe yourselves with patience and love", lien: "https://www.biblegateway.com/passage/?search=Colossians+3" },
+                { ref: "Matthew 18:21-22", texte: "I tell you, not seven times, but seventy-seven times", lien: "https://www.biblegateway.com/passage/?search=Matthew+18" }
+            ],
+            "I am accompanying someone in suffering": [
+                { ref: "Galatians 6:2", texte: "Carry each other's burdens", lien: "https://www.biblegateway.com/passage/?search=Galatians+6" },
+                { ref: "Luke 10:25-37", texte: "The parable of the Good Samaritan", lien: "https://www.biblegateway.com/passage/?search=Luke+10" },
+                { ref: "Matthew 25:40", texte: "Whatever you did for one of the least of these, you did for me", lien: "https://www.biblegateway.com/passage/?search=Matthew+25" }
+            ],
+            "I am searching for meaning in my life": [
+                { ref: "Ecclesiastes 3:11", texte: "He has made everything beautiful in its time", lien: "https://www.biblegateway.com/passage/?search=Ecclesiastes+3" },
+                { ref: "John 14:6", texte: "I am the way, the truth, the life", lien: "https://www.biblegateway.com/passage/?search=John+14" },
+                { ref: "Ephesians 2:10", texte: "We are God's handiwork, created for good works", lien: "https://www.biblegateway.com/passage/?search=Ephesians+2" }
+            ],
+            "Something else": [
+                { ref: "Psalm 62", texte: "Truly my soul finds rest in God", lien: "https://www.biblegateway.com/passage/?search=Psalm+62" },
+                { ref: "Isaiah 41:10", texte: "Fear not, I am with you", lien: "https://www.biblegateway.com/passage/?search=Isaiah+41" },
+                { ref: "Matthew 11:28", texte: "Come to me, all you who are weary", lien: "https://www.biblegateway.com/passage/?search=Matthew+11" }
+            ]
+        },
+        prieresParSituation: {
+            defaut: [
+                { titre: "Morning Prayer", texte: "Lord, this morning, I entrust my day to you. Teach me to listen to silence and to find your voice there. Give me the strength to welcome what I do not understand and to walk with trust on the path you propose. Amen." },
+                { titre: "Prayer for Difficult Days", texte: "Lord, I entrust my fears and my doubts to you. When the night is deep and I can no longer see the light, hold me by the hand. Make my weakness a place where your grace can act. Amen." },
+                { titre: "Evening Prayer", texte: "Lord, I thank you for this day that is ending. I place its joys and sorrows in your hands. Grant me rest of body and heart, and the grace to begin tomorrow with trust. Amen." },
+                { titre: "Prayer to learn to forgive", texte: "Lord, you who always forgive, place in me the strength to forgive. Heal the wounds that keep me from opening my hands and my heart. When anger or jealousy overwhelm me, remind me that you loved me first, and that your love is greater than my enclosures. Amen." }
+            ]
+        },
+        exercicesIgnatiens: [
+            { titre: "The Examen", texte: "Take a few minutes in silence. Review your day. Where did you feel peace (consolation)? Where did you feel disturbance (desolation)? Thank God for the moments of light, and entrust the darker moments to him." },
+            { titre: "Life Review", texte: "Choose a recent event, happy or difficult. Re-read it in God's light: what did you feel? What did you learn? Where was God present, even in a discreet way?" },
+            { titre: "Discernment of Spirits", texte: "Faced with a choice or a situation, observe what rises within you. What brings you deep and lasting peace comes from God. What causes persistent disturbance, endless agitation, may come from another spirit. Learn to recognize these interior movements." },
+            { titre: "Silent Prayer", texte: "Sit calmly. Breathe deeply. Choose a word (Jesus, peace, light) or a Bible verse. Repeat it gently in your heart. When thoughts arise, let them pass and gently return to your word. Stay like this for a few minutes, simply in God's presence." }
+        ],
+        ecouteList: ["Samaritans (UK): 116 123", "National Suicide Prevention Lifeline (US): 988", "Crisis Text Line: text HOME to 741741"],
+        contactPretreText: "Find a priest or a companion", contactPretreUrl: "https://www.usccb.org/parish-finder",
+        contactCommunauteText: "Community near you", contactCommunauteUrl: "https://www.catholic.org/parishes/",
+        carnetPrompt: "✨<br><br>« And you, what little light could you note today? »",
+        carnetPlaceholder: "My little light...", saveBtn: "💾 Save", copyBtn: "🔗 Copy my link", shareBtn: "📤 Share",
+        carnetInfo: "You can come back later with your link. Nothing is linked to an account.",
+        modes: { discernement: "🤲 Discernment", consolation: "🙏 Consolation", lecture: "📖 Bible Reading", priere: "❤️ Prayer" }
+    },
+    zh: {
+        title: "🕯️ 爱之家", subtitle: "辨别与小光",
+        placeholder: "描述你的情况...", role: "你是谁？（可选）",
+        submit: "获得辨别帮助 →", loading: "🕯️ 请稍候...",
+        situationsTitle: "或选择最符合你经历的情况：",
+        precisionPlaceholder: "如果你想，你可以详细说明你的情况...",
+        responseReady: "你的回答准备好了。",
+        btnContinuer: "🌿 继续辨别",
+        ressourcesTitle: "继续...",
+        textesTitle: "📖 默想经文", prieresTitle: "🙏 祈祷", contactsTitle: "👤 人际联系",
+        ecouteTitle: "🆘 聆听服务", exercicesTitle: "✨ 灵修练习",
+        revenirTitle: "🔄 返回", revenirRecommencer: "重新开始", saveLink: "保存我的链接",
+        priereJourTitle: "📖 每日祈祷",
+        temoignagesTitle: "💬 你使用过爱之家吗？",
+        temoignagesIntro: "分享你的经历（匿名）：",
+        temoignagesPlaceholder: "你的见证...", envoyer: "发送", merci: "🙏 谢谢！",
+        temoignagesRecus: "💬 收到的见证",
+        projetsPsaume: "🌱 « 正义与和平相亲。 » — 诗篇 85:11",
+        projetsCredit: "为正义、和平与辨别的工具。",
+        footerNothing: "🔒 无记录 · 🕊️ 一位沉默的伴侣",
+        footerHome: "🏠 首页", footerSagesse: "📖 智慧", footerAbout: "📖 关于", footerContact: "✉️ 联系",
+        aiWarning: "我是一个人工智能。我不能替代人际支持、神父、心理学家或医生。如果你的情况严重，请寻求人际支持。",
+        toggleUrgence: "查看紧急号码",
+        clauseText: "🙏 <strong>关于爱之家</strong><br>此工具提供<strong>初步聆听</strong>和<strong>辨别帮助</strong>，不能替代人际支持。",
+        navHome: "🏠 首页", navSagesse: "📖 智慧", navAbout: "📖 关于", navExamen: "🕯️ 检查", navContact: "✉️ 联系", navAdmin: "📊 管理", navPrivacy: "🔒 隐私",
+        situations: [
+            "我正在经历巨大的痛苦", "我找不到生活的意义", "我的感情关系出现了问题", "我失去了一位亲人",
+            "我感到孤独", "我对上帝感到愤怒", "我不知道该相信什么", "我需要做出一个艰难的决定",
+            "我患有疾病或残疾", "我害怕未来", "我筋疲力尽", "我正经历家庭冲突",
+            "我在陪伴一位受苦的人", "我在寻找生命的意义", "其他"
+        ],
+        prieres: ["主啊，求你教我聆听寂静。", "求你给我力量去接受我不理解的事物。", "愿你的平安居住在我心中。"],
+        defaultTestimonials: ["« 深深的平安。 »", "« 宝贵的寂静空间。 »"],
+        textesParSituation: {},
+        prieresParSituation: {
+            defaut: [
+                { titre: "晨祷", texte: "主啊，今天早上，我将我的一天交托给你。教我聆听寂静，并在其中找到你的声音。给我力量去接受我不理解的事物，并带着信心走在你为我预备的道路上。阿们。" },
+                { titre: "困难日子的祈祷", texte: "主啊，我将我的恐惧和疑虑交托给你。当黑夜深沉，我看不见亮光时，求你握住我的手。让我的软弱成为你恩典运行的地方。阿们。" },
+                { titre: "晚祷", texte: "主啊，我为这结束的一天感谢你。我将这一天的喜乐和忧愁都放在你手中。求你赐我身体和心灵的安息，并赐我恩典，让我明天带着信心开始。阿们。" }
+            ]
+        },
+        exercicesIgnatiens: [
+            { titre: "省察", texte: "花几分钟在寂静中。回顾你的一天。你在哪里感到平安（神慰）？你在哪里感到不安（神枯）？为光明的时刻感谢天主，将较黑暗的时刻托付给他。" },
+            { titre: "生活回顾", texte: "选择一个最近的事件，无论是快乐的还是困难的。在天主的光照下重读它：你感受到了什么？你学到了什么？天主在哪里以隐秘的方式临在？" },
+            { titre: "辨别神类", texte: "面对选择或情况，观察你内心升起的东西。带来深度和持久平安的来自天主。导致持续不安、无尽焦虑的，可能来自另一个神类。学会识别这些内在运动。" },
+            { titre: "默观祈祷", texte: "平静地坐下。深呼吸。选择一个词（耶稣、平安、光）或一节圣经经文。在心中轻声重复。当思绪浮现时，让它们过去，然后轻轻回到你的词上。这样待几分钟，只是在天主的临在中。" }
+        ],
+        ecouteList: ["北京心理援助热线：010-82951332", "上海心理援助热线：021-12320-5", "生命热线：400-821-1215"],
+        contactPretreText: "寻找一位神父或陪伴者", contactPretreUrl: "https://www.catholic.org.hk/",
+        contactCommunauteText: "你附近的团体", contactCommunauteUrl: "https://www.chinacatholic.cn/",
+        carnetPrompt: "✨<br><br>« 今天你能记下什么小小的光？ »",
+        carnetPlaceholder: "我的小光...", saveBtn: "💾 保存", copyBtn: "🔗 复制我的链接", shareBtn: "📤 分享",
+        carnetInfo: "你可以稍后通过链接返回。没有任何与账户关联的内容。",
+        modes: { discernement: "🤲 辨别", consolation: "🙏 安慰", lecture: "📖 读经", priere: "❤️ 祷告" }
+    },
+    hi: {
+        title: "🕯️ प्रेम का घर", subtitle: "विवेक और छोटी रोशनी",
+        placeholder: "अपनी स्थिति का वर्णन करें...", role: "आप कौन हैं? (वैकल्पिक)",
+        submit: "विवेक सहायता प्राप्त करें →", loading: "🕯️ एक क्षण...",
+        situationsTitle: "या जो आप अनुभव कर रहे हैं उसके अनुसार चुनें:",
+        precisionPlaceholder: "आप जो अनुभव कर रहे हैं, उसे विस्तार से बता सकते हैं...",
+        responseReady: "आपका उत्तर तैयार है।",
+        btnContinuer: "🌿 विवेक जारी रखें",
+        ressourcesTitle: "जारी रखने के लिए...",
+        textesTitle: "📖 ध्यान हेतु पाठ", prieresTitle: "🙏 प्रार्थनाएँ", contactsTitle: "👤 मानव संपर्क",
+        ecouteTitle: "🆘 सुनने की सेवाएँ", exercicesTitle: "✨ आध्यात्मिक अभ्यास",
+        revenirTitle: "🔄 वापसी", revenirRecommencer: "पुनः आरंभ करें", saveLink: "मेरा लिंक सहेजें",
+        priereJourTitle: "📖 दिन की प्रार्थना",
+        temoignagesTitle: "💬 क्या आपने प्रेम का घर का उपयोग किया?",
+        temoignagesIntro: "अपना अनुभव साझा करें (गुमनाम):",
+        temoignagesPlaceholder: "आपकी गवाही...", envoyer: "भेजें", merci: "🙏 धन्यवाद!",
+        temoignagesRecus: "💬 प्राप्त गवाहियाँ",
+        projetsPsaume: "🌱 « न्याय और शांति एक दूसरे को गले लगाते हैं। » — भजन 85:11",
+        projetsCredit: "न्याय, शांति और विवेक के लिए उपकरण।",
+        footerNothing: "🔒 कुछ रिकॉर्ड नहीं किया गया · 🕊️ एक मूक साथी",
+        footerHome: "🏠 होम", footerSagesse: "📖 ज्ञान", footerAbout: "📖 बारे में", footerContact: "✉️ संपर्क",
+        aiWarning: "मैं एक कृत्रिम बुद्धिमत्ता हूँ। मैं मानवीय समर्थन, पादरी, मनोवैज्ञानिक या डॉक्टर का स्थान नहीं लेता। यदि आपकी स्थिति गंभीर है, तो कृपया मानवीय समर्थन प्राप्त करें।",
+        toggleUrgence: "आपातकालीन नंबर देखें",
+        clauseText: "🙏 <strong>प्रेम के घर के बारे में</strong><br>यह उपकरण <strong>प्रारंभिक सुनवाई</strong> और <strong>विवेक सहायता</strong> प्रदान करता है, मानवीय समर्थन का स्थान नहीं लेता।",
+        navHome: "🏠 होम", navSagesse: "📖 ज्ञान", navAbout: "📖 बारे में", navExamen: "🕯️ परीक्षा", navContact: "✉️ संपर्क", navAdmin: "📊 व्यवस्थापक", navPrivacy: "🔒 गोपनीयता",
+        situations: [
+            "मैं बहुत बड़ी पीड़ा से गुज़र रहा हूँ", "मुझे अपने जीवन में कोई अर्थ नहीं दिखता", "मेरा रिश्ता मुश्किल में है", "मैंने किसी प्रियजन को खो दिया है",
+            "मैं अकेला महसूस करता हूँ", "मैं भगवान से नाराज़ हूँ", "मुझे नहीं पता कि अब क्या विश्वास करूँ", "मुझे एक कठिन निर्णय लेना है",
+            "मैं बीमारी या विकलांगता के साथ जी रहा हूँ", "मैं भविष्य से डरता हूँ", "मैं थक गया हूँ", "मैं पारिवारिक संघर्ष का अनुभव कर रहा हूँ",
+            "मैं किसी पीड़ित व्यक्ति की संगत कर रहा हूँ", "मैं जीवन का अर्थ खोज रहा हूँ", "कुछ और"
+        ],
+        prieres: ["प्रभु, मुझे मौन सुनना सिखा।", "मुझे वह स्वीकार करने की शक्ति दे जो मैं नहीं समझता।", "तेरी शांति मेरे हृदय में बसी रहे।"],
+        defaultTestimonials: ["« एक गहरी शांति। »", "« मौन का एक अनमोल स्थान। »"],
+        textesParSituation: {},
+        prieresParSituation: {
+            defaut: [
+                { titre: "सुबह की प्रार्थना", texte: "प्रभु, आज सुबह, मैं अपना दिन तुझे सौंपता हूँ। मुझे मौन सुनना और उसमें तेरी आवाज पाना सिखा। जो मैं नहीं समझता उसे स्वीकार करने की शक्ति दे, और जिस मार्ग पर तू मुझे ले जाता है उस पर विश्वास के साथ चलने की कृपा दे। आमीन।" },
+                { titre: "कठिन दिनों की प्रार्थना", texte: "प्रभु, मैं अपने भय और संदेह तुझे सौंपता हूँ। जब रात गहरी हो और मुझे प्रकाश न दिखे, तब मेरा हाथ थाम ले। मेरी दुर्बलता को वह स्थान बना जहाँ तेरा अनुग्रह कार्य कर सके। आमीन।" },
+                { titre: "शाम की प्रार्थना", texte: "प्रभु, इस समाप्त होते दिन के लिए मैं तुझे धन्यवाद देता हूँ। इसके सुख-दुख मैं तेरे हाथों में सौंपता हूँ। मुझे शरीर और हृदय का विश्राम दे, और कल विश्वास के साथ आरंभ करने का अनुग्रह प्रदान कर। आमीन।" }
+            ]
+        },
+        exercicesIgnatiens: [
+            { titre: "परीक्षा", texte: "कुछ मिनट मौन में लें। अपने दिन की समीक्षा करें। आपने कहाँ शांति (सांत्वना) महसूस की? आपने कहाँ अशांति (उजाड़) महसूस की? प्रकाश के क्षणों के लिए ईश्वर का धन्यवाद करें, और अंधकारमय क्षणों को उन्हें सौंप दें।" },
+            { titre: "जीवन की समीक्षा", texte: "हाल की कोई घटना चुनें, सुखद या कठिन। उसे ईश्वर के प्रकाश में पुनः पढ़ें: आपने क्या महसूस किया? आपने क्या सीखा? ईश्वर कहाँ गुप्त रूप से उपस्थित थे?" },
+            { titre: "आत्माओं का विवेक", texte: "किसी विकल्प या स्थिति का सामना करते हुए, अपने भीतर उठने वाली बातों का निरीक्षण करें। जो गहरी और स्थायी शांति लाता है वह ईश्वर से आता है। जो निरंतर अशांति, अंतहीन व्याकुलता उत्पन्न करता है, वह किसी अन्य आत्मा से आ सकता है। इन आंतरिक गतियों को पहचानना सीखें।" },
+            { titre: "मौन प्रार्थना", texte: "शांति से बैठें। गहरी साँस लें। एक शब्द (यीशु, शांति, प्रकाश) या बाइबल का एक पद चुनें। इसे अपने हृदय में धीरे से दोहराएँ। जब विचार आएँ, उन्हें जाने दें और धीरे से अपने शब्द पर लौट आएँ। कुछ मिनट ऐसे ही रहें, बस ईश्वर की उपस्थिति में।" }
+        ],
+        ecouteList: ["वन्द्रेला फाउंडेशन हेल्पलाइन: +91 9999666555", "आसरा हेल्पलाइन: +91 9820466726", "स्नेहा फाउंडेशन: +91 4424640050"],
+        contactPretreText: "कोई पादरी या संगी खोजें", contactPretreUrl: "https://www.cbci.in/",
+        contactCommunauteText: "आपके पास का समुदाय", contactCommunauteUrl: "https://www.cbci.in/parishes",
+        carnetPrompt: "✨<br><br>« आज आप कौन सी छोटी रोशनी नोट कर सकते हैं? »",
+        carnetPlaceholder: "मेरी छोटी रोशनी...", saveBtn: "💾 सहेजें", copyBtn: "🔗 मेरा लिंक कॉपी करें", shareBtn: "📤 साझा करें",
+        carnetInfo: "आप बाद में अपने लिंक से वापस आ सकते हैं। कुछ भी खाते से जुड़ा नहीं है।",
+        modes: { discernement: "🤲 विवेक", consolation: "🙏 सांत्वना", lecture: "📖 बाइबल पठन", priere: "❤️ प्रार्थना" }
+    },
+    es: {
+        title: "🕯️ Hogar del Amor", subtitle: "Discernimiento y la pequeña luz",
+        placeholder: "Describe tu situación...", role: "¿Quién eres? (opcional)",
+        submit: "Recibir ayuda para el discernimiento →", loading: "🕯️ Un momento...",
+        situationsTitle: "O elige lo que mejor se adapte a lo que estás viviendo:",
+        precisionPlaceholder: "Puedes precisar lo que vives, si lo deseas...",
+        responseReady: "Tu respuesta está lista.",
+        btnContinuer: "🌿 Continuar el discernimiento",
+        ressourcesTitle: "Para continuar...",
+        textesTitle: "📖 Textos para meditar", prieresTitle: "🙏 Oraciones", contactsTitle: "👤 Contactos humanos",
+        ecouteTitle: "🆘 Servicios de escucha", exercicesTitle: "✨ Ejercicios espirituales",
+        revenirTitle: "🔄 Volver", revenirRecommencer: "Empezar de nuevo", saveLink: "Guardar mi enlace",
+        priereJourTitle: "📖 Oración del día",
+        temoignagesTitle: "💬 ¿Has utilizado Hogar del Amor?",
+        temoignagesIntro: "Comparte tu experiencia (anónimo):",
+        temoignagesPlaceholder: "Tu testimonio...", envoyer: "Enviar", merci: "🙏 ¡Gracias!",
+        temoignagesRecus: "💬 Testimonios recibidos",
+        projetsPsaume: "🌱 « La justicia y la paz se abrazan. » — Salmo 85:11",
+        projetsCredit: "Herramientas para la justicia, la paz y el discernimiento.",
+        footerNothing: "🔒 Nada se guarda · 🕊️ Un compañero silencioso",
+        footerHome: "🏠 Inicio", footerSagesse: "📖 Sabiduría", footerAbout: "📖 Acerca de", footerContact: "✉️ Contacto",
+        aiWarning: "Soy una inteligencia artificial. No reemplazo el apoyo humano, un sacerdote, un psicólogo o un médico. Si tu situación es grave, te animo a buscar apoyo humano.",
+        toggleUrgence: "Ver números de emergencia",
+        clauseText: "🙏 <strong>Acerca de Hogar del Amor</strong><br>Esta herramienta ofrece <strong>escucha inicial</strong> y <strong>ayuda al discernimiento</strong>, sin reemplazar el acompañamiento humano.",
+        navHome: "🏠 Inicio", navSagesse: "📖 Sabiduría", navAbout: "📖 Acerca de", navExamen: "🕯️ Examen", navContact: "✉️ Contacto", navAdmin: "📊 Admin", navPrivacy: "🔒 Privacidad",
+        situations: [
+            "Estoy pasando por un gran sufrimiento", "Ya no le encuentro sentido a mi vida", "Mi relación está en problemas", "He perdido a un ser querido",
+            "Me siento solo/a", "Estoy enojado/a con Dios", "Ya no sé qué creer", "Tengo que tomar una decisión difícil",
+            "Vivo con una enfermedad o discapacidad", "Tengo miedo del futuro", "Estoy agotado/a", "Estoy viviendo un conflicto familiar",
+            "Estoy acompañando a alguien que sufre", "Busco un sentido a mi vida", "Otra cosa"
+        ],
+        prieres: ["Señor, enséñame a escuchar el silencio.", "Dame fuerza para acoger lo que no entiendo.", "Que Tu paz habite en mi corazón."],
+        defaultTestimonials: ["« Una paz profunda. »", "« Un espacio de silencio precioso. »"],
+        textesParSituation: {},
+        prieresParSituation: {
+            defaut: [
+                { titre: "Oración de la mañana", texte: "Señor, en esta mañana, te confío mi día. Enséñame a escuchar el silencio y a encontrar tu voz en él. Dame la fuerza para acoger lo que no entiendo y para caminar con confianza por el camino que me propones. Amén." },
+                { titre: "Oración para los días difíciles", texte: "Señor, te confío mis miedos y mis dudas. Cuando la noche es profunda y ya no veo la luz, tómame de la mano. Haz de mi debilidad un lugar donde tu gracia pueda actuar. Amén." },
+                { titre: "Oración de la noche", texte: "Señor, te agradezco por este día que termina. Deposito sus alegrías y sus penas en tus manos. Concédeme el descanso del cuerpo y del corazón, y la gracia de comenzar mañana con confianza. Amén." }
+            ]
+        },
+        exercicesIgnatiens: [
+            { titre: "El Examen", texte: "Toma unos minutos en silencio. Revisa tu día. ¿Dónde sentiste paz (consolación)? ¿Dónde sentiste perturbación (desolación)? Agradece a Dios por los momentos de luz, y confíale los más oscuros." },
+            { titre: "Revisión de vida", texte: "Elige un evento reciente, feliz o difícil. Reléelo a la luz de Dios: ¿qué sentiste? ¿qué aprendiste? ¿Dónde estaba Dios presente, incluso de manera discreta?" },
+            { titre: "Discernimiento de espíritus", texte: "Ante una elección o situación, observa lo que surge en ti. Lo que trae una paz profunda y duradera viene de Dios. Lo que causa perturbación persistente, agitación sin fin, puede venir de otro espíritu. Aprende a reconocer estos movimientos interiores." },
+            { titre: "Oración silenciosa", texte: "Siéntate tranquilamente. Respira profundamente. Elige una palabra (Jesús, paz, luz) o un versículo bíblico. Repítelo suavemente en tu corazón. Cuando surjan pensamientos, déjalos pasar y vuelve suavemente a tu palabra. Permanece así unos minutos, simplemente en presencia de Dios." }
+        ],
+        ecouteList: ["Teléfono de la Esperanza: 717 003 717", "Línea de atención a la conducta suicida: 024", "Cruz Roja Española: 900 22 11 22"],
+        contactPretreText: "Encontrar un sacerdote o acompañante", contactPretreUrl: "https://www.conferenciaepiscopal.es/parroquias/",
+        contactCommunauteText: "Comunidad cerca de ti", contactCommunauteUrl: "https://www.aciprensa.com/parroquias/",
+        carnetPrompt: "✨<br><br>« ¿Y tú, qué pequeña luz podrías anotar hoy? »",
+        carnetPlaceholder: "Mi pequeña luz...", saveBtn: "💾 Guardar", copyBtn: "🔗 Copiar mi enlace", shareBtn: "📤 Compartir",
+        carnetInfo: "Puedes volver más tarde con tu enlace. Nada está vinculado a una cuenta.",
+        modes: { discernement: "🤲 Discernimiento", consolation: "🙏 Consolación", lecture: "📖 Lectura bíblica", priere: "❤️ Oración" }
+    },
+    ar: {
+        title: "🕯️ بيت المحبة", subtitle: "التمييز والنور الصغير",
+        placeholder: "صف حالتك...", role: "من أنت؟ (اختياري)",
+        submit: "احصل على مساعدة في التمييز →", loading: "🕯️ لحظة...",
+        situationsTitle: "أو اختر ما يناسب ما تعيشه:",
+        precisionPlaceholder: "يمكنك تحديد ما تعيشه، إذا رغبت...",
+        responseReady: "إجابتك جاهزة.",
+        btnContinuer: "🌿 متابعة التمييز",
+        ressourcesTitle: "للمتابعة...",
+        textesTitle: "📖 نصوص للتأمل", prieresTitle: "🙏 صلوات", contactsTitle: "👤 جهات اتصال بشرية",
+        ecouteTitle: "🆘 خدمات الاستماع", exercicesTitle: "✨ تمارين روحية",
+        revenirTitle: "🔄 عودة", revenirRecommencer: "ابدأ من جديد", saveLink: "حفظ الرابط",
+        priereJourTitle: "📖 صلاة اليوم",
+        temoignagesTitle: "💬 هل استخدمت بيت المحبة؟",
+        temoignagesIntro: "شارك تجربتك (مجهول):",
+        temoignagesPlaceholder: "شهادتك...", envoyer: "إرسال", merci: "🙏 شكراً!",
+        temoignagesRecus: "💬 الشهادات الواردة",
+        projetsPsaume: "🌱 « العدل والسلام يتعانقان. » — مزمور 85:11",
+        projetsCredit: "أدوات من أجل العدل والسلام والتمييز.",
+        footerNothing: "🔒 لا شيء مسجل · 🕊️ رفيق صامت",
+        footerHome: "🏠 الرئيسية", footerSagesse: "📖 حكمة", footerAbout: "📖 عن", footerContact: "✉️ اتصال",
+        aiWarning: "أنا ذكاء اصطناعي. أنا لا أحل محل الدعم البشري، أو الكاهن، أو الطبيب النفسي، أو الطبيب. إذا كانت حالتك خطيرة، أشجعك على طلب الدعم البشري.",
+        toggleUrgence: "عرض أرقام الطوارئ",
+        clauseText: "🙏 <strong>عن بيت المحبة</strong><br>هذه الأداة تقدم <strong>استماعاً أولياً</strong> و<strong>مساعدة في التمييز</strong>، دون أن تحل محل المرافقة البشرية.",
+        navHome: "🏠 الرئيسية", navSagesse: "📖 حكمة", navAbout: "📖 عن", navExamen: "🕯️ فحص", navContact: "✉️ اتصال", navAdmin: "📊 إدارة", navPrivacy: "🔒 خصوصية",
+        situations: [
+            "أمر بمعاناة كبيرة", "لم أعد أرى معنى لحياتي", "علاقتي الزوجية متعثرة", "فقدت شخصاً عزيزاً",
+            "أشعر بالوحدة", "أنا غاضب من الله", "لا أعرف ماذا أؤمن بعد الآن", "أحتاج لاتخاذ قرار صعب",
+            "أعيش مع مرض أو إعاقة", "أخاف من المستقبل", "أنا مرهق", "أمر بنزاع عائلي",
+            "أرافق شخصاً يعاني", "أبحث عن معنى لحياتي", "شيء آخر"
+        ],
+        prieres: ["يا رب، علمني أن أستمع إلى الصمت.", "أعطني القوة لأتقبل ما لا أفهمه.", "لينعم سلامك في قلبي."],
+        defaultTestimonials: ["« سلام عميق. »", "« مكان صمت ثمين. »"],
+        textesParSituation: {},
+        prieresParSituation: {
+            defaut: [
+                { titre: "صلاة الصباح", texte: "يا رب، في هذا الصباح، أستودعك يومي. علمني أن أستمع إلى الصمت وأجد فيه صوتك. أعطني القوة لأتقبل ما لا أفهمه، ولأسير بثقة في الطريق الذي تقترحه علي. آمين." },
+                { titre: "صلاة للأيام الصعبة", texte: "يا رب، أستودعك مخاوفي وشكوكي. عندما يشتد الظلام ولا أرى النور، أمسك بيدي. اجعل ضعفي مكاناً تعمل فيه نعمتك. آمين." },
+                { titre: "صلاة المساء", texte: "يا رب، أشكرك على هذا اليوم الذي ينتهي. أضع أفراحه وأحزانه بين يديك. امنحني راحة الجسد والقلب، ونعمة أن أبدأ غداً بثقة. آمين." }
+            ]
+        },
+        exercicesIgnatiens: [
+            { titre: "الفحص", texte: "خذ بضع دقائق في صمت. راجع يومك. أين شعرت بالسلام (عزاء)؟ أين شعرت بالاضطراب (خراب)؟ اشكر الله على لحظات النور، وعهد إليه باللحظات الأكثر ظلمة." },
+            { titre: "مراجعة الحياة", texte: "اختر حدثاً أخيراً، سعيداً أو صعباً. أعد قراءته في نور الله: ما الذي شعرت به؟ ما الذي تعلمته؟ أين كان الله حاضراً، ولو بطريقة خفية؟" },
+            { titre: "تمييز الأرواح", texte: "عند مواجهة خيار أو موقف، لاحظ ما ينبع في داخلك. ما يجلب سلاماً عميقاً ودائماً يأتي من الله. وما يسبب اضطراباً مستمراً، وقلقاً لا نهاية له، قد يأتي من روح آخر. تعلم كيف تتعرف على هذه الحركات الداخلية." },
+            { titre: "الصلاة الصامتة", texte: "اجلس بهدوء. تنفس بعمق. اختر كلمة (يسوع، سلام، نور) أو آية من الكتاب المقدس. كررها بلطف في قلبك. عندما تظهر الأفكار، دعها تمر ثم عد بلطف إلى كلمتك. ابق هكذا لبضع دقائق، ببساطة في حضور الله." }
+        ],
+        ecouteList: ["الخط الساخن للدعم النفسي (مصر): 16000", "منظمة الصحة النفسية (المغرب): 0801 007 007", "جمعية النجدة (لبنان): 1564"],
+        contactPretreText: "البحث عن كاهن أو مرافق", contactPretreUrl: "https://www.lpj.org/fr/paroisses",
+        contactCommunauteText: "جماعة قريبة منك", contactCommunauteUrl: "https://www.catholicchurch-holyland.com/",
+        carnetPrompt: "✨<br><br>« ما هو النور الصغير الذي يمكنك تدوينه اليوم؟ »",
+        carnetPlaceholder: "نوري الصغير...", saveBtn: "💾 حفظ", copyBtn: "🔗 نسخ الرابط", shareBtn: "📤 مشاركة",
+        carnetInfo: "يمكنك العودة لاحقاً باستخدام الرابط. لا يوجد شيء مرتبط بحساب.",
+        modes: { discernement: "🤲 تمييز", consolation: "🙏 عزاء", lecture: "📖 قراءة الكتاب المقدس", priere: "❤️ صلاة" }
+    }
+};
+
+// Fusion des parties manquantes depuis le français
+['zh','hi','es','ar'].forEach(lang => {
+    const t = translations[lang];
+    if (!t.textesParSituation || Object.keys(t.textesParSituation).length === 0) t.textesParSituation = translations.fr.textesParSituation;
+    if (!t.prieresParSituation || !t.prieresParSituation.defaut || t.prieresParSituation.defaut.length === 0) t.prieresParSituation = translations.fr.prieresParSituation;
+    if (!t.exercicesIgnatiens || t.exercicesIgnatiens.length === 0) t.exercicesIgnatiens = translations.fr.exercicesIgnatiens;
+    if (!t.prieres || t.prieres.length === 0) t.prieres = translations.fr.prieres;
+    if (!t.defaultTestimonials || t.defaultTestimonials.length === 0) t.defaultTestimonials = translations.fr.defaultTestimonials;
+});
+
+// État global
+let currentLang = 'fr', currentMode = 'discernement', currentResponseText = '', currentSituationKey = null;
+
+function updateLanguage(lang) {
+    currentLang = lang;
+    const t = translations[lang] || translations.fr;
+    document.getElementById('mainTitle').innerHTML = t.title;
+    document.getElementById('mainSubtitle').textContent = t.subtitle;
+    document.getElementById('situation').placeholder = t.placeholder;
+    document.getElementById('role').placeholder = t.role;
+    document.getElementById('precision-situation').placeholder = t.precisionPlaceholder;
+    document.getElementById('submitBtn').textContent = t.submit;
+    document.getElementById('loading').innerHTML = t.loading;
+
+    const grid = document.querySelector('.situations-grid');
+    if (grid) {
+        grid.innerHTML = '';
+        t.situations.forEach(s => {
+            const label = document.createElement('label');
+            label.innerHTML = `<input type="radio" name="situation-choisie" value="${s}"> ${s}`;
+            grid.appendChild(label);
+        });
+    }
+    document.getElementById('situations-title').textContent = t.situationsTitle;
+
+    document.getElementById('carnet-prompt').innerHTML = t.carnetPrompt;
+    document.getElementById('carnet-entry').placeholder = t.carnetPlaceholder;
+    document.getElementById('save-carnet').textContent = t.saveBtn;
+    document.getElementById('copy-carnet-link').textContent = t.copyBtn;
+    document.getElementById('share-carnet').textContent = t.shareBtn;
+    document.getElementById('carnet-info-text').textContent = t.carnetInfo;
+    document.getElementById('btn-continuer-discernement').textContent = t.btnContinuer;
+
+    document.getElementById('ressources-title').textContent = t.ressourcesTitle;
+    document.getElementById('ressources-textes-title').textContent = t.textesTitle;
+    document.getElementById('ressources-prieres-title').textContent = t.prieresTitle;
+    document.getElementById('ressources-contacts-title').textContent = t.contactsTitle;
+    document.getElementById('ressources-ecoute-title').textContent = t.ecouteTitle;
+    document.getElementById('ressources-exercices-title').textContent = t.exercicesTitle;
+    document.getElementById('ressources-revenir-title').textContent = t.revenirTitle;
+    document.getElementById('ressources-revenir-recommencer').textContent = t.revenirRecommencer;
+    document.getElementById('save-link-ressources').textContent = t.saveLink;
+
+    document.getElementById('ressources-contact-pretre-text').textContent = t.contactPretreText || '';
+    document.getElementById('ressources-contact-pretre-link').href = t.contactPretreUrl || '#';
+    document.getElementById('ressources-contact-communaute-text').textContent = t.contactCommunauteText || '';
+    document.getElementById('ressources-contact-communaute-link').href = t.contactCommunauteUrl || '#';
+
+    const ecouteList = document.getElementById('ressources-ecoute-list');
+    if (ecouteList && t.ecouteList) {
+        ecouteList.innerHTML = '';
+        t.ecouteList.forEach(s => { const li = document.createElement('li'); li.textContent = s; ecouteList.appendChild(li); });
+    }
+
+    document.getElementById('priere-title').textContent = t.priereJourTitle;
+    const randomPriere = t.prieres[Math.floor(Math.random() * t.prieres.length)];
+    document.getElementById('priereDuJour').textContent = '« ' + randomPriere + ' »';
+
+    document.getElementById('temoignages-title').textContent = t.temoignagesTitle;
+    document.getElementById('temoignages-intro').textContent = t.temoignagesIntro;
+    document.getElementById('temoignage').placeholder = t.temoignagesPlaceholder;
+    document.getElementById('envoyerTemoignage').textContent = t.envoyer;
+    document.getElementById('merciTemoignage').textContent = t.merci;
+    document.getElementById('temoignages-recus-title').textContent = t.temoignagesRecus;
+
+    const temoignagesListe = document.getElementById('temoignagesListe');
+    if (temoignagesListe && t.defaultTestimonials) {
+        temoignagesListe.innerHTML = '';
+        t.defaultTestimonials.forEach(msg => {
+            const div = document.createElement('div');
+            div.className = 'temoignage-affiche';
+            div.innerHTML = `${msg} <div class="source">— Anonyme</div>`;
+            temoignagesListe.appendChild(div);
+        });
+    }
+
+    document.getElementById('projets-psaume').textContent = t.projetsPsaume;
+    document.getElementById('projets-credit').textContent = t.projetsCredit;
+
+    document.getElementById('footer-nothing').textContent = t.footerNothing;
+    document.getElementById('footer-home').textContent = t.footerHome;
+    document.getElementById('footer-sagesse').textContent = t.footerSagesse;
+    document.getElementById('footer-about').textContent = t.footerAbout;
+    document.getElementById('footer-contact').textContent = t.footerContact;
+    document.getElementById('ai-warning-text').textContent = t.aiWarning;
+    document.getElementById('toggle-urgence').textContent = t.toggleUrgence;
+    document.getElementById('clause-text').innerHTML = t.clauseText;
+
+    document.getElementById('navHome').textContent = t.navHome;
+    document.getElementById('navSagesse').textContent = t.navSagesse;
+    document.getElementById('navAbout').textContent = t.navAbout;
+    document.getElementById('navExamen').textContent = t.navExamen;
+    document.getElementById('navContact').textContent = t.navContact;
+    document.getElementById('navAdmin').textContent = t.navAdmin;
+    document.getElementById('navPrivacy').textContent = t.navPrivacy;
+
+    const urgenceList = document.getElementById('urgence-list');
+    if (urgenceList && t.ecouteList) {
+        urgenceList.innerHTML = '';
+        t.ecouteList.forEach(item => {
+            const p = document.createElement('p');
+            if (item.includes(':')) {
+                const parts = item.split(':');
+                p.innerHTML = `<strong>${parts[0]}</strong> : ${parts[1]}`;
+            } else p.textContent = item;
+            urgenceList.appendChild(p);
+        });
+    }
+
+    if (t.modes) {
+        document.getElementById('mode-discernement').textContent = t.modes.discernement;
+        document.getElementById('mode-consolation').textContent = t.modes.consolation;
+        document.getElementById('mode-lecture').textContent = t.modes.lecture;
+        document.getElementById('mode-priere').textContent = t.modes.priere;
+    }
+
+    if (currentSituationKey) updateRessources(currentSituationKey);
+}
+
+// Ressources dynamiques
+function updateRessources(situationKey) {
+    const langData = translations[currentLang] || translations.fr;
+
+    const textes = langData.textesParSituation?.[situationKey] || langData.textesParSituation?.["Autre chose"] || [];
+    const textesList = document.getElementById('ressources-textes-list');
+    if (textesList) {
+        textesList.innerHTML = '';
+        textes.forEach(item => {
+            const li = document.createElement('li');
+            li.innerHTML = `<strong>${item.ref}</strong> – « ${item.texte} » <a href="${item.lien}" target="_blank" style="font-size:0.85rem; color:#4a6f5e; text-decoration:underline;">(lire le texte complet)</a>`;
+            textesList.appendChild(li);
+        });
+    }
+
+    const prieres = (langData.prieresParSituation?.[situationKey] || langData.prieresParSituation?.defaut) || [];
+    const prieresList = document.getElementById('ressources-prieres-list');
+    if (prieresList) {
+        prieresList.innerHTML = '';
+        prieres.forEach(p => {
+            const li = document.createElement('li');
+            li.innerHTML = `<strong>${p.titre}</strong><br><span style="font-size:0.9rem; color:#4a3b2c;">${p.texte}</span>`;
+            prieresList.appendChild(li);
+        });
+    }
+
+    const exercicesIgnatiens = langData.exercicesIgnatiens || [];
+    const ignaciensList = document.getElementById('ressources-ignaciens-list');
+    if (ignaciensList) {
+        ignaciensList.innerHTML = '';
+        exercicesIgnatiens.forEach(item => {
+            const li = document.createElement('li');
+            li.innerHTML = `<strong>${item.titre}</strong><br><span style="font-size:0.9rem; color:#4a3b2c;">${item.texte}</span>`;
+            ignaciensList.appendChild(li);
+        });
+    }
+
+    const exercicesSimples = [
+        currentLang==='fr'?"Noter une nouvelle petite lumière demain":(currentLang==='en'?"Note a new little light tomorrow":"Noter une nouvelle petite lumière demain"),
+        currentLang==='fr'?"Prendre 5 minutes de silence le soir":(currentLang==='en'?"Take 5 minutes of silence in the evening":"Prendre 5 minutes de silence le soir"),
+        currentLang==='fr'?"3 respirations profondes : « Je suis aimé(e) »":(currentLang==='en'?"3 deep breaths: « I am loved »":"3 respirations profondes : « Je suis aimé(e) »")
+    ];
+    const exercicesList = document.getElementById('ressources-exercices-list');
+    if (exercicesList) {
+        exercicesList.innerHTML = '';
+        exercicesSimples.forEach(e => {
+            const li = document.createElement('li');
+            li.textContent = e;
+            exercicesList.appendChild(li);
+        });
+    }
+}
+
+// Affichage réponse
+const responseContainer = document.getElementById('response-container');
+const responseLecture = document.getElementById('response-lecture');
+const carnetContainer = document.getElementById('carnet-container');
+const ressourcesContainer = document.getElementById('ressources-container');
+
+function showResponseOptions() {
+    responseContainer.style.display = 'block';
+    responseLecture.style.display = 'block';
+    carnetContainer.style.display = 'block';
+    ressourcesContainer.style.display = 'none';
+    document.getElementById('loading').style.display = 'none';
+    document.getElementById('reponse').innerHTML = currentResponseText.replace(/\n/g, '<br><br>');
+}
+
+// Carnet
+const carnetEntry = document.getElementById('carnet-entry');
+function getOrCreateCarnetId() {
+    let id = localStorage.getItem('foyer_carnet_id');
+    if (!id) { id = 'carnet_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9); localStorage.setItem('foyer_carnet_id', id); }
+    return id;
+}
+function loadCarnet() {
+    const data = localStorage.getItem('foyer_carnet_' + getOrCreateCarnetId());
+    if (data) carnetEntry.value = data;
+}
+document.getElementById('save-carnet').addEventListener('click', () => {
+    localStorage.setItem('foyer_carnet_' + getOrCreateCarnetId(), carnetEntry.value.trim());
+    document.getElementById('carnet-feedback').textContent = '✨ Sauvegardé.';
+    setTimeout(() => document.getElementById('carnet-feedback').textContent = '', 3000);
+});
+document.getElementById('copy-carnet-link').addEventListener('click', () => {
+    const link = window.location.origin + window.location.pathname + '?carnet=' + getOrCreateCarnetId();
+    navigator.clipboard.writeText(link).then(() => {
+        document.getElementById('carnet-feedback').textContent = '🔗 Lien copié !';
+        setTimeout(() => document.getElementById('carnet-feedback').textContent = '', 4000);
+    });
+});
+document.getElementById('share-carnet').addEventListener('click', () => {
+    const link = window.location.origin + window.location.pathname + '?carnet=' + getOrCreateCarnetId();
+    if (navigator.share) navigator.share({ title: 'Ma petite lumière', url: link }).catch(() => {});
+    else window.location.href = 'mailto:?subject=Ma petite lumière&body=' + encodeURIComponent(link);
+});
+const urlParams = new URLSearchParams(window.location.search);
+if (urlParams.get('carnet')) localStorage.setItem('foyer_carnet_id', urlParams.get('carnet'));
+loadCarnet();
+
+document.getElementById('btn-continuer-discernement').addEventListener('click', () => {
+    updateRessources(currentSituationKey);
+    ressourcesContainer.style.display = 'block';
+    ressourcesContainer.scrollIntoView({ behavior: 'smooth' });
+});
+document.getElementById('save-link-ressources').addEventListener('click', (e) => {
+    e.preventDefault();
+    const link = window.location.origin + window.location.pathname + '?carnet=' + getOrCreateCarnetId();
+    navigator.clipboard.writeText(link).then(() => alert('Lien copié !'));
+});
+
+document.getElementById('toggle-urgence').addEventListener('click', (e) => {
+    e.preventDefault();
+    document.getElementById('urgence-list').classList.toggle('visible');
+});
+
+document.querySelectorAll('.mode-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+        document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        currentMode = this.dataset.mode;
+    });
+});
+
+document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+        document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        updateLanguage(this.dataset.lang);
+    });
+});
+
+document.getElementById('envoyerTemoignage').addEventListener('click', () => {
+    const msg = document.getElementById('temoignage').value.trim();
+    if (!msg) return;
+    document.getElementById('merciTemoignage').style.display = 'block';
+    document.getElementById('temoignage').value = '';
+    const div = document.createElement('div');
+    div.className = 'temoignage-affiche';
+    div.innerHTML = '« ' + msg + ' » <div class="source">— Anonyme</div>';
+    document.getElementById('temoignagesListe').appendChild(div);
+});
+
+document.getElementById('submitBtn').onclick = async function() {
+    let situation = document.getElementById('situation').value.trim();
+    const precision = document.getElementById('precision-situation').value.trim();
+    const situationChoisie = document.querySelector('input[name="situation-choisie"]:checked');
+    if (situationChoisie) {
+        currentSituationKey = situationChoisie.value;
+        situation = situationChoisie.value;
+        if (precision) situation += ' — ' + precision;
+    } else {
+        currentSituationKey = null;
+    }
+    const role = document.getElementById('role').value.trim();
+
+    if (!situation) return alert("Veuillez décrire votre situation ou choisir dans la liste.");
+
+    document.getElementById('loading').style.display = 'block';
+    responseContainer.style.display = 'none';
+    document.getElementById('error').style.display = 'none';
+    document.getElementById('submitBtn').disabled = true;
+
+    try {
+        const res = await fetch('/.netlify/functions/discern', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ situation, role, lang: currentLang, mode: currentMode })
+        });
+        const data = await res.json();
+        if (!res.ok || data.error) throw new Error(data.error || 'Erreur serveur');
+        currentResponseText = data.response;
+        showResponseOptions();
+    } catch (err) {
+        document.getElementById('error').innerHTML = '❌ ' + err.message;
+        document.getElementById('error').style.display = 'block';
+    } finally {
+        document.getElementById('loading').style.display = 'none';
+        document.getElementById('submitBtn').disabled = false;
+    }
+};
+
+// Init
+updateLanguage('fr');
+</script>
+</body>
+</html>

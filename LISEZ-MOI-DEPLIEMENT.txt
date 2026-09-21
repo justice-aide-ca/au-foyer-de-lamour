@@ -1,0 +1,130 @@
+================================================================
+ REMETTRE EN ROUTE LES RÉPONSES IA — GUIDE PAS À PAS
+ Au Foyer de l'Amour
+================================================================
+
+Ce dossier contient votre site complet, avec en plus :
+  netlify/functions/discern.js  → la fonction qui interroge OpenAI
+  netlify.toml                  → la configuration Netlify
+
+🆕 BONNE NOUVELLE (été 2026) : Netlify Drop (le glisser-déposer)
+vient d'être modernisé et sait désormais « construire » les projets.
+Il y a donc de fortes chances que la fonction se déploie par simple
+glisser-déposer — essayez d'abord la MÉTHODE 0 ci-dessous, c'est
+la plus simple. Si la fonction n'apparaît pas, utilisez la
+méthode 1 (CLI) ou 2 (GitHub). Comptez 15-20 minutes.
+
+
+────────────────────────────────────────────────────────────
+MÉTHODE 0 — GLISSER-DÉPOSER (à essayer en premier, 2 min)
+────────────────────────────────────────────────────────────
+
+1. Connectez-vous sur https://app.netlify.com (important : il
+   faut être connecté pour que le « build » soit pris en charge).
+2. Ouvrez votre site amour-et-verite-app → onglet « Deploys ».
+3. Glissez le dossier « au-foyer-de-lamour-complet » dans la zone
+   de dépôt en bas de page.
+4. VÉRIFIEZ le résultat : menu « Functions » dans Netlify.
+   - Si vous voyez la fonction « discern » listée → parfait,
+     passez directement à l'ÉTAPE 3 (clé API).
+   - Si la liste est vide → le glisser-déposer n'a pas pris la
+     fonction : utilisez la méthode 1 (CLI) ou 2 (GitHub).
+
+
+────────────────────────────────────────────────────────────
+ÉTAPE 1 — CRÉER VOTRE CLÉ API OPENAI (5 min)
+────────────────────────────────────────────────────────────
+
+1. Allez sur https://platform.openai.com/api-keys
+2. Connectez-vous avec votre compte OpenAI.
+3. Cliquez « Create new secret key », donnez-lui un nom
+   (ex. : foyer-amour), puis COPIEZ la clé (elle commence par
+   « sk-... »). Elle ne sera affichée qu'une fois.
+4. Vérifiez que votre compte a du crédit :
+   https://platform.openai.com/settings/organization/billing
+   (quelques euros suffisent largement : le modèle utilisé,
+   gpt-4o-mini, coûte environ 0,001 € par réponse).
+5. Par sécurité, fixez une limite mensuelle dans
+   « Billing → Usage limits » (ex. : 5 €).
+
+
+────────────────────────────────────────────────────────────
+ÉTAPE 2 — DÉPLOYER AVEC LA FONCTION
+────────────────────────────────────────────────────────────
+
+---- MÉTHODE 1 : NETLIFY CLI (recommandée) ----
+
+1. Installez Node.js (version LTS) depuis https://nodejs.org
+   (bouton « LTS », installation par défaut, tout suivant).
+
+2. Ouvrez un terminal dans ce dossier :
+   - Sous Windows : ouvrez le dossier « au-foyer-de-lamour-complet »,
+     cliquez dans la barre d'adresse de l'explorateur, tapez
+     « cmd » puis Entrée.
+
+3. Tapez ces trois commandes (l'une après l'autre) :
+
+     npm install -g netlify-cli
+     netlify login
+        → une page s'ouvre dans le navigateur : cliquez « Authorize »
+     netlify deploy --prod
+        → « Create & configure a new site » ou « Link this directory
+           to an existing site » : choisissez de lier à votre site
+           existant (amour-et-verite-app) si proposé ;
+          sinon répondez :
+            Team : (votre équipe)
+            Site name : amour-et-verite-app (existant)
+        → « Publish directory » : tapez  .  (un point) puis Entrée
+
+---- MÉTHODE 2 : GITHUB ----
+
+1. Créez un compte sur https://github.com (gratuit), puis un
+   nouveau dépôt (« New repository », ex. : foyer-amour, Public).
+2. Envoyez-y TOUT le contenu de ce dossier (bouton
+   « uploading an existing file » sur la page du dépôt, glissez
+   tous les fichiers ET le dossier « netlify »).
+3. Sur Netlify : « Add new site → Import an existing project →
+   GitHub », choisissez votre dépôt, laissez les réglages par
+   défaut (Netlify lit netlify.toml tout seul), « Deploy ».
+   Vous pouvez ensuite rattacher ce déploiement à votre site
+   existant, ou l'utiliser comme nouveau site.
+
+
+────────────────────────────────────────────────────────────
+ÉTAPE 3 — DONNER LA CLÉ À NETLIFY (2 min)
+────────────────────────────────────────────────────────────
+
+1. Sur https://app.netlify.com , ouvrez votre site.
+2. Allez dans : Site configuration → Environment variables
+3. « Add a variable » :
+     Key   : OPENAI_API_KEY
+     Value : sk-...   (votre clé de l'étape 1)
+4. Redéployez une fois (onglet Deploys → « Trigger deploy →
+   Deploy site ») pour que la variable soit prise en compte.
+
+
+────────────────────────────────────────────────────────────
+ÉTAPE 4 — TESTER
+────────────────────────────────────────────────────────────
+
+1. Ouvrez https://amour-et-verite-app.netlify.app
+2. Décrivez une situation (ou cochez une case), cliquez
+   « Recevoir une aide au discernement ».
+3. La réponse doit apparaître après quelques secondes. 🕯️
+
+En cas d'erreur : onglet « Functions → discern → Logs » dans
+Netlify pour voir le détail.
+
+
+────────────────────────────────────────────────────────────
+NOTES
+────────────────────────────────────────────────────────────
+
+- La clé OpenAI n'est JAMAIS visible par les visiteurs : elle
+  reste côté serveur, dans la fonction.
+- La fonction accepte POST uniquement, limite les textes à
+  4000 caractères, et renvoie des messages d'erreur polis.
+- Modèle utilisé : gpt-4o-mini (économique et multilingue).
+  Pour changer : éditez netlify/functions/discern.js, ligne
+  « model: 'gpt-4o-mini' ».
+================================================================

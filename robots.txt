@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://amour-et-verite-app.netlify.app/sitemap.xml

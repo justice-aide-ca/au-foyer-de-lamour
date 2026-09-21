@@ -1,0 +1,7 @@
+# Redirections des anciennes URL vers les sections de la page unique
+/about          /#/a-propos        301
+/privacy        /#/confidentialite 301
+/sagesse        /#/sagesse         301
+/examen         /#/examen          301
+/contact        /#/contact         301
+/admin          /                  301
