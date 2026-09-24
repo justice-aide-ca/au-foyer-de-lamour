@@ -54,6 +54,11 @@
     .ai-warning { margin-top: 1rem; padding: 0.6rem 1rem; background: #fefaf5; border: 1px solid #e6e4e0; border-radius: 8px; font-size: 0.85rem; color: #5a4f42; text-align: center; line-height: 1.5; }
     .emergency-numbers { display: none; margin-top: 0.5rem; font-size: 0.8rem; color: #4a3b2c; text-align: left; }
     .emergency-numbers.visible { display: block; }
+    /* Homélies */
+    .homelie-card { background: #fefaf5; padding: 1.5rem 1.8rem; border-left: 4px solid #4a6f5e; border-radius: 0 8px 8px 0; margin: 1.2rem 0; line-height: 1.8; }
+    .homelie-card h3 { color: #4a3b2c; margin-top: 0; margin-bottom: 0.8rem; font-size: 1.15rem; font-style: italic; }
+    .homelie-card p { margin: 0 0 1em 0; color: #3a3a3a; }
+    .homelie-credit { font-size: 0.85rem; color: #7a6b5a; margin-top: 1.2rem; padding-top: 0.8rem; border-top: 1px solid #e6e4e0; }
     @media (max-width: 600px) {
         .situations-grid { grid-template-columns: 1fr; }
         .reponse-card { padding: 18px 20px; font-size: 1rem; }
@@ -69,6 +74,7 @@
     <div class="nav-menu">
         <a data-page="home" class="active" id="navHome">🏠 Accueil</a>
         <a data-page="sagesse" id="navSagesse">📖 Sagesse</a>
+        <a data-page="homelies" id="navHomelies">🕊️ Homélies</a>
         <a data-page="about" id="navAbout">📖 À propos</a>
         <a data-page="examen" id="navExamen">🕯️ Examen</a>
         <a data-page="contact" id="navContact">✉️ Contact</a>
@@ -124,17 +130,109 @@
         <div id="sagesseCitations"></div>
     </div>
 
+    <!-- PAGE HOMÉLIES -->
+    <div id="page-homelies" class="page-section">
+        <h2 id="homelies-title">🕊️ Homélies — Méditations inspirées</h2>
+        <div class="section-card" id="homelies-intro">
+            <p><em>Cette section est en cours de préparation.</em></p>
+            <p>Elle accueillera des méditations librement inspirées des homélies de <strong>Msgr. Joseph A. Pellegrino</strong> (diocèse de St. Petersburg, Floride), dont le ministère nourrit la prière de nombreux fidèles.</p>
+            <p>Ces méditations ne reproduiront pas les mots de Msgr. Pellegrino, mais chercheront à en prolonger l'esprit — dans le plus grand respect de son travail et de son droit d'auteur.</p>
+            <p style="margin-top:1rem;"><strong>🕯️ Cette section sera enrichie dès que la bénédiction de Msgr. Pellegrino aura été reçue.</strong></p>
+        </div>
+
+        <!-- Emplacement pour les futures méditations -->
+        <div id="homeliesListe"></div>
+
+        <!-- Méditations prêtes (cachées pour l'instant) -->
+        <div id="homelies-modeles" style="display:none;">
+
+            <div class="homelie-card" data-situation="deuil">
+                <h3>Quand la nuit tombe</h3>
+                <p>Il y a des nuits qui ne se dissipent pas au lever du jour. La perte d'un être cher est une de ces nuits. On voudrait que le temps efface, mais le temps ne fait pas cela : il apprivoise. Ce qui reste n'est pas un oubli, c'est une présence différente.</p>
+                <p>Le Seigneur ne nous promet pas l'absence de la nuit. Il promet sa présence dans la nuit. « Même si je passe par la vallée obscure, je ne crains aucun mal, car tu es avec moi » (Psaume 23,4). Ce n'est pas une consolation facile : c'est une vérité qui tient debout, même quand tout vacille.</p>
+                <p>Et un jour — peut-être lointain, peut-être discret — quelque chose en nous se met à respirer de nouveau. Non pas parce que la douleur a disparu, mais parce que l'amour, lui, ne disparaît pas.</p>
+                <p class="homelie-credit"><em>Librement inspirée par l'esprit des homélies de Msgr. Joseph A. Pellegrino (diocèse de St. Petersburg).</em></p>
+            </div>
+
+            <div class="homelie-card" data-situation="peur">
+                <h3>L'ombre n'a jamais le dernier mot</h3>
+                <p>La peur est une compagne étrange. Elle s'invite sans prévenir, elle s'installe, elle murmure que tout va s'écrouler. Elle isole — elle fait croire qu'on est le seul à la ressentir.</p>
+                <p>Mais voici une chose que la foi nous apprend : la peur n'a jamais eu le dernier mot. Elle n'est pas plus forte que la grâce. Le disciple Pierre a eu peur sur la barque ; le Christ n'a pas attendu qu'il soit courageux pour le relever.</p>
+                <p>Ce que Dieu demande n'est pas d'abord de ne plus avoir peur, mais de faire confiance. La confiance n'est pas un sentiment — c'est un acte. C'est remettre entre ses mains ce qui nous échappe.</p>
+                <p class="homelie-credit"><em>Librement inspirée par l'esprit des homélies de Msgr. Joseph A. Pellegrino (diocèse de St. Petersburg).</em></p>
+            </div>
+
+            <div class="homelie-card" data-situation="decision">
+                <h3>Le Seigneur ne donne pas une carte, il donne une main</h3>
+                <p>Quand on doit prendre une décision importante, on aimerait une carte claire, une réponse nette, une voix du ciel qui dise : « Voilà, c'est par ici. » Mais Dieu ne donne pas une carte. Il donne une main.</p>
+                <p>Cela dérange. Cela oblige à marcher sans tout voir, à faire confiance sans tout comprendre. Mais c'est ainsi que grandit la foi : non pas dans la certitude, mais dans l'abandon.</p>
+                <p>Le discernement n'est pas une technique. C'est une grâce. Il s'agit moins de trouver la bonne réponse que de se rendre disponible à l'Esprit, qui parle souvent doucement, mais clairement.</p>
+                <p class="homelie-credit"><em>Librement inspirée par l'esprit des homélies de Msgr. Joseph A. Pellegrino (diocèse de St. Petersburg).</em></p>
+            </div>
+
+            <div class="homelie-card" data-situation="justice">
+                <h3>Ce que Dieu demande n'est pas la perfection, mais la fidélité</h3>
+                <p>Il y a dans le cœur humain une soif de justice qui ne s'éteint pas. Quand quelqu'un est écrasé, quand une parole vraie est étouffée, quand un petit est mis à l'écart pour avoir dit ce qui devait être dit — quelque chose en nous se révolte. Cette révolte n'est pas un péché. Elle est le signe que nous sommes faits à l'image de Dieu, qui lui-même s'indigne devant l'injustice.</p>
+                <p>Mais voici le piège : à force de vouloir tout réparer, on peut se durcir. On peut devenir à son tour violent, méprisant, impitoyable. On peut vouloir la justice de Dieu avec les moyens du monde.</p>
+                <p>Le prophète Michée l'a dit simplement : « On t'a fait savoir, homme, ce qui est bien : pratiquer la justice, aimer la miséricorde, marcher humblement avec ton Dieu » (Michée 6,8). Trois choses, inséparables. La justice sans la miséricorde devient une cruauté. La miséricorde sans la justice devient une lâcheté. Et les deux sans l'humilité deviennent une entreprise d'orgueil.</p>
+                <p>Ce que Dieu demande, ce n'est pas que vous répariez toutes les injustices du monde. C'est que vous restiez fidèle — à la vérité, à la douceur, à la justice. Un petit geste juste, répété, vaut mieux qu'un grand geste héroïque qui épuise.</p>
+                <p class="homelie-credit"><em>Librement inspirée par l'esprit des homélies de Msgr. Joseph A. Pellegrino (diocèse de St. Petersburg).</em></p>
+            </div>
+
+            <div class="homelie-card" data-situation="solitude">
+                <h3>Être seul et se savoir aimé : c'est déjà être deux</h3>
+                <p>La solitude est une des épreuves les plus lourdes. Non pas d'être seul physiquement — cela, on peut l'apprivoiser. Mais ce sentiment intérieur que personne ne nous voit vraiment, que personne ne nous attend, que notre vie se déroule dans un silence qui ne sera jamais rompu.</p>
+                <p>Il y a une solitude qui est un appel, et une solitude qui est une blessure. L'appel : se retirer pour prier, comme Jésus se retirait dans la montagne. La blessure : croire que nous ne comptons pour personne.</p>
+                <p>À cette solitude-blessure, la foi répond par une parole très douce, presque trop douce pour être crue : « Ne crains pas, car je t'ai racheté, je t'ai appelé par ton nom, tu es à moi » (Isaïe 43,1). Non pas « tu seras à moi si tu le mérites », mais <strong>tu es à moi</strong>. C'est déjà fait. C'est une réalité plus ancienne que toutes nos solitudes.</p>
+                <p>Quand on se sent seul, ce n'est pas d'abord une présence extérieure qu'il faut chercher — c'est cette parole qu'il faut laisser descendre : « Je t'ai appelé par ton nom. » Votre nom. Le vôtre, précisément, personnellement.</p>
+                <p>Et un jour, peut-être, un frère, une sœur, un ami se présentera — envoyé par Dieu, sans qu'on l'ait prévu. Mais avant cela, il y a cette certitude : même seul, on n'est pas abandonné.</p>
+                <p class="homelie-credit"><em>Librement inspirée par l'esprit des homélies de Msgr. Joseph A. Pellegrino (diocèse de St. Petersburg).</em></p>
+            </div>
+
+            <div class="homelie-card" data-situation="esperance">
+                <h3>Dieu écrit droit avec des lignes courbes</h3>
+                <p>Il y a des moments où tout semble aller de travers. Les projets s'effondrent. Les personnes qu'on aimait s'éloignent. Les prières montent et retombent sans réponse. Et l'on se demande : à quoi bon ?</p>
+                <p>C'est dans ces moments-là que l'espérance chrétienne se révèle pour ce qu'elle est vraiment. Pas un optimisme naïf qui dit « tout va s'arranger ». Pas une fuite dans un au-delà consolateur. Non : une <strong>certitude</strong> que Dieu travaille, même quand on ne voit rien.</p>
+                <p>Un vieux proverbe dit que Dieu écrit droit avec des lignes courbes. Cela veut dire : ce qui nous semble un détour est peut-être le chemin. Ce qui nous semble un échec est peut-être un commencement. Ce qui nous semble un silence est peut-être une préparation.</p>
+                <p>Israël a connu l'exil, et l'exil a semblé la fin de tout. Mais dans l'exil, Dieu a formé un peuple nouveau. La croix a semblé la fin de tout. Mais de la croix est née la résurrection.</p>
+                <p>Ce qui compte, ce n'est pas de comprendre le chemin maintenant. C'est de rester en marche. « Voici que je fais une chose nouvelle ; elle germe déjà, ne la voyez-vous pas ? » (Isaïe 43,19). Parfois, la chose nouvelle germe sous la neige. Mais elle germe.</p>
+                <p class="homelie-credit"><em>Librement inspirée par l'esprit des homélies de Msgr. Joseph A. Pellegrino (diocèse de St. Petersburg).</em></p>
+            </div>
+
+            <div class="homelie-card" data-situation="fatigue">
+                <h3>Le repos n'est pas un luxe, c'est un commandement</h3>
+                <p>Nous vivons dans un monde qui valorise l'épuisement. On se vante d'être débordé. On confond la fidélité avec l'acharnement. On croit que s'arrêter, c'est trahir.</p>
+                <p>Mais Dieu, lui, s'est reposé le septième jour. Non pas parce qu'il était fatigué — mais pour <strong>enseigner</strong> le repos. Le repos n'est pas une permission qu'on s'accorde quand tout est fini. C'est un commandement, inscrit dans la Création elle-même.</p>
+                <p>S'arrêter, c'est reconnaître quelque chose d'essentiel : que le monde ne dépend pas de nous. Que Dieu travaille même quand nous dormons. Que nous ne sommes pas le sauveur — nous sommes des serviteurs, et les serviteurs ont besoin de sommeil.</p>
+                <p>Jésus dit : « Venez à moi, vous tous qui portez un fardeau, et moi, je vous procurerai le repos » (Matthieu 11,28). Ce repos n'est pas d'abord celui du corps — c'est celui de l'âme. C'est déposer ce qui est trop lourd. C'est reconnaître qu'on n'est pas Dieu.</p>
+                <p>Si vous êtes épuisé, ce n'est pas un signe de faiblesse. C'est un signal. Le signal qu'il est temps de faire une chose que Dieu lui-même a faite : <strong>s'arrêter, et laisser le monde tourner sans nous.</strong></p>
+                <p class="homelie-credit"><em>Librement inspirée par l'esprit des homélies de Msgr. Joseph A. Pellegrino (diocèse de St. Petersburg).</em></p>
+            </div>
+
+            <div class="homelie-card" data-situation="pardon">
+                <h3>Pardonner, c'est ouvrir une porte que personne n'a forcée</h3>
+                <p>Le pardon est une des choses les plus difficiles que Dieu nous demande. Non pas parce qu'il est absurde, mais parce qu'il est <strong>contre-nature</strong>. La nature veut la vengeance. Le pardon est une chose surnaturelle.</p>
+                <p>Pardonner, ce n'est pas oublier. Ce n'est pas dire que le mal n'a pas eu lieu. Ce n'est pas non plus se remettre entre les mains de celui qui nous a blessé. Pardonner, c'est <strong>décider</strong> que le mal ne déterminera pas la suite de notre vie.</p>
+                <p>C'est une chose que personne ne peut faire à notre place. C'est une porte que nous seuls pouvons ouvrir. Et cette porte, personne ne nous force à l'ouvrir — pas même Dieu. Il attend. Il propose. Il ne violente pas notre liberté.</p>
+                <p>Pourquoi pardonner ? Non pas parce que c'est plus facile (ce n'est pas vrai). Non pas parce que le passé s'efface (il ne s'efface pas). Mais parce que le pardon <strong>ouvre un avenir</strong>. Sans le pardon, on reste prisonnier du passé. Avec le pardon, on redevient libre.</p>
+                <p>Jésus a dit sur la croix : « Père, pardonne-leur, ils ne savent pas ce qu'ils font » (Luc 23,34). Il n'a pas attendu que ses bourreaux s'excusent. Il a ouvert la porte <strong>le premier</strong>. C'est cela, le pardon : un acte de liberté, posé devant Dieu, qui ouvre une brèche dans une situation qui semblait fermée.</p>
+                <p class="homelie-credit"><em>Librement inspirée par l'esprit des homélies de Msgr. Joseph A. Pellegrino (diocèse de St. Petersburg).</em></p>
+            </div>
+
+        </div>
+    </div>
+
     <!-- PAGE À PROPOS -->
     <div id="page-about" class="page-section">
         <h2 id="about-title">📖 À propos</h2>
         <div class="section-card" id="about-content">
             <p><strong>Au Foyer de l'Amour</strong> est un compagnon spirituel catholique.</p>
-            <p>Il lit les situations humaines — joies, épreuves, décisions, conflits — à la lumière de l'Esprit Saint, en s'appuyant sur :</p>
+            <p>Il lit les situations humaines à la lumière de l'Esprit Saint, en s'appuyant sur :</p>
             <ul>
                 <li>La <strong>Parole de Dieu</strong> (Bible)</li>
                 <li>L'<strong>enseignement de l'Église catholique</strong> (Magistère, Catéchisme)</li>
                 <li>Les <strong>maîtres spirituels</strong> : Ignace de Loyola, Thérèse d'Avila, Jean de la Croix, Joseph Kentenich, etc.</li>
-                <li>Des <strong>penseurs chrétiens et philosophes</strong> qui ont vu quelque chose de vrai sur l'agir humain : Paul Ricœur, Hannah Arendt, Simone Weil, etc.</li>
+                <li>Des <strong>penseurs chrétiens et philosophes</strong> : Paul Ricœur, Hannah Arendt, Simone Weil, etc.</li>
             </ul>
             <p>Il ne remplace pas un accompagnement humain : un prêtre, un psychologue, un médecin.</p>
         </div>
@@ -332,6 +430,7 @@ const TRAD = {
         priereTitle: "📖 Parole du jour", priereText: "Seigneur, apprends-moi à écouter le silence.",
         modes: { discernement: "🤲 Discernement", consolation: "🙏 Consolation", lecture: "📖 Méditation", priere: "❤️ Prière" },
         sagesseTitle: "📖 Sagesse", sagesseIntro: "Quelques paroles qui nourrissent le discernement :",
+        homeliesTitle: "🕊️ Homélies — Méditations inspirées",
         aboutTitle: "📖 À propos",
         aboutContent: "<p><strong>Au Foyer de l'Amour</strong> est un compagnon spirituel catholique.</p><p>Il lit les situations humaines à la lumière de l'Esprit Saint, en s'appuyant sur la Parole de Dieu, l'enseignement de l'Église, les maîtres spirituels (Ignace, Thérèse d'Avila, Kentenich…) et des penseurs chrétiens ou philosophes (Ricœur, Arendt, Weil…).</p><p>Il ne remplace pas un accompagnement humain : un prêtre, un psychologue, un médecin.</p>",
         examenTitle: "🕯️ Examen de conscience",
@@ -359,6 +458,7 @@ const TRAD = {
         priereTitle: "📖 Word of the day", priereText: "Lord, teach me to listen to silence.",
         modes: { discernement: "🤲 Discernment", consolation: "🙏 Consolation", lecture: "📖 Meditation", priere: "❤️ Prayer" },
         sagesseTitle: "📖 Wisdom", sagesseIntro: "Words that nourish discernment:",
+        homeliesTitle: "🕊️ Homilies — Inspired meditations",
         aboutTitle: "📖 About",
         aboutContent: "<p><strong>Home of Love</strong> is a Catholic spiritual companion.</p><p>It reads human situations in the light of the Holy Spirit, drawing on the Word of God, the teaching of the Church, spiritual masters (Ignatius, Teresa of Avila, Kentenich…) and Christian or philosophical thinkers (Ricœur, Arendt, Weil…).</p><p>It does not replace human support: a priest, a psychologist, a doctor.</p>",
         examenTitle: "🕯️ Examination of conscience",
@@ -386,6 +486,7 @@ const TRAD = {
         priereTitle: "📖 Palabra del día", priereText: "Señor, enséñame a escuchar el silencio.",
         modes: { discernement: "🤲 Discernimiento", consolation: "🙏 Consolación", lecture: "📖 Meditación", priere: "❤️ Oración" },
         sagesseTitle: "📖 Sabiduría", sagesseIntro: "Palabras que alimentan el discernimiento:",
+        homeliesTitle: "🕊️ Homilías — Meditaciones inspiradas",
         aboutTitle: "📖 Acerca de",
         aboutContent: "<p><strong>Hogar del Amor</strong> es un compañero espiritual católico.</p><p>Lee las situaciones humanas a la luz del Espíritu Santo, apoyándose en la Palabra de Dios, la enseñanza de la Iglesia, los maestros espirituales (Ignacio, Teresa de Ávila, Kentenich…) y pensadores cristianos o filósofos (Ricœur, Arendt, Weil…).</p><p>No reemplaza el acompañamiento humano: un sacerdote, un psicólogo, un médico.</p>",
         examenTitle: "🕯️ Examen de conciencia",
@@ -413,6 +514,7 @@ const TRAD = {
         priereTitle: "📖 每日圣言", priereText: "主啊，求你教我聆听寂静。",
         modes: { discernement: "🤲 辨别", consolation: "🙏 安慰", lecture: "📖 默想", priere: "❤️ 祈祷" },
         sagesseTitle: "📖 智慧", sagesseIntro: "滋养辨别的言语：",
+        homeliesTitle: "🕊️ 讲道 — 受启发的默想",
         aboutTitle: "📖 关于",
         aboutContent: "<p><strong>爱之家</strong>是一位天主教灵性伴侣。</p><p>它在圣神的光照下阅读人生的各种境遇，依托天主圣言、教会训导、灵修大师（依纳爵、阿维拉的特蕾莎、肯特尼希……）以及基督徒或哲学思想家（利科、阿伦特、薇依……）。</p><p>它不能替代人际陪伴：神父、心理学家或医生。</p>",
         examenTitle: "🕯️ 良心省察",
@@ -440,15 +542,16 @@ const TRAD = {
         priereTitle: "📖 दिन का वचन", priereText: "प्रभु, मुझे मौन सुनना सिखा।",
         modes: { discernement: "🤲 विवेक", consolation: "🙏 सांत्वना", lecture: "📖 ध्यान", priere: "❤️ प्रार्थना" },
         sagesseTitle: "📖 ज्ञान", sagesseIntro: "विवेक को पोषित करने वाले वचन:",
+        homeliesTitle: "🕊️ उपदेश — प्रेरित ध्यान",
         aboutTitle: "📖 बारे में",
-        aboutContent: "<p><strong>प्रेम का घर</strong> एक कैथोलिक आध्यात्मिक साथी है।</p><p>यह मानवीय परिस्थितियों को पवित्र आत्मा की रोशनी में पढ़ता है, ईश्वर के वचन, कलीसिया की शिक्षा, आध्यात्मिक गुरुओं (इग्नेशियस, अविला की टेरेसा, केन्टेनिच…) और ईसाई या दार्शनिक विचारकों (रिको, अरेंट, वेइल…) पर आधारित।</p><p>यह मानवीय सहायता का स्थान नहीं लेता: पादरी, मनोवैज्ञानिक, चिकित्सक।</p>",
+        aboutContent: "<p><strong>प्रेम का घर</strong> एक कैथोलिक आध्यात्मिक साथी है।</p><p>यह मानवीय परिस्थितियों को पवित्र आत्मा की रोशनी में पढ़ता है, ईश्वर के वचन, कलीसिया की शिक्षा, आध्यात्मिक गुरुओं (इग्नेशियस, अविला की टेरेसा, केन्टेनिच…) और ईसाई या दार्शनिक विचारकों (रिको, अरेंट, वेइल…) पर आधारित।</p><p>यह मानवीय सहायता का स्थान नहीं लेता।</p>",
         examenTitle: "🕯️ अंतःकरण की परीक्षा",
         examenContent: "<p>कुछ मिनट मौन में लें। अपने दिन की समीक्षा करें।</p><ol style='line-height:2;'><li>मैंने कहाँ गहरी शांति महसूस की?</li><li>मैंने कहाँ अशांति महसूस की?</li><li>मैं ईश्वर को किस बात के लिए धन्यवाद दूँ?</li><li>कल के लिए उन्हें क्या सौंपूँ?</li></ol><p><em>« जो स्थायी शांति लाता है वह पवित्र आत्मा से आता है। »</em></p>",
         contactTitle: "✉️ संपर्क",
         contactContent: "<p>किसी भी प्रश्न के लिए, अपने पास के पादरी या आध्यात्मिक साथी से परामर्श करें।</p>",
         privacyTitle: "🔒 गोपनीयता",
-        privacyContent: "<p>कुछ भी सर्वर पर संग्रहीत नहीं होता। सब कुछ आपके ब्राउज़र में होता है।</p>",
-        aiWarning: "मैं कैथोलिक विश्वास की सेवा में एक कृत्रिम बुद्धिमत्ता हूँ। मैं पादरी, मनोवैज्ञानिक या डॉक्टर का स्थान नहीं लेता। संकट में मानवीय सहायता लें।",
+        privacyContent: "<p>कुछ भी सर्वर पर संग्रहीत नहीं होता।</p>",
+        aiWarning: "मैं कैथोलिक विश्वास की सेवा में एक कृत्रिम बुद्धिमत्ता हूँ। मैं पादरी, मनोवैज्ञानिक या डॉक्टर का स्थान नहीं लेता।",
         footerNothing: "🔒 कुछ रिकॉर्ड नहीं · 🕊️ एक मूक साथी"
     },
     ar: {
@@ -467,15 +570,16 @@ const TRAD = {
         priereTitle: "📖 كلمة اليوم", priereText: "يا رب، علمني أن أستمع إلى الصمت.",
         modes: { discernement: "🤲 تمييز", consolation: "🙏 عزاء", lecture: "📖 تأمل", priere: "❤️ صلاة" },
         sagesseTitle: "📖 حكمة", sagesseIntro: "كلمات تغذي التمييز:",
+        homeliesTitle: "🕊️ العظات — تأملات مستوحاة",
         aboutTitle: "📖 عن",
-        aboutContent: "<p><strong>بيت المحبة</strong> رفيق روحي كاثوليكي.</p><p>يقرأ الحالات الإنسانية في نور الروح القدس، مستنداً إلى كلمة الله، تعليم الكنيسة، المعلمين الروحيين (إغناطيوس، تيريزا الأفيلية، كنتنيش…) والمفكرين المسيحيين أو الفلاسفة (ريكور، أرندت، فاي…).</p><p>لا يحل محل المرافقة البشرية: كاهن، طبيب نفسي، طبيب.</p>",
+        aboutContent: "<p><strong>بيت المحبة</strong> رفيق روحي كاثوليكي.</p><p>يقرأ الحالات الإنسانية في نور الروح القدس، مستنداً إلى كلمة الله، تعليم الكنيسة، المعلمين الروحيين (إغناطيوس، تيريزا الأفيلية، كنتنيش…) والمفكرين المسيحيين أو الفلاسفة (ريكور، أرندت، فاي…).</p><p>لا يحل محل المرافقة البشرية.</p>",
         examenTitle: "🕯️ فحص الضمير",
         examenContent: "<p>خذ بضع دقائق في صمت. راجع يومك.</p><ol style='line-height:2;'><li>أين شعرت بسلام عميق؟</li><li>أين شعرت باضطراب؟</li><li>ماذا أشكر الله عليه؟</li><li>ماذا أعهد إليه غداً؟</li></ol><p><em>« ما يجلب سلاماً دائماً يأتي من الروح القدس. »</em></p>",
         contactTitle: "✉️ اتصال",
         contactContent: "<p>لأي سؤال، استشر كاهناً أو مرافقاً روحياً قريباً منك.</p>",
         privacyTitle: "🔒 خصوصية",
-        privacyContent: "<p>لا شيء يُخزَّن على خادم. كل شيء يحدث في متصفحك.</p>",
-        aiWarning: "أنا ذكاء اصطناعي في خدمة الإيمان الكاثوليكي. لا أحل محل كاهن أو طبيب نفسي أو طبيب. في حالة الخطر، اطلب الدعم البشري.",
+        privacyContent: "<p>لا شيء يُخزَّن على خادم.</p>",
+        aiWarning: "أنا ذكاء اصطناعي في خدمة الإيمان الكاثوليكي. لا أحل محل كاهن أو طبيب نفسي أو طبيب.",
         footerNothing: "🔒 لا شيء مسجل · 🕊️ رفيق صامت"
     }
 };
@@ -498,7 +602,7 @@ const KEYWORDS = {
     couple:      ["couple", "mari", "femme", "époux", "épouse", "relation", "amour", "丈夫", "妻子", "pareja", "زوج"],
     famille:     ["famille", "enfant", "père", "mère", "frère", "sœur", "parents", "fils", "fille", "family", "家庭", "familia", "عائلة"],
     foi:         ["foi", "croire", "dieu", "prière", "église", "doute", "espérance", "saint", "faith", "信仰", "fe", "إيمان"],
-    commencement:["commencement", "commencer", "initiative", "nouveau", "nouvelle", "projet", "créer", "création", "parole", "oser", "开始", "commienzo", "بداية"],
+    commencement:["commencement", "commencer", "initiative", "nouveau", "nouvelle", "projet", "créer", "création", "parole", "oser", "开始", "comienzo", "بداية"],
     travail:     ["travail", "équipe", "collègue", "manager", "responsable", "entreprise", "organisation", "mission", "工作", "trabajo", "عمل"]
 };
 
@@ -738,6 +842,7 @@ function updateLanguage(lang) {
     document.getElementById("mode-priere").textContent = t.modes.priere;
     document.getElementById("sagesse-title").textContent = t.sagesseTitle;
     document.getElementById("sagesse-intro").textContent = t.sagesseIntro;
+    document.getElementById("homelies-title").textContent = t.homeliesTitle || "🕊️ Homélies — Méditations inspirées";
     document.getElementById("about-title").textContent = t.aboutTitle;
     document.getElementById("about-content").innerHTML = t.aboutContent;
     document.getElementById("examen-title").textContent = t.examenTitle;
@@ -831,7 +936,7 @@ document.getElementById("submitBtn").addEventListener("click", () => {
 });
 
 /* ============================================================
-   PAGE SAGESSE — citations dynamiques
+   PAGE SAGESSE — citations dynamiques + Homélies
    ============================================================ */
 function loadSagesse() {
     const container = document.getElementById("sagesseCitations");
@@ -851,11 +956,29 @@ function loadSagesse() {
     ).join("");
 }
 
+/* Active ou désactive l'affichage des méditations (à basculer après accord de Msgr. Pellegrino) */
+const HOMELIES_ACTIVES = false;
+function loadHomelies() {
+    const liste = document.getElementById("homeliesListe");
+    const modeles = document.getElementById("homelies-modeles");
+    const intro = document.getElementById("homelies-intro");
+    if (!liste || !modeles) return;
+    if (HOMELIES_ACTIVES) {
+        liste.innerHTML = modeles.innerHTML;
+        modeles.style.display = "none";
+        if (intro) intro.style.display = "none";
+    } else {
+        liste.innerHTML = "";
+        if (intro) intro.style.display = "block";
+    }
+}
+
 /* ============================================================
    INITIALISATION
    ============================================================ */
 updateLanguage("fr");
 loadSagesse();
+loadHomelies();
 </script>
 </body>
 </html>
