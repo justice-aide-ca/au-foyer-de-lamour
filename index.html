@@ -1242,11 +1242,9 @@ document.getElementById("toggle-urgence").addEventListener("click", e => {
 document.getElementById("submitBtn").addEventListener("click", async () => {
     const situation = (document.getElementById("situation").value || "").trim();
     const precision = (document.getElementById("precision-situation").value || "").trim();
-    const situationChoisie = document.querySelector('input[name="situation-choisie"]:checked');
     const role = (document.getElementById("role").value || "").trim();
 
     let texteComplet = situation;
-    if (situationChoisie) texteComplet += " " + situationChoisie.value;
     if (precision) texteComplet += " " + precision;
 
     if (!texteComplet.trim()) {
