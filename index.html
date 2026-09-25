@@ -1237,19 +1237,9 @@ document.getElementById("toggle-urgence").addEventListener("click", e => {
 /* ============================================================
    SOUMISSION — API OpenAI avec fallback local
    ============================================================ */
-document.getElementById("submitBtn").addEventListener("click", async () => {
     const situation = (document.getElementById("situation").value || "").trim();
-    const precision = (document.getElementById("precision-situation").value || "").trim();
     const role = (document.getElementById("role").value || "").trim();
-
     let texteComplet = situation;
-    if (precision) texteComplet += " " + precision;
-
-    if (!texteComplet.trim()) {
-        alert("Merci de décrire votre situation, ou d'en choisir une dans la liste.");
-        return;
-    }
-
     const btn = document.getElementById("submitBtn");
     const loading = document.getElementById("loading");
     const error = document.getElementById("error");
