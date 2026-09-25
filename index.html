@@ -1237,6 +1237,7 @@ document.getElementById("toggle-urgence").addEventListener("click", e => {
 /* ============================================================
    SOUMISSION — API OpenAI avec fallback local
    ============================================================ */
+    document.getElementById("submitBtn").addEventListener("click", async () => {
     const situation = (document.getElementById("situation").value || "").trim();
     const role = (document.getElementById("role").value || "").trim();
     let texteComplet = situation;
