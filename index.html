@@ -1197,19 +1197,14 @@ function updateLanguage(lang) {
     document.getElementById("share-carnet").textContent = t.carnetShare || tf.carnetShare;
     document.getElementById("carnet-info-text").textContent = t.carnetInfo || tf.carnetInfo;
 
-    // Situations
-    const grid = document.getElementById("situations-list");
-    grid.innerHTML = "";
-    const situations = t.situations || tf.situations;
-    situations.forEach(s => {
-        const label = document.createElement("label");
-        const input = document.createElement("input");
-        input.type = "radio";
-        input.name = "situation-choisie";
-        input.value = s;
-        label.appendChild(input);
-        label.appendChild(document.createTextNode(" " + s));
-        grid.appendChild(label);
+        // Exemples cliquables
+    const chips = document.querySelectorAll(".exemple-chip");
+    chips.forEach(chip => {
+        chip.addEventListener("click", function() {
+            const ta = document.getElementById("situation");
+            ta.value = this.dataset.exemple;
+            ta.focus();
+        });
     });
 
     // Si l'examen est en cours, on rafraîchit son rendu
