@@ -1150,8 +1150,6 @@ function updateLanguage(lang) {
     document.getElementById("role").placeholder = t.role || tf.role;
     document.getElementById("submitBtn").textContent = t.submit || tf.submit;
     document.getElementById("loading").innerHTML = t.loading || tf.loading;
-    document.getElementById("situations-title").textContent = t.situationsTitle || tf.situationsTitle;
-    document.getElementById("precision-situation").placeholder = t.precisionPlaceholder || tf.precisionPlaceholder;
     document.getElementById("priere-title").textContent = t.priereTitle || tf.priereTitle;
     document.getElementById("priereDuJour").innerHTML = `<em>« ${t.priereText || tf.priereText} »</em>`;
     document.getElementById("mode-discernement").textContent = (t.modes && t.modes.discernement) || tf.modes.discernement;
