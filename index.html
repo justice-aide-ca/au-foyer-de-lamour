@@ -153,6 +153,40 @@
             <div id="priereDuJour" class="citation-box"><em>« Seigneur, apprends-moi à écouter le silence. »</em></div>
         </div>
     </div>
+    
+        <!-- Préparation d'homélie -->
+        <div class="section-card" id="homelie-section">
+            <h3>📖 <span id="homelie-title">Préparation d'homélie</span> <span class="badge" id="homelie-badge">NOUVEAU</span></h3>
+            <p id="homelie-description" style="color:#7a6b5a; font-size:0.9rem;">Entrez les lectures du dimanche pour recevoir une proposition d'homélie (max 500 mots).</p>
+
+            <div class="homelie-prep-grid">
+                <div>
+                    <label id="label-lecture1">Première lecture :</label>
+                    <input type="text" id="lecture1" placeholder="Ex: Isaïe 56,1.6-7">
+                </div>
+                <div>
+                    <label id="label-psaume">Psaume :</label>
+                    <input type="text" id="psaume" placeholder="Ex: Psaume 66(67)">
+                </div>
+                <div>
+                    <label id="label-lecture2">Deuxième lecture :</label>
+                    <input type="text" id="lecture2" placeholder="Ex: Romains 11,13-15.29-32">
+                </div>
+                <div>
+                    <label id="label-evangile">Évangile : <span style="color:#c0392b;">*</span></label>
+                    <input type="text" id="evangile" placeholder="Ex: Matthieu 15,21-28">
+                </div>
+            </div>
+
+            <div style="margin-top:0.5rem;">
+                <label id="label-theme" style="font-weight:bold; font-size:0.9rem;">Thème ou idée (optionnel) :</label>
+                <input type="text" id="theme" placeholder="Ex: La foi qui ne renonce pas">
+            </div>
+
+            <button type="button" id="genererHomelie" style="margin-top:0.8rem;">🕊️ <span id="homelie-button-text">Générer une homélie</span></button>
+            <div id="homelieLoading">🕯️ Préparation de l'homélie...</div>
+            <div id="homelieResponse"></div>
+        </div>
 
     <!-- PAGE SAGESSE -->
     <div id="page-sagesse" class="page-section">
