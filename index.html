@@ -147,6 +147,34 @@
         <div id="response-container">
             <div id="reponse" class="reponse-card"></div>
         </div>
+        
+        <!-- Carnet -->
+        <div id="carnet-container" style="display:none;">
+            <div class="silence-message">✨<br><br>« Et toi, quelle petite lumière pourrais-tu noter aujourd'hui ? »</div>
+            <div class="carnet-box">
+                <textarea id="carnet-entry" rows="3" placeholder="Ma petite lumière..."></textarea>
+                <div class="carnet-actions">
+                    <button type="button" id="save-carnet">💾 Sauvegarder</button>
+                    <button type="button" class="btn-outline" id="copy-carnet-link">🔗 Copier mon lien</button>
+                    <button type="button" class="btn-outline" id="share-carnet">📤 Partager</button>
+                </div>
+                <div id="carnet-feedback" class="carnet-info"></div>
+                <div class="carnet-info" id="carnet-info-text">Tu pourras revenir plus tard avec ton lien. Rien n'est lié à un compte.</div>
+            </div>
+        </div>
+
+        <!-- Témoignages -->
+        <div class="section-card">
+            <h3 id="temoignages-title">💬 Vous avez utilisé Au Foyer de l'Amour ?</h3>
+            <p id="temoignages-intro" style="color:#7a6b5a; font-size:0.9rem;">Partagez votre expérience (anonyme) :</p>
+            <textarea id="temoignage" rows="2" placeholder="Votre témoignage..."></textarea>
+            <button type="button" id="envoyerTemoignage">Envoyer</button>
+            <div id="merciTemoignage" style="display:none; color:#4a6f5e; margin-top:0.5rem;">🙏 Merci !</div>
+            <div style="margin-top:0.8rem;">
+                <h4 id="temoignages-recus-title" style="color:#4a3b2c; font-size:1rem;">💬 Témoignages reçus</h4>
+                <div id="temoignagesListe"></div>
+            </div>
+        </div>
 
         <div class="section-card">
             <h3 id="priere-title">📖 Parole du jour</h3>
