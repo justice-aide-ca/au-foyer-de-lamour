@@ -143,10 +143,16 @@
         <textarea id="situation" rows="5" placeholder="Décrivez ce que vous vivez, votre question, votre recherche..."></textarea>
         <input type="text" id="role" placeholder="Qui êtes-vous ? (optionnel)">
 
-        <div class="situations-container">
-            <p id="situations-title">Ou choisissez ce qui ressemble le plus à ce que vous vivez :</p>
-            <div class="situations-grid" id="situations-list"></div>
-            <textarea id="precision-situation" rows="2" placeholder="Vous pouvez préciser, si vous le souhaitez..."></textarea>
+                <div class="exemples-container">
+            <p class="exemples-label">Ou touchez un exemple pour commencer :</p>
+            <div class="exemples-chips" id="exemples-list">
+                <button type="button" class="exemple-chip" data-exemple="Je suis fatigué">Je suis fatigué</button>
+                <button type="button" class="exemple-chip" data-exemple="J'ai perdu un être cher">J'ai perdu un être cher</button>
+                <button type="button" class="exemple-chip" data-exemple="Je me sens seul">Je me sens seul</button>
+                <button type="button" class="exemple-chip" data-exemple="Je dois prendre une décision">Je dois prendre une décision</button>
+                <button type="button" class="exemple-chip" data-exemple="Je traverse une épreuve">Je traverse une épreuve</button>
+                <button type="button" class="exemple-chip" data-exemple="J'ai peur de l'avenir">J'ai peur de l'avenir</button>
+            </div>
         </div>
 
         <button id="submitBtn">Recevoir une parole →</button>
