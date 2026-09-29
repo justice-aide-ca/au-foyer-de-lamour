@@ -144,14 +144,7 @@
     <h1 id="mainTitle">🕯️ Au Foyer de l'Amour</h1>
     <div class="sous-titre" id="mainSubtitle">Discernement et la petite lumière</div>
 
-    <!-- MENU SIMPLIFIÉ avec ancres -->
-    <div class="nav-menu">
-        <a href='/' id='navHome'>🏠 Accueil</a>
-        <a href='#formulaire' id='navForm'>🕯️ Discernement</a>
-        <a href='#ressources-container' id='navRessources'>📖 Ressources</a>
-        <a href='#temoignages' id='navTemoignages'>💬 Témoignages</a>
-        <a href='#projets' id='navProjets'>🌱 Nos projets</a>
-    </div>
+    
 
     <div class="language-selector">
         <button class="lang-btn active" data-lang="fr">🇫🇷 Français</button>
@@ -328,6 +321,30 @@ const RESSOURCES_EXTERNES = {
 
 const translations = {
     fr: {
+        submitModes: {
+        submitModes: {
+            discernement: "Recibir ayuda para el discernimiento →",
+            consolation: "Recibir palabras de consuelo →",
+            lecture: "Recibir una lectura bíblica →",
+            priere: "Recibir una oración adaptada →"
+        },
+        modePlaceholders: {
+            discernement: "Describe tu situación para recibir ayuda para el discernimiento...",
+            consolation: "Comparte tu dolor o aflicción para recibir palabras de consuelo...",
+            lecture: "Comparte tu momento de vida para recibir una lectura bíblica...",
+            priere: "Comparte lo que pesa en tu corazón para recibir una oración..."
+        },
+            discernement: "Recevoir une aide au discernement →",
+            consolation: "Recevoir des paroles de consolation →",
+            lecture: "Recevoir une lecture biblique →",
+            priere: "Recevoir une prière adaptée →"
+        },
+        modePlaceholders: {
+            discernement: "Décrivez votre situation pour recevoir une aide au discernement...",
+            consolation: "Partagez votre peine ou votre souffrance pour recevoir des paroles de consolation...",
+            lecture: "Indiquez ce que vous vivez pour recevoir une lecture biblique éclairante...",
+            priere: "Déposez ce qui pèse sur votre cœur pour recevoir une prière personnalisée..."
+        },
         title: "🕯️ Au Foyer de l'Amour", subtitle: "Discernement et la petite lumière",
         placeholder: "Décrivez votre situation...", role: "Qui êtes-vous ? (optionnel)",
         submit: "Recevoir une aide au discernement →", loading: "🕯️ Un instant...",
@@ -470,6 +487,18 @@ const translations = {
         modes: { discernement: "🤲 Discernement", consolation: "🙏 Consolation", lecture: "📖 Lecture biblique", priere: "❤️ Prière" }
     },
     en: {
+        submitModes: {
+            discernement: "Receive discernment guidance →",
+            consolation: "Receive words of comfort →",
+            lecture: "Receive a Scripture reading →",
+            priere: "Receive a tailored prayer →"
+        },
+        modePlaceholders: {
+            discernement: "Describe your situation to receive discernment guidance...",
+            consolation: "Share your sorrow or grief to receive comforting words...",
+            lecture: "Share your journey to receive an enlightening Scripture reading...",
+            priere: "Share what weighs upon your heart to receive a prayer..."
+        },
         title: "🕯️ Home of Love", subtitle: "Discernment and the little light",
         placeholder: "Describe your situation...", role: "Who are you? (optional)",
         submit: "Receive discernment help →", loading: "🕯️ One moment...",
@@ -482,7 +511,7 @@ const translations = {
         homelieTitle: "📖 The Word of God for each day",
         navRessources: "📖 Resources",
         footerRessources: "📖 Resources",
-        ressourcesIntro: ""Home of Love" also wishes to guide you toward a few external resources helpful for your journey of faith.",
+        ressourcesIntro: "« Home of Love » also wishes to guide you toward a few external resources helpful for your journey of faith.",
         homelieTitle: "Prions en Église",
         homelieText: "To deepen your prayer life and follow the liturgy, discover Prions en Église and its monthly edition published by Novalis.",
         homelieLinkText: "Discover Prions en Église ↗",
@@ -612,6 +641,18 @@ const translations = {
         modes: { discernement: "🤲 Discernment", consolation: "🙏 Consolation", lecture: "📖 Bible Reading", priere: "❤️ Prayer" }
     },
     zh: {
+        submitModes: {
+            discernement: "获得辨别帮助 →",
+            consolation: "获得安慰之言 →",
+            lecture: "获得圣经读经 →",
+            priere: "获得针对此境况的祷告 →"
+        },
+        modePlaceholders: {
+            discernement: "描述你的情况以获得辨别指引...",
+            consolation: "分享你的困扰或悲伤以获得安慰之言...",
+            lecture: "分享你当下的经历以获得圣经指引...",
+            priere: "敞开你的心扉以获得专属祷告..."
+        },
         title: "🕯️ 爱之家", subtitle: "辨别与小光",
         placeholder: "描述你的情况...", role: "你是谁？（可选）",
         submit: "获得辨别帮助 →", loading: "🕯️ 请稍候...",
@@ -677,6 +718,18 @@ const translations = {
         modes: { discernement: "🤲 辨别", consolation: "🙏 安慰", lecture: "📖 读经", priere: "❤️ 祷告" }
     },
     hi: {
+        submitModes: {
+            discernement: "विवेक सहायता प्राप्त करें →",
+            consolation: "सांत्वना के शब्द प्राप्त करें →",
+            lecture: "बाइबिल पठन प्राप्त करें →",
+            priere: "एक उपयुक्त प्रार्थना प्राप्त करें →"
+        },
+        modePlaceholders: {
+            discernement: "विवेक मार्गदर्शन प्राप्त करने के लिए अपनी स्थिति बताएं...",
+            consolation: "सांत्वना के शब्द पाने के लिए अपनी व्यथा साझा करें...",
+            lecture: "प्रेरणादायक बाइबिल पठन प्राप्त करने के लिए अपनी बात लिखें...",
+            priere: "प्रार्थना प्राप्त करने के लिए अपने दिल की बात साझा करें..."
+        },
         title: "🕯️ प्रेम का घर", subtitle: "विवेक और छोटी रोशनी",
         placeholder: "अपनी स्थिति का वर्णन करें...", role: "आप कौन हैं? (वैकल्पिक)",
         submit: "विवेक सहायता प्राप्त करें →", loading: "🕯️ एक क्षण...",
@@ -807,6 +860,18 @@ const translations = {
         modes: { discernement: "🤲 Discernimiento", consolation: "🙏 Consolación", lecture: "📖 Lectura bíblica", priere: "❤️ Oración" }
     },
     ar: {
+        submitModes: {
+            discernement: "احصل على مساعدة في التمييز →",
+            consolation: "احصل على كلمات تعزية →",
+            lecture: "احصل على قراءة كتابية →",
+            priere: "احصل على صلاة مخصصة →"
+        },
+        modePlaceholders: {
+            discernement: "صف حالتك لتلقي مساعدة في التمييز الروحي...",
+            consolation: "شارك ألمك أو حزنك لتلقي كلمات تعزية...",
+            lecture: "شارك ما تمر به لتلقي قراءة من الكتاب المقدس...",
+            priere: "شارك ما يثقل قلبك لتلقي صلاة مخصصة..."
+        },
         title: "🕯️ بيت المحبة", subtitle: "التمييز والنور الصغير",
         placeholder: "صف حالتك...", role: "من أنت؟ (اختياري)",
         submit: "احصل على مساعدة في التمييز →", loading: "🕯️ لحظة...",
@@ -886,6 +951,26 @@ const translations = {
 // État global
 let currentLang = 'fr', currentMode = 'discernement', currentResponseText = '', currentSituationKey = null;
 
+
+function updateModeUI() {
+    const t = translations[currentLang] || translations.fr;
+    const submitText = (t.submitModes && t.submitModes[currentMode]) || t.submit;
+    const submitBtn = document.getElementById('submitBtn');
+    if (submitBtn) submitBtn.textContent = submitText;
+
+    const situationInput = document.getElementById('situation');
+    if (situationInput && t.modePlaceholders && t.modePlaceholders[currentMode]) {
+        situationInput.placeholder = t.modePlaceholders[currentMode];
+    }
+
+    if (t.modes) {
+        if (document.getElementById('mode-discernement')) document.getElementById('mode-discernement').textContent = t.modes.discernement;
+        if (document.getElementById('mode-consolation')) document.getElementById('mode-consolation').textContent = t.modes.consolation;
+        if (document.getElementById('mode-lecture')) document.getElementById('mode-lecture').textContent = t.modes.lecture;
+        if (document.getElementById('mode-priere')) document.getElementById('mode-priere').textContent = t.modes.priere;
+    }
+}
+
 function updateLanguage(lang) {
     currentLang = lang;
     const t = translations[lang] || translations.fr;
@@ -907,6 +992,7 @@ function updateLanguage(lang) {
         });
     }
     document.getElementById('situations-title').textContent = t.situationsTitle;
+    updateModeUI();
 
     document.getElementById('carnet-prompt').innerHTML = t.carnetPrompt;
     document.getElementById('carnet-entry').placeholder = t.carnetPlaceholder;
@@ -1138,6 +1224,7 @@ document.querySelectorAll('.mode-btn').forEach(btn => {
         document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
         this.classList.add('active');
         currentMode = this.dataset.mode;
+        updateModeUI();
     });
 });
 
