@@ -1075,10 +1075,10 @@ function updateLanguage(lang) {
     document.getElementById('toggle-urgence').textContent = t.toggleUrgence;
     document.getElementById('clause-text').innerHTML = t.clauseText;
 
-    document.getElementById('navHome').textContent = t.navHome;
-    document.getElementById('navForm').textContent = t.navForm;
-    document.getElementById('navTemoignages').textContent = t.navTemoignages;
-    document.getElementById('navProjets').textContent = t.navProjets;
+    const el_navHome = document.getElementById('navHome'); if (el_navHome) el_navHome.textContent = t.navHome;
+    const el_navForm = document.getElementById('navForm'); if (el_navForm) el_navForm.textContent = t.navForm;
+    const el_navTemoignages = document.getElementById('navTemoignages'); if (el_navTemoignages) el_navTemoignages.textContent = t.navTemoignages;
+    const el_navProjets = document.getElementById('navProjets'); if (el_navProjets) el_navProjets.textContent = t.navProjets;
 
     const urgenceList = document.getElementById('urgence-list');
     if (urgenceList && t.ecouteList) {
