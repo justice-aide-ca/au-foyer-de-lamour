@@ -259,7 +259,7 @@
         <!-- RÉSULTAT DE L'HOMÉLIE GÉNÉRÉE -->
         <div id="homelie-result-box" style="display:none; margin-top:1.5rem; background:#fff; border:1px solid #d4c5b3; border-radius:8px; padding:1.5rem; box-shadow:0 2px 8px rgba(0,0,0,0.04);">
             <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #eee; padding-bottom:0.5rem; margin-bottom:1rem;">
-                <h4 id="homelie-generated-title" style="margin:0; color:#4a3b2c;">Trame pastorale pour l'homélie</h4>
+                <span style="font-weight:600; color:#5b4636; font-size:0.92rem; text-transform:uppercase; letter-spacing:0.5px;">🌾 Proposition pastorale</span>
                 <button type="button" id="btn-copier-homelie" style="background:#f4ece3; border:1px solid #d8cab8; border-radius:4px; padding:0.3rem 0.6rem; font-size:0.8rem; cursor:pointer;">📋 Copier</button>
             </div>
             <div id="homelie-generated-content" style="line-height:1.7; color:#3b322a; font-size:0.95rem;"></div>
@@ -598,105 +598,6 @@ if (btnTemoignage) {
 }
 
 // GÉNÉRATEUR DE PROPOSITION D'HOMÉLIE DU DIMANCHE
-const HOMELIES_DATA = {
-    esperance: {
-        titre: "L'espérance qui ne déçoit pas",
-        accroche: "« Dieu écrit droit avec des lignes courbes. »",
-        texte: "Bien souvent, nous arrivons au dimanche avec la tentation de croire que la situation du monde ou de notre propre vie nous échappe. Pourtant, l'Évangile nous redit sans cesse que Dieu n'est pas absent des imprévus. Là où nous ne voyons que ruptures ou retards, la grâce tisse une présence silencieuse. L'espérance chrétienne n'est pas un optimisme naïf : c'est la certitude que Dieu a le dernier mot et que ce mot est la vie.",
-        question: "Dans quel domaine de ma vie ai-je besoin aujourd'hui de confier à Dieu ce que je ne contrôle pas ?",
-        priere: "Seigneur, ravive en nos cœurs l'espérance. Apprends-nous à discerner ta présence au cœur même de nos doutes et conduis nos pas dans ta paix."
-    },
-    pardon: {
-        titre: "Pardonner, c'est ouvrir une brèche vers l'avenir",
-        accroche: "« Père, pardonne-leur, ils ne savent pas ce qu'ils font. » (Luc 23,34)",
-        texte: "Le pardon est l'une des paroles les plus exigeantes de l'Évangile. Il ne consiste ni à oublier le passé ni à justifier l'injustice. Pardonner, c'est décider avec l'aide de Dieu que la blessure ne dictera pas le reste de notre existence. En ouvrant la porte du pardon, nous ne libérons pas seulement autrui : nous redevenons nous-mêmes libres d'aimer.",
-        question: "Y a-t-il une rancœur ou une amertume que je peux déposer aujourd'hui devant le Seigneur pour retrouver la paix ?",
-        priere: "Seigneur Jésus, Toi qui as pardonné sur la croix, donne-moi le courage de faire le premier pas vers la réconciliation et guéris les blessures de mon cœur."
-    },
-    peur: {
-        titre: "N'ayez pas peur : faire confiance au milieu de la tempête",
-        accroche: "« Courage ! C'est moi, n'ayez pas peur. » (Matthieu 14,27)",
-        texte: "La peur est une réalité humaine commune, mais elle ne doit pas devenir notre maître. Sur la mer agitée, Pierre a commencé à s'enfoncer lorsqu'il a fixé son regard sur les vagues plutôt que sur le Christ. Le Seigneur ne nous demande pas une témérité surhumaine, mais de poser un acte de foi : lui tendre la main dès que le doute survient.",
-        question: "Quelle tempête intérieure ou extérieure puis-je remettre avec confiance entre les mains du Christ cette semaine ?",
-        priere: "Seigneur, quand la tempête se lève, tourne mon regard vers Toi. Sois le roc sur lequel repose ma confiance."
-    },
-    decision: {
-        titre: "Le discernement : le Seigneur ne donne pas une carte, Il donne Sa main",
-        accroche: "« Parle, Seigneur, ton serviteur écoute. » (1 Samuel 3,10)",
-        texte: "Dans les carrefours de notre existence, nous cherchons souvent une réponse toute faite ou une feuille de route détaillée. La tradition biblique nous montre plutôt que Dieu marche avec nous pas à pas. Il ne nous demande pas la perfection absolue, mais la fidélité quotidienne. Discerner, c'est écouter dans le silence où se trouve la paix profonde et s'engager avec confiance.",
-        question: "Quel choix ou quelle responsabilité demande aujourd'hui que j'écoute la voix paisible de l'Esprit Saint ?",
-        priere: "Esprit Saint, éclaire mon intelligence et fortifie ma volonté pour que mes décisions portent le fruit de l'amour et de la vérité."
-    },
-    deuil: {
-        titre: "Quand la nuit tombe : la certitude de la présence",
-        accroche: "« Même si je passe par un ravin d'obscurité, je ne crains aucun mal, car tu es avec moi. » (Psaume 23)",
-        texte: "L'épreuve de la séparation et du deuil touche au cœur de notre humanité. L'Évangile ne supprime pas les larmes — Jésus lui-même a pleuré devant le tombeau de son ami Lazare. Mais il éclaire notre deuil d'une promesse : l'amour est plus fort que la mort. Chaque prière dominicale est une communion avec ceux qui nous ont précédés dans la paix de Dieu.",
-        question: "Comment puis-je être un témoin de tendresse et de réconfort auprès de ceux qui traversent la solitude ou la peine ?",
-        priere: "Seigneur, accueille auprès de Toi ceux que nous aimons et verse sur notre douleur le baume de Ta consolation infinie."
-    },
-    repos: {
-        titre: "Le repos n'est pas un luxe, c'est un commandement saint",
-        accroche: "« Venez à moi, vous tous qui peinez, et moi je vous procurerai le repos. » (Matthieu 11,28)",
-        texte: "Le dimanche est par excellence le jour de la gratuité et de l'action de grâce. Dans un monde obsédé par la rentabilité et l'urgence permanente, le repos dominical est un acte de résistance spirituelle. S'arrêter, respirer, contempler la Création et laisser Dieu être Dieu : c'est là que l'âme se renouvelle.",
-        question: "Comment puis-je vivre ce dimanche comme un vrai temps de ressourcement spirituel et familial ?",
-        priere: "Seigneur, délivre-moi de l'agitation stérile. Fais-moi goûter la douceur de Ta présence et donne à mon âme le vrai repos en Toi."
-    },
-    solitude: {
-        titre: "Être seul et se savoir aimé : la présence cachée",
-        accroche: "« Et moi, je suis avec vous tous les jours jusqu'à la fin du monde. » (Matthieu 28,20)",
-        texte: "La solitude peut peser lourdement, mais elle peut aussi devenir le lieu intime de la rencontre avec Dieu. Au désert, Dieu ne parle pas dans le fracas, mais dans le souffle d'une brise légère. Savoir que le Christ habite notre vie transforme notre désert intérieur en sanctuaire de paix.",
-        question: "À quelle personne isolée de ma paroisse ou de mon entourage puis-je offrir un geste fraternel cette semaine ?",
-        priere: "Seigneur, rappelle-moi chaque jour que je ne suis jamais seul. Fais de moi un témoin de Ta proximité pour les cœurs isolés."
-    },
-    justice: {
-        titre: "Servir le Christ dans le plus petit de nos frères",
-        accroche: "« Ce que vous avez fait à l'un de ces plus petits, c'est à moi que vous l'avez fait. » (Matthieu 25,40)",
-        texte: "L'Eucharistie dominicale nous renvoie toujours à la mission et au service. La foi authentique ne s'arrête pas aux portes de l'église : elle s'incarne dans le regard posé sur le pauvre, l'exclu, le souffrant. Vivre la justice selon l'Évangile, c'est faire de nos mains les instruments de la miséricorde du Père.",
-        question: "De quelle manière concrète puis-je vivre la solidarité et le service de mon prochain dans les jours qui viennent ?",
-        priere: "Seigneur Jésus, ouvre mes yeux et mon cœur aux besoins de mes frères et sœurs. Donne-moi un cœur humble et généreux."
-    }
-};
-
-const btnGenererHomelie = document.getElementById("btn-generer-homelie");
-const selectTheme = document.getElementById("select-theme-homelie");
-const containerRes = document.getElementById("homelie-dimanche-resultat");
-const contenuRes = document.getElementById("homelie-dimanche-contenu");
-
-if (btnGenererHomelie && selectTheme && containerRes && contenuRes) {
-    btnGenererHomelie.addEventListener("click", () => {
-        const theme = selectTheme.value;
-        const data = HOMELIES_DATA[theme] || HOMELIES_DATA.esperance;
-        
-        contenuRes.innerHTML = `
-            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; margin-bottom:0.8rem; border-bottom:1px solid #e6e4e0; padding-bottom:0.5rem;">
-                <span style="font-size:0.85rem; font-weight:bold; color:#4a6f5e; text-transform:uppercase; letter-spacing:0.5px;">Proposition d'homélie pour dimanche</span>
-                <span style="font-size:0.8rem; color:#7a6b5a; font-style:italic;">Méditation dominicale pastorale</span>
-            </div>
-            <h3 style="color:#4a3b2c; margin-top:0.2rem; font-size:1.3rem;">🕊️ ${data.titre}</h3>
-            <p style="font-style:italic; color:#4a6f5e; font-weight:bold; font-size:1.05rem; margin:0.8rem 0;">${data.accroche}</p>
-            <div style="margin:1rem 0; font-size:1.05rem; color:#2c2b28;">
-                <p>${data.texte}</p>
-            </div>
-            <div style="background:#f6f3ef; border-left:3px solid #4a6f5e; padding:12px 16px; border-radius:0 8px 8px 0; margin:1.2rem 0;">
-                <strong style="color:#4a3b2c;">💡 Piste de réflexion pour l'assemblée :</strong>
-                <p style="margin:0.4rem 0 0; font-style:italic;">${data.question}</p>
-            </div>
-            <div style="background:#f0ede8; padding:12px 16px; border-radius:8px; margin:1.2rem 0;">
-                <strong style="color:#4a6f5e;">🙏 Prière universelle ou finale :</strong>
-                <p style="margin:0.4rem 0 0; font-style:italic;">« ${data.priere} »</p>
-            </div>
-            <p style="font-size:0.8rem; color:#7a6b5a; margin-top:1rem; border-top:1px solid #e6e4e0; padding-top:0.5rem;">
-                <em>Proposition pastorale pour la préparation de la prédication du dimanche • Au Foyer de l'Amour</em>
-            </p>
-        `;
-        containerRes.style.display = "block";
-        containerRes.scrollIntoView({ behavior: "smooth", block: "nearest" });
-    });
-}
-
-
-
-
 // -------------------------------------------------------------
 // LOGIQUE COMPLÈTE INTERACTIVE (ONGLETS, HOMÉLIE, EXAMEN, RESSOURCES)
 // -------------------------------------------------------------
@@ -734,95 +635,209 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     // 2. Générateur de proposition d'homélie avec lectures du dimanche
-    const btnGenererHomelie = document.getElementById("btn-generer-homelie");
-    if (btnGenererHomelie) {
-        btnGenererHomelie.addEventListener("click", function() {
-            const l1El = document.getElementById("input-lecture1");
-            const psEl = document.getElementById("input-psaume");
-            const l2El = document.getElementById("input-lecture2");
-            const evEl = document.getElementById("input-evangile");
-            const themeEl = document.getElementById("select-theme-homelie");
+    // 2. Générateur de proposition d'homélie selon la structure demandée :
+    // - Pas de titre énoncé
+    // - Un mot (petite histoire) d'accroche
+    // - Le message de la Parole de Dieu tel qu'il ressort de chaque lecture
+    // - Comment ce message s'applique aujourd'hui
+    // - Prière finale
 
-            const l1 = (l1El ? l1El.value : "").trim();
-            const ps = (psEl ? psEl.value : "").trim();
-            const l2 = (l2El ? l2El.value : "").trim();
-            const ev = (evEl ? evEl.value : "").trim();
-            const themeKey = themeEl ? themeEl.value : "auto";
+    const HOMELIE_RECUEIL = {
+        auto: {
+            accroche: "On raconte qu'un vieux potier de village laissait toujours une fine fêlure apparente sur ses jarres de terre cuite. Un jour, un jeune apprenti lui demanda : « Maître, pourquoi ne jetez-vous pas cette argile imparfaite ? » Le vieil homme sourit doucement et répondit : « C'est par cette fissure que l'on vérifie si l'eau est bien fraîche, et c'est par là que la lumière fait son nid. » Notre vie ressemble souvent à ces vases : nous arrivons à l'assemblée dominicale avec nos fêlures, nos interrogations silencieuses et la poussière de nos semaines chargées. Et c'est précisément dans cette réalité imparfaite que la Parole de Dieu vient faire sa demeure.",
+            l1_intro: "Dans la première lecture, Dieu se manifeste d'abord comme le Dieu fidèle de l'Alliance. Il entend le cri de son peuple dans ses détresses et pose un acte d'espérance bien avant que nous soyons capables de voir l'issue. L'Ancien Testament nous apprend que Dieu ne commence jamais par exiger, mais par donner sa présence.",
+            ps_intro: "Le psaume responsorial donne une voix et une respiration à notre propre prière. Il fait résonner le cri de confiance, la supplication ou l'action de grâce. En reprenant ses mots, l'assemblée apprend à remettre toute situation humaine sous le regard de Dieu.",
+            l2_intro: "La deuxième lecture apostolique nous invite à la conversion concrète dans notre manière de vivre en communauté. Loin des spéculations abstraites, elle nous exhorte à la patience mutuelle, au pardon quotidien et au courage d'une charité sans faux-semblant.",
+            ev_intro: "Dans l'Évangile, sommet de la liturgie de la Parole, le Christ se tient au milieu de nous. Il ne s'adresse pas à une foule impersonnelle : il regarde chacun, touche nos faiblesses, guérit nos aveuglements et nous convie à une rencontre vivante et personnelle.",
+            application: "Comment ce message rejoint-il nos pas dès demain matin ? Nous quitterons cette église pour retrouver nos familles, nos lieux de travail, nos solitudes ou nos responsabilités civiques. La Parole proclamée nous appelle à une cohérence paisible : poser un regard bienveillant sur la personne difficile, renoncer à une critique inutile, écouter avec le cœur avant de juger, et poser un geste de partage discret là où personne ne nous regarde.",
+            priere: "Seigneur notre Dieu, ta Parole est une lumière sur nos pas et un baume pour nos cœurs. Ne permets pas qu'elle demeure lettre morte ou simple souvenir, mais enracine-la au plus profond de nos vies afin qu'elle porte des fruits de paix, de bonté et de réconciliation tout au long de cette semaine. Par Jésus, le Christ, notre Seigneur. Amen."
+        },
+        esperance: {
+            accroche: "Un voyageur pris dans une tempête de neige en montagne s'était assis, épuisé et frigorifié, prêt à abandonner la marche. C'est alors qu'il aperçut une faible lueur tremblotante à travers la tourmente : ce n'était qu'une simple lanterne allumée à la fenêtre d'un refuge isolé. Cette toute petite lumière ne chauffait pas ses mains engourdies, mais elle lui redonna la force de se relever et de marcher jusqu'au bout. L'espérance chrétienne est cette veilleuse que Dieu maintient allumée au cœur même de nos hivers intérieurs.",
+            l1_intro: "La première lecture vient déraciner en nous la tentation du découragement et du fatalisme. Même face à la ruine ou à l'exil, les prophètes nous rappellent que Dieu n'est jamais à court de solutions et qu'Il prépare un chemin nouveau dans le désert.",
+            ps_intro: "Le psaume chante la certitude que Dieu ne délaisse aucun de ses enfants : « Ceux qui sèment dans les larmes moissonnent dans la joie. » Il fortifie en nous la patience du semeur.",
+            l2_intro: "La deuxième lecture nous encourage à tenir ferme au milieu des tribulations : saint Paul nous assure que les épreuves du moment présent ne sauraient se comparer à la gloire et à la tendresse que Dieu nous destine.",
+            ev_intro: "Dans l'Évangile, le Christ brise la fatalité de la peur et de la mort. Par ses miracles et sa résurrection, il atteste que la dernière parole sur notre histoire appartient toujours à l'Amour vainqueur.",
+            application: "Dans notre quotidien, nous croisons des collègues démoralisés, des proches inquiets pour leur santé ou l'avenir de leurs enfants. Vivre l'espérance aujourd'hui, ce n'est pas fuir la réalité dans un optimisme naïf : c'est refuser de propager l'amertume, offrir une parole réconfortante et devenir nous-mêmes cette modeste lanterne qui aide quelqu'un à avancer d'un pas supplémentaire.",
+            priere: "Seigneur Jésus, Toi la résurrection et la vie, chasse de nos âmes l'ombre du désespoir. Quand nos forces faiblissent, ravive en nous la flamme de la confiance et fais de nous d'humbles témoins de ton espérance auprès de tous ceux qui souffrent. Amen."
+        },
+        pardon: {
+            accroche: "On demandait un jour à un vieil homme respecté pourquoi son visage respirait toujours une telle paix malgré les trahisons qu'il avait subies dans sa jeunesse. Il répondit avec simplicité : « Garder une rancune dans son cœur, c'est comme boire du poison chaque jour en espérant que ce soit l'autre qui meure. Le jour où j'ai remis ma blessure à Dieu, j'ai enfin cessé d'être l'otage de mon passé. » Le pardon n'est pas un acte de faiblesse : c'est l'acte de courage suprême qui nous rend notre liberté d'aimer.",
+            l1_intro: "La première lecture nous révèle la grandeur de la patience divine. Devant les errements des hommes, le Seigneur ne cherche pas la rétribution punitive, mais la conversion du cœur et la restauration de l'Alliance.",
+            ps_intro: "Le psaume proclame la délivrance intérieure de l'âme pardonnée : « Le Seigneur est tendresse et pitié, lent à la colère et plein d'amour. » Il nous invite à contempler l'immensité de sa grâce.",
+            l2_intro: "La deuxième lecture nous donne une règle fondamentale de vie chrétienne : « Supportez-vous les uns les autres, et pardonnez-vous mutuellement si l'un a des griefs contre l'autre. Comme le Christ vous a pardonné, vous aussi faites de même. »",
+            ev_intro: "Dans l'Évangile, le Christ renverse nos réflexes de vengeance et nos rancunes tenaces. Sur la croix même, il prie pour ses bourreaux, manifestant que la miséricorde est le couronnement de la justice divine.",
+            application: "Dans nos cercles familiaux, amicaux ou paroissiaux, nous gardons parfois des silences blessants, des rancunes tenaces ou des refus de saluer. La Parole de Dieu nous demande aujourd'hui d'avoir l'humilité de faire le premier pas. Un appel téléphonique, un mot d'apaisement, ou simplement déposer notre ressentiment dans la prière sans chercher à avoir le dernier mot.",
+            priere: "Dieu d'infinie tendresse, Toi qui as pardonné toutes nos fautes, guéris la dureté de nos cœurs. Accorde-nous la force de pardonner à ceux qui nous ont blessés, afin que ton Esprit de paix règne parmi nous et transforme notre monde. Amen."
+        },
+        peur: {
+            accroche: "Au cours d'une nuit de forte tempête en pleine mer, tous les passagers d'un navire tremblaient d'effroi face aux lames gigantesques. Seul un jeune garçon restait paisiblement assis dans la timonerie, sans montrer le moindre signe d'angoisse. Un voyageur affolé s'exclama : « Mon garçon, ne vois-tu pas le danger qui nous menace ? Pourquoi n'as-tu pas peur ? » L'enfant leva les yeux et répondit doucement : « Parce que c'est mon père qui tient la barre. » Dans les tourmentes de l'existence, nous oublions si vite entre les mains de quel Père repose notre destinée.",
+            l1_intro: "La première lecture nous transmet l'assurance que Dieu marche au-devant de son peuple : « Ne crains pas, car je t'ai racheté, je t'ai appelé par ton nom, tu es à moi. Si tu traverses les eaux, je serai avec toi. »",
+            ps_intro: "Le psaume devient notre bouclier spirituel : « Le Seigneur est ma lumière et mon salut, de qui aurais-je crainte ? Le Seigneur est le rempart de ma vie, devant qui tremblerais-je ? »",
+            l2_intro: "La deuxième lecture nous rappelle que « ce n'est pas un esprit de peur que Dieu nous a donné, mais un esprit de force, d'amour et de discernement » pour affronter sereinement les défis de notre temps.",
+            ev_intro: "Dans l'Évangile, nous voyons Jésus marcher sur les eaux en furie et s'adresser aux apôtres épouvantés : « Courage ! C'est moi, n'ayez pas peur ! » Et lorsque Pierre s'enfonce dans le doute, la main du Seigneur est immédiatement là pour le saisir.",
+            application: "Quelles sont les peurs qui nous paralysent en ce moment ? La crainte de manquer, la peur de la maladie, l'inquiétude pour nos enfants ou l'incertitude du lendemain ? Le Seigneur ne nous promet pas l'absence d'épreuves, mais Il nous garantit sa présence à la barre de notre vie. Aujourd'hui, remettons-lui avec foi nos angoisses secrètes.",
+            priere: "Seigneur Jésus, Maître de l'impossible, quand la tourmente s'élève dans notre vie, donne-nous de fixer nos yeux sur Toi plutôt que sur les vagues. Prends nos mains chancelantes et affermis notre cœur dans ta paix indicible. Amen."
+        },
+        decision: {
+            accroche: "Un jeune voyageur arrivé à un carrefour en forêt hésitait entre un sentier large et entretenu et un petit sentier caillouteux qui grimpait vers la crête. Un ermite qui passait par là lui dit : « Si tu cherches le confort immédiat, prends le grand chemin ; mais si tu cherches la clarté de la vue et la pureté de l'air, choisis la montée. » Les décisions spirituelles exigent souvent ce dépassement : le vrai discernement ne cherche pas la voie de la moindre résistance, mais celle qui fait grandir en nous la vérité et la vie intérieure.",
+            l1_intro: "La première lecture interpelle solennellement notre liberté : « Vois, je mets aujourd'hui devant toi la vie et le bonheur, la mort et le malheur. Choisis la vie, afin que tu vives, toi et ta descendance. »",
+            ps_intro: "Le psaume formule la prière indispensable à tout choix chrétien : « Enseigne-moi, Seigneur, le chemin de tes ordres, à le garder avec discernement. Fais-moi marcher sur le sentier de tes commandements. »",
+            l2_intro: "La deuxième lecture nous exhorte à ne pas calquer nos choix sur les modes éphémères du monde, mais à discerner quelle est la volonté de Dieu : ce qui est bon, ce qui est agréable, ce qui est parfait.",
+            ev_intro: "Dans l'Évangile, Jésus nous enseigne que le Royaume de Dieu ressemble à un trésor caché ou à une perle de grand prix : pour l'acquérir, il faut oser poser des priorités claires et abandonner ce qui est accessoire.",
+            application: "Nous avons tous à prendre des décisions concrètes dans les jours à venir, professionnelles, financières ou relationnelles. Avant d'agir dans la précipitation, prenons un moment de silence devant le Saint-Sacrement ou chez nous, Bible en main, et demandons-nous : « Quel choix augmentera la paix et le bien commun autour de moi ? »",
+            priere: "Esprit de sagesse et de lumière, éclaire notre intelligence et guide notre volonté. Donne-nous la lucidité d'écarter ce qui nous égare et la force de choisir avec courage ce qui plaît au Seigneur. Amen."
+        },
+        deuil: {
+            accroche: "Dans les premières communautés chrétiennes, lorsqu'un frère ou une sœur quittait ce monde, les fidèles n'inscrivaient pas sur la pierre des mots d'adieu définitif, mais une petite ancre surmontée d'un rameau vert avec cette formule : « In pace vivit » — « Il vit dans la paix ». Ils savaient que l'amour ne s'arrête pas au seuil du tombeau. La séparation physique nous brise le cœur, mais la foi nous assure que nos liens d'amour sont gardés intacts dans la mémoire éternelle de Dieu.",
+            l1_intro: "La première lecture nous offre la consolation des prophètes : le Seigneur anéantira la mort pour toujours, il essuiera les larmes sur tous les visages et accueillera les siens dans sa joie infinie.",
+            ps_intro: "Le psaume chante la confiance indéfectible dans la nuit : « Même si je traverse un ravin d'ombre et de mort, je ne crains aucun mal, car tu es avec moi : ton bâton et ta houlette me rassurent. »",
+            l2_intro: "La deuxième lecture nous délivre cette magnifique certitude de saint Paul : « J'en ai l'assurance : ni la mort ni la vie, rien ne pourra jamais nous séparer de l'amour de Dieu manifesté dans le Christ Jésus notre Seigneur. »",
+            ev_intro: "Dans l'Évangile, devant le tombeau de Lazare, nous voyons Jésus pleurer avec Marthe et Marie. Le Sauveur partage notre chagrin, mais il proclame avec autorité : « Je suis la résurrection et la vie. Celui qui croit en moi vivra. »",
+            application: "Dans notre paroisse et parmi nos proches, beaucoup portent le fardeau silencieux d'un deuil récent ou d'un vide difficile à combler. Que notre présence ne soit pas faite de formules banales, mais d'une écoute affectueuse, d'une prière fidèle pour nos défunts et d'un soutien concret pour ceux qui restent.",
+            priere: "Dieu de miséricorde et d'espérance, accueille dans la lumière de ta paix ceux que nous aimons et qui nous ont précédés. Essuie nos larmes, fortifie notre foi dans la résurrection et guide nos pas vers le jour où Tu nous réuniras pour toujours. Amen."
+        },
+        repos: {
+            accroche: "Un explorateur pressé conduisait une expédition en pleine savane en exigeant un rythme effréné. Après trois jours de marche forcée, les guides locaux s'assirent soudain par terre et refusèrent d'avancer d'un pas. L'explorateur cria : « Qu'attendez-vous donc ? Nous avons encore des heures de jour ! » Le chef des pisteurs leva les yeux vers lui et répondit calmement : « Nous avons marché beaucoup trop vite. Maintenant, nous attendons que nos âmes nous rattrapent. » Combien de fois courons-nous si vite que notre esprit s'épuise et que notre âme reste à la traîne ?",
+            l1_intro: "Dès les premières pages de la Genèse, la première lecture nous transmet le don du sabbat : Dieu lui-même s'est reposé au septième jour. Le repos sanctifié n'est pas une perte de temps coupable, c'est l'affirmation reconnaissante que notre dignité ne réside pas dans notre seul rendement économique.",
+            ps_intro: "Le psaume nous enseigne le secret du calme intérieur : « En paix, comme un enfant sevré contre sa mère, mon âme est en moi. Mets ton espoir dans le Seigneur, dès maintenant et à jamais. »",
+            l2_intro: "La deuxième lecture nous invite à faire reposer notre esprit dans la paix de Dieu, qui surpasse toute intelligence, et à remettre toutes nos requêtes au Père avec reconnaissance.",
+            ev_intro: "Dans l'Évangile, voyant les disciples harassés par les allées et venues de la foule, Jésus leur dit : « Venez à l'écart dans un lieu désert, et reposez-vous un peu. » Il nous invite tous : « Venez à moi, vous qui peinez sous le fardeau, et je vous donnerai le repos. »",
+            application: "Faisons de ce dimanche un véritable sanctuaire de repos pour l'âme. Éteignons un moment les écrans et les sollicitations perpétuelles. Accordons un temps gratuit à la prière silencieuse, à la contemplation de la nature et à un repas serein partagé en famille ou entre amis.",
+            priere: "Seigneur Jésus, Maître du temps et de la vie, délivre-nous du vertige de l'urgence et de l'illusion de vouloir tout maîtriser par nos propres forces. Enseigne-nous à goûter le saint repos en Toi, pour que renouvelés par ta grâce, nous puissions aimer avec générosité. Amen."
+        },
+        solitude: {
+            accroche: "Dans les métropoles modernes, des milliers de personnes se croisent chaque jour sans jamais échanger un seul regard. Une dame âgée disait un jour à un bénévole venu lui rendre visite : « Le plus dur, ce n'est pas le silence de ma chambre, c'est de regarder par la fenêtre et de voir que tout le monde marche dehors comme si je n'existais pas. » La solitude est l'une des pauvretés les plus poignantes de notre époque, et elle réclame un cœur capable de s'arrêter.",
+            l1_intro: "Dès les origines, la première lecture affirme le dessein d'amour de Dieu : « Il n'est pas bon que l'homme soit seul. » La vocation humaine est fondamentalement communion, alliance et responsabilité mutuelle.",
+            ps_intro: "Le psaume chante la consolation de celui qui se sent délaissé de tous : « Si mon père et ma mère m'abandonnent, le Seigneur me recueillera. » Dieu n'est jamais sourd au gémissement de l'esseulé.",
+            l2_intro: "La deuxième lecture nous dépeint l'Église comme un corps solidaire : si un membre souffre, tous les membres souffrent avec lui. Notre foi ne peut pas se vivre en spectateurs isolés.",
+            ev_intro: "Dans l'Évangile, nous voyons Jésus aller constamment vers les plus isolés : l'aveugle assis au bord du chemin, la femme au puits aux heures chaudes, le lépreux mis au ban. Par sa proximité, Jésus réintègre chaque personne dans la dignité de la famille divine.",
+            application: "Regardons autour de nous cette semaine : quel voisin vit seul dans son appartement sans visite ? Quel paroissien s'efface discrètement au fond de l'église sans que personne ne lui serre la main ? Un simple bonjour chaleureux, une visite bienveillante ou un temps d'écoute attentive peuvent ramener la clarté du Christ dans une vie solitaire.",
+            priere: "Seigneur Dieu, Père des abandonnés et des petits, ouvre nos yeux et élargis nos cœurs. Fais de notre paroisse une maison hospitalière où personne ne se sente exclu ni ignoré, et inspire-nous des gestes de véritable amitié fraternelle. Amen."
+        },
+        justice: {
+            accroche: "Un juge réputé pour sa probité recevait un jour la visite d'un homme influent qui lui proposait un pot-de-vin colossal pour fermer les yeux sur l'expulsion injuste de modestes cultivateurs. Le magistrat refusa sans hésiter. L'homme lui demanda : « Mais qui saura jamais que vous avez accepté cet arrangement ? » Le magistrat posa la main sur son cœur et répondit : « Deux personnes le sauront toujours : Dieu, et ma propre conscience quand je me regarderai dans un miroir ce soir. » La justice divine n'est pas un calcul d'intérêts : elle est le respect inconditionnel de la dignité que Dieu a imprimée en tout homme.",
+            l1_intro: "La première lecture fait retentir la voix brûlante des prophètes bibliques : « Que le droit jaillisse comme une source, et la justice comme un torrent intarissable ! » Dieu refuse les actes de dévotion qui s'accommodent de l'oppression du faible.",
+            ps_intro: "Le psaume proclame la sainteté du Dieu juste : « Le Seigneur fait droit aux opprimés, aux affamés il donne le pain ; le Seigneur protège l'étranger, il soutient l'orphelin et la veuve. »",
+            l2_intro: "La deuxième lecture, notamment dans la lettre de saint Jacques, nous met en garde avec fermeté : la foi qui n'a pas les œuvres de la justice et du partage est morte en elle-même.",
+            ev_intro: "Dans l'Évangile, le Christ pose le critère du jugement d'amour : « Tout ce que vous avez fait à l'un de ces plus petits de mes frères, c'est à moi que vous l'avez fait. »",
+            application: "La justice évangélique commence dans nos choix ordinaires : l'honnêteté scrupuleuse dans notre métier, la juste rémunération de ceux qui nous aident, le refus des commérages destructeurs et la solidarité active envers ceux qui manquent du nécessaire. Posons cette semaine un geste concret pour rétablir la justice là où nous le pouvons.",
+            priere: "Seigneur Dieu, Roi de justice et de paix, donne-nous la faim et la soif de ta justice. Débarrasse nos cœurs de l'indifférence et de l'égoïsme, et fais de nous d'humbles serviteurs des plus vulnérables, au nom de ton Fils Jésus. Amen."
+        }
+    };
 
-            const resultBox = document.getElementById("homelie-result-box");
-            const resultTitle = document.getElementById("homelie-generated-title");
-            const resultContent = document.getElementById("homelie-generated-content");
+    const btnGenHomelie = document.getElementById("btn-generer-homelie");
+    if (btnGenHomelie) {
+        btnGenHomelie.addEventListener("click", function() {
+            const l1 = (document.getElementById("input-lecture1")?.value || "").trim();
+            const ps = (document.getElementById("input-psaume")?.value || "").trim();
+            const l2 = (document.getElementById("input-lecture2")?.value || "").trim();
+            const ev = (document.getElementById("input-evangile")?.value || "").trim();
+            const themeKey = (document.getElementById("select-theme-homelie")?.value || "auto");
 
-            const referencesList = [];
-            if (l1) referencesList.push("<strong>1ère lecture :</strong> " + l1);
-            if (ps) referencesList.push("<strong>Psaume :</strong> " + ps);
-            if (l2) referencesList.push("<strong>2ème lecture :</strong> " + l2);
-            if (ev) referencesList.push("<strong>Évangile :</strong> " + ev);
+            const tmpl = HOMELIE_RECUEIL[themeKey] || HOMELIE_RECUEIL.auto;
 
-            const refSummary = referencesList.length > 0 
-                ? "<div style='background:#f6f1eb; padding:0.8rem; border-radius:6px; margin-bottom:1rem; font-size:0.9rem;'>" + referencesList.join(" · ") + "</div>"
-                : "<div style='background:#f6f1eb; padding:0.8rem; border-radius:6px; margin-bottom:1rem; font-size:0.9rem;'><em>Méditation sur les lectures dominicales et le souffle de l'Évangile</em></div>";
+            const r1Label = l1 ? l1 : "Première Lecture";
+            const psLabel = ps ? ps : "Psaume responsorial";
+            const r2Label = l2 ? l2 : "Deuxième Lecture";
+            const evLabel = ev ? ev : "Évangile du dimanche";
 
-            const propositionsThemes = {
-                esperance: {
-                    titre: "Garder l'espérance au cœur de l'épreuve",
-                    intro: "Chers frères et sœurs, la liturgie de ce dimanche nous rassemble au cœur de nos réalités quotidiennes. La Parole de Dieu n'est pas une théorie abstraite : elle vient nous rejoindre dans nos doutes, nos fatigues et nos attentes.",
-                    developpement: "À travers les lectures proclamées, le Seigneur nous redit que sa fidélité devance nos peurs. Quand les apôtres ou le peuple d'Israël traversent la tempête ou l'exil, Dieu ne les abandonne pas au vide ; Il trace un chemin là où nos yeux ne voient que l'impasse. C'est le sens même de l'espérance chrétienne : croire que la grâce de Dieu travaille toujours silencieusement dans le secret de nos vies.",
-                    resonance: "Dans nos familles, nos engagements professionnels et nos solitudes, nous sommes souvent tentés par le découragement. Mais le Christ nous invite à lever la tête et à lui confier ce qui nous pèse.",
-                    questions: ["Où suis-je invité(e) cette semaine à faire un acte de confiance renouvelé ?", "Quelle situation concrète puis-je déposer avec espérance dans la prière ?"],
-                    priere: "Seigneur Jésus, Toi qui es le Maître de la vie, fortifie notre foi chancelante. Que ta Parole habite notre semaine et que notre cœur demeure en paix, confiants dans ton amour sans fin. Amen."
-                },
-                pardon: {
-                    titre: "La force libératrice du pardon et de la réconciliation",
-                    intro: "En ce dimanche, les textes sacrés nous invitent à contempler le visage du Père miséricordieux. Dieu ne se lasse jamais de pardonner ; c'est nous qui nous lassons de demander son pardon.",
-                    developpement: "Le pardon n'est pas un oubli naïf ni une faiblesse : c'est un acte de courage et de liberté spirituelle. En accueillant la grâce divine, nous sommes rendus capables de briser les spirales de ressentiment pour réapprendre la bienveillance mutuelle.",
-                    resonance: "Chacun de nous porte parfois des blessures anciennes ou des tensions non résolues. L'Évangile nous appelle à faire le premier pas de l'apaisement.",
-                    questions: ["Quelle rancœur ai-je besoin de remettre aujourd'hui au Seigneur ?", "Comment puis-je être artisan de paix dans mon entourage proche ?"],
-                    priere: "Père de toute bonté, guéris nos cœurs fermés. Accorde-nous la grâce de pardonner comme Tu nous as pardonné, afin que ton amour rayonne dans nos vies. Amen."
-                },
-                auto: {
-                    titre: "Écouter la Parole vivante et discerner la volonté du Père",
-                    intro: "Frères et sœurs en Christ, la Parole que nous venons d'entendre résonne comme un appel personnel. Chaque dimanche, Dieu s'adresse à notre assemblée pour éclairer nos décisions et affermir nos pas.",
-                    developpement: "Les textes liturgiques révèlent la pédagogie patiente du Seigneur. De la promesse biblique jusqu'au témoignage évangélique, Dieu se révèle non dans le fracas, mais dans le souffle ténu de sa grâce. Il nous invite à convertir notre regard et à reconnaître sa présence active.",
-                    resonance: "Cette Parole s'incarne aujourd'hui : elle s'adresse à nos joies paroissiales comme à nos combats intérieurs. Elle nous demande d'être des témoins humbles et persévérants de l'amour du prochain.",
-                    questions: ["Quel mot ou verset de ce dimanche a particulièrement touché mon cœur ?", "Comment puis-je mettre en pratique cet enseignement dès demain ?"],
-                    priere: "Esprit Saint, souffle de vérité et d'amour, ouvre nos intelligences et nos cœurs. Fais de nous des disciples attentifs à ta Parole et fidèles au service de nos frères. Amen."
-                }
-            };
+            // CONSTRUCTION STRICTEMENT CONFORME SANS TITRE :
+            // 1. Un mot (petite histoire) d'accroche
+            // 2. Le message de la Parole de Dieu tel qu'il ressort de chaque lecture
+            // 3. Comment ce message s'applique aujourd'hui
+            // 4. Prière finale
+            const htmlHomelie = `
+                <div style="font-size:1.02rem; line-height:1.8; color:#3a3229;">
+                    
+                    <!-- 1. MOT (PETITE HISTOIRE) D'ACCROCHE -->
+                    <div style="background:#fefaf4; border-left:4px solid #b38b59; padding:1.25rem 1.5rem; border-radius:0 8px 8px 0; margin-bottom:1.8rem;">
+                        <span style="font-size:0.8rem; font-weight:bold; color:#8c7355; text-transform:uppercase; letter-spacing:0.8px; display:block; margin-bottom:0.5rem;">
+                            🕊️ Parole d'accroche
+                        </span>
+                        <p style="margin:0; font-size:1.05rem; font-style:italic; color:#4a3b2c; line-height:1.75;">
+                            ${tmpl.accroche}
+                        </p>
+                    </div>
 
-            const data = propositionsThemes[themeKey] || propositionsThemes.auto;
+                    <!-- 2. LE MESSAGE DE LA PAROLE DE DIEU RESSORTANT DE CHAQUE LECTURE -->
+                    <div style="margin-bottom:1.8rem;">
+                        <span style="font-size:0.82rem; font-weight:bold; color:#4a6f5e; text-transform:uppercase; letter-spacing:0.8px; display:block; margin-bottom:0.8rem; border-bottom:1px solid #e2dad0; padding-bottom:0.35rem;">
+                            📖 Le message de la Parole de Dieu tel qu'il ressort de chaque lecture
+                        </span>
 
-            if (resultTitle) resultTitle.textContent = "🕊️ Proposition de trame : " + data.titre;
-            if (resultContent) {
-                resultContent.innerHTML = refSummary +
-                    "<p><strong>1. Accueil liturgique & entrée dans la Parole :</strong><br>" + data.intro + "</p>" +
-                    "<p><strong>2. Méditation & résonance de la Parole :</strong><br>" + data.developpement + "</p>" +
-                    "<p><strong>3. Application dans la vie paroissiale et fraternelle :</strong><br>" + data.resonance + "</p>" +
-                    "<p><strong>4. Pistes de discernement pour l'assemblée :</strong></p>" +
-                    "<ul><li>" + data.questions.join("</li><li>") + "</li></ul>" +
-                    "<p><strong>5. Prière de conclusion :</strong><br><em>« " + data.priere + " »</em></p>";
+                        <div style="margin-bottom:1rem; padding:0.85rem 1rem; background:#faf7f2; border-radius:6px;">
+                            <strong style="color:#5b4636; display:block; margin-bottom:0.3rem;">• ${r1Label} :</strong>
+                            <p style="margin:0; font-size:0.98rem; color:#42382f; line-height:1.7;">${tmpl.l1_intro}</p>
+                        </div>
+
+                        <div style="margin-bottom:1rem; padding:0.85rem 1rem; background:#faf7f2; border-radius:6px;">
+                            <strong style="color:#5b4636; display:block; margin-bottom:0.3rem;">• ${psLabel} :</strong>
+                            <p style="margin:0; font-size:0.98rem; color:#42382f; line-height:1.7;">${tmpl.ps_intro}</p>
+                        </div>
+
+                        <div style="margin-bottom:1rem; padding:0.85rem 1rem; background:#faf7f2; border-radius:6px;">
+                            <strong style="color:#5b4636; display:block; margin-bottom:0.3rem;">• ${r2Label} :</strong>
+                            <p style="margin:0; font-size:0.98rem; color:#42382f; line-height:1.7;">${tmpl.l2_intro}</p>
+                        </div>
+
+                        <div style="margin-bottom:1rem; padding:0.95rem 1.1rem; background:#f4f9f6; border-left:3px solid #4a6f5e; border-radius:0 6px 6px 0;">
+                            <strong style="color:#2d5040; display:block; margin-bottom:0.3rem;">• ${evLabel} (Clé de voûte) :</strong>
+                            <p style="margin:0; font-size:0.98rem; color:#2c3b33; line-height:1.7;">${tmpl.ev_intro}</p>
+                        </div>
+                    </div>
+
+                    <!-- 3. COMMENT CE MESSAGE S'APPLIQUE AUJOURD'HUI -->
+                    <div style="background:#f9f6f0; border-left:4px solid #8c7355; padding:1.25rem 1.5rem; border-radius:0 8px 8px 0; margin-bottom:1.8rem;">
+                        <span style="font-size:0.82rem; font-weight:bold; color:#5b4636; text-transform:uppercase; letter-spacing:0.8px; display:block; margin-bottom:0.5rem;">
+                            🧭 Comment ce message s'applique aujourd'hui dans notre vie
+                        </span>
+                        <p style="margin:0; font-size:1rem; color:#3a3025; line-height:1.75;">
+                            ${tmpl.application}
+                        </p>
+                    </div>
+
+                    <!-- 4. PRIÈRE FINALE -->
+                    <div style="background:#f0ede8; padding:1.25rem 1.5rem; border-radius:8px; margin-top:1.5rem;">
+                        <span style="font-size:0.82rem; font-weight:bold; color:#4a6f5e; text-transform:uppercase; letter-spacing:0.8px; display:block; margin-bottom:0.5rem;">
+                            🙏 Prière
+                        </span>
+                        <p style="margin:0; font-style:italic; font-size:1.02rem; color:#3b3228; line-height:1.75;">
+                            « ${tmpl.priere} »
+                        </p>
+                    </div>
+
+                </div>
+            `;
+
+            const box = document.getElementById("homelie-result-box");
+            const container = document.getElementById("homelie-generated-content");
+            if (container) {
+                container.innerHTML = htmlHomelie;
             }
-
-            if (resultBox) {
-                resultBox.style.display = "block";
-                resultBox.scrollIntoView({ behavior: "smooth", block: "nearest" });
+            if (box) {
+                box.style.display = "block";
+                box.scrollIntoView({ behavior: "smooth", block: "start" });
             }
         });
     }
 
-    // Bouton copier homélie
     const btnCopierHomelie = document.getElementById("btn-copier-homelie");
     if (btnCopierHomelie) {
         btnCopierHomelie.addEventListener("click", function() {
-            const el = document.getElementById("homelie-generated-content");
-            const content = el ? el.innerText : "";
+            const container = document.getElementById("homelie-generated-content");
+            if (!container) return;
+            const textToCopy = container.innerText;
             if (navigator.clipboard && navigator.clipboard.writeText) {
-                navigator.clipboard.writeText(content).then(function() {
-                    btnCopierHomelie.textContent = "✓ Copié !";
-                    setTimeout(function() { btnCopierHomelie.textContent = "📋 Copier"; }, 2000);
+                navigator.clipboard.writeText(textToCopy).then(function() {
+                    const original = btnCopierHomelie.textContent;
+                    btnCopierHomelie.textContent = "✅ Copié !";
+                    setTimeout(function() { btnCopierHomelie.textContent = original; }, 2500);
+                }).catch(function() {
+                    alert("Sélectionnez le texte de la proposition pour le copier.");
                 });
             } else {
-                alert("Texte prêt à être copié.");
+                alert("Sélectionnez le texte de la proposition pour le copier.");
             }
         });
     }
