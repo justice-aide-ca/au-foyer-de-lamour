@@ -1892,43 +1892,122 @@ function initAelfDate() {
 }
 
 function genererHomelieLocale(lecture1, psaume, lecture2, evangile, theme, lang) {
+    // We gather all available data from the loaded AELF lectures or manual entries.
+    const aelf = (typeof window !== 'undefined' && Array.isArray(window.currentAelfLectures)) ? window.currentAelfLectures : [];
+
+    const getAelf = (kinds) => {
+        for (const kind of kinds) {
+            const found = aelf.find(l => (l.type || '').includes(kind));
+            if (found) return found;
+        }
+        return null;
+    };
+
+    const aLect1 = getAelf(['lecture_1', 'premiere']);
+    const aPsaume = getAelf(['psaume', 'cantique']);
+    const aLect2 = getAelf(['lecture_2', 'deuxieme']);
+    const aEvangile = getAelf(['evangile']);
+
+    // Utility: strip HTML tags, collapse whitespace.
+    const stripHtml = (html) => {
+        const div = document.createElement('div');
+        div.innerHTML = html || '';
+        return (div.textContent || div.innerText || '').replace(/\s+/g, ' ').trim();
+    };
+
+    // Utility: extract sentences.
+    const getSentences = (text) => {
+        if (!text) return [];
+        return text.split(/(?<=[.!?…])\s+/).map(s => s.trim()).filter(s => s.length > 25);
+    };
+
+    // Detect the Gospel book from the ref string.
+    const detectBook = (refStr) => {
+        const r = (refStr || '').toLowerCase();
+        const books = [
+            { k: 'mt', pat: /matthieu|matthew|mateo|mt/ },
+            { k: 'mc', pat: /marc|mark|marcos|mc/ },
+            { k: 'lc', pat: /luc|luke|lucas|lc/ },
+            { k: 'jn', pat: /jean|john|juan|jn/ }
+        ];
+        for (const b of books) { if (b.pat.test(r)) return b.k; }
+        return '';
+    };
+
+    // Extract the psalm refrain (typically the line ending with a colon or in the first sentence).
+    const psalmRefrain = (aPsaume && stripHtml(aPsaume.contenu).split(/\n|\./).find(s => s.length > 10)) || '';
+
+    // Extract a central quote from each lecture (a representative sentence).
+    const quoteFrom = (aObj, fallbackText, maxLen) => {
+        const src = aObj && aObj.contenu ? stripHtml(aObj.contenu) : (fallbackText || '');
+        const sents = getSentences(src);
+        if (!sents.length) return '';
+        // Take a mid-length sentence, usually the core message.
+        const sorted = sents.slice().sort((a, b) => Math.abs(a.length - 120) - Math.abs(b.length - 120));
+        const chosen = sorted[0];
+        return chosen.length > maxLen ? chosen.slice(0, maxLen) + '…' : chosen;
+    };
+
+    const evRef = (aEvangile && (aEvangile.ref || '')) || evangile || '';
+    const l1Ref = (aLect1 && (aLect1.ref || '')) || lecture1 || '';
+    const psRef = (aPsaume && (aPsaume.ref || '')) || psaume || '';
+    const l2Ref = (aLect2 && (aLect2.ref || '')) || lecture2 || '';
+
+    const evTitre = aEvangile && aEvangile.titre ? aEvangile.titre : '';
+    const l1Titre = aLect1 && aLect1.titre ? aLect1.titre : '';
+    const l2Titre = aLect2 && aLect2.titre ? aLect2.titre : '';
+
+    const evBook = detectBook(evRef);
+    const bookNames = { mt: 'saint Matthieu', mc: 'saint Marc', lc: 'saint Luc', jn: 'saint Jean' };
+    const evAuthor = bookNames[evBook] || "l'évangéliste";
+
+    // Choose an accroche (narrative opening).
     const accroches = [
         "Une mère demandait un jour à son jeune enfant : « As-tu rangé ta chambre ? » L'enfant répondit : « Oui, maman ! » La mère monta vérifier : rien n'avait bougé. Étonnée, elle revint : « Mais tu m'avais dit que tu l'avais rangée ? » Et l'enfant répondit avec candeur : « Oui, je l'ai rangée dans mon imagination ! »",
         "Un vieux sage racontait qu'un voyageur cherchait son chemin dans une nuit sombre. Un passant lui offrit une petite lanterne et lui dit : « Elle n'éclaire pas jusqu'au bout du voyage, mais elle éclaire toujours le pas que tu dois poser maintenant. »",
         "On raconte qu'un homme contemplait un vitrail de cathédrale depuis l'extérieur, un jour de pluie : tout lui paraissait sombre, froid et sans relief. Mais dès qu'il franchit le seuil et entra dans l'église, la lumière traversa le verre et révéla des couleurs éblouissantes.",
         "Un maître artisan demandait à ses apprentis quel était le plus grand risque pour une vigne : était-ce la sécheresse, ou l'absence de soin régulier ? Le plus âgé répondit : « Le pire n'est pas la sécheresse passagère, c'est de regarder la terre avec de bonnes intentions sans jamais y enfoncer la bêche. »"
     ];
-
     const accrocheChoisie = accroches[Math.floor(Math.random() * accroches.length)];
-    const evangileRef = evangile || "l'Évangile";
-    const lecture1Ref = lecture1 || "la première lecture";
-    const psaumeRef = psaume || "le psaume";
-    const lecture2Ref = lecture2 || "la deuxième lecture";
+
     const themeTexte = theme ? theme.trim() : "";
 
     let texte = "";
     texte += `<p>${accrocheChoisie}</p>`;
-    texte += `<p>Nous sourions volontiers devant cette scène, mais combien de fois n'agissons-nous pas de la même façon avec notre foi ? Nous savons dire les mots justes, nous connaissons les belles formules, mais nos actes ne suivent pas toujours. C'est précisément au cœur de cette vérité que nous rejoint la Parole de Dieu proclamée aujourd'hui.</p>`;
 
-    texte += `<p>Dans <strong>${evangileRef}</strong>, Jésus nous invite à dépasser les apparences pour regarder la réalité de notre cœur. Le Seigneur ne s'arrête pas aux promesses faites du bout des lèvres ; Il regarde ce que nous choisissons de vivre et d'accomplir. Ce qui compte aux yeux de Dieu n'est pas simplement de dire « oui », mais de laisser ce « oui » transformer nos attitudes, nos pardons et nos engagements quotidiens.</p>`;
+    // Bridge from the story to the Gospel of the day.
+    texte += `<p>Nous sourions volontiers devant cette scène, et pourtant elle nous rejoint profondément. Car ce que ${evAuthor} nous rapporte aujourd'hui ${evRef ? 'en <strong>' + evRef + '</strong>' : 'dans son Évangile'} nous met devant la même interrogation : que faisons-nous, concrètement, de la Parole que nous avons entendue ? ${evTitre ? 'L\'Évangile nous le dit à sa manière : <em>« ' + evTitre + ' »</em>.' : ''}</p>`;
 
-    if (lecture1) {
-        texte += `<p><strong>${lecture1Ref}</strong> nous offre le même message d'espérance : le Seigneur nous rappelle que lorsqu'une personne se détourne de ses égarements pour choisir la justice et la vérité, Dieu ne retient pas le passé contre elle. Chez Dieu, la grâce offre toujours la possibilité d'un nouveau départ.</p>`;
+    // Quote an excerpt of the actual Gospel text.
+    const evQuote = quoteFrom(aEvangile, '', 220);
+    if (evQuote) {
+        texte += `<p>Écoutons à nouveau la parole entendue ce jour : <em>« ${evQuote} »</em> Cette parole de Jésus n'est pas d'abord un objet de réflexion lointaine : elle vient toucher notre vie, là où elle se joue vraiment.</p>`;
     }
 
-    if (psaume) {
-        texte += `<p>Le chant de <strong>${psaumeRef}</strong> traduit cette démarche en une prière d'humilité : <em>« Rappelle-toi, Seigneur, ta miséricorde. »</em> Nous ne venons pas devant Dieu avec la prétention d'être parfaits, mais avec le désir sincère d'apprendre ses voies et de marcher à sa suite.</p>`;
+    if (aLect1 || lecture1) {
+        const l1Quote = quoteFrom(aLect1, '', 200);
+        texte += `<p><strong>${l1Ref || 'La première lecture'}</strong> fait entendre la même voix de Dieu. ${l1Titre ? 'Elle nous y invite : <em>« ' + l1Titre + ' »</em>. ' : ''}${l1Quote ? 'Nous y lisons : <em>« ' + l1Quote + ' »</em> ' : ''}Dieu s'y révèle comme celui qui accompagne son peuple, qui ne le laisse pas seul face à ses choix, et qui ouvre toujours un chemin d'espérance.</p>`;
     }
 
-    if (lecture2) {
-        texte += `<p>Et dans <strong>${lecture2Ref}</strong>, saint Paul nous indique le modèle par excellence : le Christ Jésus lui-même. Paul nous exhorte à avoir entre nous les mêmes dispositions que le Christ : nous faire humbles, attentifs aux autres, et ne pas chercher sans cesse la première place.</p>`;
+    if (aPsaume || psaume) {
+        const psQuote = psalmRefrain || quoteFrom(aPsaume, '', 150);
+        texte += `<p>Le <strong>psaume de ce jour ${psRef ? '(' + psRef + ')' : ''}</strong> répond en prière à ce que la Parole annonce. ${psQuote ? 'Nous le chantons : <em>« ' + psQuote + ' »</em> ' : ''}Ce refrain devient notre propre prière : celle d'un cœur qui ne prétend pas être parfait, mais qui s'ouvre humblement à la fidélité de Dieu.</p>`;
     }
 
-    texte += `<p>La vie chrétienne ne consiste pas simplement à dire « Seigneur, Seigneur ». Elle consiste à dire oui à Dieu avec notre vie entière : en pardonnant à celui qui nous a blessés, en tendant la main à celui qui peine, en nous montrant patients au sein de notre famille, et en portant attention à ceux qui souffrent dans la solitude. ${themeTexte ? "C'est dans cette fidélité concrète que résonne aujourd'hui cet appel : " + themeTexte + "." : ""}</p>`;
+    if (aLect2 || lecture2) {
+        const l2Quote = quoteFrom(aLect2, '', 200);
+        texte += `<p>Et <strong>${l2Ref || 'la deuxième lecture'}</strong> nous éclaire encore. ${l2Titre ? 'Saint Paul y souligne : <em>« ' + l2Titre + ' »</em>. ' : ''}${l2Quote ? 'Nous y lisons : <em>« ' + l2Quote + ' »</em> ' : ''}Cette parole nous conduit au cœur du mystère du Christ, humble et proche, qui nous entraîne à sa suite.</p>`;
+    }
 
-    texte += `<p>Peut-être devrions-nous nous poser une question toute simple en cette semaine qui s'ouvre : <em>mes actes correspondent-ils vraiment à mes paroles ?</em> Y a-t-il un domaine de ma vie où j'ai dit oui à Dieu, mais où j'hésite encore à faire le premier pas ?</p>`;
+    // Application, anchored in the theme or in the Gospel's call.
+    texte += `<p>Alors, comment vivre cela aujourd'hui ? Peut-être en commençant très concrètement : un pardon à accorder, une main à tendre, un temps de silence à garder, une présence à offrir à celui qui est seul. ${themeTexte ? "C'est précisément ce que nous rappelle cet appel : <em>" + themeTexte + "</em>." : "La Parole de ce dimanche nous invite à la cohérence : que ce que nous croyons se voie dans ce que nous vivons."}</p>`;
 
-    texte += `<p>La bonne nouvelle de ce dimanche, c'est que Dieu nous renouvelle sa confiance. Il n'est jamais trop tard pour changer de direction, pour revenir à Lui, et pour dire oui — non seulement de nos lèvres, mais de toute notre vie.</p>`;
+    texte += `<p>Peut-être devrions-nous nous poser une question toute simple en cette semaine qui s'ouvre : <em>mes actes correspondent-ils vraiment aux paroles que je prononce devant Dieu ?</em> Y a-t-il un domaine de ma vie où j'ai dit oui, mais où j'hésite encore à faire le premier pas ?</p>`;
+
+    texte += `<p>La bonne nouvelle de ce jour, c'est que Dieu ne se lasse pas. Il renouvelle sa confiance, il ne retient pas le passé, et il nous laisse le temps du fruit. Il n'est jamais trop tard pour changer de direction, pour revenir à Lui, et pour dire oui — non seulement de nos lèvres, mais de toute notre vie.</p>`;
+
+    // Closing prayer, invoking the actual texts of the day.
+    texte += `<p><em>Prions :</em> Seigneur, tu nous as parlé aujourd'hui ${evRef ? 'dans l\'Évangile de ' + evAuthor + ' (' + evRef + ')' : 'dans ton Évangile'}${l1Ref ? ', dans la première lecture (' + l1Ref + ')' : ''}${l2Ref ? ' et dans la lettre apostolique (' + l2Ref + ')' : ''}. Fais de ta Parole une lumière pour nos pas. Donne-nous d'entendre, de garder et de mettre en pratique ce que nous avons reçu, pour te glorifier par nos actes autant que par nos paroles. Amen.</p>`;
     texte += `<p style="font-weight:600; text-align:center; margin-top:1.5rem; color:#4a6f5e;">Amen.</p>`;
 
     return texte;
@@ -2000,6 +2079,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     bodyHtml += `<div style="font-weight:bold; color:#4a6f5e;">${titre} ${ref ? '(' + ref + ')' : ''}</div>`;
                     bodyHtml += `<div style="margin-top:0.3rem;">${contenu}</div>`;
                     bodyHtml += `</div>`;
+
+                    const lectureObj = { type: type, titre: titre, ref: ref, contenu: contenu };
+                    window.currentAelfLectures.push(lectureObj);
 
                     if (type.includes("lecture_1") || type.includes("premiere") || type === "lecture") {
                         if (!lect1) lect1 = `${titre} ${ref}`.trim();
