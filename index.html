@@ -210,16 +210,46 @@
         <strong>📋 Note pastorale :</strong> Une demande formelle d'autorisation a été transmise à <strong>Monseigneur Joseph A. Pellegrino</strong> pour pouvoir citer ou paraphraser ses homélies. Dans l'attente de sa confirmation, les propositions ci-dessous constituent des trames pastorales méditatives indépendantes, inspirées directement des Saintes Écritures et de la tradition vivante de l'Église.
     </div>
 
-    <!-- PRÉPARATION DE L'HOMÉLIE : ON ÉCOUTE LA PAROLE, PUIS ON LA MET EN PRATIQUE -->
+    <!-- MODULE OFFICIEL AELF & PRÉPARATION DE L'HOMÉLIE -->
     <div class="section-card" style="background:#fefaf5; border-left:4px solid #4a6f5e; padding:1.5rem; margin-bottom:1.8rem;">
         <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:0.5rem; margin-bottom:0.8rem;">
-            <h3 style="margin:0; color:#4a3b2c;">✨ Préparer l'homélie du dimanche</h3>
-            <button type="button" id="btn-prefill-exemple" style="background:#f4ece2; border:1px solid #c9b9a6; color:#4a3b2c; border-radius:6px; padding:0.4rem 0.8rem; font-size:0.85rem; cursor:pointer; font-weight:600;">
-                💡 Charger l'exemple du dimanche
-            </button>
+            <div>
+                <h3 style="margin:0; color:#4a3b2c;">✨ Préparer l'homélie du dimanche</h3>
+                <span style="font-size:0.88rem; color:#7a6b5a;">Connexion directe avec les textes liturgiques officiels (AELF)</span>
+            </div>
+            <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+                <button type="button" id="btn-prefill-exemple" style="background:#f4ece2; border:1px solid #c9b9a6; color:#4a3b2c; border-radius:6px; padding:0.4rem 0.8rem; font-size:0.85rem; cursor:pointer; font-weight:600;">
+                    💡 Exemple type (Ézéchiel, Ps 24, Philippiens, Matthieu)
+                </button>
+            </div>
         </div>
+
+        <!-- ZONE CHARGEMENT AELF -->
+        <div style="background:#f4f9f6; border:1px solid #c8ded4; border-radius:8px; padding:1rem 1.2rem; margin-bottom:1.4rem;">
+            <label style="font-size:0.88rem; font-weight:bold; color:#2d5040; display:block; margin-bottom:0.4rem;">
+                📅 Charger les lectures liturgiques officielles du dimanche via l'AELF
+            </label>
+            <div style="display:flex; flex-wrap:wrap; gap:0.6rem; align-items:center;">
+                <input type="date" id="input-date-liturgique" style="padding:0.55rem 0.75rem; border-radius:6px; border:1px solid #a8c8ba; font-family:inherit; font-size:0.92rem; background:#fff;">
+                <button type="button" id="btn-charger-aelf" style="background:#4a6f5e; color:#fff; border:none; padding:0.55rem 1.1rem; border-radius:6px; font-weight:bold; font-size:0.9rem; cursor:pointer;">
+                    📥 Charger le texte intégral officiel (AELF)
+                </button>
+                <span id="aelf-status" style="font-size:0.85rem; color:#4a6f5e; font-style:italic;"></span>
+            </div>
+            <div id="aelf-jour-nom" style="font-size:0.9rem; font-weight:600; color:#325c48; margin-top:0.6rem; display:none;"></div>
+        </div>
+
+        <!-- TEXTE INTÉGRAL DES LECTURES DU DIMANCHE (DÉPLIABLE) -->
+        <div id="aelf-lectures-display" style="display:none; background:#fff; border:1px solid #d4c5b3; border-radius:8px; padding:1.2rem; margin-bottom:1.4rem;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.8rem;">
+                <strong style="color:#5b4636; font-size:0.95rem;">📖 Textes liturgiques officiels proclamés (AELF)</strong>
+                <button type="button" id="btn-toggle-lectures-text" style="background:none; border:none; color:#4a6f5e; text-decoration:underline; font-size:0.85rem; cursor:pointer;">Masquer/Afficher</button>
+            </div>
+            <div id="aelf-lectures-body" style="font-size:0.92rem; line-height:1.7; color:#3b322a; max-height:400px; overflow-y:auto; padding-right:0.5rem;"></div>
+        </div>
+
         <p style="margin-bottom:1.2rem; font-size:0.95rem; color:#5a4f42; line-height:1.6;">
-            Entrez d'abord les lectures du dimanche. Puis, après avoir écouté la Parole de Dieu, notez librement le message qu'elle fait entendre aujourd'hui et la manière dont nous sommes invités à la mettre en pratique. L'homélie est ensuite tissée en un texte oral continu, sans rubriques, prêt à être prêché.
+            Après avoir écouté la Parole de Dieu et lu les textes officiels, notez le message essentiel et la mise en pratique. L'homélie se tisse sans rubriques artificielles, dans un style oral continu :
         </p>
 
         <div class="readings-grid">
@@ -261,7 +291,7 @@
             <button type="button" id="btn-generer-homelie" class="btn" style="background:#4a6f5e; color:#fff; border:none; padding:0.65rem 1.4rem; border-radius:6px; cursor:pointer; font-weight:bold; font-size:0.95rem;">
                 ✨ Tisser l'homélie
             </button>
-            <span style="font-size:0.85rem; color:#7a6b5a; font-style:italic;">Vos notes sont tissées telles quelles dans le texte ; vous pourrez toujours le reprendre.</span>
+            <span style="font-size:0.85rem; color:#7a6b5a; font-style:italic;">Vos notes et l'écoute des textes sont unifiées en une homélie continue.</span>
         </div>
 
         <!-- RÉSULTAT : TEXTE ORAL CONTINU -->
@@ -275,7 +305,8 @@
     </div>
 
     <!-- MODÈLES DE MÉDITATIONS EXISTANTES -->
-    <h3 style="color:#4a3b2c; margin-top:2.5rem; margin-bottom:0.8rem;">📖 Méditations pastorales complémentaires</h3>\n    <div id="homelies-modeles-container">
+    <h3 style="color:#4a3b2c; margin-top:2.5rem; margin-bottom:0.8rem;">📖 Méditations pastorales complémentaires</h3>
+    <div id="homelies-modeles-container">
         <div class="homelie-card" style="background:#fff; border:1px solid #e0d5c7; border-radius:8px; padding:1.25rem; margin-bottom:1rem;">
             <h4 style="margin-top:0; color:#5b4636;">🕊️ Dans le deuil : La promesse de la résurrection</h4>
             <p>La mort sépare, mais elle ne brise pas le lien d'amour scellé dans le Christ. Devant la tombe de Lazare, Jésus a pleuré : notre souffrance est accueillie par Dieu avec compassion infinie.</p>
@@ -657,6 +688,120 @@ document.addEventListener("DOMContentLoaded", function() {
 
     function paragraphes(texte) {
         return texte.split(/\n\s*\n/).map(function(b) { return b.trim(); }).filter(Boolean);
+    }
+
+    // --- CHARGEMENT VIA L'API AELF (Association Épiscopale Liturgique Francophone) ---
+    function initAelfDate() {
+        const dateInput = document.getElementById("input-date-liturgique");
+        if (!dateInput) return;
+        const now = new Date();
+        // Calculer le prochain dimanche
+        const day = now.getDay();
+        const diff = (7 - day) % 7;
+        const sunday = new Date(now.getFullYear(), now.getMonth(), now.getDate() + (diff === 0 ? 0 : diff));
+        const yyyy = sunday.getFullYear();
+        const mm = String(sunday.getMonth() + 1).padStart(2, "0");
+        const dd = String(sunday.getDate()).padStart(2, "0");
+        dateInput.value = `${yyyy}-${mm}-${dd}`;
+    }
+    initAelfDate();
+
+    const btnAelf = document.getElementById("btn-charger-aelf");
+    if (btnAelf) {
+        btnAelf.addEventListener("click", function() {
+            const dateInput = document.getElementById("input-date-liturgique");
+            const dateVal = dateInput ? dateInput.value : "";
+            const statusEl = document.getElementById("aelf-status");
+            const jourNomEl = document.getElementById("aelf-jour-nom");
+            const displayEl = document.getElementById("aelf-lectures-display");
+            const bodyEl = document.getElementById("aelf-lectures-body");
+
+            if (!dateVal) {
+                if (statusEl) statusEl.textContent = "Veuillez choisir une date.";
+                return;
+            }
+
+            if (statusEl) statusEl.textContent = "⏳ Chargement des lectures AELF...";
+            btnAelf.disabled = true;
+
+            fetch(`https://api.aelf.org/v1/messes/${dateVal}/france`)
+                .then(function(res) {
+                    if (!res.ok) throw new Error("Erreur de réponse (" + res.status + ")");
+                    return res.json();
+                })
+                .then(function(data) {
+                    btnAelf.disabled = false;
+                    if (statusEl) statusEl.textContent = "✅ Lectures officielles chargées !";
+
+                    const info = data.informations || {};
+                    if (jourNomEl) {
+                        jourNomEl.textContent = "Liturgie : " + (info.jour_liturgique_nom || info.ligne1 || dateVal);
+                        jourNomEl.style.display = "block";
+                    }
+
+                    const messes = data.messes || [];
+                    if (messes.length === 0) {
+                        if (statusEl) statusEl.textContent = "Aucune messe trouvée pour cette date.";
+                        return;
+                    }
+
+                    const lectures = messes[0].lectures || [];
+                    let l1Found = null, psFound = null, l2Found = null, evFound = null;
+                    let displayHtml = "";
+
+                    lectures.forEach(function(lec) {
+                        const type = lec.type || "";
+                        const ref = (lec.ref || "").trim();
+                        const titre = (lec.titre || "").trim();
+                        const intro = (lec.intro_lue || "").trim();
+                        const contenu = lec.contenu || "";
+
+                        if (type === "lecture_1" || type === "lecture") {
+                            l1Found = lec;
+                            const inL1 = document.getElementById("input-lecture1");
+                            if (inL1 && ref) inL1.value = (intro ? intro + " (" + ref + ")" : ref).replace(/\s+/g, " ");
+                        } else if (type === "psaume") {
+                            psFound = lec;
+                            const inPs = document.getElementById("input-psaume");
+                            if (inPs && ref) inPs.value = ("Psaume " + ref).replace(/\s+/g, " ");
+                        } else if (type === "lecture_2") {
+                            l2Found = lec;
+                            const inL2 = document.getElementById("input-lecture2");
+                            if (inL2 && ref) inL2.value = (intro ? intro + " (" + ref + ")" : ref).replace(/\s+/g, " ");
+                        } else if (type === "evangile") {
+                            evFound = lec;
+                            const inEv = document.getElementById("input-evangile");
+                            if (inEv && ref) inEv.value = (intro ? intro + " (" + ref + ")" : ref).replace(/\s+/g, " ");
+                        }
+
+                        displayHtml += `
+                            <div style="margin-bottom:1.2rem; border-bottom:1px solid #f0e9df; padding-bottom:0.8rem;">
+                                <strong style="color:#4a6f5e; font-size:0.95rem; display:block;">
+                                    ${intro || type.toUpperCase()} ${ref ? "(" + ref + ")" : ""}
+                                </strong>
+                                ${titre ? '<em style="color:#6d5b4a; display:block; margin-bottom:0.3rem;">' + titre + '</em>' : ''}
+                                <div style="margin-top:0.3rem;">${contenu}</div>
+                            </div>
+                        `;
+                    });
+
+                    if (bodyEl) bodyEl.innerHTML = displayHtml;
+                    if (displayEl) displayEl.style.display = "block";
+                })
+                .catch(function(err) {
+                    btnAelf.disabled = false;
+                    if (statusEl) statusEl.textContent = "⚠️ Impossible de joindre l'AELF (" + err.message + "). Vous pouvez renseigner les champs manuellement.";
+                });
+        });
+    }
+
+    const btnToggleLectures = document.getElementById("btn-toggle-lectures-text");
+    if (btnToggleLectures) {
+        btnToggleLectures.addEventListener("click", function() {
+            const body = document.getElementById("aelf-lectures-body");
+            if (!body) return;
+            body.style.display = (body.style.display === "none") ? "block" : "none";
+        });
     }
 
     const btnPrefill = document.getElementById("btn-prefill-exemple");
