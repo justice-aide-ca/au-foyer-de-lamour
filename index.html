@@ -106,6 +106,21 @@
         .share-btn.linkedin { background: #0a66c2; }
         .share-btn.whatsapp { background: #25d366; }
 
+        /* --- Bouton Novalis / Prions en Église --- */
+        .btn-novalis {
+            display: inline-block;
+            margin-top: 0.8rem;
+            padding: 0.5rem 1.2rem;
+            background: #4a6f5e;
+            color: white !important;
+            border-radius: 40px;
+            text-decoration: none !important;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: opacity 0.2s;
+        }
+        .btn-novalis:hover { opacity: 0.9; }
+
         @media (max-width: 600px) {
             .situations-grid { grid-template-columns: 1fr; }
         }
@@ -116,14 +131,12 @@
     <h1 id="mainTitle">🕯️ Au Foyer de l'Amour</h1>
     <div class="sous-titre" id="mainSubtitle">Discernement et la petite lumière</div>
 
+    <!-- MENU SIMPLIFIÉ avec ancres -->
     <div class="nav-menu">
         <a href='/' id='navHome'>🏠 Accueil</a>
-        <a href='/sagesse' id='navSagesse'>📖 Sagesse</a>
-        <a href='/about' id='navAbout'>📖 À propos</a>
-        <a href='/examen' id='navExamen'>🕯️ Examen</a>
-        <a href='/contact' id='navContact'>✉️ Contact</a>
-        <a href='/admin' id='navAdmin'>📊 Admin</a>
-        <a href='/privacy' id='navPrivacy'>🔒 Confidentialité</a>
+        <a href='#formulaire' id='navForm'>🕯️ Discernement</a>
+        <a href='#temoignages' id='navTemoignages'>💬 Témoignages</a>
+        <a href='#projets' id='navProjets'>🌱 Nos projets</a>
     </div>
 
     <div class="language-selector">
@@ -135,25 +148,28 @@
         <button class="lang-btn" data-lang="ar">🇸🇦 العربية</button>
     </div>
 
-    <div class="mode-selector">
-        <button class="mode-btn active" data-mode="discernement" id="mode-discernement">🤲 Discernement</button>
-        <button class="mode-btn" data-mode="consolation" id="mode-consolation">🙏 Consolation</button>
-        <button class="mode-btn" data-mode="lecture" id="mode-lecture">📖 Lecture biblique</button>
-        <button class="mode-btn" data-mode="priere" id="mode-priere">❤️ Prière</button>
-    </div>
-
-    <textarea id="situation" rows="6" placeholder="Décrivez votre situation..."></textarea>
-    <input type="text" id="role" placeholder="Qui êtes-vous ? (optionnel)">
-
-    <div class="situations-container">
-        <p id="situations-title">Ou choisissez ce qui correspond le mieux à ce que vous vivez :</p>
-        <div class="situations-grid" id="situations-list">
-            <!-- Généré dynamiquement -->
+    <!-- ANCRE : formulaire -->
+    <div id="formulaire">
+        <div class="mode-selector">
+            <button class="mode-btn active" data-mode="discernement" id="mode-discernement">🤲 Discernement</button>
+            <button class="mode-btn" data-mode="consolation" id="mode-consolation">🙏 Consolation</button>
+            <button class="mode-btn" data-mode="lecture" id="mode-lecture">📖 Lecture biblique</button>
+            <button class="mode-btn" data-mode="priere" id="mode-priere">❤️ Prière</button>
         </div>
-        <textarea id="precision-situation" rows="2" placeholder="Tu peux préciser ce que tu vis, si tu le souhaites..."></textarea>
-    </div>
 
-    <button id="submitBtn">Recevoir une aide au discernement →</button>
+        <textarea id="situation" rows="6" placeholder="Décrivez votre situation..."></textarea>
+        <input type="text" id="role" placeholder="Qui êtes-vous ? (optionnel)">
+
+        <div class="situations-container">
+            <p id="situations-title">Ou choisissez ce qui correspond le mieux à ce que vous vivez :</p>
+            <div class="situations-grid" id="situations-list">
+                <!-- Généré dynamiquement -->
+            </div>
+            <textarea id="precision-situation" rows="2" placeholder="Tu peux préciser ce que tu vis, si tu le souhaites..."></textarea>
+        </div>
+
+        <button id="submitBtn">Recevoir une aide au discernement →</button>
+    </div>
 
     <div id="response-container">
         <div id="response-lecture">
@@ -187,6 +203,18 @@
             <h3 id="ressources-textes-title">📖 Textes à méditer</h3>
             <ul id="ressources-textes-list"></ul>
         </div>
+
+        <!-- ✨ Section Parole de Dieu / Prions en Église -->
+        <div class="ressources-section" id="ressources-homelie-section">
+            <h3 id="ressources-homelie-title">📖 La Parole de Dieu pour chaque jour</h3>
+            <p id="ressources-homelie-text" style="font-size: 0.9rem; color: #5a4f42; margin-bottom: 0.8rem;">
+                Pour approfondir l'Évangile du jour et trouver un commentaire quotidien, nous vous recommandons <strong>Prions en Église</strong>, la revue mensuelle des Éditions Novalis.
+            </p>
+            <a href="https://www.prionseneglise.ca/" target="_blank" rel="noopener" class="btn-novalis" id="ressources-homelie-link">
+                📖 Découvrir Prions en Église ↗
+            </a>
+        </div>
+
         <div class="ressources-section">
             <h3 id="ressources-prieres-title">🙏 Prières</h3>
             <ul id="ressources-prieres-list"></ul>
@@ -224,7 +252,8 @@
         <div id="priereDuJour" style="font-style:italic; color:#4a3b2c;">« Seigneur, apprends-moi à écouter le silence. »</div>
     </div>
 
-    <div class="section-card">
+    <!-- ANCRE : témoignages -->
+    <div class="section-card" id="temoignages">
         <h3 id="temoignages-title">💬 Vous avez utilisé Au Foyer de l'Amour ?</h3>
         <p id="temoignages-intro">Partagez votre expérience (anonyme) :</p>
         <textarea id="temoignage" rows="3" placeholder="Votre témoignage..."></textarea>
@@ -238,7 +267,8 @@
         </div>
     </div>
 
-    <div class="encart-projets">
+    <!-- ANCRE : projets -->
+    <div class="encart-projets" id="projets">
         <p id="projets-psaume">🌱 « La justice et la paix s'embrassent. » — Psaume 85,11</p>
         <a href="https://justice-ai-anonyme-u4sn.onrender.com">⚖️ Justice AI</a> |
         <a href="https://bridge-your-project.lovable.app" target="_blank">🌍 ONBRIDGE AI</a> |
@@ -250,9 +280,9 @@
     <footer id="mainFooter">
         <span id="footer-nothing">🔒 Rien n'est enregistré · 🕊️ Un compagnon silencieux</span><br>
         <a href='/' id='footer-home'>🏠 Accueil</a> |
-        <a href='/sagesse' id='footer-sagesse'>📖 Sagesse</a> |
-        <a href='/about' id='footer-about'>📖 À propos</a> |
-        <a href='/contact' id='footer-contact'>✉️ Contact</a>
+        <a href='#formulaire' id='footer-form'>🕯️ Discernement</a> |
+        <a href='#temoignages' id='footer-temoignages'>💬 Témoignages</a> |
+        <a href='#projets' id='footer-projets'>🌱 Nos projets</a>
         <div class="ai-warning">
             <span id="ai-warning-text">Je suis une intelligence artificielle. Je ne remplace pas un accompagnement humain, un prêtre, un psychologue ou un médecin. Si ta situation est grave, je t'encourage à chercher un soutien humain.</span><br>
             <a id="toggle-urgence">Voir les numéros d'urgence</a>
@@ -279,7 +309,11 @@ const translations = {
         responseReady: "Ta réponse est prête.",
         btnContinuer: "🌿 Continuer le discernement",
         ressourcesTitle: "Pour continuer...",
-        textesTitle: "📖 Textes à méditer", prieresTitle: "🙏 Prières", contactsTitle: "👤 Contacts humains",
+        textesTitle: "📖 Textes à méditer",
+        homelieTitle: "📖 La Parole de Dieu pour chaque jour",
+        homelieText: "Pour approfondir l'Évangile du jour et trouver un commentaire quotidien, nous vous recommandons <strong>Prions en Église</strong>, la revue mensuelle des Éditions Novalis.",
+        homelieLinkText: "📖 Découvrir Prions en Église ↗",
+        prieresTitle: "🙏 Prières", contactsTitle: "👤 Contacts humains",
         ecouteTitle: "🆘 Services d'écoute", exercicesTitle: "✨ Exercices spirituels",
         revenirTitle: "🔄 Revenir", revenirRecommencer: "Recommencer", saveLink: "Sauvegarder mon lien",
         priereJourTitle: "📖 Prière du jour",
@@ -290,11 +324,11 @@ const translations = {
         projetsPsaume: "🌱 « La justice et la paix s'embrassent. » — Psaume 85,11",
         projetsCredit: "Des outils pour la justice, la paix et le discernement.",
         footerNothing: "🔒 Rien n'est enregistré · 🕊️ Un compagnon silencieux",
-        footerHome: "🏠 Accueil", footerSagesse: "📖 Sagesse", footerAbout: "📖 À propos", footerContact: "✉️ Contact",
+        footerHome: "🏠 Accueil", footerForm: "🕯️ Discernement", footerTemoignages: "💬 Témoignages", footerProjets: "🌱 Nos projets",
         aiWarning: "Je suis une intelligence artificielle. Je ne remplace pas un accompagnement humain, un prêtre, un psychologue ou un médecin. Si ta situation est grave, je t'encourage à chercher un soutien humain.",
         toggleUrgence: "Voir les numéros d'urgence",
         clauseText: "🙏 <strong>À propos d'Au Foyer de l'Amour</strong><br>Cet outil offre une <strong>première écoute</strong> et une <strong>aide au discernement</strong>, sans remplacer un accompagnement humain.",
-        navHome: "🏠 Accueil", navSagesse: "📖 Sagesse", navAbout: "📖 À propos", navExamen: "🕯️ Examen", navContact: "✉️ Contact", navAdmin: "📊 Admin", navPrivacy: "🔒 Confidentialité",
+        navHome: "🏠 Accueil", navForm: "🕯️ Discernement", navTemoignages: "💬 Témoignages", navProjets: "🌱 Nos projets",
         situations: [
             "Je traverse une grande souffrance", "Je ne vois plus de sens à ma vie", "Mon couple va mal", "J'ai perdu un être cher",
             "Je me sens seul(e)", "Je suis en colère contre Dieu", "Je ne sais plus quoi croire", "Je dois prendre une décision difficile",
@@ -411,7 +445,11 @@ const translations = {
         responseReady: "Your answer is ready.",
         btnContinuer: "🌿 Continue discernment",
         ressourcesTitle: "To continue...",
-        textesTitle: "📖 Texts to meditate on", prieresTitle: "🙏 Prayers", contactsTitle: "👤 Human contacts",
+        textesTitle: "📖 Texts to meditate on",
+        homelieTitle: "📖 The Word of God for each day",
+        homelieText: "To go deeper into the daily Gospel and find a daily commentary, we recommend <strong>Prions en Église</strong>, the monthly magazine from Éditions Novalis.",
+        homelieLinkText: "📖 Discover Prions en Église ↗",
+        prieresTitle: "🙏 Prayers", contactsTitle: "👤 Human contacts",
         ecouteTitle: "🆘 Listening services", exercicesTitle: "✨ Spiritual exercises",
         revenirTitle: "🔄 Return", revenirRecommencer: "Start over", saveLink: "Save my link",
         priereJourTitle: "📖 Prayer of the day",
@@ -422,11 +460,11 @@ const translations = {
         projetsPsaume: "🌱 « Justice and peace embrace. » — Psalm 85:11",
         projetsCredit: "Tools for justice, peace and discernment.",
         footerNothing: "🔒 Nothing is recorded · 🕊️ A silent companion",
-        footerHome: "🏠 Home", footerSagesse: "📖 Wisdom", footerAbout: "📖 About", footerContact: "✉️ Contact",
+        footerHome: "🏠 Home", footerForm: "🕯️ Discernment", footerTemoignages: "💬 Testimonials", footerProjets: "🌱 Our projects",
         aiWarning: "I am an artificial intelligence. I do not replace human support, a priest, a psychologist or a doctor. If your situation is serious, I encourage you to seek human support.",
         toggleUrgence: "See emergency numbers",
         clauseText: "🙏 <strong>About Home of Love</strong><br>This tool offers <strong>initial listening</strong> and <strong>discernment help</strong>, without replacing human support.",
-        navHome: "🏠 Home", navSagesse: "📖 Wisdom", navAbout: "📖 About", navExamen: "🕯️ Examination", navContact: "✉️ Contact", navAdmin: "📊 Admin", navPrivacy: "🔒 Privacy",
+        navHome: "🏠 Home", navForm: "🕯️ Discernment", navTemoignages: "💬 Testimonials", navProjets: "🌱 Our projects",
         situations: [
             "I am going through great suffering", "I no longer see meaning in my life", "My relationship is in trouble", "I have lost a loved one",
             "I feel alone", "I am angry with God", "I don't know what to believe anymore", "I have a difficult decision to make",
@@ -543,7 +581,11 @@ const translations = {
         responseReady: "你的回答准备好了。",
         btnContinuer: "🌿 继续辨别",
         ressourcesTitle: "继续...",
-        textesTitle: "📖 默想经文", prieresTitle: "🙏 祈祷", contactsTitle: "👤 人际联系",
+        textesTitle: "📖 默想经文",
+        homelieTitle: "📖 每日圣言",
+        homelieText: "为了深入每日福音并找到每日评论，我们推荐 <strong>Prions en Église</strong>，这是 Éditions Novalis 的月刊。",
+        homelieLinkText: "📖 探索 Prions en Église ↗",
+        prieresTitle: "🙏 祈祷", contactsTitle: "👤 人际联系",
         ecouteTitle: "🆘 聆听服务", exercicesTitle: "✨ 灵修练习",
         revenirTitle: "🔄 返回", revenirRecommencer: "重新开始", saveLink: "保存我的链接",
         priereJourTitle: "📖 每日祈祷",
@@ -554,11 +596,11 @@ const translations = {
         projetsPsaume: "🌱 « 正义与和平相亲。 » — 诗篇 85:11",
         projetsCredit: "为正义、和平与辨别的工具。",
         footerNothing: "🔒 无记录 · 🕊️ 一位沉默的伴侣",
-        footerHome: "🏠 首页", footerSagesse: "📖 智慧", footerAbout: "📖 关于", footerContact: "✉️ 联系",
+        footerHome: "🏠 首页", footerForm: "🕯️ 辨别", footerTemoignages: "💬 见证", footerProjets: "🌱 我们的项目",
         aiWarning: "我是一个人工智能。我不能替代人际支持、神父、心理学家或医生。如果你的情况严重，请寻求人际支持。",
         toggleUrgence: "查看紧急号码",
         clauseText: "🙏 <strong>关于爱之家</strong><br>此工具提供<strong>初步聆听</strong>和<strong>辨别帮助</strong>，不能替代人际支持。",
-        navHome: "🏠 首页", navSagesse: "📖 智慧", navAbout: "📖 关于", navExamen: "🕯️ 检查", navContact: "✉️ 联系", navAdmin: "📊 管理", navPrivacy: "🔒 隐私",
+        navHome: "🏠 首页", navForm: "🕯️ 辨别", navTemoignages: "💬 见证", navProjets: "🌱 我们的项目",
         situations: [
             "我正在经历巨大的痛苦", "我找不到生活的意义", "我的感情关系出现了问题", "我失去了一位亲人",
             "我感到孤独", "我对上帝感到愤怒", "我不知道该相信什么", "我需要做出一个艰难的决定",
@@ -598,7 +640,11 @@ const translations = {
         responseReady: "आपका उत्तर तैयार है।",
         btnContinuer: "🌿 विवेक जारी रखें",
         ressourcesTitle: "जारी रखने के लिए...",
-        textesTitle: "📖 ध्यान हेतु पाठ", prieresTitle: "🙏 प्रार्थनाएँ", contactsTitle: "👤 मानव संपर्क",
+        textesTitle: "📖 ध्यान हेतु पाठ",
+        homelieTitle: "📖 हर दिन के लिए ईश्वर का वचन",
+        homelieText: "दैनिक सुसमाचार में गहराई से जाने और दैनिक टिप्पणी पाने के लिए, हम <strong>Prions en Église</strong> की सलाह देते हैं, जो Éditions Novalis की मासिक पत्रिका है।",
+        homelieLinkText: "📖 Prions en Église देखें ↗",
+        prieresTitle: "🙏 प्रार्थनाएँ", contactsTitle: "👤 मानव संपर्क",
         ecouteTitle: "🆘 सुनने की सेवाएँ", exercicesTitle: "✨ आध्यात्मिक अभ्यास",
         revenirTitle: "🔄 वापसी", revenirRecommencer: "पुनः आरंभ करें", saveLink: "मेरा लिंक सहेजें",
         priereJourTitle: "📖 दिन की प्रार्थना",
@@ -609,11 +655,11 @@ const translations = {
         projetsPsaume: "🌱 « न्याय और शांति एक दूसरे को गले लगाते हैं। » — भजन 85:11",
         projetsCredit: "न्याय, शांति और विवेक के लिए उपकरण।",
         footerNothing: "🔒 कुछ रिकॉर्ड नहीं किया गया · 🕊️ एक मूक साथी",
-        footerHome: "🏠 होम", footerSagesse: "📖 ज्ञान", footerAbout: "📖 बारे में", footerContact: "✉️ संपर्क",
+        footerHome: "🏠 होम", footerForm: "🕯️ विवेक", footerTemoignages: "💬 गवाहियाँ", footerProjets: "🌱 हमारी परियोजनाएँ",
         aiWarning: "मैं एक कृत्रिम बुद्धिमत्ता हूँ। मैं मानवीय समर्थन, पादरी, मनोवैज्ञानिक या डॉक्टर का स्थान नहीं लेता। यदि आपकी स्थिति गंभीर है, तो कृपया मानवीय समर्थन प्राप्त करें।",
         toggleUrgence: "आपातकालीन नंबर देखें",
         clauseText: "🙏 <strong>प्रेम के घर के बारे में</strong><br>यह उपकरण <strong>प्रारंभिक सुनवाई</strong> और <strong>विवेक सहायता</strong> प्रदान करता है, मानवीय समर्थन का स्थान नहीं लेता।",
-        navHome: "🏠 होम", navSagesse: "📖 ज्ञान", navAbout: "📖 बारे में", navExamen: "🕯️ परीक्षा", navContact: "✉️ संपर्क", navAdmin: "📊 व्यवस्थापक", navPrivacy: "🔒 गोपनीयता",
+        navHome: "🏠 होम", navForm: "🕯️ विवेक", navTemoignages: "💬 गवाहियाँ", navProjets: "🌱 हमारी परियोजनाएँ",
         situations: [
             "मैं बहुत बड़ी पीड़ा से गुज़र रहा हूँ", "मुझे अपने जीवन में कोई अर्थ नहीं दिखता", "मेरा रिश्ता मुश्किल में है", "मैंने किसी प्रियजन को खो दिया है",
             "मैं अकेला महसूस करता हूँ", "मैं भगवान से नाराज़ हूँ", "मुझे नहीं पता कि अब क्या विश्वास करूँ", "मुझे एक कठिन निर्णय लेना है",
@@ -653,7 +699,11 @@ const translations = {
         responseReady: "Tu respuesta está lista.",
         btnContinuer: "🌿 Continuar el discernimiento",
         ressourcesTitle: "Para continuar...",
-        textesTitle: "📖 Textos para meditar", prieresTitle: "🙏 Oraciones", contactsTitle: "👤 Contactos humanos",
+        textesTitle: "📖 Textos para meditar",
+        homelieTitle: "📖 La Palabra de Dios para cada día",
+        homelieText: "Para profundizar en el Evangelio del día y encontrar un comentario diario, te recomendamos <strong>Prions en Église</strong>, la revista mensual de Éditions Novalis.",
+        homelieLinkText: "📖 Descubrir Prions en Église ↗",
+        prieresTitle: "🙏 Oraciones", contactsTitle: "👤 Contactos humanos",
         ecouteTitle: "🆘 Servicios de escucha", exercicesTitle: "✨ Ejercicios espirituales",
         revenirTitle: "🔄 Volver", revenirRecommencer: "Empezar de nuevo", saveLink: "Guardar mi enlace",
         priereJourTitle: "📖 Oración del día",
@@ -664,11 +714,11 @@ const translations = {
         projetsPsaume: "🌱 « La justicia y la paz se abrazan. » — Salmo 85:11",
         projetsCredit: "Herramientas para la justicia, la paz y el discernimiento.",
         footerNothing: "🔒 Nada se guarda · 🕊️ Un compañero silencioso",
-        footerHome: "🏠 Inicio", footerSagesse: "📖 Sabiduría", footerAbout: "📖 Acerca de", footerContact: "✉️ Contacto",
+        footerHome: "🏠 Inicio", footerForm: "🕯️ Discernimiento", footerTemoignages: "💬 Testimonios", footerProjets: "🌱 Nuestros proyectos",
         aiWarning: "Soy una inteligencia artificial. No reemplazo el apoyo humano, un sacerdote, un psicólogo o un médico. Si tu situación es grave, te animo a buscar apoyo humano.",
         toggleUrgence: "Ver números de emergencia",
         clauseText: "🙏 <strong>Acerca de Hogar del Amor</strong><br>Esta herramienta ofrece <strong>escucha inicial</strong> y <strong>ayuda al discernimiento</strong>, sin reemplazar el acompañamiento humano.",
-        navHome: "🏠 Inicio", navSagesse: "📖 Sabiduría", navAbout: "📖 Acerca de", navExamen: "🕯️ Examen", navContact: "✉️ Contacto", navAdmin: "📊 Admin", navPrivacy: "🔒 Privacidad",
+        navHome: "🏠 Inicio", navForm: "🕯️ Discernimiento", navTemoignages: "💬 Testimonios", navProjets: "🌱 Nuestros proyectos",
         situations: [
             "Estoy pasando por un gran sufrimiento", "Ya no le encuentro sentido a mi vida", "Mi relación está en problemas", "He perdido a un ser querido",
             "Me siento solo/a", "Estoy enojado/a con Dios", "Ya no sé qué creer", "Tengo que tomar una decisión difícil",
@@ -708,7 +758,11 @@ const translations = {
         responseReady: "إجابتك جاهزة.",
         btnContinuer: "🌿 متابعة التمييز",
         ressourcesTitle: "للمتابعة...",
-        textesTitle: "📖 نصوص للتأمل", prieresTitle: "🙏 صلوات", contactsTitle: "👤 جهات اتصال بشرية",
+        textesTitle: "📖 نصوص للتأمل",
+        homelieTitle: "📖 كلمة الله لكل يوم",
+        homelieText: "للتعمق في إنجيل اليوم وإيجاد تعليق يومي، نوصي بـ <strong>Prions en Église</strong>، المجلة الشهرية من Éditions Novalis.",
+        homelieLinkText: "📖 اكتشف Prions en Église ↗",
+        prieresTitle: "🙏 صلوات", contactsTitle: "👤 جهات اتصال بشرية",
         ecouteTitle: "🆘 خدمات الاستماع", exercicesTitle: "✨ تمارين روحية",
         revenirTitle: "🔄 عودة", revenirRecommencer: "ابدأ من جديد", saveLink: "حفظ الرابط",
         priereJourTitle: "📖 صلاة اليوم",
@@ -719,11 +773,11 @@ const translations = {
         projetsPsaume: "🌱 « العدل والسلام يتعانقان. » — مزمور 85:11",
         projetsCredit: "أدوات من أجل العدل والسلام والتمييز.",
         footerNothing: "🔒 لا شيء مسجل · 🕊️ رفيق صامت",
-        footerHome: "🏠 الرئيسية", footerSagesse: "📖 حكمة", footerAbout: "📖 عن", footerContact: "✉️ اتصال",
+        footerHome: "🏠 الرئيسية", footerForm: "🕯️ التمييز", footerTemoignages: "💬 الشهادات", footerProjets: "🌱 مشاريعنا",
         aiWarning: "أنا ذكاء اصطناعي. أنا لا أحل محل الدعم البشري، أو الكاهن، أو الطبيب النفسي، أو الطبيب. إذا كانت حالتك خطيرة، أشجعك على طلب الدعم البشري.",
         toggleUrgence: "عرض أرقام الطوارئ",
         clauseText: "🙏 <strong>عن بيت المحبة</strong><br>هذه الأداة تقدم <strong>استماعاً أولياً</strong> و<strong>مساعدة في التمييز</strong>، دون أن تحل محل المرافقة البشرية.",
-        navHome: "🏠 الرئيسية", navSagesse: "📖 حكمة", navAbout: "📖 عن", navExamen: "🕯️ فحص", navContact: "✉️ اتصال", navAdmin: "📊 إدارة", navPrivacy: "🔒 خصوصية",
+        navHome: "🏠 الرئيسية", navForm: "🕯️ التمييز", navTemoignages: "💬 الشهادات", navProjets: "🌱 مشاريعنا",
         situations: [
             "أمر بمعاناة كبيرة", "لم أعد أرى معنى لحياتي", "علاقتي الزوجية متعثرة", "فقدت شخصاً عزيزاً",
             "أشعر بالوحدة", "أنا غاضب من الله", "لا أعرف ماذا أؤمن بعد الآن", "أحتاج لاتخاذ قرار صعب",
@@ -801,6 +855,9 @@ function updateLanguage(lang) {
 
     document.getElementById('ressources-title').textContent = t.ressourcesTitle;
     document.getElementById('ressources-textes-title').textContent = t.textesTitle;
+    document.getElementById('ressources-homelie-title').textContent = t.homelieTitle || '📖 La Parole de Dieu pour chaque jour';
+    document.getElementById('ressources-homelie-text').innerHTML = t.homelieText || '';
+    document.getElementById('ressources-homelie-link').textContent = t.homelieLinkText || '📖 Découvrir Prions en Église ↗';
     document.getElementById('ressources-prieres-title').textContent = t.prieresTitle;
     document.getElementById('ressources-contacts-title').textContent = t.contactsTitle;
     document.getElementById('ressources-ecoute-title').textContent = t.ecouteTitle;
@@ -847,20 +904,17 @@ function updateLanguage(lang) {
 
     document.getElementById('footer-nothing').textContent = t.footerNothing;
     document.getElementById('footer-home').textContent = t.footerHome;
-    document.getElementById('footer-sagesse').textContent = t.footerSagesse;
-    document.getElementById('footer-about').textContent = t.footerAbout;
-    document.getElementById('footer-contact').textContent = t.footerContact;
+    document.getElementById('footer-form').textContent = t.footerForm;
+    document.getElementById('footer-temoignages').textContent = t.footerTemoignages;
+    document.getElementById('footer-projets').textContent = t.footerProjets;
     document.getElementById('ai-warning-text').textContent = t.aiWarning;
     document.getElementById('toggle-urgence').textContent = t.toggleUrgence;
     document.getElementById('clause-text').innerHTML = t.clauseText;
 
     document.getElementById('navHome').textContent = t.navHome;
-    document.getElementById('navSagesse').textContent = t.navSagesse;
-    document.getElementById('navAbout').textContent = t.navAbout;
-    document.getElementById('navExamen').textContent = t.navExamen;
-    document.getElementById('navContact').textContent = t.navContact;
-    document.getElementById('navAdmin').textContent = t.navAdmin;
-    document.getElementById('navPrivacy').textContent = t.navPrivacy;
+    document.getElementById('navForm').textContent = t.navForm;
+    document.getElementById('navTemoignages').textContent = t.navTemoignages;
+    document.getElementById('navProjets').textContent = t.navProjets;
 
     const urgenceList = document.getElementById('urgence-list');
     if (urgenceList && t.ecouteList) {
