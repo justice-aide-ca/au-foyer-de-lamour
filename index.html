@@ -6,21 +6,22 @@
     <title>Au Foyer de l'Amour – Discernement et la petite lumière</title>
     <meta name="description" content="Au Foyer de l'Amour est un outil d'aide au discernement enraciné dans la foi chrétienne, pour ceux qui cherchent la paix, la justice et un sens à leur vie.">
     <meta name="keywords" content="discernement, spiritualité, foi chrétienne, prière, examen de conscience, paix intérieure, justice, amour, vérité">
-    <link rel="canonical" href="https://amour-et-verite-app.netlify.app">
+    <link rel="canonical" href="https://compagnon-spirituel.netlify.app">
 
     <meta property="og:title" content="Au Foyer de l'Amour – Discernement et la petite lumière" />
     <meta property="og:description" content="Un espace de discernement et d'écoute. Une petite lumière dans ta nuit." />
-    <meta property="og:image" content="https://amour-et-verite-app.netlify.app/ekklesia-og-image.png" />
-    <meta property="og:url" content="https://amour-et-verite-app.netlify.app" />
+    <meta property="og:image" content="https://compagnon-spirituel.netlify.app/ekklesia-og-image.png" />
+    <meta property="og:url" content="https://compagnon-spirituel.netlify.app" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Au Foyer de l'Amour" />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Au Foyer de l'Amour – Discernement et la petite lumière" />
     <meta name="twitter:description" content="Un espace de discernement et d'écoute. Une petite lumière dans ta nuit." />
-    <meta name="twitter:image" content="https://amour-et-verite-app.netlify.app/ekklesia-og-image.png" />
+    <meta name="twitter:image" content="https://compagnon-spirituel.netlify.app/ekklesia-og-image.png" />
 
     <style>
+        html { scroll-behavior: smooth; scroll-padding-top: 20px; }
         body { font-family: Georgia, serif; background: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200') no-repeat center center fixed; background-size: cover; padding: 20px; }
         .container { max-width: 800px; margin: auto; background: rgba(255, 255, 255, 0.92); padding: 2rem; border-radius: 16px; }
         h1, h2, h3 { color: #4a3b2c; }
@@ -1123,6 +1124,36 @@ document.getElementById('submitBtn').onclick = async function() {
 
 // Init
 updateLanguage('fr');
+</script>
+
+<!-- Script pour le défilement fluide vers les ancres -->
+<script>
+// Force le défilement vers l'ancre après le chargement complet de la page
+document.addEventListener('DOMContentLoaded', function() {
+    if (window.location.hash) {
+        const target = document.querySelector(window.location.hash);
+        if (target) {
+            setTimeout(() => {
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 300);
+        }
+    }
+});
+
+// Réagit aux clics sur les liens d'ancre
+document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', function(e) {
+        const targetId = this.getAttribute('href');
+        if (targetId && targetId !== '#') {
+            const target = document.querySelector(targetId);
+            if (target) {
+                e.preventDefault();
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                history.pushState(null, null, targetId);
+            }
+        }
+    });
+});
 </script>
 </body>
 </html>
