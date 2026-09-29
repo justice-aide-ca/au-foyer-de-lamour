@@ -106,21 +106,6 @@
         .share-btn.linkedin { background: #0a66c2; }
         .share-btn.whatsapp { background: #25d366; }
 
-        /* --- Bouton Novalis / Prions en Église --- */
-        .btn-novalis {
-            display: inline-block;
-            margin-top: 0.8rem;
-            padding: 0.5rem 1.2rem;
-            background: #4a6f5e;
-            color: white !important;
-            border-radius: 40px;
-            text-decoration: none !important;
-            font-weight: 600;
-            font-size: 0.9rem;
-            transition: opacity 0.2s;
-        }
-        .btn-novalis:hover { opacity: 0.9; }
-
         @media (max-width: 600px) {
             .situations-grid { grid-template-columns: 1fr; }
         }
@@ -202,18 +187,6 @@
             <h3 id="ressources-textes-title">📖 Textes à méditer</h3>
             <ul id="ressources-textes-list"></ul>
         </div>
-
-        <!-- ✨ NOUVEAU : Section Parole de Dieu / Homélie avec Prions en Église -->
-        <div class="ressources-section" id="ressources-homelie-section">
-            <h3 id="ressources-homelie-title">📖 La Parole de Dieu pour chaque jour</h3>
-            <p id="ressources-homelie-text" style="font-size: 0.9rem; color: #5a4f42; margin-bottom: 0.8rem;">
-                Pour approfondir l'Évangile du jour et trouver un commentaire quotidien, nous vous recommandons <strong>Prions en Église</strong>, la revue mensuelle des Éditions Novalis.
-            </p>
-            <a href="https://www.prionseneglise.ca/" target="_blank" rel="noopener" class="btn-novalis" id="ressources-homelie-link">
-                📖 Découvrir Prions en Église ↗
-            </a>
-        </div>
-
         <div class="ressources-section">
             <h3 id="ressources-prieres-title">🙏 Prières</h3>
             <ul id="ressources-prieres-list"></ul>
@@ -306,12 +279,7 @@ const translations = {
         responseReady: "Ta réponse est prête.",
         btnContinuer: "🌿 Continuer le discernement",
         ressourcesTitle: "Pour continuer...",
-        textesTitle: "📖 Textes à méditer",
-        // ✨ NOUVEAU : Parole de Dieu / Prions en Église
-        homelieTitle: "📖 La Parole de Dieu pour chaque jour",
-        homelieText: "Pour approfondir l'Évangile du jour et trouver un commentaire quotidien, nous vous recommandons <strong>Prions en Église</strong>, la revue mensuelle des Éditions Novalis.",
-        homelieLinkText: "📖 Découvrir Prions en Église ↗",
-        prieresTitle: "🙏 Prières", contactsTitle: "👤 Contacts humains",
+        textesTitle: "📖 Textes à méditer", prieresTitle: "🙏 Prières", contactsTitle: "👤 Contacts humains",
         ecouteTitle: "🆘 Services d'écoute", exercicesTitle: "✨ Exercices spirituels",
         revenirTitle: "🔄 Revenir", revenirRecommencer: "Recommencer", saveLink: "Sauvegarder mon lien",
         priereJourTitle: "📖 Prière du jour",
@@ -443,12 +411,7 @@ const translations = {
         responseReady: "Your answer is ready.",
         btnContinuer: "🌿 Continue discernment",
         ressourcesTitle: "To continue...",
-        textesTitle: "📖 Texts to meditate on",
-        // ✨ NEW : Word of God / Prions en Église
-        homelieTitle: "📖 The Word of God for each day",
-        homelieText: "To go deeper into the daily Gospel and find a daily commentary, we recommend <strong>Prions en Église</strong>, the monthly magazine from Éditions Novalis.",
-        homelieLinkText: "📖 Discover Prions en Église ↗",
-        prieresTitle: "🙏 Prayers", contactsTitle: "👤 Human contacts",
+        textesTitle: "📖 Texts to meditate on", prieresTitle: "🙏 Prayers", contactsTitle: "👤 Human contacts",
         ecouteTitle: "🆘 Listening services", exercicesTitle: "✨ Spiritual exercises",
         revenirTitle: "🔄 Return", revenirRecommencer: "Start over", saveLink: "Save my link",
         priereJourTitle: "📖 Prayer of the day",
@@ -580,11 +543,7 @@ const translations = {
         responseReady: "你的回答准备好了。",
         btnContinuer: "🌿 继续辨别",
         ressourcesTitle: "继续...",
-        textesTitle: "📖 默想经文",
-        homelieTitle: "📖 每日圣言",
-        homelieText: "为了深入每日福音并找到每日评论，我们推荐 <strong>Prions en Église</strong>，这是 Éditions Novalis 的月刊。",
-        homelieLinkText: "📖 探索 Prions en Église ↗",
-        prieresTitle: "🙏 祈祷", contactsTitle: "👤 人际联系",
+        textesTitle: "📖 默想经文", prieresTitle: "🙏 祈祷", contactsTitle: "👤 人际联系",
         ecouteTitle: "🆘 聆听服务", exercicesTitle: "✨ 灵修练习",
         revenirTitle: "🔄 返回", revenirRecommencer: "重新开始", saveLink: "保存我的链接",
         priereJourTitle: "📖 每日祈祷",
@@ -639,11 +598,7 @@ const translations = {
         responseReady: "आपका उत्तर तैयार है।",
         btnContinuer: "🌿 विवेक जारी रखें",
         ressourcesTitle: "जारी रखने के लिए...",
-        textesTitle: "📖 ध्यान हेतु पाठ",
-        homelieTitle: "📖 हर दिन के लिए ईश्वर का वचन",
-        homelieText: "दैनिक सुसमाचार में गहराई से जाने और दैनिक टिप्पणी पाने के लिए, हम <strong>Prions en Église</strong> की सलाह देते हैं, जो Éditions Novalis की मासिक पत्रिका है।",
-        homelieLinkText: "📖 Prions en Église देखें ↗",
-        prieresTitle: "🙏 प्रार्थनाएँ", contactsTitle: "👤 मानव संपर्क",
+        textesTitle: "📖 ध्यान हेतु पाठ", prieresTitle: "🙏 प्रार्थनाएँ", contactsTitle: "👤 मानव संपर्क",
         ecouteTitle: "🆘 सुनने की सेवाएँ", exercicesTitle: "✨ आध्यात्मिक अभ्यास",
         revenirTitle: "🔄 वापसी", revenirRecommencer: "पुनः आरंभ करें", saveLink: "मेरा लिंक सहेजें",
         priereJourTitle: "📖 दिन की प्रार्थना",
@@ -698,11 +653,7 @@ const translations = {
         responseReady: "Tu respuesta está lista.",
         btnContinuer: "🌿 Continuar el discernimiento",
         ressourcesTitle: "Para continuar...",
-        textesTitle: "📖 Textos para meditar",
-        homelieTitle: "📖 La Palabra de Dios para cada día",
-        homelieText: "Para profundizar en el Evangelio del día y encontrar un comentario diario, te recomendamos <strong>Prions en Église</strong>, la revista mensual de Éditions Novalis.",
-        homelieLinkText: "📖 Descubrir Prions en Église ↗",
-        prieresTitle: "🙏 Oraciones", contactsTitle: "👤 Contactos humanos",
+        textesTitle: "📖 Textos para meditar", prieresTitle: "🙏 Oraciones", contactsTitle: "👤 Contactos humanos",
         ecouteTitle: "🆘 Servicios de escucha", exercicesTitle: "✨ Ejercicios espirituales",
         revenirTitle: "🔄 Volver", revenirRecommencer: "Empezar de nuevo", saveLink: "Guardar mi enlace",
         priereJourTitle: "📖 Oración del día",
@@ -757,11 +708,7 @@ const translations = {
         responseReady: "إجابتك جاهزة.",
         btnContinuer: "🌿 متابعة التمييز",
         ressourcesTitle: "للمتابعة...",
-        textesTitle: "📖 نصوص للتأمل",
-        homelieTitle: "📖 كلمة الله لكل يوم",
-        homelieText: "للتعمق في إنجيل اليوم وإيجاد تعليق يومي، نوصي بـ <strong>Prions en Église</strong>، المجلة الشهرية من Éditions Novalis.",
-        homelieLinkText: "📖 اكتشف Prions en Église ↗",
-        prieresTitle: "🙏 صلوات", contactsTitle: "👤 جهات اتصال بشرية",
+        textesTitle: "📖 نصوص للتأمل", prieresTitle: "🙏 صلوات", contactsTitle: "👤 جهات اتصال بشرية",
         ecouteTitle: "🆘 خدمات الاستماع", exercicesTitle: "✨ تمارين روحية",
         revenirTitle: "🔄 عودة", revenirRecommencer: "ابدأ من جديد", saveLink: "حفظ الرابط",
         priereJourTitle: "📖 صلاة اليوم",
@@ -854,12 +801,6 @@ function updateLanguage(lang) {
 
     document.getElementById('ressources-title').textContent = t.ressourcesTitle;
     document.getElementById('ressources-textes-title').textContent = t.textesTitle;
-
-    // ✨ NOUVEAU : Mise à jour de la section Parole de Dieu / Prions en Église
-    document.getElementById('ressources-homelie-title').textContent = t.homelieTitle || '📖 La Parole de Dieu pour chaque jour';
-    document.getElementById('ressources-homelie-text').innerHTML = t.homelieText || '';
-    document.getElementById('ressources-homelie-link').textContent = t.homelieLinkText || '📖 Découvrir Prions en Église ↗';
-
     document.getElementById('ressources-prieres-title').textContent = t.prieresTitle;
     document.getElementById('ressources-contacts-title').textContent = t.contactsTitle;
     document.getElementById('ressources-ecoute-title').textContent = t.ecouteTitle;
