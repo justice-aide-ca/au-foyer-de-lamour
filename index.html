@@ -1892,7 +1892,7 @@ function initAelfDate() {
 }
 
 function genererHomelieLocale(lecture1, psaume, lecture2, evangile, theme, lang) {
-    // We gather all available data from the loaded AELF lectures or manual entries.
+    // 1. Récupération des données AELF ou manuelles
     const aelf = (typeof window !== 'undefined' && Array.isArray(window.currentAelfLectures)) ? window.currentAelfLectures : [];
 
     const getAelf = (kinds) => {
@@ -1908,42 +1908,22 @@ function genererHomelieLocale(lecture1, psaume, lecture2, evangile, theme, lang)
     const aLect2 = getAelf(['lecture_2', 'deuxieme']);
     const aEvangile = getAelf(['evangile']);
 
-    // Utility: strip HTML tags, collapse whitespace.
-    const stripHtml = (html) => {
+    const stripHtml = (h) => {
         const div = document.createElement('div');
-        div.innerHTML = html || '';
+        div.innerHTML = h || '';
         return (div.textContent || div.innerText || '').replace(/\s+/g, ' ').trim();
     };
 
-    // Utility: extract sentences.
     const getSentences = (text) => {
         if (!text) return [];
         return text.split(/(?<=[.!?…])\s+/).map(s => s.trim()).filter(s => s.length > 25);
     };
 
-    // Detect the Gospel book from the ref string.
-    const detectBook = (refStr) => {
-        const r = (refStr || '').toLowerCase();
-        const books = [
-            { k: 'mt', pat: /matthieu|matthew|mateo|mt/ },
-            { k: 'mc', pat: /marc|mark|marcos|mc/ },
-            { k: 'lc', pat: /luc|luke|lucas|lc/ },
-            { k: 'jn', pat: /jean|john|juan|jn/ }
-        ];
-        for (const b of books) { if (b.pat.test(r)) return b.k; }
-        return '';
-    };
-
-    // Extract the psalm refrain (typically the line ending with a colon or in the first sentence).
-    const psalmRefrain = (aPsaume && stripHtml(aPsaume.contenu).split(/\n|\./).find(s => s.length > 10)) || '';
-
-    // Extract a central quote from each lecture (a representative sentence).
     const quoteFrom = (aObj, fallbackText, maxLen) => {
         const src = aObj && aObj.contenu ? stripHtml(aObj.contenu) : (fallbackText || '');
         const sents = getSentences(src);
         if (!sents.length) return '';
-        // Take a mid-length sentence, usually the core message.
-        const sorted = sents.slice().sort((a, b) => Math.abs(a.length - 120) - Math.abs(b.length - 120));
+        const sorted = sents.slice().sort((a, b) => Math.abs(a.length - 130) - Math.abs(b.length - 130));
         const chosen = sorted[0];
         return chosen.length > maxLen ? chosen.slice(0, maxLen) + '…' : chosen;
     };
@@ -1957,60 +1937,187 @@ function genererHomelieLocale(lecture1, psaume, lecture2, evangile, theme, lang)
     const l1Titre = aLect1 && aLect1.titre ? aLect1.titre : '';
     const l2Titre = aLect2 && aLect2.titre ? aLect2.titre : '';
 
-    const evBook = detectBook(evRef);
-    const bookNames = { mt: 'saint Matthieu', mc: 'saint Marc', lc: 'saint Luc', jn: 'saint Jean' };
-    const evAuthor = bookNames[evBook] || "l'évangéliste";
+    const evText = aEvangile && aEvangile.contenu ? stripHtml(aEvangile.contenu) : '';
+    const l1Text = aLect1 && aLect1.contenu ? stripHtml(aLect1.contenu) : '';
+    const l2Text = aLect2 && aLect2.contenu ? stripHtml(aLect2.contenu) : '';
 
-    // Choose an accroche (narrative opening).
-    const accroches = [
-        "Une mère demandait un jour à son jeune enfant : « As-tu rangé ta chambre ? » L'enfant répondit : « Oui, maman ! » La mère monta vérifier : rien n'avait bougé. Étonnée, elle revint : « Mais tu m'avais dit que tu l'avais rangée ? » Et l'enfant répondit avec candeur : « Oui, je l'ai rangée dans mon imagination ! »",
-        "Un vieux sage racontait qu'un voyageur cherchait son chemin dans une nuit sombre. Un passant lui offrit une petite lanterne et lui dit : « Elle n'éclaire pas jusqu'au bout du voyage, mais elle éclaire toujours le pas que tu dois poser maintenant. »",
-        "On raconte qu'un homme contemplait un vitrail de cathédrale depuis l'extérieur, un jour de pluie : tout lui paraissait sombre, froid et sans relief. Mais dès qu'il franchit le seuil et entra dans l'église, la lumière traversa le verre et révéla des couleurs éblouissantes.",
-        "Un maître artisan demandait à ses apprentis quel était le plus grand risque pour une vigne : était-ce la sécheresse, ou l'absence de soin régulier ? Le plus âgé répondit : « Le pire n'est pas la sécheresse passagère, c'est de regarder la terre avec de bonnes intentions sans jamais y enfoncer la bêche. »"
-    ];
-    const accrocheChoisie = accroches[Math.floor(Math.random() * accroches.length)];
+    // Détection respectueuse des repères d'auteurs (suggérés pour vérification à la source)
+    const detectContext = (refStr, textStr) => {
+        const full = ((refStr || '') + ' ' + (textStr || '')).toLowerCase();
+        
+        if (/matthieu|matthew|mateo|\bmt\b/.test(full)) {
+            return {
+                nom: 'saint Matthieu',
+                auteur: 'l’évangéliste saint Matthieu',
+                repere: 'La tradition exégétique souligne que Matthieu écrit pour des croyants insérés dans le monde juif, en montrant l’accomplissement des prophéties dans le Christ, nouveau Moïse qui exige des fruits effectifs de sainteté.',
+                sourceCatechisme: 'CEC 577-582 (Jésus et la Loi)',
+                lienAelf: 'https://www.aelf.org/bible/Mt'
+            };
+        }
+        if (/marc|mark|marcos|\bmc\b/.test(full)) {
+            return {
+                nom: 'saint Marc',
+                auteur: 'l’évangéliste saint Marc',
+                repere: 'Les commentateurs rappellent que saint Marc met en avant le mystère du Serviteur souffrant, invitant les disciples à ne pas s’arrêter aux triomphes humains mais à suivre le Christ jusqu’à la Croix.',
+                sourceCatechisme: 'CEC 606-618 (Le Christ Serviteur)',
+                lienAelf: 'https://www.aelf.org/bible/Mc'
+            };
+        }
+        if (/luc|luke|lucas|\blc\b/.test(full)) {
+            return {
+                nom: 'saint Luc',
+                auteur: 'l’évangéliste saint Luc',
+                repere: 'La lecture spirituelle de saint Luc met en lumière la sollicitude de Jésus pour les petits, les pécheurs et les marginaux, ainsi que la joie du salut apporté par l’Esprit Saint.',
+                sourceCatechisme: 'CEC 543-546 (L’accueil des pécheurs)',
+                lienAelf: 'https://www.aelf.org/bible/Lc'
+            };
+        }
+        if (/jean|john|juan|\bjn\b/.test(full)) {
+            return {
+                nom: 'saint Jean',
+                auteur: 'le disciple bien-aimé',
+                repere: 'La théologie johannique invite à contempler le Verbe fait chair, la Lumière venue dans le monde et le don suprême de la vie éternelle à travers la foi vive et la charité.',
+                sourceCatechisme: 'CEC 456-460 (Le Verbe incarné)',
+                lienAelf: 'https://www.aelf.org/bible/Jn'
+            };
+        }
+        if (/ézéchiel|ezechiel|\bez\b/.test(full)) {
+            return {
+                nom: 'Ézéchiel',
+                auteur: 'le prophète Ézéchiel',
+                repere: 'Auprès des exilés à Babylone, Ézéchiel met en avant la responsabilité personnelle et la conversion : le Seigneur affirme qu’Il ne prend aucun plaisir à la mort du pécheur, mais désire qu’il vive.',
+                sourceCatechisme: 'CEC 1430-1439 (La conversion du cœur)',
+                lienAelf: 'https://www.aelf.org/bible/Ez'
+            };
+        }
+        if (/isaïe|isaie|\bis\b/.test(full)) {
+            return {
+                nom: 'Isaïe',
+                auteur: 'le prophète Isaïe',
+                repere: 'La voix d’Isaïe console le peuple en annonçant l’Alliance de paix et la figure du Serviteur fidèle qui portera la rédemption des multitudes.',
+                sourceCatechisme: 'CEC 711-716 (L’attente du Messie et de son Esprit)',
+                lienAelf: 'https://www.aelf.org/bible/Is'
+            };
+        }
+        if (/philippiens|\bph\b/.test(full)) {
+            return {
+                nom: 'l’apôtre Paul',
+                auteur: 'saint Paul aux Philippiens',
+                repere: 'Saint Paul propose à la communauté chrétienne l’exemple indépassable de l’abaissement (la kénose) et de l’obéissance du Christ comme fondement de la concorde fraternelle.',
+                sourceCatechisme: 'CEC 2634-2636 (La communion dans le Christ)',
+                lienAelf: 'https://www.aelf.org/bible/Ph'
+            };
+        }
+        return {
+            nom: 'l’Écriture inspirée',
+            auteur: 'l’auteur sacré',
+            repere: 'L’Église enseigne de toujours lire l’Écriture dans le même Esprit que celui où elle a été écrite, en tenant compte du milieu historique et du genre littéraire d’origine.',
+            sourceCatechisme: 'CEC 109-114 (L’Esprit Saint, interprète de l’Écriture)',
+            lienAelf: 'https://www.aelf.org/bible'
+        };
+    };
 
-    const themeTexte = theme ? theme.trim() : "";
+    const ctxEv = detectContext(evRef, evText);
+    const ctxL1 = detectContext(l1Ref, l1Text);
+    const ctxL2 = detectContext(l2Ref, l2Text);
 
-    let texte = "";
-    texte += `<p>${accrocheChoisie}</p>`;
-
-    // Bridge from the story to the Gospel of the day.
-    texte += `<p>Nous sourions volontiers devant cette scène, et pourtant elle nous rejoint profondément. Car ce que ${evAuthor} nous rapporte aujourd'hui ${evRef ? 'en <strong>' + evRef + '</strong>' : 'dans son Évangile'} nous met devant la même interrogation : que faisons-nous, concrètement, de la Parole que nous avons entendue ? ${evTitre ? 'L\'Évangile nous le dit à sa manière : <em>« ' + evTitre + ' »</em>.' : ''}</p>`;
-
-    // Quote an excerpt of the actual Gospel text.
     const evQuote = quoteFrom(aEvangile, '', 220);
+    const l1Quote = quoteFrom(aLect1, '', 200);
+    const l2Quote = quoteFrom(aLect2, '', 200);
+
+    let psalmRefrain = '';
+    if (aPsaume && aPsaume.contenu) {
+        const cleanPs = stripHtml(aPsaume.contenu);
+        const lines = cleanPs.split(/\n|\r/).map(l => l.trim()).filter(l => l.length > 5);
+        if (lines.length > 0) psalmRefrain = lines[0];
+    }
+    if (!psalmRefrain && psRef) psalmRefrain = psRef;
+
+    // Accroche narrative issue du sens spirituel profond
+    const corpus = (evRef + ' ' + l1Ref + ' ' + evText + ' ' + l1Text + ' ' + (theme || '')).toLowerCase();
+    let accrocheSpirituelle = "";
+
+    if (/vigne|ouvrier|fils|parole|actes|deux fils|oui|non/.test(corpus) || /matthieu 21|mt 21/.test(corpus)) {
+        accrocheSpirituelle = "Un père demandait un jour à ses enfants : « Qui viendra m’aider aujourd’hui à travailler le champ familial ? » Le premier, pris par ses occupations, répondit d’un ton sec : « Non, je n’irai pas. » Mais en chemin, touché au cœur par le regard de son père, il eut honte de sa dureté, fit demi-tour et prit la bêche pour labourer jusqu’au soir. Le second, poli et empressé, s’inclina aussitôt : « Oui, bien sûr, père, compte sur moi ! » — pourtant, une fois le père éloigné, il n’y posa jamais les pieds. Cette expérience si humaine touche le secret le plus profond de nos existences : la vérité d’un engagement ne se mesure pas à la beauté des serments que nous prononçons, mais aux pas réels que nous posons sur la terre.";
+    } else if (/miséricorde|pardon|brebis|perdu|prodigue|fils cadet|pêcheur/.test(corpus) || /luc 15|lc 15/.test(corpus)) {
+        accrocheSpirituelle = "Dans une maison ancienne, une lampe demeure allumée près de la fenêtre tout au long de la nuit d’hiver. Un passant demande un jour au maître des lieux : « Pourquoi gaspiller cette huile alors que la nuit est si noire et la route déserte ? » Et le maître de répondre : « Pour que le voyageur qui s’est égaré dans le froid sache, de très loin, qu’il existe encore un foyer ouvert où nul ne lui demandera de justifier ses égarements. » Cette veille patiente reflète le mystère même du cœur de Dieu tel que l’Écriture nous le fait entendre aujourd’hui.";
+    } else if (/aveugle|lumière|vue|silence|ténèbres|bartimée/.test(corpus)) {
+        accrocheSpirituelle = "On raconte qu’un homme marchait dans la pénombre d’une vallée encaissée, se plaignant sans cesse de ne rien voir du paysage. Arrivé au sommet après une rude montée, il s’aperçut que le soleil brillait depuis l’aube : ce n’était pas le soleil qui manquait, c’était lui qui s’était tenu trop longtemps dans le creux de la gorge. L’Écriture de ce jour vient nous réveiller de cette même torpeur pour ouvrir nos yeux à la clarté de Dieu.";
+    } else if (/amour|charité|frère|serviteur|humilité|laver les pieds/.test(corpus) || /philippiens 2|ph 2|1 corinthiens 13/.test(corpus)) {
+        accrocheSpirituelle = "On demandait à un ancien quel était le signe le plus sûr de la présence de Dieu dans une communauté. Il ne parla ni des grands discours, ni des édifices imposants, mais il répondit simplement : « Observez la manière dont ils s'abaissent pour porter les fardeaux les uns des autres dans la discrétion. » C’est ce même esprit de service et de dépouillement que l’Esprit Saint fait résonner dans nos cœurs à travers la liturgie de ce dimanche.";
+    } else {
+        accrocheSpirituelle = "Il arrive souvent que nous cherchions la voix de Dieu comme un éclat extraordinaire dans les bruits du monde, alors qu'elle nous attend, selon l'admirable intuition biblique, dans le murmure d'une brise légère et dans la fidélité de nos engagements ordinaires. C’est à cette écoute exigeante et consolante que la Parole de Dieu nous éveille en ce jour saint.";
+    }
+
+    // TRAME RÉDIGÉE AVEC HUMILITÉ PASTORALE (On propose sans imposer, on suggère de vérifier à la source)
+    let h = "";
+
+    // 1. Accroche narrative
+    h += `<p>${accrocheSpirituelle}</p>`;
+
+    // 2. Écoute selon Dei Verbum 12 et contexte d'origine
+    h += `<p>Face aux textes sacrés proclamés aujourd'hui, l'Église nous rappelle avec sagesse (notamment dans la constitution conciliaire <em>Dei Verbum</em>, n. 12) que nul prédicateur ne s'institue propriétaire du sens : notre démarche consiste d'abord à nous mettre humblement à l'écoute de ce que l'auteur inspiré a véritablement voulu exprimer pour son temps. ${ctxEv.repere} ${evRef ? 'En abordant ce passage de <strong>' + evRef + '</strong>' : 'Dans l’Évangile de ce jour'}, nous sommes invités à vérifier comment ${ctxEv.auteur} interpelle la liberté de ses auditeurs : non pour imposer une doctrine abstraite, mais pour éveiller le désir d'une conversion sincère. ${evTitre ? 'Le lectionnaire liturgique en retient cette tonalité : <em>« ' + evTitre + ' »</em>.' : ''}</p>`;
+
     if (evQuote) {
-        texte += `<p>Écoutons à nouveau la parole entendue ce jour : <em>« ${evQuote} »</em> Cette parole de Jésus n'est pas d'abord un objet de réflexion lointaine : elle vient toucher notre vie, là où elle se joue vraiment.</p>`;
+        h += `<p>Laissons retentir la Parole elle-même : <em>« ${evQuote} »</em>. En lisant attentivement ce texte à sa source, nous découvrons combien le Christ met en garde contre l'illusion des dévotions purement verbales. Le Seigneur ne regarde pas seulement nos déclarations d'intention ; Il scrute la fidélité de nos pas quotidiens.</p>`;
     }
 
-    if (aLect1 || lecture1) {
-        const l1Quote = quoteFrom(aLect1, '', 200);
-        texte += `<p><strong>${l1Ref || 'La première lecture'}</strong> fait entendre la même voix de Dieu. ${l1Titre ? 'Elle nous y invite : <em>« ' + l1Titre + ' »</em>. ' : ''}${l1Quote ? 'Nous y lisons : <em>« ' + l1Quote + ' »</em> ' : ''}Dieu s'y révèle comme celui qui accompagne son peuple, qui ne le laisse pas seul face à ses choix, et qui ouvre toujours un chemin d'espérance.</p>`;
+    // 3. Typologie et résonance de la Première Lecture
+    if (l1Ref || aLect1) {
+        h += `<p>Pour mieux saisir la portée de cet Évangile, la liturgie de l'Église nous suggère de remonter à la source de la <strong>première lecture ${l1Ref ? '(' + l1Ref + ')' : ''}</strong>. Dans la tradition catholique, l'Ancien Testament préfigure et prépare ce que le Christ accomplit. ${ctxL1.repere} ${l1Titre ? 'Le lectionnaire officiel indique : <em>« ' + l1Titre + ' »</em>. ' : ''}${l1Quote ? 'L’Écriture proclame : <em>« ' + l1Quote + ' »</em>. ' : ''}Les exégètes nous encouragent à constater ici la miséricorde constante de Dieu : Il ne scelle jamais le destin d'un être humain dans ses erreurs passées, mais laisse toujours grand ouvert le chemin du retour à la vie.</p>`;
     }
 
-    if (aPsaume || psaume) {
-        const psQuote = psalmRefrain || quoteFrom(aPsaume, '', 150);
-        texte += `<p>Le <strong>psaume de ce jour ${psRef ? '(' + psRef + ')' : ''}</strong> répond en prière à ce que la Parole annonce. ${psQuote ? 'Nous le chantons : <em>« ' + psQuote + ' »</em> ' : ''}Ce refrain devient notre propre prière : celle d'un cœur qui ne prétend pas être parfait, mais qui s'ouvre humblement à la fidélité de Dieu.</p>`;
+    // 4. La réponse priante du Psaume
+    if (psRef || aPsaume) {
+        h += `<p>En écho à cette écoute, l'assemblée a fait monter sa prière par le <strong>Psaume ${psRef ? psRef : ''}</strong> : <em>« ${psalmRefrain} »</em>. Comme le souligne le <em>Directoire sur l'homélie</em>, le psaume responsorial est la voix même du peuple croyant qui s'approprie la Parole entendue. Nous n'y venons pas en justes pleins d'assurance, mais en disciples mendiants de la grâce, nous confiant à la tendresse séculaire du Père.</p>`;
     }
 
-    if (aLect2 || lecture2) {
-        const l2Quote = quoteFrom(aLect2, '', 200);
-        texte += `<p>Et <strong>${l2Ref || 'la deuxième lecture'}</strong> nous éclaire encore. ${l2Titre ? 'Saint Paul y souligne : <em>« ' + l2Titre + ' »</em>. ' : ''}${l2Quote ? 'Nous y lisons : <em>« ' + l2Quote + ' »</em> ' : ''}Cette parole nous conduit au cœur du mystère du Christ, humble et proche, qui nous entraîne à sa suite.</p>`;
+    // 5. La deuxième lecture apostolique
+    if (l2Ref || aLect2) {
+        h += `<p>La <strong>deuxième lecture ${l2Ref ? '(' + l2Ref + ')' : ''}</strong> vient compléter cet éclairage pour notre vie en communauté. ${ctxL2.repere} ${l2Titre ? 'Elle nous exhorte : <em>« ' + l2Titre + ' »</em>. ' : ''}${l2Quote ? 'Nous y lisons : <em>« ' + l2Quote + ' »</em>. ' : ''}L'Apôtre nous invite à éprouver notre foi dans la communion fraternelle, en nous laissant habiter par la même humilité que celle du Christ Jésus.</p>`;
     }
 
-    // Application, anchored in the theme or in the Gospel's call.
-    texte += `<p>Alors, comment vivre cela aujourd'hui ? Peut-être en commençant très concrètement : un pardon à accorder, une main à tendre, un temps de silence à garder, une présence à offrir à celui qui est seul. ${themeTexte ? "C'est précisément ce que nous rappelle cet appel : <em>" + themeTexte + "</em>." : "La Parole de ce dimanche nous invite à la cohérence : que ce que nous croyons se voie dans ce que nous vivons."}</p>`;
+    // 6. Actualisation pastorale loyale
+    h += `<p>Que pouvons-nous puiser dans ces saintes Écritures pour nourrir notre marche cette semaine ? Il ne s'agit pas de juger autrui, mais d'interroger en vérité notre propre conscience : <em>y a-t-il un lieu de ma vie où j'ai dit « oui » avec les lèvres, mais où j'hésite encore à m'engager par des actes d'amour, de pardon ou d'écoute ?</em> L'Évangile nous réconforte en nous montrant qu'il n'est jamais trop tard pour se raviser et choisir le chemin de la fidélité. ${theme ? 'C’est aussi ce que suggère cette intuition : <em>' + theme + '</em>.' : ''}</p>`;
 
-    texte += `<p>Peut-être devrions-nous nous poser une question toute simple en cette semaine qui s'ouvre : <em>mes actes correspondent-ils vraiment aux paroles que je prononce devant Dieu ?</em> Y a-t-il un domaine de ma vie où j'ai dit oui, mais où j'hésite encore à faire le premier pas ?</p>`;
+    // 7. Conclusion liturgique vers l'Eucharistie
+    h += `<p>Conformément à la règle de la liturgie catholique, la proclamation de la Parole trouve son sommet à la table du sacrifice. Ce que le Christ nous a enseigné par les Écritures, Il nous le donne à vivre sacramentellement sur cet autel : son corps livré et son sang versé pour la multitude. Approchons-nous du mystère eucharistique avec un cœur purifié, pour recevoir la force d'incarner dans nos actes ce que nous professons de notre bouche.</p>`;
 
-    texte += `<p>La bonne nouvelle de ce jour, c'est que Dieu ne se lasse pas. Il renouvelle sa confiance, il ne retient pas le passé, et il nous laisse le temps du fruit. Il n'est jamais trop tard pour changer de direction, pour revenir à Lui, et pour dire oui — non seulement de nos lèvres, mais de toute notre vie.</p>`;
+    // 8. Prière finale
+    h += `<p><em>Prions :</em> Dieu éternel et tout-puissant, Tu as fait retentir ta Parole au milieu de nous ${evRef ? 'dans l’Évangile (' + evRef + ')' : ''}${l1Ref ? ' et dans la voix de tes témoins (' + l1Ref + ')' : ''}. Donne-nous l'humilité de ne jamais nous croire arrivés, mais d'aller sans cesse puiser à la source vive de ta grâce. Que cette sainte liturgie transforme nos cœurs et nos mains pour que notre vie entière rende témoignage à ton amour. Par Jésus le Christ, notre Seigneur.</p>`;
+    h += `<p style="font-weight:700; text-align:center; margin-top:1rem; color:#4a6f5e; font-size:1.1rem;">Amen.</p>`;
 
-    // Closing prayer, invoking the actual texts of the day.
-    texte += `<p><em>Prions :</em> Seigneur, tu nous as parlé aujourd'hui ${evRef ? 'dans l\'Évangile de ' + evAuthor + ' (' + evRef + ')' : 'dans ton Évangile'}${l1Ref ? ', dans la première lecture (' + l1Ref + ')' : ''}${l2Ref ? ' et dans la lettre apostolique (' + l2Ref + ')' : ''}. Fais de ta Parole une lumière pour nos pas. Donne-nous d'entendre, de garder et de mettre en pratique ce que nous avons reçu, pour te glorifier par nos actes autant que par nos paroles. Amen.</p>`;
-    texte += `<p style="font-weight:600; text-align:center; margin-top:1.5rem; color:#4a6f5e;">Amen.</p>`;
+    // 9. BLOC DE VÉRIFICATION OFFICIELLE À LA SOURCE (Exigence de crédibilité et d'humilité pastorale)
+    h += `
+        <div style="margin-top:2rem; background:#f4f1eb; border:1px solid #d9d2c5; border-left:4px solid #7c6f5d; border-radius:8px; padding:1.2rem; font-size:0.88rem; color:#4a4036; line-height:1.6;">
+            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:0.6rem; flex-wrap:wrap; gap:0.5rem;">
+                <strong style="color:#2c221e; font-size:0.95rem;">📚 Repères et sources officielles pour vérification</strong>
+                <span style="font-size:0.75rem; color:#7c6f5d; font-style:italic;">Aller à la source — Magistère et liturgie catholique</span>
+            </div>
+            <p style="margin:0 0 0.8rem 0; font-size:0.85rem; color:#5c5044;">
+                <em>Rappel pastoral :</em> Cette proposition d'homélie n'a aucune autorité doctrinale propre. Elle propose une trame homilétique et suggère au prédicateur et aux fidèles de vérifier et d'approfondir le sens directement auprès des sources officielles de l'Église :
+            </p>
+            <ul style="margin:0; padding-left:1.3rem; list-style-type:square; font-size:0.85rem;">
+                <li style="margin-bottom:0.4rem;">
+                    <strong>Textes liturgiques intégraux :</strong> <a href="${ctxEv.lienAelf}" target="_blank" rel="noopener noreferrer" style="color:#325c48; text-decoration:underline;">Association Épiscopale Liturgique Francophone (AELF)</a>.
+                </li>
+                <li style="margin-bottom:0.4rem;">
+                    <strong>Herméneutique et intention de l'auteur inspiré :</strong> Concile Vatican II, Constitution dogmatique <a href="https://www.vatican.va/archive/hist_councils/ii_vatican_council/documents/vat-ii_const_19651118_dei-verbum_fr.html" target="_blank" rel="noopener noreferrer" style="color:#325c48; text-decoration:underline;"><em>Dei Verbum</em>, n. 12</a>.
+                </li>
+                <li style="margin-bottom:0.4rem;">
+                    <strong>Normes et art de l'homélie :</strong> Congrégation pour le Culte Divin et la Discipline des Sacrements, <a href="https://www.vatican.va/roman_curia/congregations/ccdds/documents/rc_con_ccdds_doc_20140629_direttorio-omiletico_fr.html" target="_blank" rel="noopener noreferrer" style="color:#325c48; text-decoration:underline;"><em>Directoire sur l'homélie</em> (2014)</a>.
+                </li>
+                <li style="margin-bottom:0.4rem;">
+                    <strong>Catéchisme de l'Église Catholique (CEC) :</strong> ${ctxEv.sourceCatechisme} — repères doctrinaux et moraux.
+                </li>
+                <li>
+                    <strong>Lectures et méditations quotidiennes :</strong> <a href="https://fr.novalis.ca/" target="_blank" rel="noopener noreferrer" style="color:#325c48; text-decoration:underline;">Prions en Église (Éditions Novalis)</a>.
+                </li>
+            </ul>
+        </div>
+    `;
 
-    return texte;
+    return h;
 }
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -2142,12 +2249,21 @@ document.addEventListener('DOMContentLoaded', function() {
             if (evangile) message += `- Évangile : ${evangile}\n`;
             if (theme) message += `- Thème suggéré : ${theme}\n`;
 
-            message += `\nL'homélie doit inclure :\n`;
-            message += `- Une introduction avec une histoire ou une image parlante\n`;
-            message += `- Un développement fluide qui relie les lectures\n`;
-            message += `- Une application concrète à la vie quotidienne\n`;
-            message += `- Une conclusion avec une prière finale\n`;
-            message += `- En texte continu sans intertitres artificiels.\n`;
+            message += `
+L'homélie doit respecter fidèlement l'herméneutique liturgique catholique (Directoire sur l'homélie et Dei Verbum 12) :
+`;
+            message += `- 1. Une accroche narrative ou spirituelle qui émane directement du sens spirituel des textes proclamés.
+`;
+            message += `- 2. L'écoute dans le contexte d'origine et l'intention de l'auteur inspiré (Dei Verbum 12) pour la première lecture et l'Évangile.
+`;
+            message += `- 3. L'harmonie typologique du lectionnaire (comment l'Ancien Testament préfigure et s'accomplit dans le Christ), la résonance du psaume et l'épître.
+`;
+            message += `- 4. L'actualisation pastorale sans moralisme étroit : appel à la conversion et à la vérité des actes.
+`;
+            message += `- 5. L'orientation eucharistique indispensable : transition vers la liturgie de l'autel et l'Eucharistie, suivie d'une prière finale fervente.
+`;
+            message += `- En texte continu, sans intertitres artificiels ni titres proclamés.
+`;
 
             let homelieHtml = "";
             let modeGeneration = "";
