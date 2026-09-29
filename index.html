@@ -72,22 +72,46 @@
 </div>
 
 <!-- PAGE HOMÉLIES -->
+<!-- PAGE HOMÉLIES & PROPOSITION DU DIMANCHE -->
 <div id="page-homelies" class="page-section">
-    <h2 id="homelies-title">🕊️ Homélies — Méditations inspirées</h2>
-    <div class="section-card" id="homelies-intro">
-        <p><em>Cette section est en cours de préparation.</em></p>
-        <p>Elle accueillera des méditations librement inspirées des homélies de <strong>Msgr. Joseph A. Pellegrino</strong> (diocèse de St. Petersburg, Floride), dont le ministère nourrit la prière de nombreux fidèles.</p>
-        <p>Ces méditations ne reproduiront pas les mots de Msgr. Pellegrino, mais chercheront à en prolonger l'esprit — dans le plus grand respect de son travail et de son droit d'auteur.</p>
-        <p style="margin-top:1rem;"><strong>🕯️ Cette section sera enrichie dès que la bénédiction de Msgr. Pellegrino aura été reçue.</strong></p>
+    <h2 id="homelies-title">🕊️ Homélies — Méditations & Propositions dominicales</h2>
+    
+    <!-- GÉNÉRATEUR DE PROPOSITION D'HOMÉLIE POUR LE DIMANCHE -->
+    <div class="section-card" style="background:#fefaf5; border-left:4px solid #4a6f5e; padding:1.5rem; margin-bottom:1.5rem;">
+        <h3 style="margin-top:0; color:#4a3b2c;">✨ Préparer une homélie pour dimanche</h3>
+        <p style="margin-bottom:1rem; font-size:0.95rem; color:#5a4f42;">
+            Choisissez une orientation spirituelle ou un thème d'Évangile pour générer une proposition d'homélie structurée (accueil, méditation, question pastorale et prière) :
+        </p>
+        <div style="display:flex; flex-wrap:wrap; gap:0.5rem; margin-bottom:1rem;">
+            <select id="select-theme-homelie" style="padding:10px; border-radius:8px; border:1px solid #c4b8a8; font-family:Georgia, serif; font-size:0.95rem; flex:1; min-width:200px;">
+                <option value="esperance">🌱 Espérance & Confiance dans l'épreuve</option>
+                <option value="pardon">🕊️ Le Pardon & La Réconciliation</option>
+                <option value="peur">🕯️ Vaincre la peur par la foi</option>
+                <option value="decision">🧭 Discernement & Fidélité dans les choix</option>
+                <option value="deuil">🤲 Deuil & Consolation fraternelle</option>
+                <option value="repos">☀️ Le repos saint & Le renouvellement</option>
+                <option value="solitude">❤️ La présence de Dieu dans la solitude</option>
+                <option value="justice">⚖️ La justice de Dieu et la miséricorde</option>
+            </select>
+            <button type="button" class="primary-btn" id="btn-generer-homelie" style="padding:10px 20px;">
+                🕊️ Générer une proposition pour dimanche
+            </button>
+        </div>
+
+        <!-- ZONE D'AFFICHAGE DE LA PROPOSITION DU DIMANCHE -->
+        <div id="homelie-dimanche-resultat" style="display:none; margin-top:1.5rem; padding:1.5rem; background:#ffffff; border-radius:8px; border:1px solid #e0d8cc; line-height:1.8;">
+            <div id="homelie-dimanche-contenu"></div>
+        </div>
     </div>
 
-    <!-- Emplacement pour les futures méditations -->
-    <div id="homeliesListe"></div>
+    <div class="section-card" id="homelies-intro">
+        <h3 style="margin-top:0;">📖 Pistes & Méditations disponibles</h3>
+        <p>Ces réflexions pastorales sont librement inspirées des homélies de <strong>Msgr. Joseph A. Pellegrino</strong> (diocèse de St. Petersburg, Floride), adaptées pour soutenir la prière personnelle et la prédication dominicale :</p>
+    </div>
 
-    <!-- Méditations prêtes (cachées pour l'instant) -->
-    <div id="homelies-modeles" style="display:none;">
-
-        <div class="homelie-card" data-situation="deuil">
+    <!-- Modèles d'homélies complets -->
+    <div id="homeliesListe">
+<div class="homelie-card" data-situation="deuil">
             <h3>Quand la nuit tombe</h3>
             <p>Il y a des nuits qui ne se dissipent pas au lever du jour. La perte d'un être cher est une de ces nuits. On voudrait que le temps efface, mais le temps ne fait pas cela : il apprivoise. Ce qui reste n'est pas un oubli, c'est une présence différente.</p>
             <p>Le Seigneur ne nous promet pas l'absence de la nuit. Il promet sa présence dans la nuit. « Même si je passe par la vallée obscure, je ne crains aucun mal, car tu es avec moi » (Psaume 23,4). Ce n'est pas une consolation facile : c'est une vérité qui tient debout, même quand tout vacille.</p>
@@ -159,78 +183,6 @@
             <p>Jésus a dit sur la croix : « Père, pardonne-leur, ils ne savent pas ce qu'ils font » (Luc 23,34). Il n'a pas attendu que ses bourreaux s'excusent. Il a ouvert la porte <strong>le premier</strong>. C'est cela, le pardon : un acte de liberté, posé devant Dieu, qui ouvre une brèche dans une situation qui semblait fermée.</p>
             <p class="homelie-credit"><em>Librement inspirée par l'esprit des homélies de Msgr. Joseph A. Pellegrino (diocèse de St. Petersburg).</em></p>
         </div>
-
-    </div>
-</div>
-
-<!-- PAGE À PROPOS -->
-
-<!-- PAGE RESSOURCES (AVEC PRIONS EN ÉGLISE OFFICIEL) -->
-<div id="page-ressources" class="page-section">
-    <h2 id="ressources-title">📚 Ressources spirituelles</h2>
-    <p id="ressources-intro">Ressources recommandées pour approfondir votre prière et nourrir votre cheminement :</p>
-    
-    <div class="homelie-card" style="border-left: 4px solid #4a6f5e; background: #fefaf5; padding: 1.5rem; margin: 1.2rem 0; border-radius: 0 8px 8px 0;">
-        <span style="display:inline-block; font-size:0.75rem; color:#7a6b5a; background:#ede8e1; padding:0.2rem 0.5rem; border-radius:4px; margin-bottom:0.5rem;">Ressource externe officielle • Novalis</span>
-        <h3 style="margin: 0.3rem 0; color: #4a3b2c;">📖 Prions en Église</h3>
-        <p style="margin: 0.5rem 0 1rem; color: #3a3a3a; line-height: 1.6;">Pour approfondir la prière quotidienne et suivre la liturgie de l'Église, découvrez la revue et les ressources publiées par Novalis.</p>
-        <a href="https://fr.novalis.ca/" target="_blank" rel="noopener noreferrer" style="display:inline-block; background:#4a6f5e; color:#ffffff !important; padding:0.6rem 1.2rem; border-radius:30px; text-decoration:none !important; font-weight:500; font-size:0.95rem;">
-            Découvrir Prions en Église ↗
-        </a>
-    </div>
-
-    <div class="section-card">
-        <h3>📖 Textes bibliques à méditer</h3>
-        <ul style="line-height: 2; margin-top: 0.5rem;">
-            <li><strong>La confiance en la Providence :</strong> Évangile selon saint Matthieu 6, 25-34</li>
-            <li><strong>Le Bon Pasteur :</strong> Psaume 23 (22)</li>
-            <li><strong>La paix de Dieu :</strong> Lettre de saint Paul aux Philippiens 4, 6-7</li>
-        </ul>
-    </div>
-
-    <div class="section-card">
-        <h3>👤 Accompagnement & Écoute</h3>
-        <p>Pour un accompagnement personnalisé, n'hésitez pas à vous adresser à une paroisse, un prêtre ou une communauté religieuse près de chez vous.</p>
-        <p>En cas de souffrance morale ou de détresse, des services d'écoute confidentiels et gratuits sont disponibles 24h/24.</p>
-    </div>
-</div>
-
-<!-- PAGE TÉMOIGNAGES -->
-<div id="page-temoignages" class="page-section">
-    <h2 id="temoignages-title">💬 Témoignages</h2>
-    <div class="section-card">
-        <p id="temoignages-intro">Vous avez utilisé Au Foyer de l'Amour ? Partagez anonymement ce que cette prière ou ce discernement vous a apporté :</p>
-        <textarea id="temoignage" rows="3" placeholder="Votre témoignage (anonyme)..."></textarea>
-        <button type="button" id="envoyerTemoignage" style="margin-top: 0.5rem;">Partager mon témoignage</button>
-        <div id="merciTemoignage" style="display:none; color: #4a6f5e; margin-top: 10px; font-weight: bold;">
-            Merci pour votre témoignage. Que le Seigneur vous bénisse !
-        </div>
-    </div>
-    <div style="margin-top: 1.5rem;">
-        <h3>💬 Témoignages reçus</h3>
-        <div class="citation-box">
-            « Cette méditation m'a redonné la paix un soir où j'étais submergé par l'anxiété. Merci. »
-            <span class="ref">— Marie</span>
-        </div>
-        <div class="citation-box">
-            « Le discernement proposé m'a aidé à prendre du recul sur un choix professionnel difficile. »
-            <span class="ref">— David</span>
-        </div>
-    </div>
-</div>
-
-<div id="page-about" class="page-section">
-    <h2 id="about-title">📖 À propos</h2>
-    <div class="section-card" id="about-content">
-        <p><strong>Au Foyer de l'Amour</strong> est un compagnon spirituel catholique.</p>
-        <p>Il lit les situations humaines à la lumière de l'Esprit Saint, en s'appuyant sur :</p>
-        <ul>
-            <li>La <strong>Parole de Dieu</strong> (Bible)</li>
-            <li>L'<strong>enseignement de l'Église catholique</strong> (Magistère, Catéchisme)</li>
-            <li>Les <strong>maîtres spirituels</strong> : Ignace de Loyola, Thérèse d'Avila, Jean de la Croix, Joseph Kentenich, etc.</li>
-            <li>Des <strong>penseurs chrétiens et philosophes</strong> : Paul Ricœur, Hannah Arendt, Simone Weil, etc.</li>
-        </ul>
-        <p>Il ne remplace pas un accompagnement humain : un prêtre, un psychologue, un médecin.</p>
     </div>
 </div>
 
@@ -300,6 +252,104 @@ if (btnTemoignage) {
         }
     });
 }
+
+// GÉNÉRATEUR DE PROPOSITION D'HOMÉLIE DU DIMANCHE
+const HOMELIES_DATA = {
+    esperance: {
+        titre: "L'espérance qui ne déçoit pas",
+        accroche: "« Dieu écrit droit avec des lignes courbes. »",
+        texte: "Bien souvent, nous arrivons au dimanche avec la tentation de croire que la situation du monde ou de notre propre vie nous échappe. Pourtant, l'Évangile nous redit sans cesse que Dieu n'est pas absent des imprévus. Là où nous ne voyons que ruptures ou retards, la grâce tisse une présence silencieuse. L'espérance chrétienne n'est pas un optimisme naïf : c'est la certitude que Dieu a le dernier mot et que ce mot est la vie.",
+        question: "Dans quel domaine de ma vie ai-je besoin aujourd'hui de confier à Dieu ce que je ne contrôle pas ?",
+        priere: "Seigneur, ravive en nos cœurs l'espérance. Apprends-nous à discerner ta présence au cœur même de nos doutes et conduis nos pas dans ta paix."
+    },
+    pardon: {
+        titre: "Pardonner, c'est ouvrir une brèche vers l'avenir",
+        accroche: "« Père, pardonne-leur, ils ne savent pas ce qu'ils font. » (Luc 23,34)",
+        texte: "Le pardon est l'une des paroles les plus exigeantes de l'Évangile. Il ne consiste ni à oublier le passé ni à justifier l'injustice. Pardonner, c'est décider avec l'aide de Dieu que la blessure ne dictera pas le reste de notre existence. En ouvrant la porte du pardon, nous ne libérons pas seulement autrui : nous redevenons nous-mêmes libres d'aimer.",
+        question: "Y a-t-il une rancœur ou une amertume que je peux déposer aujourd'hui devant le Seigneur pour retrouver la paix ?",
+        priere: "Seigneur Jésus, Toi qui as pardonné sur la croix, donne-moi le courage de faire le premier pas vers la réconciliation et guéris les blessures de mon cœur."
+    },
+    peur: {
+        titre: "N'ayez pas peur : faire confiance au milieu de la tempête",
+        accroche: "« Courage ! C'est moi, n'ayez pas peur. » (Matthieu 14,27)",
+        texte: "La peur est une réalité humaine commune, mais elle ne doit pas devenir notre maître. Sur la mer agitée, Pierre a commencé à s'enfoncer lorsqu'il a fixé son regard sur les vagues plutôt que sur le Christ. Le Seigneur ne nous demande pas une témérité surhumaine, mais de poser un acte de foi : lui tendre la main dès que le doute survient.",
+        question: "Quelle tempête intérieure ou extérieure puis-je remettre avec confiance entre les mains du Christ cette semaine ?",
+        priere: "Seigneur, quand la tempête se lève, tourne mon regard vers Toi. Sois le roc sur lequel repose ma confiance."
+    },
+    decision: {
+        titre: "Le discernement : le Seigneur ne donne pas une carte, Il donne Sa main",
+        accroche: "« Parle, Seigneur, ton serviteur écoute. » (1 Samuel 3,10)",
+        texte: "Dans les carrefours de notre existence, nous cherchons souvent une réponse toute faite ou une feuille de route détaillée. La tradition biblique nous montre plutôt que Dieu marche avec nous pas à pas. Il ne nous demande pas la perfection absolue, mais la fidélité quotidienne. Discerner, c'est écouter dans le silence où se trouve la paix profonde et s'engager avec confiance.",
+        question: "Quel choix ou quelle responsabilité demande aujourd'hui que j'écoute la voix paisible de l'Esprit Saint ?",
+        priere: "Esprit Saint, éclaire mon intelligence et fortifie ma volonté pour que mes décisions portent le fruit de l'amour et de la vérité."
+    },
+    deuil: {
+        titre: "Quand la nuit tombe : la certitude de la présence",
+        accroche: "« Même si je passe par un ravin d'obscurité, je ne crains aucun mal, car tu es avec moi. » (Psaume 23)",
+        texte: "L'épreuve de la séparation et du deuil touche au cœur de notre humanité. L'Évangile ne supprime pas les larmes — Jésus lui-même a pleuré devant le tombeau de son ami Lazare. Mais il éclaire notre deuil d'une promesse : l'amour est plus fort que la mort. Chaque prière dominicale est une communion avec ceux qui nous ont précédés dans la paix de Dieu.",
+        question: "Comment puis-je être un témoin de tendresse et de réconfort auprès de ceux qui traversent la solitude ou la peine ?",
+        priere: "Seigneur, accueille auprès de Toi ceux que nous aimons et verse sur notre douleur le baume de Ta consolation infinie."
+    },
+    repos: {
+        titre: "Le repos n'est pas un luxe, c'est un commandement saint",
+        accroche: "« Venez à moi, vous tous qui peinez, et moi je vous procurerai le repos. » (Matthieu 11,28)",
+        texte: "Le dimanche est par excellence le jour de la gratuité et de l'action de grâce. Dans un monde obsédé par la rentabilité et l'urgence permanente, le repos dominical est un acte de résistance spirituelle. S'arrêter, respirer, contempler la Création et laisser Dieu être Dieu : c'est là que l'âme se renouvelle.",
+        question: "Comment puis-je vivre ce dimanche comme un vrai temps de ressourcement spirituel et familial ?",
+        priere: "Seigneur, délivre-moi de l'agitation stérile. Fais-moi goûter la douceur de Ta présence et donne à mon âme le vrai repos en Toi."
+    },
+    solitude: {
+        titre: "Être seul et se savoir aimé : la présence cachée",
+        accroche: "« Et moi, je suis avec vous tous les jours jusqu'à la fin du monde. » (Matthieu 28,20)",
+        texte: "La solitude peut peser lourdement, mais elle peut aussi devenir le lieu intime de la rencontre avec Dieu. Au désert, Dieu ne parle pas dans le fracas, mais dans le souffle d'une brise légère. Savoir que le Christ habite notre vie transforme notre désert intérieur en sanctuaire de paix.",
+        question: "À quelle personne isolée de ma paroisse ou de mon entourage puis-je offrir un geste fraternel cette semaine ?",
+        priere: "Seigneur, rappelle-moi chaque jour que je ne suis jamais seul. Fais de moi un témoin de Ta proximité pour les cœurs isolés."
+    },
+    justice: {
+        titre: "Servir le Christ dans le plus petit de nos frères",
+        accroche: "« Ce que vous avez fait à l'un de ces plus petits, c'est à moi que vous l'avez fait. » (Matthieu 25,40)",
+        texte: "L'Eucharistie dominicale nous renvoie toujours à la mission et au service. La foi authentique ne s'arrête pas aux portes de l'église : elle s'incarne dans le regard posé sur le pauvre, l'exclu, le souffrant. Vivre la justice selon l'Évangile, c'est faire de nos mains les instruments de la miséricorde du Père.",
+        question: "De quelle manière concrète puis-je vivre la solidarité et le service de mon prochain dans les jours qui viennent ?",
+        priere: "Seigneur Jésus, ouvre mes yeux et mon cœur aux besoins de mes frères et sœurs. Donne-moi un cœur humble et généreux."
+    }
+};
+
+const btnGenererHomelie = document.getElementById("btn-generer-homelie");
+const selectTheme = document.getElementById("select-theme-homelie");
+const containerRes = document.getElementById("homelie-dimanche-resultat");
+const contenuRes = document.getElementById("homelie-dimanche-contenu");
+
+if (btnGenererHomelie && selectTheme && containerRes && contenuRes) {
+    btnGenererHomelie.addEventListener("click", () => {
+        const theme = selectTheme.value;
+        const data = HOMELIES_DATA[theme] || HOMELIES_DATA.esperance;
+        
+        contenuRes.innerHTML = `
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; margin-bottom:0.8rem; border-bottom:1px solid #e6e4e0; padding-bottom:0.5rem;">
+                <span style="font-size:0.85rem; font-weight:bold; color:#4a6f5e; text-transform:uppercase; letter-spacing:0.5px;">Proposition d'homélie pour dimanche</span>
+                <span style="font-size:0.8rem; color:#7a6b5a; font-style:italic;">Méditation dominicale pastorale</span>
+            </div>
+            <h3 style="color:#4a3b2c; margin-top:0.2rem; font-size:1.3rem;">🕊️ ${data.titre}</h3>
+            <p style="font-style:italic; color:#4a6f5e; font-weight:bold; font-size:1.05rem; margin:0.8rem 0;">${data.accroche}</p>
+            <div style="margin:1rem 0; font-size:1.05rem; color:#2c2b28;">
+                <p>${data.texte}</p>
+            </div>
+            <div style="background:#f6f3ef; border-left:3px solid #4a6f5e; padding:12px 16px; border-radius:0 8px 8px 0; margin:1.2rem 0;">
+                <strong style="color:#4a3b2c;">💡 Piste de réflexion pour l'assemblée :</strong>
+                <p style="margin:0.4rem 0 0; font-style:italic;">${data.question}</p>
+            </div>
+            <div style="background:#f0ede8; padding:12px 16px; border-radius:8px; margin:1.2rem 0;">
+                <strong style="color:#4a6f5e;">🙏 Prière universelle ou finale :</strong>
+                <p style="margin:0.4rem 0 0; font-style:italic;">« ${data.priere} »</p>
+            </div>
+            <p style="font-size:0.8rem; color:#7a6b5a; margin-top:1rem; border-top:1px solid #e6e4e0; padding-top:0.5rem;">
+                <em>Proposition pastorale pour la préparation de la prédication du dimanche • Au Foyer de l'Amour</em>
+            </p>
+        `;
+        containerRes.style.display = "block";
+        containerRes.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    });
+}
+
 </script>
 </body>
 </html>
