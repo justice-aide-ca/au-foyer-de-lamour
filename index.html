@@ -8,7 +8,132 @@
     <style>
  body { font-family: Georgia, serif; background: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200') no-repeat center center fixed; background-size: cover; padding: 20px; margin: 0; } .container { max-width: 820px; margin: auto; background: rgba(255,255,255,0.95); padding: 2rem; border-radius: 16px; box-shadow: 0 4px 30px rgba(0,0,0,0.15); } h1, h2, h3, h4 { color: #4a3b2c; } h1 { text-align: center; margin-bottom: 0; } .sous-titre { text-align: center; color: #7a6b5a; font-style: italic; margin-top: 0.2rem; margin-bottom: 1.5rem; } .nav-menu { display: flex; justify-content: center; flex-wrap: wrap; gap: 0.8rem; margin: 1rem 0 1.5rem; padding: 0.5rem 0; border-top: 1px solid #e6e4e0; border-bottom: 1px solid #e6e4e0; } .nav-menu a { color: #4a3b2c; text-decoration: none; font-size: 0.9rem; padding: 0.3rem 0.6rem; border-radius: 30px; transition: background 0.2s; cursor: pointer; } .nav-menu a:hover { background: #f0ede8; color: #4a6f5e; } .nav-menu a.active { background: #4a6f5e; color: white; } .language-selector { display: flex; justify-content: center; flex-wrap: wrap; gap: 0.4rem; margin: 0.5rem 0 1.5rem; } .lang-btn { background: #f0ede8; border: 1px solid #c4b8a8; padding: 0.2rem 0.6rem; border-radius: 30px; cursor: pointer; font-size: 0.75rem; color: #2c2b28; } .lang-btn:hover { background: #e0d8cc; } .lang-btn.active { background: #4a6f5e; color: white; border-color: #4a6f5e; } .mode-selector { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem; margin: 1rem 0; } .mode-btn { background: #f0ede8; border: 1px solid #c4b8a8; padding: 0.4rem 1rem; border-radius: 30px; cursor: pointer; font-size: 0.85rem; color: #2c2b28; } .mode-btn:hover { background: #e0d8cc; } .mode-btn.active { background: #4a6f5e; color: white; border-color: #4a6f5e; } textarea, input[type="text"] { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ddd; border-radius: 8px; font-family: inherit; box-sizing: border-box; font-size: 1rem; } button { background: #4a6f5e; color: white; padding: 12px 24px; border: none; border-radius: 40px; cursor: pointer; font-size: 1rem; font-family: inherit; } button:disabled { opacity: 0.6; cursor: wait; } .reponse-card { background: #fefaf5; padding: 25px 30px; border-left: 4px solid #4a6f5e; margin-top: 25px; line-height: 1.85; font-size: 1.05rem; border-radius: 0 8px 8px 0; } .reponse-card p { margin: 0 0 1.1em 0; } .reponse-card .verset { font-style: italic; color: #4a3b2c; font-weight: 500; } .reponse-card .priere { background: #f0ede8; padding: 15px 20px; border-radius: 10px; margin: 1.2em 0; font-style: italic; } .reponse-card .benediction { text-align: center; color: #4a6f5e; margin-top: 1.2em; font-size: 0.95rem; } .loading { text-align: center; color: #4a6f5e; margin-top: 20px; font-style: italic; } .error { color: #c0392b; background: #fdecea; padding: 12px; border-radius: 8px; margin-top: 20px; } .situations-container { margin: 1.5rem 0; padding: 1.2rem; background: #f6f3ef; border-radius: 12px; } .situations-container p:first-child { font-weight: bold; color: #4a3b2c; margin-top: 0; margin-bottom: 0.8rem; } .situations-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.4rem 1rem; } .situations-grid label { display: flex; align-items: center; gap: 0.4rem; font-size: 0.9rem; color: #4a3b2c; cursor: pointer; padding: 0.3rem 0; } .situations-grid input[type="radio"] { width: auto; margin: 0; } #precision-situation { margin-top: 0.8rem; width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 8px; font-size: 0.9rem; } #response-container { margin-top: 2rem; display: none; } .page-section { display: none; } .page-section.active { display: block; } .section-card { background: #f6f3ef; padding: 1.2rem; border-radius: 12px; margin: 1.5rem 0; } .section-card h3 { margin-top: 0; } .citation-box { background: #fefaf5; padding: 1rem 1.4rem; border-left: 4px solid #4a6f5e; margin: 0.8rem 0; font-style: italic; border-radius: 0 8px 8px 0; } .citation-box .ref { font-style: normal; font-size: 0.85rem; color: #7a6b5a; display: block; margin-top: 0.4rem; } footer { text-align: center; margin-top: 2rem; font-size: 0.8rem; color: #aaa39a; line-height: 2; } footer a { color: #7a6b5a; text-decoration: none; margin: 0 0.4rem; cursor: pointer; } footer a:hover { text-decoration: underline; } .ai-warning { margin-top: 1rem; padding: 0.6rem 1rem; background: #fefaf5; border: 1px solid #e6e4e0; border-radius: 8px; font-size: 0.85rem; color: #5a4f42; text-align: center; line-height: 1.5; } .emergency-numbers { display: none; margin-top: 0.5rem; font-size: 0.8rem; color: #4a3b2c; text-align: left; } .emergency-numbers.visible { display: block; } /* Homélies */ .homelie-card { background: #fefaf5; padding: 1.5rem 1.8rem; border-left: 4px solid #4a6f5e; border-radius: 0 8px 8px 0; margin: 1.2rem 0; line-height: 1.8; } .homelie-card h3 { color: #4a3b2c; margin-top: 0; margin-bottom: 0.8rem; font-size: 1.15rem; font-style: italic; } .homelie-card p { margin: 0 0 1em 0; color: #3a3a3a; } .homelie-credit { font-size: 0.85rem; color: #7a6b5a; margin-top: 1.2rem; padding-top: 0.8rem; border-top: 1px solid #e6e4e0; } @media (max-width: 600px) { .situations-grid { grid-template-columns: 1fr; } .reponse-card { padding: 18px 20px; font-size: 1rem; } .container { padding: 1.2rem; } } 
     </style>
+
+/* Styles enrichis pour onglets, examen dynamique, homélie et ressources */
+.nav-tab-btn {
+    background: #fdfaf6;
+    border: 1px solid #d4c5b3;
+    color: #4a3b2c;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    display: inline-block;
+}
+.nav-tab-btn:hover {
+    background: #eedecf;
+    border-color: #8c7355;
+}
+.nav-tab-btn.active {
+    background: #5b4636;
+    color: #ffffff;
+    border-color: #5b4636;
+    font-weight: bold;
+}
+.readings-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+.readings-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+.readings-field label {
+    font-size: 0.85rem;
+    font-weight: bold;
+    color: #4a3b2c;
+}
+.readings-field input, .readings-field select {
+    padding: 0.55rem 0.75rem;
+    border: 1px solid #c4b8a8;
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 0.9rem;
+    background: #ffffff;
+}
+.auth-notice-card {
+    background: #fcf8f2;
+    border-left: 4px solid #b38b59;
+    padding: 1rem 1.25rem;
+    margin-bottom: 1.5rem;
+    border-radius: 0 8px 8px 0;
+    font-size: 0.92rem;
+    color: #524335;
+    line-height: 1.5;
+}
+.examen-wizard {
+    background: #ffffff;
+    border: 1px solid #dfd4c7;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-top: 1rem;
+}
+.examen-steps-bar {
+    display: flex;
+    gap: 0.35rem;
+    margin-bottom: 1.5rem;
+}
+.examen-step-indicator {
+    flex: 1;
+    text-align: center;
+    padding: 0.45rem 0.2rem;
+    border-radius: 4px;
+    background: #efe7de;
+    font-size: 0.78rem;
+    color: #6a5c4e;
+    font-weight: 500;
+}
+.examen-step-indicator.active {
+    background: #5b4636;
+    color: #ffffff;
+    font-weight: bold;
+}
+.examen-step-indicator.done {
+    background: #8c7355;
+    color: #ffffff;
+}
+.examen-timer-btn {
+    background: #f3ece4;
+    border: 1px solid #c9baa8;
+    border-radius: 20px;
+    padding: 0.45rem 0.9rem;
+    font-size: 0.88rem;
+    cursor: pointer;
+    color: #4a3b2c;
+}
+.examen-textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.75rem;
+    border: 1px solid #d4c5b3;
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 0.92rem;
+    margin-top: 0.75rem;
+    resize: vertical;
+}
+.ressource-tag-btn {
+    background: #f3eee8;
+    border: 1px solid #d9cebf;
+    border-radius: 16px;
+    padding: 0.3rem 0.7rem;
+    font-size: 0.82rem;
+    cursor: pointer;
+    color: #4a3b2c;
+}
+.ressource-tag-btn.active {
+    background: #5b4636;
+    color: #ffffff;
+    border-color: #5b4636;
+}
+</style>
 </head>
+
 <body>
  <div class="container"> <h1 id="mainTitle">🕯️ Au Foyer de l'Amour</h1> <div class="sous-titre" id="mainSubtitle">Un compagnon spirituel pour discerner</div>
 
@@ -32,6 +157,17 @@
 </div>
 
 <!-- PAGE ACCUEIL -->
+
+<div class="top-nav" style="display:flex; flex-wrap:wrap; justify-content:center; gap:0.4rem; margin:1rem 0 1.5rem 0;">
+    <button class="nav-tab-btn active" data-page="home" id="nav-btn-home">🕊️ Accueil & Discernement</button>
+    <button class="nav-tab-btn" data-page="sagesse" id="nav-btn-sagesse">📖 Sagesse</button>
+    <button class="nav-tab-btn" data-page="homelies" id="nav-btn-homelies">🕊️ Homélies</button>
+    <button class="nav-tab-btn" data-page="examen" id="nav-btn-examen">🕯️ Examen ignatien</button>
+    <button class="nav-tab-btn" data-page="ressources" id="nav-btn-ressources">📚 Ressources</button>
+    <button class="nav-tab-btn" data-page="temoignages" id="nav-btn-temoignages">💬 Témoignages</button>
+    <button class="nav-tab-btn" data-page="about" id="nav-btn-about">ℹ️ À propos</button>
+</div>
+
 <div id="page-home" class="page-section active">
     <div class="mode-selector">
         <button class="mode-btn active" data-mode="discernement" id="mode-discernement">🤲 Discernement</button>
@@ -65,6 +201,7 @@
 </div>
 
 <!-- PAGE SAGESSE -->
+
 <div id="page-sagesse" class="page-section">
     <h2 id="sagesse-title">📖 Sagesse</h2>
     <p id="sagesse-intro">Quelques paroles qui nourrissent le discernement :</p>
@@ -73,153 +210,295 @@
 
 <!-- PAGE HOMÉLIES -->
 <!-- PAGE HOMÉLIES & PROPOSITION DU DIMANCHE -->
-<div id="page-homelies" class="page-section">
-    <h2 id="homelies-title">🕊️ Homélies — Méditations & Propositions dominicales</h2>
-    
-    <!-- GÉNÉRATEUR DE PROPOSITION D'HOMÉLIE POUR LE DIMANCHE -->
+
+<!-- PAGE HOMÉLIES -->
+<div id="page-homelies" class="page-section" style="display:none;">
+    <h2 id="homelies-title">🕊️ Homélies — Méditations & Préparation dominicale</h2>
+
+    <!-- AVERTISSEMENT / NOTE PASTORALE AUTORISATION MGR PELLEGRINO -->
+    <div class="auth-notice-card">
+        <strong>📋 Note pastorale :</strong> Une demande formelle d'autorisation a été transmise à <strong>Monseigneur Joseph A. Pellegrino</strong> pour pouvoir citer ou paraphraser ses homélies. Dans l'attente de sa confirmation, les méditations et propositions ci-dessous constituent des trames pastorales méditatives indépendantes, inspirées directement des Saintes Écritures et de la tradition vivante de l'Église.
+    </div>
+
+    <!-- ESPACE DE SAISIE DES LECTURES DU DIMANCHE -->
     <div class="section-card" style="background:#fefaf5; border-left:4px solid #4a6f5e; padding:1.5rem; margin-bottom:1.5rem;">
-        <h3 style="margin-top:0; color:#4a3b2c;">✨ Préparer une homélie pour dimanche</h3>
+        <h3 style="margin-top:0; color:#4a3b2c;">✨ Préparer l'homélie du dimanche à partir des lectures</h3>
         <p style="margin-bottom:1rem; font-size:0.95rem; color:#5a4f42;">
-            Choisissez une orientation spirituelle ou un thème d'Évangile pour générer une proposition d'homélie structurée (accueil, méditation, question pastorale et prière) :
+            Renseignez les références des lectures liturgiques du dimanche (ou les passages clés) pour générer une trame pastorale d'homélie structurée :
         </p>
-        <div style="display:flex; flex-wrap:wrap; gap:0.5rem; margin-bottom:1rem;">
-            <select id="select-theme-homelie" style="padding:10px; border-radius:8px; border:1px solid #c4b8a8; font-family:Georgia, serif; font-size:0.95rem; flex:1; min-width:200px;">
-                <option value="esperance">🌱 Espérance & Confiance dans l'épreuve</option>
-                <option value="pardon">🕊️ Le Pardon & La Réconciliation</option>
-                <option value="peur">🕯️ Vaincre la peur par la foi</option>
-                <option value="decision">🧭 Discernement & Fidélité dans les choix</option>
-                <option value="deuil">🤲 Deuil & Consolation fraternelle</option>
-                <option value="repos">☀️ Le repos saint & Le renouvellement</option>
-                <option value="solitude">❤️ La présence de Dieu dans la solitude</option>
-                <option value="justice">⚖️ La justice de Dieu et la miséricorde</option>
-            </select>
-            <button type="button" class="primary-btn" id="btn-generer-homelie" style="padding:10px 20px;">
-                🕊️ Générer une proposition pour dimanche
+
+        <div class="readings-grid">
+            <div class="readings-field">
+                <label for="input-lecture1">1ère Lecture (Ancien Testament / Actes)</label>
+                <input type="text" id="input-lecture1" placeholder="Ex: Isaïe 55, 1-3">
+            </div>
+            <div class="readings-field">
+                <label for="input-psaume">Psaume responsorial</label>
+                <input type="text" id="input-psaume" placeholder="Ex: Psaume 144 (145)">
+            </div>
+            <div class="readings-field">
+                <label for="input-lecture2">2ème Lecture (Épîtres)</label>
+                <input type="text" id="input-lecture2" placeholder="Ex: Romains 8, 35-39">
+            </div>
+            <div class="readings-field">
+                <label for="input-evangile">Évangile du dimanche</label>
+                <input type="text" id="input-evangile" placeholder="Ex: Matthieu 14, 13-21">
+            </div>
+        </div>
+
+        <div style="margin-bottom:1rem;">
+            <label for="select-theme-homelie" style="font-size:0.85rem; font-weight:bold; color:#4a3b2c; display:block; margin-bottom:0.25rem;">Axe pastoral ou orientation spirituelle</label>
+            <div style="display:flex; flex-wrap:wrap; gap:0.5rem;">
+                <select id="select-theme-homelie" style="padding:0.6rem 0.8rem; border-radius:6px; border:1px solid #c4b8a8; font-family:Georgia, serif; font-size:0.92rem; flex:1; min-width:220px; background:#fff;">
+                    <option value="auto">🌿 Harmonie des Écritures & Appel à la foi</option>
+                    <option value="esperance">🌱 Espérance & Confiance dans l'épreuve</option>
+                    <option value="pardon">🕊️ Le Pardon & La Réconciliation</option>
+                    <option value="peur">🕯️ Vaincre la peur & Trouver la paix</option>
+                    <option value="decision">🧭 Discernement & Fidélité dans nos choix</option>
+                    <option value="deuil">🤲 Deuil & Consolation fraternelle</option>
+                    <option value="repos">⚓ Repos de l'âme & Retour à l'essentiel</option>
+                    <option value="solitude">🤝 Briser la solitude & Faire communauté</option>
+                    <option value="justice">⚖️ Justice de Dieu & Amour des plus fragiles</option>
+                </select>
+                <button type="button" id="btn-generer-homelie" class="btn" style="background:#4a6f5e; color:#fff; border:none; padding:0.6rem 1.2rem; border-radius:6px; cursor:pointer; font-weight:bold;">
+                    ✨ Élaborer la proposition d'homélie
+                </button>
+            </div>
+        </div>
+
+        <!-- RÉSULTAT DE L'HOMÉLIE GÉNÉRÉE -->
+        <div id="homelie-result-box" style="display:none; margin-top:1.5rem; background:#fff; border:1px solid #d4c5b3; border-radius:8px; padding:1.5rem; box-shadow:0 2px 8px rgba(0,0,0,0.04);">
+            <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #eee; padding-bottom:0.5rem; margin-bottom:1rem;">
+                <h4 id="homelie-generated-title" style="margin:0; color:#4a3b2c;">Trame pastorale pour l'homélie</h4>
+                <button type="button" id="btn-copier-homelie" style="background:#f4ece3; border:1px solid #d8cab8; border-radius:4px; padding:0.3rem 0.6rem; font-size:0.8rem; cursor:pointer;">📋 Copier</button>
+            </div>
+            <div id="homelie-generated-content" style="line-height:1.7; color:#3b322a; font-size:0.95rem;"></div>
+        </div>
+    </div>
+
+    <!-- MODÈLES DE MÉDITATIONS EXISTANTES -->
+    <h3 style="color:#4a3b2c; margin-top:2rem;">📖 Méditations pastorales par situation</h3>
+    <div id="homelies-modeles-container">
+        <div class="homelie-card" style="background:#fff; border:1px solid #e0d5c7; border-radius:8px; padding:1.25rem; margin-bottom:1rem;">
+            <h4 style="margin-top:0; color:#5b4636;">🕊️ Dans le deuil : La promesse de la résurrection</h4>
+            <p>La mort sépare, mais elle ne brise pas le lien d'amour scellé dans le Christ. Devant la tombe de Lazare, Jésus a pleuré : notre souffrance est accueillie par Dieu avec compassion infinie.</p>
+            <p style="font-size:0.88rem; color:#776a5c;"><em>« Je suis la résurrection et la vie. Celui qui croit en moi vivra. » (Jean 11, 25)</em></p>
+        </div>
+        <div class="homelie-card" style="background:#fff; border:1px solid #e0d5c7; border-radius:8px; padding:1.25rem; margin-bottom:1rem;">
+            <h4 style="margin-top:0; color:#5b4636;">🕯️ Vaincre la peur : La tempête apaisée</h4>
+            <p>Les disciples s'écrient : « Maître, cela ne te fait rien que nous périssions ? » La peur réduit l'horizon. Mais le Seigneur est dans la barque avec nous, même dans la nuit la plus sombre.</p>
+            <p style="font-size:0.88rem; color:#776a5c;"><em>« Pourquoi avez-vous si peur ? Vous n'avez pas encore de foi ? » (Marc 4, 40)</em></p>
+        </div>
+        <div class="homelie-card" style="background:#fff; border:1px solid #e0d5c7; border-radius:8px; padding:1.25rem; margin-bottom:1rem;">
+            <h4 style="margin-top:0; color:#5b4636;">🧭 Dans la décision : Écouter la voix du Bon Pasteur</h4>
+            <p>Le discernement chrétien ne cherche pas la voie la plus facile, mais celle qui fait grandir la paix profonde, la charité envers le prochain et la liberté intérieure.</p>
+            <p style="font-size:0.88rem; color:#776a5c;"><em>« Mes brebis écoutent ma voix ; moi, je les connais, et elles me suivent. » (Jean 10, 27)</em></p>
+        </div>
+    </div>
+</div>
+
+<!-- PAGE EXAMEN IGNATIEN DYNAMIQUE -->
+<div id="page-examen" class="page-section" style="display:none;">
+    <h2 id="examen-title">🕯️ Examen de conscience — Démarche ignatienne</h2>
+    
+    <div class="section-card" style="background:#fefaf6; border-left:4px solid #8c7355; padding:1.25rem; margin-bottom:1rem;">
+        <p style="margin:0; font-size:0.95rem; color:#4a3b2c; line-height:1.6;">
+            Inspirée de la prière quotidienne de <strong>Saint Ignace de Loyola</strong>, cette démarche en 5 étapes vous guide pour relire votre journée sous le regard aimant de Dieu, discerner vos mouvements intérieurs (consolation et désolation) et préparer le lendemain dans la paix.
+        </p>
+    </div>
+
+    <div class="examen-wizard">
+        <!-- BARRE DE PROGRESSION DES 5 ÉTAPES -->
+        <div class="examen-steps-bar">
+            <div class="examen-step-indicator active" id="step-ind-1">1. Gratitude</div>
+            <div class="examen-step-indicator" id="step-ind-2">2. Lumière</div>
+            <div class="examen-step-indicator" id="step-ind-3">3. Relecture</div>
+            <div class="examen-step-indicator" id="step-ind-4">4. Pardon</div>
+            <div class="examen-step-indicator" id="step-ind-5">5. Demain</div>
+        </div>
+
+        <!-- CONTENU DE CHAQUE ÉTAPE -->
+        <div id="examen-step-body" class="examen-step-body">
+            <!-- ÉTAPE 1 -->
+            <div class="step-panel" id="step-panel-1">
+                <h3 style="color:#5b4636; margin-top:0;">1. Action de grâce (Gratitude)</h3>
+                <p style="color:#4a3b2c; line-height:1.6;">
+                    Placez-vous en présence du Seigneur. Rappelez-vous avec gratitude les dons reçus aujourd'hui : une rencontre, un sourire, la beauté d'une lumière, un repas partagé, un moment de paix.
+                </p>
+                <div style="background:#fbf8f4; padding:0.8rem 1rem; border-radius:6px; font-style:italic; color:#685848; margin-bottom:1rem;">
+                    « Pour quoi ai-je envie de dire un merci sincère à Dieu en cet instant ? »
+                </div>
+                <textarea id="examen-note-1" class="examen-textarea" rows="3" placeholder="Notez ici vos motifs de gratitude (vos notes restent privées sur votre appareil)..."></textarea>
+            </div>
+
+            <!-- ÉTAPE 2 -->
+            <div class="step-panel" id="step-panel-2" style="display:none;">
+                <h3 style="color:#5b4636; margin-top:0;">2. Demande de lumière (Esprit Saint)</h3>
+                <p style="color:#4a3b2c; line-height:1.6;">
+                    Demandez à l'Esprit Saint d'éclairer votre mémoire et votre cœur. Il ne s'agit pas de juger ou de culpabiliser, mais de regarder votre journée avec vérité, douceur et amour bienveillant.
+                </p>
+                <div style="background:#fbf8f4; padding:0.8rem 1rem; border-radius:6px; font-style:italic; color:#685848; margin-bottom:1rem;">
+                    « Viens, Esprit Saint, donne-moi de voir ma vie comme le Père la regarde. »
+                </div>
+                <textarea id="examen-note-2" class="examen-textarea" rows="3" placeholder="Votre prière ou disposition intérieure..."></textarea>
+            </div>
+
+            <!-- ÉTAPE 3 -->
+            <div class="step-panel" id="step-panel-3" style="display:none;">
+                <h3 style="color:#5b4636; margin-top:0;">3. Relecture de la journée (Consolations & Désolations)</h3>
+                <p style="color:#4a3b2c; line-height:1.6;">
+                    Parcourez les heures de votre journée du matin jusqu'au soir. Observez vos réactions et vos émotions :
+                </p>
+                <ul style="line-height:1.7; color:#4a3b2c;">
+                    <li><strong>Consolation :</strong> Où ai-je ressenti une paix durable, de la joie, de l'espérance, de la bonté ?</li>
+                    <li><strong>Désolation :</strong> Où ai-je ressenti du repli, de l'amertume, de l'inquiétude, de l'agitation ?</li>
+                </ul>
+                <textarea id="examen-note-3" class="examen-textarea" rows="3" placeholder="Quels mouvements intérieurs ont habité votre journée ?"></textarea>
+            </div>
+
+            <!-- ÉTAPE 4 -->
+            <div class="step-panel" id="step-panel-4" style="display:none;">
+                <h3 style="color:#5b4636; margin-top:0;">4. Demande de pardon & Réconciliation</h3>
+                <p style="color:#4a3b2c; line-height:1.6;">
+                    Là où vous reconnaissez un manque d'amour, une parole blessante, une négligence ou une fermeture du cœur, déposez-les simplement dans la miséricorde de Dieu. Le pardon chrétien guérit et relève.
+                </p>
+                <div style="background:#fbf8f4; padding:0.8rem 1rem; border-radius:6px; font-style:italic; color:#685848; margin-bottom:1rem;">
+                    « Seigneur, guéris mon cœur blessé et pardonne mes faiblesses. »
+                </div>
+                <textarea id="examen-note-4" class="examen-textarea" rows="3" placeholder="Ce que vous confiez à la miséricorde du Père..."></textarea>
+            </div>
+
+            <!-- ÉTAPE 5 -->
+            <div class="step-panel" id="step-panel-5" style="display:none;">
+                <h3 style="color:#5b4636; margin-top:0;">5. Regard vers demain & Résolution d'espérance</h3>
+                <p style="color:#4a3b2c; line-height:1.6;">
+                    Envisagez la journée de demain : les rencontres prévues, les tâches, les éventuelles appréhensions. Choisissez un petit pas concret pour vivre demain dans la charité, la vérité et la présence de Dieu.
+                </p>
+                <div style="background:#fbf8f4; padding:0.8rem 1rem; border-radius:6px; font-style:italic; color:#685848; margin-bottom:1rem;">
+                    « Seigneur, je te confie le jour de demain. Guide mes pas dans ta paix. »
+                </div>
+                <textarea id="examen-note-5" class="examen-textarea" rows="3" placeholder="Une intention ou une résolution simple pour demain..."></textarea>
+            </div>
+
+            <!-- RÉCAPITULATIF FINAL -->
+            <div class="step-panel" id="step-panel-summary" style="display:none;">
+                <h3 style="color:#5b4636; margin-top:0;">✨ Synthèse de votre examen de conscience</h3>
+                <p style="color:#4a3b2c;">Voici le recueillement de votre cœur devant le Seigneur :</p>
+                <div id="examen-summary-display" style="background:#fdfaf6; border:1px solid #e5dacd; border-radius:8px; padding:1.2rem; line-height:1.7; margin-bottom:1rem;"></div>
+                <p style="font-size:0.85rem; color:#7a6d5f;"><em>Vos réflexions ne quittent jamais votre navigateur. Vous pouvez les effacer immédiatement ci-dessous.</em></p>
+            </div>
+        </div>
+
+        <!-- CONTRÔLES DU PARCOURS IGNATIEN -->
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-top:1.5rem; border-top:1px solid #eee; padding-top:1rem; flex-wrap:wrap; gap:0.5rem;">
+            <div>
+                <button type="button" id="btn-examen-prev" style="background:#eee5dc; border:1px solid #d4c5b3; border-radius:6px; padding:0.5rem 1rem; cursor:pointer;" disabled>← Précédent</button>
+                <button type="button" id="btn-examen-next" style="background:#5b4636; color:#fff; border:none; border-radius:6px; padding:0.5rem 1.2rem; cursor:pointer; font-weight:bold; margin-left:0.5rem;">Suivant →</button>
+            </div>
+            
+            <div style="display:flex; align-items:center; gap:0.5rem;">
+                <button type="button" id="btn-examen-timer" class="examen-timer-btn">⏱️ Silence (1 min)</button>
+                <span id="examen-timer-display" style="font-size:0.88rem; font-weight:bold; color:#5b4636; min-width:40px;"></span>
+                <button type="button" id="btn-examen-reset" style="background:transparent; border:none; color:#887766; text-decoration:underline; font-size:0.82rem; cursor:pointer; margin-left:0.5rem;">Réinitialiser</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- PAGE RESSOURCES (AVEC PRIONS EN ÉGLISE / NOVALIS ET BIBLIOTHÈQUE SPIRITUELLE) -->
+<div id="page-ressources" class="page-section" style="display:none;">
+    <h2 id="ressources-title">📚 Ressources spirituelles</h2>
+    
+    <!-- CARTE OFFICIELLE PRIONS EN ÉGLISE (NOVALIS) -->
+    <div class="section-card" style="background:#fefdfa; border:2px solid #3b6e8c; border-radius:8px; padding:1.5rem; margin-bottom:2rem; box-shadow:0 3px 10px rgba(0,0,0,0.05);">
+        <div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:0.75rem;">
+            <span style="font-size:1.8rem;">📖</span>
+            <div>
+                <h3 style="margin:0; color:#1f4b66; font-size:1.25rem;">Prions en Église — Textes et lectures du jour</h3>
+                <span style="font-size:0.82rem; color:#687b87; font-weight:bold; text-transform:uppercase; letter-spacing:0.5px;">Ressource externe officielle · Novalis</span>
+            </div>
+        </div>
+        <p style="margin-bottom:1rem; color:#3d4f59; line-height:1.6;">
+            Pour approfondir votre prière quotidienne, retrouver l'intégralité des lectures bibliques de la messe, les psaumes liturgiques et les méditations du jour, consultez le site officiel de <strong>Prions en Église</strong>, publié par les éditions Novalis.
+        </p>
+        <div style="margin-top:1.2rem;">
+            <a href="https://fr.novalis.ca/" target="_blank" rel="noopener noreferrer" class="btn" style="background:#1f4b66; color:#ffffff; padding:0.65rem 1.25rem; border-radius:6px; text-decoration:none; display:inline-flex; align-items:center; gap:0.5rem; font-weight:bold; box-shadow:0 2px 5px rgba(0,0,0,0.1);">
+                Ouvrir Prions en Église (Novalis) ↗
+            </a>
+            <span style="display:block; margin-top:0.5rem; font-size:0.8rem; color:#788b96;">
+                Ce lien ouvre le site externe officiel de Novalis dans un nouvel onglet.
+            </span>
+        </div>
+    </div>
+
+    <!-- MOTEUR DE RECHERCHE ET FILTRES DANS LES RESSOURCES BIBLIQUES ET TÉMOINS -->
+    <div class="section-card">
+        <h3 style="color:#4a3b2c; margin-top:0;">🔍 Explorer les textes bibliques et maîtres spirituels</h3>
+        <p style="font-size:0.92rem; color:#5a4f42; margin-bottom:1rem;">
+            Recherchez un thème spirituel ou filtrez par mot-clé pour trouver réconfort, lumière et discernement :
+        </p>
+        
+        <div style="margin-bottom:1rem;">
+            <input type="text" id="ressources-search-input" placeholder="Rechercher un mot (ex: paix, pardon, peur, espérance, foi...)" style="width:100%; box-sizing:border-box; padding:0.65rem 0.9rem; border:1px solid #c9baa8; border-radius:6px; font-family:Georgia, serif; font-size:0.95rem;">
+        </div>
+
+        <div style="display:flex; flex-wrap:wrap; gap:0.4rem; margin-bottom:1.5rem;" id="ressources-filter-tags">
+            <button class="ressource-tag-btn active" data-tag="all">Tous</button>
+            <button class="ressource-tag-btn" data-tag="paix">Paix & Silence</button>
+            <button class="ressource-tag-btn" data-tag="esperance">Espérance</button>
+            <button class="ressource-tag-btn" data-tag="pardon">Pardon & Miséricorde</button>
+            <button class="ressource-tag-btn" data-tag="consolation">Consolation</button>
+            <button class="ressource-tag-btn" data-tag="discernement">Discernement</button>
+            <button class="ressource-tag-btn" data-tag="amour">Amour & Don</button>
+            <button class="ressource-tag-btn" data-tag="decision">Décision</button>
+            <button class="ressource-tag-btn" data-tag="deuil">Deuil & Épreuve</button>
+        </div>
+
+        <div id="ressources-results-list" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:1rem;"></div>
+    </div>
+</div>
+
+<!-- PAGE TÉMOIGNAGES -->
+<div id="page-temoignages" class="page-section" style="display:none;">
+    <h2 id="temoignages-title">💬 Témoignages & Partage spirituel</h2>
+    <div class="section-card" style="margin-bottom:1.5rem;">
+        <p style="color:#4a3b2c; line-height:1.6;">
+            Partagez une grâce reçue, une parole qui vous a soutenu ou une intention de prière. Aucun compte ni inscription n'est requis.
+        </p>
+        <div style="margin-top:1rem;">
+            <textarea id="input-temoignage" class="examen-textarea" rows="3" placeholder="Votre témoignage ou intention anonyme..."></textarea>
+            <button type="button" id="btn-envoyer-temoignage" class="btn" style="background:#5b4636; color:#fff; border:none; padding:0.6rem 1.2rem; border-radius:6px; cursor:pointer; font-weight:bold; margin-top:0.5rem;">
+                Déposer mon intention anonyme
             </button>
         </div>
-
-        <!-- ZONE D'AFFICHAGE DE LA PROPOSITION DU DIMANCHE -->
-        <div id="homelie-dimanche-resultat" style="display:none; margin-top:1.5rem; padding:1.5rem; background:#ffffff; border-radius:8px; border:1px solid #e0d8cc; line-height:1.8;">
-            <div id="homelie-dimanche-contenu"></div>
-        </div>
     </div>
 
-    <div class="section-card" id="homelies-intro">
-        <h3 style="margin-top:0;">📖 Pistes & Méditations disponibles</h3>
-        <p>Ces réflexions pastorales sont librement inspirées des homélies de <strong>Msgr. Joseph A. Pellegrino</strong> (diocèse de St. Petersburg, Floride), adaptées pour soutenir la prière personnelle et la prédication dominicale :</p>
-    </div>
-
-    <!-- Modèles d'homélies complets -->
-    <div id="homeliesListe">
-<div class="homelie-card" data-situation="deuil">
-            <h3>Quand la nuit tombe</h3>
-            <p>Il y a des nuits qui ne se dissipent pas au lever du jour. La perte d'un être cher est une de ces nuits. On voudrait que le temps efface, mais le temps ne fait pas cela : il apprivoise. Ce qui reste n'est pas un oubli, c'est une présence différente.</p>
-            <p>Le Seigneur ne nous promet pas l'absence de la nuit. Il promet sa présence dans la nuit. « Même si je passe par la vallée obscure, je ne crains aucun mal, car tu es avec moi » (Psaume 23,4). Ce n'est pas une consolation facile : c'est une vérité qui tient debout, même quand tout vacille.</p>
-            <p>Et un jour — peut-être lointain, peut-être discret — quelque chose en nous se met à respirer de nouveau. Non pas parce que la douleur a disparu, mais parce que l'amour, lui, ne disparaît pas.</p>
-            <p class="homelie-credit"><em>Librement inspirée par l'esprit des homélies de Msgr. Joseph A. Pellegrino (diocèse de St. Petersburg).</em></p>
+    <div id="liste-temoignages-partages" style="display:flex; flex-direction:column; gap:1rem;">
+        <div class="section-card" style="background:#fff; border-left:4px solid #b38b59;">
+            <p style="margin:0 0 0.5rem 0; font-style:italic; color:#3b322a;">« Dans un moment de grand doute sur mon orientation professionnelle, l'examen ignatien et le verset d'Isaïe "Ne crains pas car je t'ai appelé par ton nom" m'ont redonné une sérénité profonde. »</p>
+            <span style="font-size:0.8rem; color:#776a5c;">Témoignage anonyme · Partagé avec paix</span>
         </div>
-
-        <div class="homelie-card" data-situation="peur">
-            <h3>L'ombre n'a jamais le dernier mot</h3>
-            <p>La peur est une compagne étrange. Elle s'invite sans prévenir, elle s'installe, elle murmure que tout va s'écrouler. Elle isole — elle fait croire qu'on est le seul à la ressentir.</p>
-            <p>Mais voici une chose que la foi nous apprend : la peur n'a jamais eu le dernier mot. Elle n'est pas plus forte que la grâce. Le disciple Pierre a eu peur sur la barque ; le Christ n'a pas attendu qu'il soit courageux pour le relever.</p>
-            <p>Ce que Dieu demande n'est pas d'abord de ne plus avoir peur, mais de faire confiance. La confiance n'est pas un sentiment — c'est un acte. C'est remettre entre ses mains ce qui nous échappe.</p>
-            <p class="homelie-credit"><em>Librement inspirée par l'esprit des homélies de Msgr. Joseph A. Pellegrino (diocèse de St. Petersburg).</em></p>
-        </div>
-
-        <div class="homelie-card" data-situation="decision">
-            <h3>Le Seigneur ne donne pas une carte, il donne une main</h3>
-            <p>Quand on doit prendre une décision importante, on aimerait une carte claire, une réponse nette, une voix du ciel qui dise : « Voilà, c'est par ici. » Mais Dieu ne donne pas une carte. Il donne une main.</p>
-            <p>Cela dérange. Cela oblige à marcher sans tout voir, à faire confiance sans tout comprendre. Mais c'est ainsi que grandit la foi : non pas dans la certitude, mais dans l'abandon.</p>
-            <p>Le discernement n'est pas une technique. C'est une grâce. Il s'agit moins de trouver la bonne réponse que de se rendre disponible à l'Esprit, qui parle souvent doucement, mais clairement.</p>
-            <p class="homelie-credit"><em>Librement inspirée par l'esprit des homélies de Msgr. Joseph A. Pellegrino (diocèse de St. Petersburg).</em></p>
-        </div>
-
-        <div class="homelie-card" data-situation="justice">
-            <h3>Ce que Dieu demande n'est pas la perfection, mais la fidélité</h3>
-            <p>Il y a dans le cœur humain une soif de justice qui ne s'éteint pas. Quand quelqu'un est écrasé, quand une parole vraie est étouffée, quand un petit est mis à l'écart pour avoir dit ce qui devait être dit — quelque chose en nous se révolte. Cette révolte n'est pas un péché. Elle est le signe que nous sommes faits à l'image de Dieu, qui lui-même s'indigne devant l'injustice.</p>
-            <p>Mais voici le piège : à force de vouloir tout réparer, on peut se durcir. On peut devenir à son tour violent, méprisant, impitoyable. On peut vouloir la justice de Dieu avec les moyens du monde.</p>
-            <p>Le prophète Michée l'a dit simplement : « On t'a fait savoir, homme, ce qui est bien : pratiquer la justice, aimer la miséricorde, marcher humblement avec ton Dieu » (Michée 6,8). Trois choses, inséparables. La justice sans la miséricorde devient une cruauté. La miséricorde sans la justice devient une lâcheté. Et les deux sans l'humilité deviennent une entreprise d'orgueil.</p>
-            <p>Ce que Dieu demande, ce n'est pas que vous répariez toutes les injustices du monde. C'est que vous restiez fidèle — à la vérité, à la douceur, à la justice. Un petit geste juste, répété, vaut mieux qu'un grand geste héroïque qui épuise.</p>
-            <p class="homelie-credit"><em>Librement inspirée par l'esprit des homélies de Msgr. Joseph A. Pellegrino (diocèse de St. Petersburg).</em></p>
-        </div>
-
-        <div class="homelie-card" data-situation="solitude">
-            <h3>Être seul et se savoir aimé : c'est déjà être deux</h3>
-            <p>La solitude est une des épreuves les plus lourdes. Non pas d'être seul physiquement — cela, on peut l'apprivoiser. Mais ce sentiment intérieur que personne ne nous voit vraiment, que personne ne nous attend, que notre vie se déroule dans un silence qui ne sera jamais rompu.</p>
-            <p>Il y a une solitude qui est un appel, et une solitude qui est une blessure. L'appel : se retirer pour prier, comme Jésus se retirait dans la montagne. La blessure : croire que nous ne comptons pour personne.</p>
-            <p>À cette solitude-blessure, la foi répond par une parole très douce, presque trop douce pour être crue : « Ne crains pas, car je t'ai racheté, je t'ai appelé par ton nom, tu es à moi » (Isaïe 43,1). Non pas « tu seras à moi si tu le mérites », mais <strong>tu es à moi</strong>. C'est déjà fait. C'est une réalité plus ancienne que toutes nos solitudes.</p>
-            <p>Quand on se sent seul, ce n'est pas d'abord une présence extérieure qu'il faut chercher — c'est cette parole qu'il faut laisser descendre : « Je t'ai appelé par ton nom. » Votre nom. Le vôtre, précisément, personnellement.</p>
-            <p>Et un jour, peut-être, un frère, une sœur, un ami se présentera — envoyé par Dieu, sans qu'on l'ait prévu. Mais avant cela, il y a cette certitude : même seul, on n'est pas abandonné.</p>
-            <p class="homelie-credit"><em>Librement inspirée par l'esprit des homélies de Msgr. Joseph A. Pellegrino (diocèse de St. Petersburg).</em></p>
-        </div>
-
-        <div class="homelie-card" data-situation="esperance">
-            <h3>Dieu écrit droit avec des lignes courbes</h3>
-            <p>Il y a des moments où tout semble aller de travers. Les projets s'effondrent. Les personnes qu'on aimait s'éloignent. Les prières montent et retombent sans réponse. Et l'on se demande : à quoi bon ?</p>
-            <p>C'est dans ces moments-là que l'espérance chrétienne se révèle pour ce qu'elle est vraiment. Pas un optimisme naïf qui dit « tout va s'arranger ». Pas une fuite dans un au-delà consolateur. Non : une <strong>certitude</strong> que Dieu travaille, même quand on ne voit rien.</p>
-            <p>Un vieux proverbe dit que Dieu écrit droit avec des lignes courbes. Cela veut dire : ce qui nous semble un détour est peut-être le chemin. Ce qui nous semble un échec est peut-être un commencement. Ce qui nous semble un silence est peut-être une préparation.</p>
-            <p>Israël a connu l'exil, et l'exil a semblé la fin de tout. Mais dans l'exil, Dieu a formé un peuple nouveau. La croix a semblé la fin de tout. Mais de la croix est née la résurrection.</p>
-            <p>Ce qui compte, ce n'est pas de comprendre le chemin maintenant. C'est de rester en marche. « Voici que je fais une chose nouvelle ; elle germe déjà, ne la voyez-vous pas ? » (Isaïe 43,19). Parfois, la chose nouvelle germe sous la neige. Mais elle germe.</p>
-            <p class="homelie-credit"><em>Librement inspirée par l'esprit des homélies de Msgr. Joseph A. Pellegrino (diocèse de St. Petersburg).</em></p>
-        </div>
-
-        <div class="homelie-card" data-situation="fatigue">
-            <h3>Le repos n'est pas un luxe, c'est un commandement</h3>
-            <p>Nous vivons dans un monde qui valorise l'épuisement. On se vante d'être débordé. On confond la fidélité avec l'acharnement. On croit que s'arrêter, c'est trahir.</p>
-            <p>Mais Dieu, lui, s'est reposé le septième jour. Non pas parce qu'il était fatigué — mais pour <strong>enseigner</strong> le repos. Le repos n'est pas une permission qu'on s'accorde quand tout est fini. C'est un commandement, inscrit dans la Création elle-même.</p>
-            <p>S'arrêter, c'est reconnaître quelque chose d'essentiel : que le monde ne dépend pas de nous. Que Dieu travaille même quand nous dormons. Que nous ne sommes pas le sauveur — nous sommes des serviteurs, et les serviteurs ont besoin de sommeil.</p>
-            <p>Jésus dit : « Venez à moi, vous tous qui portez un fardeau, et moi, je vous procurerai le repos » (Matthieu 11,28). Ce repos n'est pas d'abord celui du corps — c'est celui de l'âme. C'est déposer ce qui est trop lourd. C'est reconnaître qu'on n'est pas Dieu.</p>
-            <p>Si vous êtes épuisé, ce n'est pas un signe de faiblesse. C'est un signal. Le signal qu'il est temps de faire une chose que Dieu lui-même a faite : <strong>s'arrêter, et laisser le monde tourner sans nous.</strong></p>
-            <p class="homelie-credit"><em>Librement inspirée par l'esprit des homélies de Msgr. Joseph A. Pellegrino (diocèse de St. Petersburg).</em></p>
-        </div>
-
-        <div class="homelie-card" data-situation="pardon">
-            <h3>Pardonner, c'est ouvrir une porte que personne n'a forcée</h3>
-            <p>Le pardon est une des choses les plus difficiles que Dieu nous demande. Non pas parce qu'il est absurde, mais parce qu'il est <strong>contre-nature</strong>. La nature veut la vengeance. Le pardon est une chose surnaturelle.</p>
-            <p>Pardonner, ce n'est pas oublier. Ce n'est pas dire que le mal n'a pas eu lieu. Ce n'est pas non plus se remettre entre les mains de celui qui nous a blessé. Pardonner, c'est <strong>décider</strong> que le mal ne déterminera pas la suite de notre vie.</p>
-            <p>C'est une chose que personne ne peut faire à notre place. C'est une porte que nous seuls pouvons ouvrir. Et cette porte, personne ne nous force à l'ouvrir — pas même Dieu. Il attend. Il propose. Il ne violente pas notre liberté.</p>
-            <p>Pourquoi pardonner ? Non pas parce que c'est plus facile (ce n'est pas vrai). Non pas parce que le passé s'efface (il ne s'efface pas). Mais parce que le pardon <strong>ouvre un avenir</strong>. Sans le pardon, on reste prisonnier du passé. Avec le pardon, on redevient libre.</p>
-            <p>Jésus a dit sur la croix : « Père, pardonne-leur, ils ne savent pas ce qu'ils font » (Luc 23,34). Il n'a pas attendu que ses bourreaux s'excusent. Il a ouvert la porte <strong>le premier</strong>. C'est cela, le pardon : un acte de liberté, posé devant Dieu, qui ouvre une brèche dans une situation qui semblait fermée.</p>
-            <p class="homelie-credit"><em>Librement inspirée par l'esprit des homélies de Msgr. Joseph A. Pellegrino (diocèse de St. Petersburg).</em></p>
+        <div class="section-card" style="background:#fff; border-left:4px solid #4a6f5e;">
+            <p style="margin:0 0 0.5rem 0; font-style:italic; color:#3b322a;">« Prendre 10 minutes chaque soir pour faire l'examen de conscience m'aide à m'endormir réconcilié avec ma journée, même quand tout n'a pas été parfait. »</p>
+            <span style="font-size:0.8rem; color:#776a5c;">Témoignage anonyme · Déposé avec foi</span>
         </div>
     </div>
 </div>
 
-<!-- PAGE EXAMEN -->
-<div id="page-examen" class="page-section">
-    <h2 id="examen-title">🕯️ Examen de conscience</h2>
-    <div class="section-card" id="examen-content">
-        <p>Prenez quelques minutes en silence. Relisez votre journée.</p>
-        <ol style="line-height:2;">
-            <li>Où ai-je senti une paix profonde ? (consolation)</li>
-            <li>Où ai-je senti un trouble, une agitation ? (désolation)</li>
-            <li>Pour quoi puis-je remercier Dieu ?</li>
-            <li>Que lui confier pour demain ?</li>
-        </ol>
-        <p><em>« Ce qui apporte une paix durable vient de l'Esprit Saint. Ce qui laisse trouble et resserrement vient d'ailleurs. »</em></p>
+<!-- PAGE À PROPOS & PROJETS -->
+<div id="page-about" class="page-section" style="display:none;">
+    <h2 id="about-title">ℹ️ À propos — Au Foyer de l'Amour</h2>
+    <div class="section-card" id="about-content" style="line-height:1.7; color:#3b322a;">
+        <p><strong>Au Foyer de l'Amour</strong> est une œuvre spirituelle catholique et pastorale conçue comme un <em>compagnon silencieux</em> pour éclairer les chemins de vie.</p>
+        <p>Il lit les situations humaines à la lumière de l'Esprit Saint, en s'appuyant sur la Parole de Dieu, l'enseignement de l'Église, les maîtres spirituels (Ignace de Loyola, Thérèse d'Avila, Père Joseph Kentenich, Charles de Foucauld…) et des penseurs chrétiens (Paul Ricœur, Simone Weil, Hannah Arendt).</p>
+        <h3 style="color:#5b4636; margin-top:1.5rem;">🔒 Respect absolu de la vie privée</h3>
+        <p>Cette application fonctionne entièrement dans votre navigateur. Aucune donnée personnelle, aucune situation partagée et aucune note d'examen de conscience n'est envoyée vers un serveur externe ni enregistrée.</p>
+        <h3 style="color:#5b4636; margin-top:1.5rem;">🕊️ Dialogue et accompagnement humain</h3>
+        <p>Ce compagnon spirituel ne remplace pas un accompagnement humain régulier : nous vous encourageons à rencontrer un prêtre, un religieux ou un accompagnateur spirituel dans votre paroisse ou votre diocèse.</p>
     </div>
 </div>
 
-<!-- PAGE CONTACT -->
-<div id="page-contact" class="page-section">
-    <h2 id="contact-title">✉️ Contact</h2>
-    <div class="section-card" id="contact-content">
-        <p>Pour toute question ou suggestion :</p>
-        <p>Consultez un prêtre ou un accompagnateur spirituel près de chez vous.</p>
-        <p>En cas d'urgence, appelez les services d'écoute (voir pied de page).</p>
-    </div>
 </div>
-
-<!-- PAGE PRIVACY -->
-<div id="page-privacy" class="page-section">
-    <h2 id="privacy-title">🔒 Confidentialité</h2>
-    <div class="section-card" id="privacy-content">
-        <p>Rien n'est enregistré sur un serveur. Tout se passe dans votre navigateur.</p>
-        <p>Aucun cookie, aucune donnée personnelle collectée.</p>
-    </div>
-</div>
-
 <footer>
     <span id="footer-nothing">🔒 Rien n'est enregistré · 🕊️ Un compagnon silencieux</span><br>
     <div class="ai-warning">
@@ -233,11 +512,8 @@
         </div>
     </div>
 </footer>
-
-</div>
-
-
 <script>
+
  /* ============================================================ RESSOURCES — Bible & Témoins ============================================================ */ const RESSOURCES = { bible: [ { ref: "Genèse 1,3", texte: "Dieu dit : « Que la lumière soit ! » Et la lumière fut.", tags: ["commencement", "parole", "lumière"] }, { ref: "Exode 3,14", texte: "Dieu dit à Moïse : « Je suis celui qui est. »", tags: ["présence", "mystère", "nom"] }, { ref: "Deutéronome 30,19", texte: "Je mets devant toi la vie et la mort. Choisis la vie.", tags: ["décision", "vie"] }, { ref: "Josué 1,9", texte: "Sois fort et courageux. Le Seigneur ton Dieu est avec toi partout où tu iras.", tags: ["courage", "peur", "présence"] }, { ref: "1 Samuel 3,10", texte: "Parle, Seigneur, ton serviteur écoute.", tags: ["écoute", "appel"] }, { ref: "Psaume 22,2", texte: "Mon Dieu, mon Dieu, pourquoi m'as-tu abandonné ?", tags: ["souffrance", "abandon"] }, { ref: "Psaume 23,4", texte: "Même si je passe par la vallée obscure, je ne crains aucun mal, car tu es avec moi.", tags: ["deuil", "peur", "présence"] }, { ref: "Psaume 27,1", texte: "Le Seigneur est ma lumière et mon salut ; de qui aurais-je peur ?", tags: ["peur", "lumière"] }, { ref: "Psaume 34,19", texte: "Le Seigneur est proche de ceux qui ont le cœur brisé, il sauve ceux qui ont l'esprit abattu.", tags: ["souffrance", "consolation"] }, { ref: "Psaume 40,2", texte: "J'ai attendu le Seigneur avec confiance : il s'est penché vers moi, il a entendu mon cri.", tags: ["attente", "écoute", "consolation"] }, { ref: "Psaume 46,11", texte: "Arrêtez, et sachez que je suis Dieu.", tags: ["silence", "présence"] }, { ref: "Psaume 51,12", texte: "Crée en moi un cœur pur, ô mon Dieu, renouvelle et raffermis au fond de moi mon esprit.", tags: ["pardon", "conversion", "création"] }, { ref: "Psaume 62,2", texte: "Oui, c'est en Dieu que mon âme se confie ; de lui vient mon salut.", tags: ["confiance", "repos"] }, { ref: "Psaume 91,1", texte: "Celui qui demeure sous l'abri du Très-Haut repose à l'ombre du Tout-Puissant.", tags: ["protection", "confiance"] }, { ref: "Psaume 121,1", texte: "Je lève les yeux vers les montagnes : d'où me viendra le secours ?", tags: ["aide", "espérance"] }, { ref: "Psaume 130,1", texte: "Des profondeurs je crie vers toi, Seigneur.", tags: ["désespoir", "prière", "profondeur"] }, { ref: "Psaume 139,14", texte: "Je te rends grâce pour tant de merveilles : oui, je suis une créature merveilleuse.", tags: ["dignité", "gratitude", "création"] }, { ref: "Proverbes 3,5", texte: "Confie-toi en Dieu de tout ton cœur, ne t'appuie pas sur ta propre intelligence.", tags: ["confiance", "décision"] }, { ref: "Proverbes 4,23", texte: "Garde ton cœur plus que tout, car de lui jaillit la vie.", tags: ["cœur", "vigilance", "vie"] }, { ref: "Isaïe 40,31", texte: "Ceux qui espèrent en Dieu reprennent des forces ; ils prennent leur essor comme les aigles.", tags: ["fatigue", "espérance", "force"] }, { ref: "Isaïe 41,10", texte: "Ne crains pas, je suis avec toi ; ne regarde pas avec inquiétude, je suis ton Dieu.", tags: ["peur", "présence"] }, { ref: "Isaïe 43,1", texte: "Ne crains pas, car je t'ai racheté ; je t'ai appelé par ton nom, tu es à moi.", tags: ["identité", "peur", "nom"] }, { ref: "Isaïe 43,19", texte: "Voici que je fais une chose nouvelle ; elle germe déjà, ne la voyez-vous pas ?", tags: ["nouveauté", "commencement", "espérance"] }, { ref: "Isaïe 49,15", texte: "Une mère oublie-t-elle son enfant ? Même si elle l'oubliait, moi je ne t'oublie pas.", tags: ["abandon", "amour"] }, { ref: "Isaïe 55,11", texte: "Ma parole ne revient pas sans résultat, sans avoir fait ce que je voulais.", tags: ["parole", "efficacité", "vie"] }, { ref: "Jérémie 20,9", texte: "Il y avait dans mon cœur comme un feu dévorant ; je ne pouvais plus le contenir.", tags: ["parole", "vocation", "commencement"] }, { ref: "Jérémie 29,11", texte: "Je connais les projets que j'ai formés sur vous : des projets de paix, non de malheur.", tags: ["avenir", "espérance"] }, { ref: "Jérémie 31,33", texte: "Je mettrai ma loi au plus profond d'eux-mêmes, je l'écrirai dans leur cœur.", tags: ["cœur", "alliance", "intériorité"] }, { ref: "Lamentations 3,22", texte: "Les bontés du Seigneur ne sont pas épuisées, sa miséricorde est nouvelle chaque matin.", tags: ["espérance", "renouveau", "pardon"] }, { ref: "Michée 6,8", texte: "On t'a fait savoir, homme, ce qui est bien : pratiquer la justice, aimer la miséricorde, marcher humblement avec ton Dieu.", tags: ["justice", "humilité", "action"] }, { ref: "Matthieu 5,4", texte: "Heureux ceux qui pleurent : ils seront consolés.", tags: ["deuil", "souffrance", "consolation"] }, { ref: "Matthieu 5,6", texte: "Heureux ceux qui ont faim et soif de justice : ils seront rassasiés.", tags: ["justice", "désir"] }, { ref: "Matthieu 5,9", texte: "Heureux les artisans de paix : ils seront appelés fils de Dieu.", tags: ["paix", "justice", "action"] }, { ref: "Matthieu 5,14", texte: "Vous êtes la lumière du monde.", tags: ["lumière", "témoignage"] }, { ref: "Matthieu 6,34", texte: "Ne vous inquiétez pas pour demain : à chaque jour suffit sa peine.", tags: ["peur", "avenir", "confiance"] }, { ref: "Matthieu 7,7", texte: "Demandez, on vous donnera ; cherchez, vous trouverez ; frappez, on vous ouvrira.", tags: ["prière", "décision"] }, { ref: "Matthieu 11,28", texte: "Venez à moi, vous tous qui portez un fardeau, et moi, je vous procurerai le repos.", tags: ["fatigue", "consolation", "repos"] }, { ref: "Matthieu 18,20", texte: "Là où deux ou trois sont réunis en mon nom, je suis au milieu d'eux.", tags: ["communauté", "présence"] }, { ref: "Matthieu 25,40", texte: "Ce que vous avez fait au plus petit d'entre les miens, c'est à moi que vous l'avez fait.", tags: ["justice", "service", "action"] }, { ref: "Matthieu 28,20", texte: "Moi, je suis avec vous tous les jours, jusqu'à la fin du monde.", tags: ["présence", "confiance"] }, { ref: "Marc 9,24", texte: "Je crois ! Viens au secours de mon manque de foi.", tags: ["doute", "foi"] }, { ref: "Marc 10,27", texte: "Pour les hommes, c'est impossible, mais non pour Dieu : tout est possible à Dieu.", tags: ["espérance", "impuissance"] }, { ref: "Luc 1,37", texte: "Rien n'est impossible à Dieu.", tags: ["espérance", "confiance"] }, { ref: "Luc 1,78", texte: "Le soleil levant nous visitera d'en haut, pour éclairer ceux qui sont dans les ténèbres.", tags: ["lumière", "espérance"] }, { ref: "Luc 4,18", texte: "L'Esprit du Seigneur est sur moi, il m'a envoyé porter la Bonne Nouvelle aux pauvres.", tags: ["Esprit", "mission", "parole", "commencement"] }, { ref: "Luc 6,36", texte: "Soyez miséricordieux comme votre Père est miséricordieux.", tags: ["miséricorde", "pardon"] }, { ref: "Luc 10,27", texte: "Tu aimeras le Seigneur ton Dieu de tout ton cœur, et ton prochain comme toi-même.", tags: ["amour", "action"] }, { ref: "Luc 15,20", texte: "Comme il était encore loin, son père l'aperçut et fut saisi de compassion.", tags: ["pardon", "miséricorde", "attente"] }, { ref: "Luc 22,27", texte: "Je suis au milieu de vous comme celui qui sert.", tags: ["service", "humilité"] }, { ref: "Luc 24,32", texte: "Notre cœur n'était-il pas brûlant en nous, tandis qu'il nous parlait ?", tags: ["cœur", "présence", "consolation", "parole"] }, { ref: "Jean 1,1", texte: "Au commencement était le Verbe, et le Verbe était tourné vers Dieu.", tags: ["parole", "commencement"] }, { ref: "Jean 1,5", texte: "La lumière brille dans les ténèbres, et les ténèbres ne l'ont pas saisie.", tags: ["lumière", "espérance"] }, { ref: "Jean 3,8", texte: "Le vent souffle où il veut : ainsi en est-il de celui qui est né de l'Esprit.", tags: ["Esprit", "liberté", "commencement"] }, { ref: "Jean 8,12", texte: "Je suis la lumière du monde ; celui qui me suit ne marchera pas dans les ténèbres.", tags: ["lumière", "suivre"] }, { ref: "Jean 10,10", texte: "Je suis venu pour que les hommes aient la vie, et qu'ils l'aient en abondance.", tags: ["vie", "espérance"] }, { ref: "Jean 11,25", texte: "Je suis la résurrection et la vie.", tags: ["deuil", "espérance", "vie"] }, { ref: "Jean 14,6", texte: "Je suis le chemin, la vérité, la vie.", tags: ["chemin", "décision", "vie"] }, { ref: "Jean 14,27", texte: "Je vous laisse la paix, je vous donne ma paix ; je ne la donne pas comme le monde la donne.", tags: ["paix", "consolation"] }, { ref: "Jean 15,5", texte: "Moi, je suis la vigne, vous êtes les sarments. Sans moi, vous ne pouvez rien faire.", tags: ["humilité", "dépendance", "communion"] }, { ref: "Jean 15,13", texte: "Il n'y a pas de plus grand amour que de donner sa vie pour ceux qu'on aime.", tags: ["amour", "don"] }, { ref: "Jean 16,33", texte: "Dans le monde vous aurez à souffrir, mais gardez confiance : moi, j'ai vaincu le monde.", tags: ["épreuve", "confiance"] }, { ref: "Actes 2,4", texte: "Tous furent remplis de l'Esprit Saint et se mirent à parler.", tags: ["Esprit", "parole", "commencement"] }, { ref: "Romains 5,5", texte: "L'espérance ne trompe pas, car l'amour de Dieu a été répandu dans nos cœurs par l'Esprit Saint.", tags: ["Esprit", "espérance", "amour"] }, { ref: "Romains 8,26", texte: "L'Esprit vient au secours de notre faiblesse, car nous ne savons pas prier comme il faut.", tags: ["Esprit", "prière", "faiblesse"] }, { ref: "Romains 8,28", texte: "Tout concourt au bien de ceux qui aiment Dieu.", tags: ["espérance", "confiance"] }, { ref: "Romains 12,2", texte: "Ne vous modelez pas sur le monde présent ; laissez-vous transformer par le renouvellement de votre jugement.", tags: ["discernement", "transformation"] }, { ref: "1 Corinthiens 12,4", texte: "Les dons sont variés, mais c'est le même Esprit ; les services sont variés, mais c'est le même Seigneur.", tags: ["Esprit", "dons", "communauté"] }, { ref: "1 Corinthiens 13,4", texte: "L'amour est patient, l'amour est serviable ; il ne s'irrite pas, il n'entretient pas de rancune.", tags: ["amour", "patience", "pardon"] }, { ref: "1 Corinthiens 13,13", texte: "Maintenant donc ces trois choses demeurent : la foi, l'espérance, l'amour ; mais la plus grande, c'est l'amour.", tags: ["amour", "foi", "espérance"] }, { ref: "2 Corinthiens 1,4", texte: "Dieu nous console dans toutes nos détresses, pour que nous puissions consoler ceux qui sont dans l'épreuve.", tags: ["consolation", "service"] }, { ref: "2 Corinthiens 4,7", texte: "Nous portons ce trésor dans des vases de terre, afin que cette puissance soit attribuée à Dieu.", tags: ["fragilité", "puissance", "commencement"] }, { ref: "2 Corinthiens 5,17", texte: "Si quelqu'un est dans le Christ, il est une créature nouvelle.", tags: ["nouveauté", "commencement", "création"] }, { ref: "2 Corinthiens 12,9", texte: "Ma grâce te suffit, car ma puissance se déploie dans la faiblesse.", tags: ["faiblesse", "grâce", "fragilité"] }, { ref: "Galates 5,22", texte: "Voici le fruit de l'Esprit : amour, joie, paix, patience, bonté, bienveillance, fidélité, douceur, maîtrise de soi.", tags: ["Esprit", "fruits", "consolation"] }, { ref: "Éphésiens 2,10", texte: "Nous sommes l'ouvrage de Dieu, créés dans le Christ Jésus pour accomplir les œuvres bonnes qu'il a préparées d'avance.", tags: ["vocation", "action", "création"] }, { ref: "Éphésiens 4,15", texte: "Vivons dans la vérité et dans l'amour, et grandissons à tous égards vers celui qui est la tête, le Christ.", tags: ["vérité", "amour", "croissance"] }, { ref: "Philippiens 2,4", texte: "Que chacun ne cherche pas son intérêt, mais celui des autres.", tags: ["service", "humilité"] }, { ref: "Philippiens 4,6", texte: "Ne soyez inquiets de rien, mais en toute circonstance, par la prière, faites connaître vos demandes à Dieu.", tags: ["prière", "peur"] }, { ref: "Philippiens 4,13", texte: "Je puis tout en celui qui me fortifie.", tags: ["force", "confiance"] }, { ref: "Colossiens 3,12", texte: "Revêtez-vous de tendresse, de bonté, d'humilité, de douceur et de patience.", tags: ["vertu", "patience"] }, { ref: "Colossiens 3,14", texte: "Par-dessus tout, revêtez-vous de l'amour, qui est le lien de la perfection.", tags: ["amour", "unité"] }, { ref: "1 Thessaloniciens 5,19", texte: "N'éteignez pas l'Esprit.", tags: ["Esprit", "commencement", "fragilité"] }, { ref: "1 Jean 4,18", texte: "Il n'y a pas de crainte dans l'amour ; l'amour parfait bannit la crainte.", tags: ["amour", "peur"] }, { ref: "Apocalypse 3,20", texte: "Voici que je me tiens à la porte et que je frappe.", tags: ["appel", "décision"] }, { ref: "Apocalypse 21,4", texte: "Il essuiera toute larme de leurs yeux ; la mort ne sera plus.", tags: ["deuil", "espérance", "consolation"] }, { ref: "Apocalypse 21,5", texte: "Voici que je fais toutes choses nouvelles.", tags: ["nouveauté", "espérance", "création"] } ], temoins: [ { ref: "Saint Augustin", texte: "Tu nous as faits pour toi, Seigneur, et notre cœur est sans repos tant qu'il ne repose en toi.", tags: ["désir", "repos", "cœur"] }, { ref: "Saint Augustin", texte: "Aime et fais ce que tu veux.", tags: ["amour", "liberté"] }, { ref: "Saint Ignace de Loyola", texte: "Ce qui apporte une paix profonde et durable vient de Dieu ; ce qui trouble et agite vient d'ailleurs.", tags: ["discernement", "consolation", "désolation"] }, { ref: "Saint Ignace de Loyola", texte: "Demandons la grâce de connaître les mouvements intérieurs et de discerner ceux qui viennent de Dieu.", tags: ["discernement", "Esprit"] }, { ref: "Sainte Thérèse d'Avila", texte: "Dieu seul suffit.", tags: ["confiance", "dépouillement"] }, { ref: "Sainte Thérèse d'Avila", texte: "Que rien ne te trouble, que rien ne t'effraie ; celui qui a Dieu ne manque de rien.", tags: ["peur", "confiance"] }, { ref: "Saint Jean de la Croix", texte: "Pour aller où tu ne vas pas, il faut passer par où tu ne passes pas.", tags: ["chemin", "décision", "foi"] }, { ref: "Saint François de Sales", texte: "Faites tout par amour, rien par force.", tags: ["amour", "douceur"] }, { ref: "Sainte Thérèse de Lisieux", texte: "Tout est grâce.", tags: ["grâce", "confiance"] }, { ref: "Saint François d'Assise", texte: "Là où il y a la haine, que je mette l'amour.", tags: ["paix", "amour"] }, { ref: "Saint Jean-Paul II", texte: "N'ayez pas peur ! Ouvrez les portes au Christ.", tags: ["peur", "courage"] }, { ref: "Saint Charles de Foucauld", texte: "Crier l'Évangile par toute sa vie.", tags: ["témoignage", "action"] }, { ref: "Saint Vincent de Paul", texte: "Aller vers les pauvres, c'est aller vers Dieu.", tags: ["pauvres", "service"] }, { ref: "Padre Pio", texte: "Priez, espérez, ne vous inquiétez pas.", tags: ["prière", "espérance"] }, { ref: "Sainte Faustine", texte: "Jésus, j'ai confiance en toi.", tags: ["confiance"] }, { ref: "Père Joseph Kentenich", texte: "L'homme moderne a besoin de foyers où l'on peut respirer l'air de Dieu.", tags: ["communauté", "foyer"] }, { ref: "Père Joseph Kentenich", texte: "Tout commence par de petites choses : une fidélité quotidienne, un oui discret.", tags: ["commencement", "fidélité"] }, { ref: "Père Joseph Kentenich", texte: "La liberté intérieure est la condition de l'amour véritable.", tags: ["liberté", "amour", "discernement"] }, { ref: "Hannah Arendt", texte: "Agir, c'est prendre une initiative, commencer quelque chose de nouveau — et ce commencement est toujours imprévisible.", tags: ["commencement", "action", "fragilité"] }, { ref: "Hannah Arendt", texte: "L'action a besoin de la promesse et du pardon pour durer dans le monde des hommes.", tags: ["promesse", "pardon", "action"] }, { ref: "Paul Ricœur", texte: "Le pardon ne change pas le passé, mais il ouvre un avenir nouveau.", tags: ["pardon", "avenir"] }, { ref: "Simone Weil", texte: "L'attention est la forme la plus rare et la plus pure de la générosité.", tags: ["attention", "amour"] }, { ref: "C.S. Lewis", texte: "Le deuil est le prix de l'amour.", tags: ["deuil", "amour"] }, { ref: "Jean Vanier", texte: "Les personnes vulnérables nous révèlent ce qu'est l'humain.", tags: ["vulnérabilité", "dignité"] }, { ref: "Etty Hillesum", texte: "Il y a en nous un puits très profond, et en ce puits, Dieu.", tags: ["intériorité", "présence"] }, { ref: "Henri Nouwen", texte: "La vulnérabilité est la porte de la compassion.", tags: ["vulnérabilité", "compassion"] } ] }; /* ============================================================ TRADUCTIONS — interface ============================================================ */ const TRAD = { fr: { title: "🕯️ Au Foyer de l'Amour", subtitle: "Un compagnon spirituel pour discerner", placeholder: "Décrivez ce que vous vivez, votre question, votre recherche...", role: "Qui êtes-vous ? (optionnel)", submit: "Recevoir une parole →", loading: "🕯️ Un instant de silence...", situationsTitle: "Ou choisissez ce qui ressemble le plus à ce que vous vivez :", precisionPlaceholder: "Vous pouvez préciser, si vous le souhaitez...", situations: [ "Je traverse une grande souffrance", "Je ne vois plus de sens à ma vie", "Mon couple va mal", "J'ai perdu un être cher", "Je me sens seul(e)", "Je suis en colère contre Dieu", "Je ne sais plus quoi croire", "Je dois prendre une décision difficile", "Je vis une maladie ou un handicap", "J'ai peur de l'avenir", "Je suis épuisé(e)", "Je vis un conflit familial", "J'accompagne une personne en souffrance", "Je cherche un sens à ma vie", "Autre chose" ], priereTitle: "📖 Parole du jour", priereText: "Seigneur, apprends-moi à écouter le silence.", modes: { discernement: "🤲 Discernement", consolation: "🙏 Consolation", lecture: "📖 Méditation", priere: "❤️ Prière" }, sagesseTitle: "📖 Sagesse", sagesseIntro: "Quelques paroles qui nourrissent le discernement :", homeliesTitle: "🕊️ Homélies — Méditations inspirées", aboutTitle: "📖 À propos", aboutContent: "<p><strong>Au Foyer de l'Amour</strong> est un compagnon spirituel catholique.</p><p>Il lit les situations humaines à la lumière de l'Esprit Saint, en s'appuyant sur la Parole de Dieu, l'enseignement de l'Église, les maîtres spirituels (Ignace, Thérèse d'Avila, Kentenich…) et des penseurs chrétiens ou philosophes (Ricœur, Arendt, Weil…).</p><p>Il ne remplace pas un accompagnement humain : un prêtre, un psychologue, un médecin.</p>", examenTitle: "🕯️ Examen de conscience", examenContent: "<p>Prenez quelques minutes en silence. Relisez votre journée.</p><ol style='line-height:2;'><li>Où ai-je senti une paix profonde ?</li><li>Où ai-je senti un trouble ?</li><li>Pour quoi puis-je remercier Dieu ?</li><li>Que lui confier pour demain ?</li></ol><p><em>« Ce qui apporte une paix durable vient de l'Esprit Saint. »</em></p>", contactTitle: "✉️ Contact", contactContent: "<p>Pour toute question, consultez un prêtre ou un accompagnateur spirituel près de chez vous.</p>", privacyTitle: "🔒 Confidentialité", privacyContent: "<p>Rien n'est enregistré sur un serveur. Tout se passe dans votre navigateur.</p>", aiWarning: "Je suis une intelligence artificielle au service de la foi catholique. Je ne remplace pas un prêtre, un psychologue ou un médecin. En cas de danger, cherchez un soutien humain.", footerNothing: "🔒 Rien n'est enregistré · 🕊️ Un compagnon silencieux" }, en: { title: "🕯️ Home of Love", subtitle: "A spiritual companion for discernment", placeholder: "Describe what you are living, your question, your search...", role: "Who are you? (optional)", submit: "Receive a word →", loading: "🕯️ A moment of silence...", situationsTitle: "Or choose what best matches what you are experiencing:", precisionPlaceholder: "You may specify, if you wish...", situations: [ "I am going through great suffering", "I no longer see meaning in my life", "My relationship is in trouble", "I have lost a loved one", "I feel alone", "I am angry with God", "I don't know what to believe anymore", "I have a difficult decision to make", "I am living with illness or disability", "I am afraid of the future", "I am exhausted", "I am experiencing family conflict", "I am accompanying someone in suffering", "I am searching for meaning in my life", "Something else" ], priereTitle: "📖 Word of the day", priereText: "Lord, teach me to listen to silence.", modes: { discernement: "🤲 Discernment", consolation: "🙏 Consolation", lecture: "📖 Meditation", priere: "❤️ Prayer" }, sagesseTitle: "📖 Wisdom", sagesseIntro: "Words that nourish discernment:", homeliesTitle: "🕊️ Homilies — Inspired meditations", aboutTitle: "📖 About", aboutContent: "<p><strong>Home of Love</strong> is a Catholic spiritual companion.</p><p>It reads human situations in the light of the Holy Spirit, drawing on the Word of God, the teaching of the Church, spiritual masters (Ignatius, Teresa of Avila, Kentenich…) and Christian or philosophical thinkers (Ricœur, Arendt, Weil…).</p><p>It does not replace human support: a priest, a psychologist, a doctor.</p>", examenTitle: "🕯️ Examination of conscience", examenContent: "<p>Take a few minutes in silence. Review your day.</p><ol style='line-height:2;'><li>Where did I feel deep peace?</li><li>Where did I feel disturbance?</li><li>For what can I thank God?</li><li>What to entrust to Him for tomorrow?</li></ol><p><em>« What brings lasting peace comes from the Holy Spirit. »</em></p>", contactTitle: "✉️ Contact", contactContent: "<p>For any question, consult a priest or spiritual companion near you.</p>", privacyTitle: "🔒 Privacy", privacyContent: "<p>Nothing is stored on a server. Everything happens in your browser.</p>", aiWarning: "I am an artificial intelligence at the service of the Catholic faith. I do not replace a priest, a psychologist or a doctor. In case of danger, seek human support.", footerNothing: "🔒 Nothing is recorded · 🕊️ A silent companion" }, es: { title: "🕯️ Hogar del Amor", subtitle: "Un compañero espiritual para discernir", placeholder: "Describe lo que vives, tu pregunta, tu búsqueda...", role: "¿Quién eres? (opcional)", submit: "Recibir una palabra →", loading: "🕯️ Un momento de silencio...", situationsTitle: "O elige lo que mejor se adapte a lo que estás viviendo:", precisionPlaceholder: "Puedes precisar, si lo deseas...", situations: [ "Estoy pasando por un gran sufrimiento", "Ya no le encuentro sentido a mi vida", "Mi relación está en problemas", "He perdido a un ser querido", "Me siento solo/a", "Estoy enojado/a con Dios", "Ya no sé qué creer", "Tengo que tomar una decisión difícil", "Vivo con una enfermedad o discapacidad", "Tengo miedo del futuro", "Estoy agotado/a", "Estoy viviendo un conflicto familiar", "Estoy acompañando a alguien que sufre", "Busco un sentido a mi vida", "Otra cosa" ], priereTitle: "📖 Palabra del día", priereText: "Señor, enséñame a escuchar el silencio.", modes: { discernement: "🤲 Discernimiento", consolation: "🙏 Consolación", lecture: "📖 Meditación", priere: "❤️ Oración" }, sagesseTitle: "📖 Sabiduría", sagesseIntro: "Palabras que alimentan el discernimiento:", homeliesTitle: "🕊️ Homilías — Meditaciones inspiradas", aboutTitle: "📖 Acerca de", aboutContent: "<p><strong>Hogar del Amor</strong> es un compañero espiritual católico.</p><p>Lee las situaciones humanas a la luz del Espíritu Santo, apoyándose en la Palabra de Dios, la enseñanza de la Iglesia, los maestros espirituales (Ignacio, Teresa de Ávila, Kentenich…) y pensadores cristianos o filósofos (Ricœur, Arendt, Weil…).</p><p>No reemplaza el acompañamiento humano: un sacerdote, un psicólogo, un médico.</p>", examenTitle: "🕯️ Examen de conciencia", examenContent: "<p>Toma unos minutos en silencio. Revisa tu día.</p><ol style='line-height:2;'><li>¿Dónde sentí paz profunda?</li><li>¿Dónde sentí inquietud?</li><li>¿Por qué puedo agradecer a Dios?</li><li>¿Qué confiarle para mañana?</li></ol><p><em>« Lo que trae paz duradera viene del Espíritu Santo. »</em></p>", contactTitle: "✉️ Contacto", contactContent: "<p>Para cualquier pregunta, consulta a un sacerdote o acompañante espiritual cerca de ti.</p>", privacyTitle: "🔒 Privacidad", privacyContent: "<p>Nada se guarda en un servidor. Todo ocurre en tu navegador.</p>", aiWarning: "Soy una inteligencia artificial al servicio de la fe católica. No reemplazo a un sacerdote, un psicólogo o un médico. En caso de peligro, busca apoyo humano.", footerNothing: "🔒 Nada se guarda · 🕊️ Un compañero silencioso" }, zh: { title: "🕯️ 爱之家", subtitle: "一位帮助辨别的灵性伴侣", placeholder: "描述你所经历的、你的问题、你的寻求...", role: "你是谁？（可选）", submit: "领受一句话 →", loading: "🕯️ 片刻的静默...", situationsTitle: "或选择最贴近你经历的情况：", precisionPlaceholder: "如果你愿意，可以进一步说明...", situations: [ "我正在经历巨大的痛苦", "我找不到生活的意义", "我的感情关系出现了问题", "我失去了一位亲人", "我感到孤独", "我对上帝感到愤怒", "我不知道该相信什么", "我需要做出一个艰难的决定", "我患有疾病或残疾", "我害怕未来", "我筋疲力尽", "我正经历家庭冲突", "我在陪伴一位受苦的人", "我在寻找生命的意义", "其他" ], priereTitle: "📖 每日圣言", priereText: "主啊，求你教我聆听寂静。", modes: { discernement: "🤲 辨别", consolation: "🙏 安慰", lecture: "📖 默想", priere: "❤️ 祈祷" }, sagesseTitle: "📖 智慧", sagesseIntro: "滋养辨别的言语：", homeliesTitle: "🕊️ 讲道 — 受启发的默想", aboutTitle: "📖 关于", aboutContent: "<p><strong>爱之家</strong>是一位天主教灵性伴侣。</p><p>它在圣神的光照下阅读人生的各种境遇，依托天主圣言、教会训导、灵修大师（依纳爵、阿维拉的特蕾莎、肯特尼希……）以及基督徒或哲学思想家（利科、阿伦特、薇依……）。</p><p>它不能替代人际陪伴：神父、心理学家或医生。</p>", examenTitle: "🕯️ 良心省察", examenContent: "<p>静默几分钟，回顾你的一天。</p><ol style='line-height:2;'><li>我在哪里感到深深的平安？</li><li>我在哪里感到不安？</li><li>我可以为什么感谢天主？</li><li>明天要把什么托付给他？</li></ol><p><em>« 带来持久平安的，来自圣神。 »</em></p>", contactTitle: "✉️ 联系", contactContent: "<p>如有任何问题，请咨询你附近的神父或灵修陪伴者。</p>", privacyTitle: "🔒 隐私", privacyContent: "<p>没有内容存储在服务器上。一切都在你的浏览器中进行。</p>", aiWarning: "我是一个服务于天主教信仰的人工智能。我不能替代神父、心理学家或医生。遇到危险时，请寻求人际支持。", footerNothing: "🔒 无记录 · 🕊️ 一位沉默的伴侣" }, hi: { title: "🕯️ प्रेम का घर", subtitle: "विवेक के लिए एक आध्यात्मिक साथी", placeholder: "जो आप जी रहे हैं, अपना प्रश्न, अपनी खोज बताएं...", role: "आप कौन हैं? (वैकल्पिक)", submit: "एक वचन प्राप्त करें →", loading: "🕯️ मौन का एक क्षण...", situationsTitle: "या जो आप अनुभव कर रहे हैं उसके अनुसार चुनें:", precisionPlaceholder: "आप चाहें तो विस्तार से बता सकते हैं...", situations: [ "मैं बहुत बड़ी पीड़ा से गुज़र रहा हूँ", "मुझे अपने जीवन में कोई अर्थ नहीं दिखता", "मेरा रिश्ता मुश्किल में है", "मैंने किसी प्रियजन को खो दिया है", "मैं अकेला महसूस करता हूँ", "मैं भगवान से नाराज़ हूँ", "मुझे नहीं पता कि अब क्या विश्वास करूँ", "मुझे एक कठिन निर्णय लेना है", "मैं बीमारी या विकलांगता के साथ जी रहा हूँ", "मैं भविष्य से डरता हूँ", "मैं थक गया हूँ", "मैं पारिवारिक संघर्ष का अनुभव कर रहा हूँ", "मैं किसी पीड़ित व्यक्ति की संगत कर रहा हूँ", "मैं जीवन का अर्थ खोज रहा हूँ", "कुछ और" ], priereTitle: "📖 दिन का वचन", priereText: "प्रभु, मुझे मौन सुनना सिखा।", modes: { discernement: "🤲 विवेक", consolation: "🙏 सांत्वना", lecture: "📖 ध्यान", priere: "❤️ प्रार्थना" }, sagesseTitle: "📖 ज्ञान", sagesseIntro: "विवेक को पोषित करने वाले वचन:", homeliesTitle: "🕊️ उपदेश — प्रेरित ध्यान", aboutTitle: "📖 बारे में", aboutContent: "<p><strong>प्रेम का घर</strong> एक कैथोलिक आध्यात्मिक साथी है।</p><p>यह मानवीय परिस्थितियों को पवित्र आत्मा की रोशनी में पढ़ता है, ईश्वर के वचन, कलीसिया की शिक्षा, आध्यात्मिक गुरुओं (इग्नेशियस, अविला की टेरेसा, केन्टेनिच…) और ईसाई या दार्शनिक विचारकों (रिको, अरेंट, वेइल…) पर आधारित।</p><p>यह मानवीय सहायता का स्थान नहीं लेता।</p>", examenTitle: "🕯️ अंतःकरण की परीक्षा", examenContent: "<p>कुछ मिनट मौन में लें। अपने दिन की समीक्षा करें।</p><ol style='line-height:2;'><li>मैंने कहाँ गहरी शांति महसूस की?</li><li>मैंने कहाँ अशांति महसूस की?</li><li>मैं ईश्वर को किस बात के लिए धन्यवाद दूँ?</li><li>कल के लिए उन्हें क्या सौंपूँ?</li></ol><p><em>« जो स्थायी शांति लाता है वह पवित्र आत्मा से आता है। »</em></p>", contactTitle: "✉️ संपर्क", contactContent: "<p>किसी भी प्रश्न के लिए, अपने पास के पादरी या आध्यात्मिक साथी से परामर्श करें।</p>", privacyTitle: "🔒 गोपनीयता", privacyContent: "<p>कुछ भी सर्वर पर संग्रहीत नहीं होता।</p>", aiWarning: "मैं कैथोलिक विश्वास की सेवा में एक कृत्रिम बुद्धिमत्ता हूँ। मैं पादरी, मनोवैज्ञानिक या डॉक्टर का स्थान नहीं लेता।", footerNothing: "🔒 कुछ रिकॉर्ड नहीं · 🕊️ एक मूक साथी" }, ar: { title: "🕯️ بيت المحبة", subtitle: "رفيق روحي للتمييز", placeholder: "صف ما تعيشه، سؤالك، بحثك...", role: "من أنت؟ (اختياري)", submit: "استقبل كلمة →", loading: "🕯️ لحظة صمت...", situationsTitle: "أو اختر ما يناسب ما تعيشه:", precisionPlaceholder: "يمكنك التوضيح إن رغبت...", situations: [ "أمر بمعاناة كبيرة", "لم أعد أرى معنى لحياتي", "علاقتي متعثرة", "فقدت شخصاً عزيزاً", "أشعر بالوحدة", "أنا غاضب من الله", "لا أعرف ماذا أؤمن", "أحتاج لاتخاذ قرار صعب", "أعيش مع مرض أو إعاقة", "أخاف من المستقبل", "أنا مرهق", "أمر بنزاع عائلي", "أرافق شخصاً يعاني", "أبحث عن معنى لحياتي", "شيء آخر" ], priereTitle: "📖 كلمة اليوم", priereText: "يا رب، علمني أن أستمع إلى الصمت.", modes: { discernement: "🤲 تمييز", consolation: "🙏 عزاء", lecture: "📖 تأمل", priere: "❤️ صلاة" }, sagesseTitle: "📖 حكمة", sagesseIntro: "كلمات تغذي التمييز:", homeliesTitle: "🕊️ العظات — تأملات مستوحاة", aboutTitle: "📖 عن", aboutContent: "<p><strong>بيت المحبة</strong> رفيق روحي كاثوليكي.</p><p>يقرأ الحالات الإنسانية في نور الروح القدس، مستنداً إلى كلمة الله، تعليم الكنيسة، المعلمين الروحيين (إغناطيوس، تيريزا الأفيلية، كنتنيش…) والمفكرين المسيحيين أو الفلاسفة (ريكور، أرندت، فاي…).</p><p>لا يحل محل المرافقة البشرية.</p>", examenTitle: "🕯️ فحص الضمير", examenContent: "<p>خذ بضع دقائق في صمت. راجع يومك.</p><ol style='line-height:2;'><li>أين شعرت بسلام عميق؟</li><li>أين شعرت باضطراب؟</li><li>ماذا أشكر الله عليه؟</li><li>ماذا أعهد إليه غداً؟</li></ol><p><em>« ما يجلب سلاماً دائماً يأتي من الروح القدس. »</em></p>", contactTitle: "✉️ اتصال", contactContent: "<p>لأي سؤال، استشر كاهناً أو مرافقاً روحياً قريباً منك.</p>", privacyTitle: "🔒 خصوصية", privacyContent: "<p>لا شيء يُخزَّن على خادم.</p>", aiWarning: "أنا ذكاء اصطناعي في خدمة الإيمان الكاثوليكي. لا أحل محل كاهن أو طبيب نفسي أو طبيب.", footerNothing: "🔒 لا شيء مسجل · 🕊️ رفيق صامت" } }; /* ============================================================ DÉTECTION DES THÈMES & MOTS FORTS ============================================================ */ const KEYWORDS = { peur: ["peur", "angoisse", "inquiet", "inquiète", "anxiété", "avenir", "demain", "crainte", "stress", "fear", "afraid", "害怕", "miedo", "خوف"], solitude: ["seul", "seule", "solitude", "isolement", "abandon", "vide", "alone", "lonely", "孤独", "solo", "وحدة"], colere: ["colère", "en colère", "furieux", "révolte", "injuste", "injustice", "rage", "angry", "anger", "愤怒", "enojado", "غاضب"], souffrance: ["souffrance", "souffrir", "douleur", "mal", "épreuve", "pleure", "pleurer", "larmes", "désespoir", "suffering", "pain", "痛苦", "sufrimiento", "ألم"], deuil: ["mort", "deuil", "perdu", "décès", "disparu", "enterrement", "death", "grief", "死亡", "muerte", "موت"], maladie: ["maladie", "malade", "handicap", "santé", "hôpital", "médecin", "cancer", "illness", "sick", "疾病", "enfermedad", "مرض"], fatigue: ["fatigué", "fatiguée", "épuisé", "épuisée", "épuisement", "repos", "sommeil", "burn", "tired", "exhausted", "疲劳", "agotado", "مرهق"], pardon: ["pardon", "pardonner", "rancune", "blessure", "offense", "trahi", "trahison", "reproche", "forgive", "宽恕", "perdón", "مسامحة"], decision: ["décision", "décider", "choix", "choisir", "doute", "hésiter", "orientation", "vocation", "choice", "决定", "decisión", "قرار"], conflit: ["conflit", "tension", "dispute", "désaccord", "division", "querelle", "冲突", "conflicto", "نزاع"], justice: ["justice", "injuste", "injustice", "oppression", "pauvres", "exclusion", "mis à l'écart", "rejeté", "oppressed", "不义", "injusticia", "ظلم"], couple: ["couple", "mari", "femme", "époux", "épouse", "relation", "amour", "丈夫", "妻子", "pareja", "زوج"], famille: ["famille", "enfant", "père", "mère", "frère", "sœur", "parents", "fils", "fille", "family", "家庭", "familia", "عائلة"], foi: ["foi", "croire", "dieu", "prière", "église", "doute", "espérance", "saint", "faith", "信仰", "fe", "إيمان"], commencement:["commencement", "commencer", "initiative", "nouveau", "nouvelle", "projet", "créer", "création", "parole", "oser", "开始", "comienzo", "بداية"], travail: ["travail", "équipe", "collègue", "manager", "responsable", "entreprise", "organisation", "mission", "工作", "trabajo", "عمل"] }; const CONCEPTS = { confiance: "Ce que Dieu demande n'est pas d'abord de ne plus avoir peur, mais de faire confiance — c'est-à-dire de remettre entre ses mains ce qui nous échappe. La confiance n'est pas un sentiment : c'est un acte.", communion: "La solitude n'est jamais le dernier mot. Dieu nous a créés pour la communion, et même dans le silence, son Esprit travaille à nous relier.", justice: "La colère devant l'injustice n'est pas un péché quand elle est ordonnée : elle est la juste réaction d'un cœur qui reconnaît la dignité de tout être humain.", espérance: "L'espérance chrétienne n'est pas l'optimisme. C'est la certitude que, même quand tout semble perdu, Dieu travaille encore. La souffrance n'a pas le dernier mot.", fragilité: "Ce qui est fragile n'est pas un échec : c'est peut-être le lieu même où la puissance de Dieu veut se déployer.", repos: "Le repos n'est pas un luxe : c'est un commandement. S'arrêter, c'est reconnaître que nous ne sommes pas Dieu.", miséricorde: "Le pardon n'est pas un oubli : c'est un acte de liberté qui ouvre un avenir nouveau.", discernement:"Le discernement n'est pas une technique : c'est une grâce. Il s'agit moins de trouver la bonne réponse que de se rendre disponible à l'Esprit, qui parle souvent doucement.", paix: "La paix véritable n'est pas l'absence de conflit : c'est la présence du Christ au milieu de ce qui divise.", action: "Ce qui commence est fragile — et c'est justement cette fragilité qui porte la puissance. Toute action véritable a besoin d'être protégée, sinon elle s'épuise.", amour: "L'amour n'est pas un sentiment qui va et vient : c'est un don de soi qui se choisit chaque jour.", foi: "La foi n'est pas la certitude : c'est la confiance dans le mystère. Elle grandit dans l'épreuve plus que dans la consolation.", commencement:"Ce qui essaie de naître est fragile — et c'est bien ainsi. L'Esprit Saint ne force pas les portes : il frappe et il attend.", vie: "La Parole de Dieu n'est pas un discours : elle est un événement. Quand Dieu parle, quelque chose se met à exister qui n'existait pas." }; const MODES_CONCEPT = { peur: "confiance", solitude: "communion", colere: "justice", souffrance: "espérance", deuil: "espérance", maladie: "fragilité", fatigue: "repos", pardon: "miséricorde", decision: "discernement", conflit: "paix", justice: "action", couple: "amour", famille: "communion", foi: "foi", commencement: "commencement", travail: "action" }; function detecterThemes(texte) { const t = (texte || "").toLowerCase(); const scores = {}; for (const theme in KEYWORDS) { scores[theme] = 0; KEYWORDS[theme].forEach(mot => { const regex = new RegExp(mot, "gi"); const m = t.match(regex); if (m) scores[theme] += m.length; }); } const dominants = Object.entries(scores) .filter(([_, s]) => s > 0) .sort((a, b) => b[1] - a[1]) .slice(0, 3) .map(([theme]) => theme); return dominants.length ? dominants : ["foi"]; } function extraireMotFort(texte) { if (!texte) return null; const stopwords = new Set(["je","tu","il","elle","nous","vous","ils","elles","le","la","les","un","une","des","de","du","et","ou","mais","car","que","qui","quoi","dont","où","ce","cet","cette","ces","mon","ma","mes","ton","ta","tes","son","sa","ses","notre","nos","votre","vos","leur","leurs","est","sont","était","étaient","être","avoir","fait","faire","dit","dire","plus","moins","très","trop","peu","bien","mal","aussi","encore","déjà","toujours","jamais","souvent","parfois","pour","sans","avec","dans","sur","sous","vers","chez","entre","par","ne","pas","rien","tout","toute","tous","toutes"]); const mots = texte.toLowerCase() .replace(/[.,;:!?'"()\[\]{}]/g, " ") .split(/\s+/) .filter(m => m.length > 4 && !stopwords.has(m)); if (mots.length === 0) return null; const importants = ["injustice", "injuste", "colère", "peur", "angoisse", "souffrance", "douleur", "solitude", "abandon", "vide", "espoir", "espérance", "confiance", "pardon", "foi", "doute", "prière", "silence", "écoute", "vérité", "mensonge", "rejet", "trahison", "amour", "amitié", "famille", "enfant", "mort", "deuil", "maladie", "fatigue", "épuisement", "commencement", "projet", "décision", "choix"]; for (const m of mots) { if (importants.includes(m)) return m; } return mots.sort((a, b) => b.length - a.length)[0]; } /* ============================================================ MOTEUR DE GÉNÉRATION ============================================================ */ function pickRandom(arr) { return arr[Math.floor(Math.random() * arr.length)]; } function pickByTags(banque, themes) { const matches = banque.filter(item => item.tags.some(tag => themes.includes(tag))); return matches.length ? pickRandom(matches) : pickRandom(banque); } function genererReponse(situationTexte, role, mode, lang) { const themes = detecterThemes(situationTexte); const themePrincipal = themes[0]; const concept = MODES_CONCEPT[themePrincipal] || "espérance"; const motFort = extraireMotFort(situationTexte); const verset = pickByTags(RESSOURCES.bible, themes); const avecTemoin = Math.random() < 0.55; const temoin = avecTemoin ? pickByTags(RESSOURCES.temoins, themes) : null; const salutations = ["Paix à vous.", "Que la paix soit avec vous.", "Paix et lumière sur votre route.", ""]; const salutation = pickRandom(salutations); const accueil = role ? `${role}, ce que vous portez est reçu avec respect.` : "Ce que vous portez est reçu avec respect."; let reprise = ""; if (motFort && Math.random() < 0.7) { const ouvertures = { souffrance: `Le mot « ${motFort} » que vous employez n'est pas anodin. Il dit quelque chose que les mots ordinaires ne peuvent pas dire.`, deuil: `Vous dites « ${motFort} ». Ce mot porte tout un poids, et il est bon de le laisser résonner.`, peur: `Vous parlez de « ${motFort} ». La peur a ceci de particulier qu'elle isole : elle fait croire qu'on est seul à la ressentir.`, solitude: `Vous dites « ${motFort} ». Ce mot, chez vous, n'est pas une idée : c'est une expérience.`, colere: `Vous dites « ${motFort} ». Cette colère n'est pas à étouffer : elle a quelque chose à vous apprendre.`, justice: `Vous nommez « ${motFort} ». Ce mot est lourd, et il touche à quelque chose de sacré : la dignité de l'autre.`, decision: `Vous parlez de « ${motFort} ». C'est un moment important, et il est normal qu'il vous habite.`, foi: `Vous dites « ${motFort} ». Ce mot est le seuil de tout. Il est bon de le laisser venir sans le forcer.`, pardon: `Vous dites « ${motFort} ». Ce mot ouvre une porte difficile, mais réelle.`, fatigue: `Vous dites « ${motFort} ». Ce n'est pas une faiblesse : c'est un signal.`, commencement: `Vous parlez de « ${motFort} ». Ce qui commence est toujours fragile, et c'est cette fragilité même qui porte la vie.`, travail: `Vous parlez de « ${motFort} » dans le travail. Le travail est un lieu spirituel, même quand il ne le semble pas.`, conflit: `Vous dites « ${motFort} ». Le conflit n'est jamais seulement un problème : c'est aussi un appel.`, maladie: `Vous dites « ${motFort} ». Ce mot touche le corps, et par le corps, tout l'être.`, couple: `Vous dites « ${motFort} ». Ce mot touche au cœur d'une relation.`, famille: `Vous dites « ${motFort} ». La famille est le premier lieu de l'amour — et parfois le premier lieu de la blessure.` }; reprise = ouvertures[themePrincipal] || `Vous dites « ${motFort} ». Ce mot est important, et il est bon de le laisser parler en vous.`; } const ouverturesLegeres = { peur: "Ce que vous décrivez a la couleur de la peur.", solitude: "Ce que vous portez a le goût de la solitude.", colere: "Ce que vous décrivez laisse entendre une colère juste.", souffrance: "Ce que vous portez est une vraie souffrance.", deuil: "Ce que vous traversez est un deuil véritable.", maladie: "Ce que vous vivez touche le corps.", fatigue: "Ce que vous décrivez est un épuisement.", pardon: "Ce que vous portez a le goût d'une blessure.", decision: "Ce que vous vivez est un moment de décision.", conflit: "Ce que vous décrivez a la forme d'un conflit.", justice: "Ce que vous décrivez touche à la justice.", couple: "Ce que vous vivez touche une relation.", famille: "Ce que vous portez touche à la famille.", foi: "Ce que vous cherchez touche à la foi.", commencement: "Ce que vous décrivez, c'est un commencement.", travail: "Ce que vous décrivez se passe dans le travail." }; const ouverture = Math.random() < 0.6 ? (ouverturesLegeres[themePrincipal] || "") : ""; const filParole = `<span class="verset">« ${verset.texte} »</span> (${verset.ref}).`; const filConcept = CONCEPTS[concept] || CONCEPTS.espérance; const filTemoin = temoin ? `<em>« ${temoin.texte} »</em> (${temoin.ref})` : ""; const propositions = { discernement: [ "Prenez un temps de silence : non pour trouver une solution, mais pour laisser monter en vous ce qui est paix et ce qui est trouble.", "Écrivez ce qui vous attire dans une direction, et ce qui vous retient dans l'autre. Devant Dieu, demandez : où est la paix ?", "Confiez cela à un accompagnateur spirituel. On ne discerne pas seul." ], consolation: [ "Respirez lentement, et redites dans votre cœur : « Seigneur, je te fais confiance. »", "Laissez-vous consoler par ce qui apaise : un psaume, un chant, une marche silencieuse.", "Notez une petite chose pour laquelle dire merci aujourd'hui." ], lecture: [ "Relisez ce verset lentement, en vous arrêtant sur chaque mot.", "Gardez ce verset comme une lampe pour votre semaine.", "Laissez descendre ce verset du mental au cœur, dans le silence." ], priere: [ "Redites simplement cette parole, dans le silence : c'est votre cœur qui parle.", "Priez sans chercher à bien dire : Dieu écoute même les soupirs.", "Faites de ce verset une prière. Répétez-le doucement, plusieurs fois." ] }; const proposition = Math.random() < 0.75 ? pickRandom(propositions[mode] || propositions.discernement) : ""; const colloques = [ "Seigneur, tu connais ce que je vis mieux que moi-même. Donne-moi ton Esprit.", "Père, je viens à toi avec ce que je suis. Que ton Esprit me conduise, pas à pas.", "Esprit Saint, souffle sur ce que je porte.", "Seigneur, je ne comprends pas tout, mais je te fais confiance.", "Que ta Parole, Seigneur, accomplisse en moi ce qu'elle dit." ]; const colloque = pickRandom(colloques); const avecBenediction = Math.random() < 0.5; const benediction = avecBenediction ? `<div class="benediction">✠ Que le Seigneur vous bénisse et vous garde, qu'Il fasse briller sa face sur vous et vous donne la paix.</div>` : ""; const blocs = []; if (salutation) blocs.push(`<strong>${salutation}</strong>`); if (accueil) blocs.push(accueil); if (reprise) blocs.push(reprise); if (ouverture && !reprise) blocs.push(ouverture); blocs.push(`La Parole de Dieu éclaire ce que vous vivez : ${filParole}`); if (filTemoin) blocs.push(`Un témoin l'a éprouvé avant vous : ${filTemoin}.`); blocs.push(filConcept); if (proposition) blocs.push(proposition); blocs.push(`<div class="priere">🙏 ${colloque}</div>`); if (benediction) blocs.push(benediction); return blocs.join("\n\n"); } /* ============================================================ ÉTAT GLOBAL & NAVIGATION ============================================================ */ let currentLang = "fr"; let currentMode = "discernement"; function navigateTo(page) { document.querySelectorAll(".page-section").forEach(s => s.classList.remove("active")); const target = document.getElementById("page-" + page); if (target) target.classList.add("active"); document.querySelectorAll(".nav-menu a").forEach(a => { a.classList.toggle("active", a.dataset.page === page); }); window.scrollTo({ top: 0, behavior: "smooth" }); } document.querySelectorAll("[data-page]").forEach(el => { el.addEventListener("click", e => { e.preventDefault(); navigateTo(el.dataset.page); }); }); /* ============================================================ MISE À JOUR LANGUE ============================================================ */ function updateLanguage(lang) { currentLang = lang; const t = TRAD[lang] || TRAD.fr; document.getElementById("mainTitle").innerHTML = t.title; document.getElementById("mainSubtitle").textContent = t.subtitle; document.getElementById("situation").placeholder = t.placeholder; document.getElementById("role").placeholder = t.role; document.getElementById("submitBtn").textContent = t.submit; document.getElementById("loading").innerHTML = t.loading; document.getElementById("situations-title").textContent = t.situationsTitle; document.getElementById("precision-situation").placeholder = t.precisionPlaceholder; document.getElementById("priere-title").textContent = t.priereTitle; document.getElementById("priereDuJour").innerHTML = `<em>« ${t.priereText} »</em>`; document.getElementById("mode-discernement").textContent = t.modes.discernement; document.getElementById("mode-consolation").textContent = t.modes.consolation; document.getElementById("mode-lecture").textContent = t.modes.lecture; document.getElementById("mode-priere").textContent = t.modes.priere; document.getElementById("sagesse-title").textContent = t.sagesseTitle; document.getElementById("sagesse-intro").textContent = t.sagesseIntro; document.getElementById("homelies-title").textContent = t.homeliesTitle || "🕊️ Homélies — Méditations inspirées"; document.getElementById("about-title").textContent = t.aboutTitle; document.getElementById("about-content").innerHTML = t.aboutContent; document.getElementById("examen-title").textContent = t.examenTitle; document.getElementById("examen-content").innerHTML = t.examenContent; document.getElementById("contact-title").textContent = t.contactTitle; document.getElementById("contact-content").innerHTML = t.contactContent; document.getElementById("privacy-title").textContent = t.privacyTitle; document.getElementById("privacy-content").innerHTML = t.privacyContent; document.getElementById("ai-warning-text").textContent = t.aiWarning; document.getElementById("footer-nothing").textContent = t.footerNothing; const grid = document.getElementById("situations-list"); grid.innerHTML = ""; t.situations.forEach(s => { const label = document.createElement("label"); const input = document.createElement("input"); input.type = "radio"; input.name = "situation-choisie"; input.value = s; label.appendChild(input); label.appendChild(document.createTextNode(" " + s)); grid.appendChild(label); }); } /* ============================================================ ÉVÉNEMENTS ============================================================ */ document.querySelectorAll(".mode-btn").forEach(btn => { btn.addEventListener("click", function() { document.querySelectorAll(".mode-btn").forEach(b => b.classList.remove("active")); this.classList.add("active"); currentMode = this.dataset.mode; }); }); document.querySelectorAll(".lang-btn").forEach(btn => { btn.addEventListener("click", function() { document.querySelectorAll(".lang-btn").forEach(b => b.classList.remove("active")); this.classList.add("active"); updateLanguage(this.dataset.lang); }); }); document.getElementById("toggle-urgence").addEventListener("click", e => { e.preventDefault(); document.getElementById("urgence-list").classList.toggle("visible"); }); /* ============================================================ SOUMISSION ============================================================ */ document.getElementById("submitBtn").addEventListener("click", () => { const situation = (document.getElementById("situation").value || "").trim(); const precision = (document.getElementById("precision-situation").value || "").trim(); const situationChoisie = document.querySelector('input[name="situation-choisie"]:checked'); const role = (document.getElementById("role").value || "").trim(); let texteComplet = situation; if (situationChoisie) texteComplet += " " + situationChoisie.value; if (precision) texteComplet += " " + precision; if (!texteComplet.trim()) { alert("Merci de décrire votre situation, ou d'en choisir une dans la liste."); return; } const btn = document.getElementById("submitBtn"); const loading = document.getElementById("loading"); const error = document.getElementById("error"); const container = document.getElementById("response-container"); const reponse = document.getElementById("reponse"); btn.disabled = true; loading.style.display = "block"; error.style.display = "none"; container.style.display = "none"; setTimeout(() => { try { const html = genererReponse(texteComplet, role, currentMode, currentLang); reponse.innerHTML = html; container.style.display = "block"; container.scrollIntoView({ behavior: "smooth", block: "start" }); } catch (err) { error.textContent = "Une erreur est survenue. Veuillez réessayer."; error.style.display = "block"; } finally { loading.style.display = "none"; btn.disabled = false; } }, 700 + Math.random() * 500); }); /* ============================================================ PAGE SAGESSE — citations dynamiques + Homélies ============================================================ */ function loadSagesse() { const container = document.getElementById("sagesseCitations"); if (!container) return; const toutes = [...RESSOURCES.bible, ...RESSOURCES.temoins]; const selection = []; const used = new Set(); while (selection.length < 5 && used.size < toutes.length) { const idx = Math.floor(Math.random() * toutes.length); if (!used.has(idx)) { used.add(idx); selection.push(toutes[idx]); } } container.innerHTML = selection.map(item => `<div class="citation-box">« ${item.texte} »<span class="ref">— ${item.ref}</span></div>` ).join(""); } /* Active ou désactive l'affichage des méditations (à basculer après accord de Msgr. Pellegrino) */ const HOMELIES_ACTIVES = false; function loadHomelies() { const liste = document.getElementById("homeliesListe"); const modeles = document.getElementById("homelies-modeles"); const intro = document.getElementById("homelies-intro"); if (!liste || !modeles) return; if (HOMELIES_ACTIVES) { liste.innerHTML = modeles.innerHTML; modeles.style.display = "none"; if (intro) intro.style.display = "none"; } else { liste.innerHTML = ""; if (intro) intro.style.display = "block"; } } /* ============================================================ INITIALISATION ============================================================ */ updateLanguage("fr"); loadSagesse(); loadHomelies(); 
 
 // Handler pour les témoignages
@@ -349,6 +625,352 @@ if (btnGenererHomelie && selectTheme && containerRes && contenuRes) {
         containerRes.scrollIntoView({ behavior: "smooth", block: "nearest" });
     });
 }
+
+
+
+
+// -------------------------------------------------------------
+// LOGIQUE COMPLÈTE INTERACTIVE (ONGLETS, HOMÉLIE, EXAMEN, RESSOURCES)
+// -------------------------------------------------------------
+document.addEventListener("DOMContentLoaded", function() {
+    // 1. Navigation par onglets (7 onglets complets)
+    const navButtons = document.querySelectorAll(".nav-tab-btn");
+    const sections = document.querySelectorAll(".page-section");
+
+    function showTab(targetPage) {
+        sections.forEach(function(sec) {
+            if (sec.id === "page-" + targetPage) {
+                sec.classList.add("active");
+                sec.style.display = "block";
+            } else {
+                sec.classList.remove("active");
+                sec.style.display = "none";
+            }
+        });
+        navButtons.forEach(function(btn) {
+            if (btn.getAttribute("data-page") === targetPage) {
+                btn.classList.add("active");
+            } else {
+                btn.classList.remove("active");
+            }
+        });
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    navButtons.forEach(function(btn) {
+        btn.addEventListener("click", function(e) {
+            e.preventDefault();
+            const page = this.getAttribute("data-page");
+            if (page) showTab(page);
+        });
+    });
+
+    // 2. Générateur de proposition d'homélie avec lectures du dimanche
+    const btnGenererHomelie = document.getElementById("btn-generer-homelie");
+    if (btnGenererHomelie) {
+        btnGenererHomelie.addEventListener("click", function() {
+            const l1El = document.getElementById("input-lecture1");
+            const psEl = document.getElementById("input-psaume");
+            const l2El = document.getElementById("input-lecture2");
+            const evEl = document.getElementById("input-evangile");
+            const themeEl = document.getElementById("select-theme-homelie");
+
+            const l1 = (l1El ? l1El.value : "").trim();
+            const ps = (psEl ? psEl.value : "").trim();
+            const l2 = (l2El ? l2El.value : "").trim();
+            const ev = (evEl ? evEl.value : "").trim();
+            const themeKey = themeEl ? themeEl.value : "auto";
+
+            const resultBox = document.getElementById("homelie-result-box");
+            const resultTitle = document.getElementById("homelie-generated-title");
+            const resultContent = document.getElementById("homelie-generated-content");
+
+            const referencesList = [];
+            if (l1) referencesList.push("<strong>1ère lecture :</strong> " + l1);
+            if (ps) referencesList.push("<strong>Psaume :</strong> " + ps);
+            if (l2) referencesList.push("<strong>2ème lecture :</strong> " + l2);
+            if (ev) referencesList.push("<strong>Évangile :</strong> " + ev);
+
+            const refSummary = referencesList.length > 0 
+                ? "<div style='background:#f6f1eb; padding:0.8rem; border-radius:6px; margin-bottom:1rem; font-size:0.9rem;'>" + referencesList.join(" · ") + "</div>"
+                : "<div style='background:#f6f1eb; padding:0.8rem; border-radius:6px; margin-bottom:1rem; font-size:0.9rem;'><em>Méditation sur les lectures dominicales et le souffle de l'Évangile</em></div>";
+
+            const propositionsThemes = {
+                esperance: {
+                    titre: "Garder l'espérance au cœur de l'épreuve",
+                    intro: "Chers frères et sœurs, la liturgie de ce dimanche nous rassemble au cœur de nos réalités quotidiennes. La Parole de Dieu n'est pas une théorie abstraite : elle vient nous rejoindre dans nos doutes, nos fatigues et nos attentes.",
+                    developpement: "À travers les lectures proclamées, le Seigneur nous redit que sa fidélité devance nos peurs. Quand les apôtres ou le peuple d'Israël traversent la tempête ou l'exil, Dieu ne les abandonne pas au vide ; Il trace un chemin là où nos yeux ne voient que l'impasse. C'est le sens même de l'espérance chrétienne : croire que la grâce de Dieu travaille toujours silencieusement dans le secret de nos vies.",
+                    resonance: "Dans nos familles, nos engagements professionnels et nos solitudes, nous sommes souvent tentés par le découragement. Mais le Christ nous invite à lever la tête et à lui confier ce qui nous pèse.",
+                    questions: ["Où suis-je invité(e) cette semaine à faire un acte de confiance renouvelé ?", "Quelle situation concrète puis-je déposer avec espérance dans la prière ?"],
+                    priere: "Seigneur Jésus, Toi qui es le Maître de la vie, fortifie notre foi chancelante. Que ta Parole habite notre semaine et que notre cœur demeure en paix, confiants dans ton amour sans fin. Amen."
+                },
+                pardon: {
+                    titre: "La force libératrice du pardon et de la réconciliation",
+                    intro: "En ce dimanche, les textes sacrés nous invitent à contempler le visage du Père miséricordieux. Dieu ne se lasse jamais de pardonner ; c'est nous qui nous lassons de demander son pardon.",
+                    developpement: "Le pardon n'est pas un oubli naïf ni une faiblesse : c'est un acte de courage et de liberté spirituelle. En accueillant la grâce divine, nous sommes rendus capables de briser les spirales de ressentiment pour réapprendre la bienveillance mutuelle.",
+                    resonance: "Chacun de nous porte parfois des blessures anciennes ou des tensions non résolues. L'Évangile nous appelle à faire le premier pas de l'apaisement.",
+                    questions: ["Quelle rancœur ai-je besoin de remettre aujourd'hui au Seigneur ?", "Comment puis-je être artisan de paix dans mon entourage proche ?"],
+                    priere: "Père de toute bonté, guéris nos cœurs fermés. Accorde-nous la grâce de pardonner comme Tu nous as pardonné, afin que ton amour rayonne dans nos vies. Amen."
+                },
+                auto: {
+                    titre: "Écouter la Parole vivante et discerner la volonté du Père",
+                    intro: "Frères et sœurs en Christ, la Parole que nous venons d'entendre résonne comme un appel personnel. Chaque dimanche, Dieu s'adresse à notre assemblée pour éclairer nos décisions et affermir nos pas.",
+                    developpement: "Les textes liturgiques révèlent la pédagogie patiente du Seigneur. De la promesse biblique jusqu'au témoignage évangélique, Dieu se révèle non dans le fracas, mais dans le souffle ténu de sa grâce. Il nous invite à convertir notre regard et à reconnaître sa présence active.",
+                    resonance: "Cette Parole s'incarne aujourd'hui : elle s'adresse à nos joies paroissiales comme à nos combats intérieurs. Elle nous demande d'être des témoins humbles et persévérants de l'amour du prochain.",
+                    questions: ["Quel mot ou verset de ce dimanche a particulièrement touché mon cœur ?", "Comment puis-je mettre en pratique cet enseignement dès demain ?"],
+                    priere: "Esprit Saint, souffle de vérité et d'amour, ouvre nos intelligences et nos cœurs. Fais de nous des disciples attentifs à ta Parole et fidèles au service de nos frères. Amen."
+                }
+            };
+
+            const data = propositionsThemes[themeKey] || propositionsThemes.auto;
+
+            if (resultTitle) resultTitle.textContent = "🕊️ Proposition de trame : " + data.titre;
+            if (resultContent) {
+                resultContent.innerHTML = refSummary +
+                    "<p><strong>1. Accueil liturgique & entrée dans la Parole :</strong><br>" + data.intro + "</p>" +
+                    "<p><strong>2. Méditation & résonance de la Parole :</strong><br>" + data.developpement + "</p>" +
+                    "<p><strong>3. Application dans la vie paroissiale et fraternelle :</strong><br>" + data.resonance + "</p>" +
+                    "<p><strong>4. Pistes de discernement pour l'assemblée :</strong></p>" +
+                    "<ul><li>" + data.questions.join("</li><li>") + "</li></ul>" +
+                    "<p><strong>5. Prière de conclusion :</strong><br><em>« " + data.priere + " »</em></p>";
+            }
+
+            if (resultBox) {
+                resultBox.style.display = "block";
+                resultBox.scrollIntoView({ behavior: "smooth", block: "nearest" });
+            }
+        });
+    }
+
+    // Bouton copier homélie
+    const btnCopierHomelie = document.getElementById("btn-copier-homelie");
+    if (btnCopierHomelie) {
+        btnCopierHomelie.addEventListener("click", function() {
+            const el = document.getElementById("homelie-generated-content");
+            const content = el ? el.innerText : "";
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(content).then(function() {
+                    btnCopierHomelie.textContent = "✓ Copié !";
+                    setTimeout(function() { btnCopierHomelie.textContent = "📋 Copier"; }, 2000);
+                });
+            } else {
+                alert("Texte prêt à être copié.");
+            }
+        });
+    }
+
+    // 3. Parcours interactif de l'Examen ignatien (5 étapes)
+    let currentStep = 1;
+    const totalSteps = 5;
+
+    function updateExamenUI() {
+        for (let i = 1; i <= totalSteps; i++) {
+            const panel = document.getElementById("step-panel-" + i);
+            const ind = document.getElementById("step-ind-" + i);
+            if (panel) panel.style.display = (i === currentStep) ? "block" : "none";
+            if (ind) {
+                ind.classList.remove("active", "done");
+                if (i === currentStep) ind.classList.add("active");
+                else if (i < currentStep) ind.classList.add("done");
+            }
+        }
+        const summaryPanel = document.getElementById("step-panel-summary");
+        if (summaryPanel) summaryPanel.style.display = (currentStep > totalSteps) ? "block" : "none";
+
+        const btnPrev = document.getElementById("btn-examen-prev");
+        const btnNext = document.getElementById("btn-examen-next");
+
+        if (btnPrev) btnPrev.disabled = (currentStep === 1);
+        if (btnNext) {
+            if (currentStep < totalSteps) {
+                btnNext.textContent = "Suivant →";
+                btnNext.style.display = "inline-block";
+            } else if (currentStep === totalSteps) {
+                btnNext.textContent = "Terminer l'examen ✨";
+                btnNext.style.display = "inline-block";
+            } else {
+                btnNext.style.display = "none";
+            }
+        }
+
+        if (currentStep > totalSteps) {
+            renderExamenSummary();
+        }
+    }
+
+    function renderExamenSummary() {
+        const sumBox = document.getElementById("examen-summary-display");
+        if (!sumBox) return;
+
+        const n1El = document.getElementById("examen-note-1");
+        const n2El = document.getElementById("examen-note-2");
+        const n3El = document.getElementById("examen-note-3");
+        const n4El = document.getElementById("examen-note-4");
+        const n5El = document.getElementById("examen-note-5");
+
+        const n1 = (n1El ? n1El.value : "").trim();
+        const n2 = (n2El ? n2El.value : "").trim();
+        const n3 = (n3El ? n3El.value : "").trim();
+        const n4 = (n4El ? n4El.value : "").trim();
+        const n5 = (n5El ? n5El.value : "").trim();
+
+        sumBox.innerHTML = 
+            "<p><strong>1. Action de grâce :</strong><br>" + (n1 || "<em>Temps de gratitude silencieuse</em>") + "</p>" +
+            "<p><strong>2. Lumière de l'Esprit :</strong><br>" + (n2 || "<em>Regard de vérité et d'amour</em>") + "</p>" +
+            "<p><strong>3. Relecture de la journée :</strong><br>" + (n3 || "<em>Consolations et désolations remises à Dieu</em>") + "</p>" +
+            "<p><strong>4. Pardon et miséricorde :</strong><br>" + (n4 || "<em>Dépôt de nos faiblesses dans le pardon du Père</em>") + "</p>" +
+            "<p><strong>5. Remise de la journée de demain :</strong><br>" + (n5 || "<em>Résolution d'espérance et de charité</em>") + "</p>";
+    }
+
+    const btnExamenPrev = document.getElementById("btn-examen-prev");
+    const btnExamenNext = document.getElementById("btn-examen-next");
+    const btnExamenReset = document.getElementById("btn-examen-reset");
+
+    if (btnExamenPrev) {
+        btnExamenPrev.addEventListener("click", function() {
+            if (currentStep > 1) {
+                currentStep--;
+                updateExamenUI();
+            }
+        });
+    }
+
+    if (btnExamenNext) {
+        btnExamenNext.addEventListener("click", function() {
+            if (currentStep <= totalSteps) {
+                currentStep++;
+                updateExamenUI();
+            }
+        });
+    }
+
+    if (btnExamenReset) {
+        btnExamenReset.addEventListener("click", function() {
+            for (let i = 1; i <= totalSteps; i++) {
+                const ta = document.getElementById("examen-note-" + i);
+                if (ta) ta.value = "";
+            }
+            currentStep = 1;
+            updateExamenUI();
+        });
+    }
+
+    // Minuteur de recueillement silencieux
+    let timerInterval = null;
+    let secondsLeft = 60;
+    const btnTimer = document.getElementById("btn-examen-timer");
+    const displayTimer = document.getElementById("examen-timer-display");
+
+    if (btnTimer && displayTimer) {
+        btnTimer.addEventListener("click", function() {
+            if (timerInterval) {
+                clearInterval(timerInterval);
+                timerInterval = null;
+                btnTimer.textContent = "⏱️ Silence (1 min)";
+                displayTimer.textContent = "";
+                return;
+            }
+            secondsLeft = 60;
+            btnTimer.textContent = "⏹️ Arrêter";
+            displayTimer.textContent = "60s";
+            timerInterval = setInterval(function() {
+                secondsLeft--;
+                if (secondsLeft <= 0) {
+                    clearInterval(timerInterval);
+                    timerInterval = null;
+                    btnTimer.textContent = "⏱️ Silence (1 min)";
+                    displayTimer.textContent = "Terminé ✨";
+                } else {
+                    displayTimer.textContent = secondsLeft + "s";
+                }
+            }, 1000);
+        });
+    }
+
+    // 4. Moteur de recherche et filtres dans les Ressources
+    const searchInput = document.getElementById("ressources-search-input");
+    const tagButtons = document.querySelectorAll(".ressource-tag-btn");
+    const resultsContainer = document.getElementById("ressources-results-list");
+
+    function renderRessources(query, selectedTag) {
+        if (!resultsContainer || typeof RESSOURCES === "undefined") return;
+        resultsContainer.innerHTML = "";
+        const q = (query || "").toLowerCase().trim();
+        const tag = (selectedTag || "all").toLowerCase();
+
+        const allItems = [];
+        if (RESSOURCES.bible) {
+            RESSOURCES.bible.forEach(function(b) { allItems.push({ type: "Bible", ref: b.ref, texte: b.texte, tags: b.tags || [] }); });
+        }
+        if (RESSOURCES.temoins) {
+            RESSOURCES.temoins.forEach(function(t) { allItems.push({ type: "Maître spirituel", ref: t.ref, texte: t.texte, tags: t.tags || [] }); });
+        }
+
+        const filtered = allItems.filter(function(item) {
+            const matchesTag = (tag === "all") || item.tags.some(function(t) { return t.toLowerCase() === tag; });
+            const matchesQuery = !q || item.texte.toLowerCase().includes(q) || item.ref.toLowerCase().includes(q) || item.tags.some(function(t) { return t.toLowerCase().includes(q); });
+            return matchesTag && matchesQuery;
+        });
+
+        if (filtered.length === 0) {
+            resultsContainer.innerHTML = "<p style='color:#776a5c; font-style:italic; grid-column:1/-1;'>Aucun texte ne correspond à cette recherche. Essayez un autre mot (ex: paix, pardon, foi...).</p>";
+            return;
+        }
+
+        filtered.slice(0, 18).forEach(function(item) {
+            const card = document.createElement("div");
+            card.style.cssText = "background:#fff; border:1px solid #e2d7cb; border-radius:6px; padding:1rem; display:flex; flex-direction:column; justify-content:space-between;";
+            card.innerHTML = 
+                "<div><span style='font-size:0.75rem; text-transform:uppercase; letter-spacing:0.5px; color:#8c7355; font-weight:bold;'>" + item.type + "</span>" +
+                "<p style='margin:0.5rem 0; font-size:0.92rem; color:#3b322a; line-height:1.5;'>« " + item.texte + " »</p></div>" +
+                "<div style='font-size:0.85rem; font-weight:bold; color:#5b4636; margin-top:0.5rem;'>" + item.ref + "</div>";
+            resultsContainer.appendChild(card);
+        });
+    }
+
+    if (searchInput) {
+        searchInput.addEventListener("input", function() {
+            const curTagEl = document.querySelector(".ressource-tag-btn.active");
+            const currentActiveTag = curTagEl ? curTagEl.getAttribute("data-tag") : "all";
+            renderRessources(this.value, currentActiveTag);
+        });
+    }
+
+    tagButtons.forEach(function(btn) {
+        btn.addEventListener("click", function() {
+            tagButtons.forEach(function(b) { b.classList.remove("active"); });
+            this.classList.add("active");
+            const tag = this.getAttribute("data-tag") || "all";
+            const q = searchInput ? searchInput.value : "";
+            renderRessources(q, tag);
+        });
+    });
+
+    renderRessources("", "all");
+
+    // Envoi de témoignage anonyme
+    const btnEnvoyerTemoignage = document.getElementById("btn-envoyer-temoignage");
+    if (btnEnvoyerTemoignage) {
+        btnEnvoyerTemoignage.addEventListener("click", function() {
+            const inputTem = document.getElementById("input-temoignage");
+            const val = inputTem ? inputTem.value.trim() : "";
+            if (!val) {
+                alert("Veuillez saisir votre intention ou témoignage.");
+                return;
+            }
+            const liste = document.getElementById("liste-temoignages-partages");
+            if (liste) {
+                const card = document.createElement("div");
+                card.className = "section-card";
+                card.style.cssText = "background:#fff; border-left:4px solid #4a6f5e;";
+                card.innerHTML = "<p style='margin:0 0 0.5rem 0; font-style:italic; color:#3b322a;'>« " + val + " »</p><span style='font-size:0.8rem; color:#776a5c;'>Votre intention anonyme · Confiée dans la prière</span>";
+                liste.prepend(card);
+            }
+            if (inputTem) inputTem.value = "";
+            alert("Votre intention a été déposée avec paix.");
+        });
+    }
+});
 
 </script>
 </body>
