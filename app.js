@@ -14,7 +14,9 @@ let currentSituationKey = null;
 let examenIdx = 0;
 let aelfLectures = [];
 
-/* ---------- TRADUCTIONS ---------- */
+/* ============================================================
+   TRADUCTIONS
+   ============================================================ */
 const FR = {
     title: "🕯️ Au Foyer de l'Amour", subtitle: "Discernement et la petite lumière",
     placeholder: "Décrivez votre situation...", role: "Qui êtes-vous ? (optionnel)",
@@ -111,11 +113,199 @@ EN.homelieLoading = "Preparing the homily...";
 EN.ecouteList = ["Emergency: dial your country's emergency number","Listening centres: befrienders.org","In distress: reach out to someone you trust"];
 EN.contactPretreText = "Find a priest"; EN.contactPretreUrl = "https://www.usccb.org/parish-finder";
 EN.contactCommunauteText = "Community near you"; EN.contactCommunauteUrl = "https://www.catholic.org/parishes/";
+EN.pageExamen = { title: "🕯️ Guided Examen", intro: "Five steps, at your own pace, in silence.",
+    steps: [{ t: "Gratitude", d: "Give thanks. Review your day." },{ t: "Light", d: "Ask for the grace to see with God's eyes." },{ t: "Review", d: "Where did you feel peace? Where disturbance?" },{ t: "Entrust", d: "Entrust what weighs on you." },{ t: "Tomorrow", d: "Look at tomorrow with hope." }],
+    end: "🙏 Finish with a simple prayer.", prev: "← Previous", next: "Next →" };
 
-const translations = { fr: FR, en: EN };
-['zh','hi','es','ar'].forEach(l => { translations[l] = EN; });
+/* ---------- CHINOIS ---------- */
+const ZH = JSON.parse(JSON.stringify(EN));
+ZH.title = "🕯️ 爱之家"; ZH.subtitle = "辨别与小光";
+ZH.placeholder = "描述你的情况..."; ZH.role = "你是谁？（可选）";
+ZH.submit = "获得辨别帮助 →"; ZH.loading = "辨别进行中...";
+ZH.alertSituation = "请描述您的情况或选择一个选项。";
+ZH.situationsTitle = "或选择最符合你经历的情况：";
+ZH.precisionPlaceholder = "如果你想，你可以详细说明...";
+ZH.btnContinuer = "🌿 继续辨别"; ZH.ressourcesTitle = "继续...";
+ZH.textesTitle = "📖 默想经文"; ZH.prieresTitle = "🙏 祈祷"; ZH.contactsTitle = "👤 人际联系";
+ZH.ecouteTitle = "🆘 聆听服务"; ZH.exercicesTitle = "✨ 灵修练习";
+ZH.revenirTitle = "🔄 返回"; ZH.revenirRecommencer = "重新开始"; ZH.saveLink = "保存我的链接";
+ZH.priereJourTitle = "📖 每日祈祷"; ZH.temoignagesTitle = "💬 你使用过爱之家吗？";
+ZH.temoignagesIntro = "分享你的经历（匿名）："; ZH.temoignagesPlaceholder = "你的见证...";
+ZH.envoyer = "发送"; ZH.merci = "🙏 谢谢！您的见证仅保存在您的设备上。";
+ZH.temoignagesRecus = "💬 您的见证";
+ZH.projetsPsaume = "🌱 « 正义与和平相亲。 » — 诗篇 85:11";
+ZH.projetsCredit = "为正义、和平与辨别的工具。";
+ZH.footerNothing = "🔒 无记录 · 🕊️ 一位沉默的伴侣";
+ZH.footerHome = "🏠 首页"; ZH.footerSagesse = "📖 智慧"; ZH.footerAbout = "📖 关于";
+ZH.footerSources = "📚 来源"; ZH.footerPrivacy = "🔒 隐私"; ZH.footerContact = "✉️ 联系";
+ZH.navHome = "🏠 首页"; ZH.navSagesse = "📖 智慧"; ZH.navAbout = "📖 关于";
+ZH.navExamen = "🕯️ 省察"; ZH.navSources = "📚 来源"; ZH.navContact = "✉️ 联系"; ZH.navPrivacy = "🔒 隐私";
+ZH.aiWarning = "我是一个人工智能。我不能替代人际支持、神父、心理学家或医生。";
+ZH.toggleUrgence = "查看紧急号码";
+ZH.clauseText = "🙏 <strong>关于爱之家</strong><br>此工具提供<strong>初步聆听</strong>和<strong>辨别帮助</strong>。";
+ZH.retour = "← 返回首页";
+ZH.situations = ["我正在经历巨大的痛苦","我找不到生活的意义","我的感情关系出现了问题","我失去了一位亲人","我感到孤独","我对上帝感到愤怒","我不知道该相信什么","我需要做出一个艰难的决定","我患有疾病或残疾","我害怕未来","我筋疲力尽","我正经历家庭冲突","我在陪伴一位受苦的人","我在寻找生命的意义","其他"];
+ZH.prieres = ["主啊，求你教我聆听寂静。","求你给我力量去接受我不理解的事物。","愿你的平安居住在我心中。"];
+ZH.defaultTestimonials = ["« 深深的平安。 »","« 宝贵的寂静空间。 »"];
+ZH.carnetPrompt = "✨<br><br>« 今天你能记下什么小小的光？ »";
+ZH.carnetPlaceholder = "我的小光..."; ZH.saveBtn = "💾 保存"; ZH.copyBtn = "🔗 复制我的链接"; ZH.shareBtn = "📤 分享";
+ZH.carnetInfo = "你可以稍后通过链接返回。";
+ZH.modes = { discernement: "🤲 辨别", consolation: "🙏 安慰", lecture: "📖 读经", priere: "❤️ 祷告" };
+ZH.homelieTitle = "讲道准备"; ZH.homelieDescription = "输入读经或从 AELF 加载。";
+ZH.labelLecture1 = "第一读经："; ZH.labelPsaume = "圣咏：";
+ZH.labelLecture2 = "第二读经："; ZH.labelEvangile = "福音：";
+ZH.labelTheme = "主题（可选）："; ZH.homelieButton = "生成讲道";
+ZH.homelieLoading = "准备讲道...";
+ZH.ecouteList = ["紧急情况：请拨打您所在国家的紧急电话","全球聆听中心：befrienders.org","处于痛苦中时：请立即向信任的人倾诉"];
+ZH.contactPretreText = "寻找一位神父"; ZH.contactPretreUrl = "https://www.catholic.org.hk/";
+ZH.contactCommunauteText = "你附近的团体"; ZH.contactCommunauteUrl = "https://www.chinacatholic.cn/";
+ZH.pageExamen = { title: "🕯️ 引导式省察", intro: "五个步骤，按照你的节奏，在寂静中进行。",
+    steps: [{ t: "感恩", d: "献上感谢。回顾你的一天。" },{ t: "光明", d: "祈求恩宠，以天主的眼光看待你的一天。" },{ t: "回顾", d: "重温过去的时光。你在哪里感到平安？在哪里感到不安？" },{ t: "交托", d: "交托你的重担。祈求宽恕。" },{ t: "明天", d: "怀着希望看向明天。你想活出哪一小步？" }],
+    end: "🙏 用你自己的话，以简单的祈祷结束。", prev: "← 上一步", next: "下一步 →" };
 
-/* ---------- PAGES INTERNES ---------- */
+/* ---------- HINDI ---------- */
+const HI = JSON.parse(JSON.stringify(EN));
+HI.title = "🕯️ प्रेम का घर"; HI.subtitle = "विवेक और छोटी रोशनी";
+HI.placeholder = "अपनी स्थिति का वर्णन करें..."; HI.role = "आप कौन हैं? (वैकल्पिक)";
+HI.submit = "विवेक सहायता प्राप्त करें →"; HI.loading = "विवेक जारी है...";
+HI.alertSituation = "कृपया अपनी स्थिति बताएं या एक विकल्प चुनें।";
+HI.situationsTitle = "या जो आप अनुभव कर रहे हैं उसके अनुसार चुनें:";
+HI.precisionPlaceholder = "आप जो अनुभव कर रहे हैं, उसे विस्तार से बता सकते हैं...";
+HI.btnContinuer = "🌿 विवेक जारी रखें"; HI.ressourcesTitle = "जारी रखने के लिए...";
+HI.textesTitle = "📖 ध्यान हेतु पाठ"; HI.prieresTitle = "🙏 प्रार्थनाएँ"; HI.contactsTitle = "👤 मानव संपर्क";
+HI.ecouteTitle = "🆘 सुनने की सेवाएँ"; HI.exercicesTitle = "✨ आध्यात्मिक अभ्यास";
+HI.revenirTitle = "🔄 वापसी"; HI.revenirRecommencer = "पुनः आरंभ करें"; HI.saveLink = "मेरा लिंक सहेजें";
+HI.priereJourTitle = "📖 दिन की प्रार्थना"; HI.temoignagesTitle = "💬 क्या आपने प्रेम का घर का उपयोग किया?";
+HI.temoignagesIntro = "अपना अनुभव साझा करें (गुमनाम):"; HI.temoignagesPlaceholder = "आपकी गवाही...";
+HI.envoyer = "भेजें"; HI.merci = "🙏 धन्यवाद! आपकी गवाही आपके डिवाइस पर ही रहती है।";
+HI.temoignagesRecus = "💬 आपकी गवाहियाँ";
+HI.projetsPsaume = "🌱 « न्याय और शांति एक दूसरे को गले लगाते हैं। » — भजन 85:11";
+HI.projetsCredit = "न्याय, शांति और विवेक के लिए उपकरण।";
+HI.footerNothing = "🔒 कुछ रिकॉर्ड नहीं किया गया · 🕊️ एक मूक साथी";
+HI.footerHome = "🏠 होम"; HI.footerSagesse = "📖 ज्ञान"; HI.footerAbout = "📖 बारे में";
+HI.footerSources = "📚 स्रोत"; HI.footerPrivacy = "🔒 गोपनीयता"; HI.footerContact = "✉️ संपर्क";
+HI.navHome = "🏠 होम"; HI.navSagesse = "📖 ज्ञान"; HI.navAbout = "📖 बारे में";
+HI.navExamen = "🕯️ परीक्षा"; HI.navSources = "📚 स्रोत"; HI.navContact = "✉️ संपर्क"; HI.navPrivacy = "🔒 गोपनीयता";
+HI.aiWarning = "मैं एक कृत्रिम बुद्धिमत्ता हूँ। मैं मानवीय समर्थन का स्थान नहीं लेता।";
+HI.toggleUrgence = "आपातकालीन नंबर देखें";
+HI.clauseText = "🙏 <strong>प्रेम के घर के बारे में</strong><br>यह उपकरण <strong>प्रारंभिक सुनवाई</strong> और <strong>विवेक सहायता</strong> प्रदान करता है।";
+HI.retour = "← होम पर लौटें";
+HI.situations = ["मैं बहुत बड़ी पीड़ा से गुज़र रहा हूँ","मुझे अपने जीवन में कोई अर्थ नहीं दिखता","मेरा रिश्ता मुश्किल में है","मैंने किसी प्रियजन को खो दिया है","मैं अकेला महसूस करता हूँ","मैं भगवान से नाराज़ हूँ","मुझे नहीं पता कि अब क्या विश्वास करूँ","मुझे एक कठिन निर्णय लेना है","मैं बीमारी या विकलांगता के साथ जी रहा हूँ","मैं भविष्य से डरता हूँ","मैं थक गया हूँ","मैं पारिवारिक संघर्ष का अनुभव कर रहा हूँ","मैं किसी पीड़ित व्यक्ति की संगत कर रहा हूँ","मैं जीवन का अर्थ खोज रहा हूँ","कुछ और"];
+HI.prieres = ["प्रभु, मुझे मौन सुनना सिखा।","मुझे वह स्वीकार करने की शक्ति दे जो मैं नहीं समझता।","तेरी शांति मेरे हृदय में बसी रहे।"];
+HI.defaultTestimonials = ["« एक गहरी शांति। »","« मौन का एक अनमोल स्थान। »"];
+HI.carnetPrompt = "✨<br><br>« आज आप कौन सी छोटी रोशनी नोट कर सकते हैं? »";
+HI.carnetPlaceholder = "मेरी छोटी रोशनी..."; HI.saveBtn = "💾 सहेजें"; HI.copyBtn = "🔗 मेरा लिंक कॉपी करें"; HI.shareBtn = "📤 साझा करें";
+HI.carnetInfo = "आप बाद में अपने लिंक से वापस आ सकते हैं।";
+HI.modes = { discernement: "🤲 विवेक", consolation: "🙏 सांत्वना", lecture: "📖 बाइबल पठन", priere: "❤️ प्रार्थना" };
+HI.homelieTitle = "प्रवचन तैयारी"; HI.homelieDescription = "पाठ दर्ज करें या AELF से लोड करें।";
+HI.labelLecture1 = "पहला पाठ:"; HI.labelPsaume = "भजन:";
+HI.labelLecture2 = "दूसरा पाठ:"; HI.labelEvangile = "सुसमाचार:";
+HI.labelTheme = "विषय (वैकल्पिक):"; HI.homelieButton = "प्रवचन उत्पन्न करें";
+HI.homelieLoading = "प्रवचन तैयार कर रहा है...";
+HI.ecouteList = ["आपातकाल: अपने देश का आपातकालीन नंबर डायल करें","दुनिया भर के श्रवण केंद्र: befrienders.org","संकट में: तुरंत किसी विश्वसनीय व्यक्ति से बात करें"];
+HI.contactPretreText = "कोई पादरी खोजें"; HI.contactPretreUrl = "https://www.cbci.in/";
+HI.contactCommunauteText = "आपके पास का समुदाय"; HI.contactCommunauteUrl = "https://www.cbci.in/parishes";
+HI.pageExamen = { title: "🕯️ निर्देशित परीक्षा", intro: "पाँच चरण, अपनी गति से, मौन में।",
+    steps: [{ t: "कृतज्ञता", d: "धन्यवाद दें। अपने दिन की समीक्षा करें।" },{ t: "प्रकाश", d: "ईश्वर की दृष्टि से देखने की कृपा माँगें।" },{ t: "पुनरावलोकन", d: "बीते घंटों पर लौटें। कहाँ शांति? कहाँ अशांति?" },{ t: "समर्पण", d: "जो बोझ है उसे सौंपें।" },{ t: "कल", d: "आशा के साथ कल की ओर देखें।" }],
+    end: "🙏 अपने शब्दों में समाप्त करें।", prev: "← पिछला", next: "अगला →" };
+
+/* ---------- ESPAGNOL ---------- */
+const ES = JSON.parse(JSON.stringify(EN));
+ES.title = "🕯️ Hogar del Amor"; ES.subtitle = "Discernimiento y la pequeña luz";
+ES.placeholder = "Describe tu situación..."; ES.role = "¿Quién eres? (opcional)";
+ES.submit = "Recibir ayuda para el discernimiento →"; ES.loading = "Discernimiento en curso...";
+ES.alertSituation = "Por favor describa su situación o elija una opción.";
+ES.situationsTitle = "O elige lo que mejor se adapte a lo que estás viviendo:";
+ES.precisionPlaceholder = "Puedes precisar lo que vives, si lo deseas...";
+ES.btnContinuer = "🌿 Continuar el discernimiento"; ES.ressourcesTitle = "Para continuar...";
+ES.textesTitle = "📖 Textos para meditar"; ES.prieresTitle = "🙏 Oraciones"; ES.contactsTitle = "👤 Contactos humanos";
+ES.ecouteTitle = "🆘 Servicios de escucha"; ES.exercicesTitle = "✨ Ejercicios espirituales";
+ES.revenirTitle = "🔄 Volver"; ES.revenirRecommencer = "Empezar de nuevo"; ES.saveLink = "Guardar mi enlace";
+ES.priereJourTitle = "📖 Oración del día"; ES.temoignagesTitle = "💬 ¿Has utilizado Hogar del Amor?";
+ES.temoignagesIntro = "Comparte tu experiencia (anónimo):"; ES.temoignagesPlaceholder = "Tu testimonio...";
+ES.envoyer = "Enviar"; ES.merci = "🙏 ¡Gracias! Tu testimonio permanece en tu dispositivo.";
+ES.temoignagesRecus = "💬 Tus testimonios";
+ES.projetsPsaume = "🌱 « La justicia y la paz se abrazan. » — Salmo 85:11";
+ES.projetsCredit = "Herramientas para la justicia, la paz y el discernimiento.";
+ES.footerNothing = "🔒 Nada se guarda · 🕊️ Un compañero silencioso";
+ES.footerHome = "🏠 Inicio"; ES.footerSagesse = "📖 Sabiduría"; ES.footerAbout = "📖 Acerca de";
+ES.footerSources = "📚 Fuentes"; ES.footerPrivacy = "🔒 Privacidad"; ES.footerContact = "✉️ Contacto";
+ES.navHome = "🏠 Inicio"; ES.navSagesse = "📖 Sabiduría"; ES.navAbout = "📖 Acerca de";
+ES.navExamen = "🕯️ Examen"; ES.navSources = "📚 Fuentes"; ES.navContact = "✉️ Contacto"; ES.navPrivacy = "🔒 Privacidad";
+ES.aiWarning = "Soy una inteligencia artificial. No reemplazo el apoyo humano.";
+ES.toggleUrgence = "Ver números de emergencia";
+ES.clauseText = "🙏 <strong>Acerca de Hogar del Amor</strong><br>Esta herramienta ofrece <strong>escucha inicial</strong> y <strong>ayuda al discernimiento</strong>.";
+ES.retour = "← Volver al inicio";
+ES.situations = ["Estoy pasando por un gran sufrimiento","Ya no le encuentro sentido a mi vida","Mi relación está en problemas","He perdido a un ser querido","Me siento solo/a","Estoy enojado/a con Dios","Ya no sé qué creer","Tengo que tomar una decisión difícil","Vivo con una enfermedad o discapacidad","Tengo miedo del futuro","Estoy agotado/a","Estoy viviendo un conflicto familiar","Estoy acompañando a alguien que sufre","Busco un sentido a mi vida","Otra cosa"];
+ES.prieres = ["Señor, enséñame a escuchar el silencio.","Dame fuerza para acoger lo que no entiendo.","Que Tu paz habite en mi corazón."];
+ES.defaultTestimonials = ["« Una paz profunda. »","« Un espacio de silencio precioso. »"];
+ES.carnetPrompt = "✨<br><br>« ¿Y tú, qué pequeña luz podrías anotar hoy? »";
+ES.carnetPlaceholder = "Mi pequeña luz..."; ES.saveBtn = "💾 Guardar"; ES.copyBtn = "🔗 Copiar mi enlace"; ES.shareBtn = "📤 Compartir";
+ES.carnetInfo = "Puedes volver más tarde con tu enlace.";
+ES.modes = { discernement: "🤲 Discernimiento", consolation: "🙏 Consolación", lecture: "📖 Lectura bíblica", priere: "❤️ Oración" };
+ES.homelieTitle = "Preparación de homilía"; ES.homelieDescription = "Ingrese las lecturas o cárguelas desde AELF.";
+ES.labelLecture1 = "Primera lectura:"; ES.labelPsaume = "Salmo:";
+ES.labelLecture2 = "Segunda lectura:"; ES.labelEvangile = "Evangelio:";
+ES.labelTheme = "Tema (opcional):"; ES.homelieButton = "Generar una homilía";
+ES.homelieLoading = "Preparando la homilía...";
+ES.ecouteList = ["Emergencia: marca el número de emergencias de tu país","Centros de escucha: befrienders.org","En angustia: habla con una persona de confianza"];
+ES.contactPretreText = "Encontrar un sacerdote"; ES.contactPretreUrl = "https://www.conferenciaepiscopal.es/parroquias/";
+ES.contactCommunauteText = "Comunidad cerca de ti"; ES.contactCommunauteUrl = "https://www.aciprensa.com/parroquias/";
+ES.pageExamen = { title: "🕯️ Examen guiado", intro: "Cinco pasos, a tu ritmo, en silencio.",
+    steps: [{ t: "Gratitud", d: "Da gracias. Repasa tu día." },{ t: "Luz", d: "Pide la gracia de mirar con los ojos de Dios." },{ t: "Relectura", d: "Vuelve sobre las horas pasadas. ¿Dónde sentiste paz?" },{ t: "Confiar", d: "Confía lo que pesa." },{ t: "Mañana", d: "Mira el mañana con esperanza." }],
+    end: "🙏 Termina con una oración sencilla.", prev: "← Anterior", next: "Siguiente →" };
+
+/* ---------- ARABE ---------- */
+const AR = JSON.parse(JSON.stringify(EN));
+AR.title = "🕯️ بيت المحبة"; AR.subtitle = "التمييز والنور الصغير";
+AR.placeholder = "صف حالتك..."; AR.role = "من أنت؟ (اختياري)";
+AR.submit = "احصل على مساعدة في التمييز →"; AR.loading = "التمييز جارٍ...";
+AR.alertSituation = "يرجى وصف حالتك أو اختيار خيار.";
+AR.situationsTitle = "أو اختر ما يناسب ما تعيشه:";
+AR.precisionPlaceholder = "يمكنك تحديد ما تعيشه، إذا رغبت...";
+AR.btnContinuer = "🌿 متابعة التمييز"; AR.ressourcesTitle = "للمتابعة...";
+AR.textesTitle = "📖 نصوص للتأمل"; AR.prieresTitle = "🙏 صلوات"; AR.contactsTitle = "👤 جهات اتصال بشرية";
+AR.ecouteTitle = "🆘 خدمات الاستماع"; AR.exercicesTitle = "✨ تمارين روحية";
+AR.revenirTitle = "🔄 عودة"; AR.revenirRecommencer = "ابدأ من جديد"; AR.saveLink = "حفظ الرابط";
+AR.priereJourTitle = "📖 صلاة اليوم"; AR.temoignagesTitle = "💬 هل استخدمت بيت المحبة؟";
+AR.temoignagesIntro = "شارك تجربتك (مجهول):"; AR.temoignagesPlaceholder = "شهادتك...";
+AR.envoyer = "إرسال"; AR.merci = "🙏 شكراً! تبقى شهادتك على جهازك.";
+AR.temoignagesRecus = "💬 شهاداتك";
+AR.projetsPsaume = "🌱 « العدل والسلام يتعانقان. » — مزمور 85:11";
+AR.projetsCredit = "أدوات من أجل العدل والسلام والتمييز.";
+AR.footerNothing = "🔒 لا شيء مسجل · 🕊️ رفيق صامت";
+AR.footerHome = "🏠 الرئيسية"; AR.footerSagesse = "📖 حكمة"; AR.footerAbout = "📖 عن";
+AR.footerSources = "📚 المصادر"; AR.footerPrivacy = "🔒 الخصوصية"; AR.footerContact = "✉️ اتصال";
+AR.navHome = "🏠 الرئيسية"; AR.navSagesse = "📖 حكمة"; AR.navAbout = "📖 عن";
+AR.navExamen = "🕯️ فحص"; AR.navSources = "📚 المصادر"; AR.navContact = "✉️ اتصال"; AR.navPrivacy = "🔒 الخصوصية";
+AR.aiWarning = "أنا ذكاء اصطناعي. أنا لا أحل محل الدعم البشري.";
+AR.toggleUrgence = "عرض أرقام الطوارئ";
+AR.clauseText = "🙏 <strong>عن بيت المحبة</strong><br>هذه الأداة تقدم <strong>استماعاً أولياً</strong> و<strong>مساعدة في التمييز</strong>.";
+AR.retour = "→ العودة إلى الرئيسية";
+AR.situations = ["أمر بمعاناة كبيرة","لم أعد أرى معنى لحياتي","علاقتي الزوجية متعثرة","فقدت شخصاً عزيزاً","أشعر بالوحدة","أنا غاضب من الله","لا أعرف ماذا أؤمن بعد الآن","أحتاج لاتخاذ قرار صعب","أعيش مع مرض أو إعاقة","أخاف من المستقبل","أنا مرهق","أمر بنزاع عائلي","أرافق شخصاً يعاني","أبحث عن معنى لحياتي","شيء آخر"];
+AR.prieres = ["يا رب، علمني أن أستمع إلى الصمت.","أعطني القوة لأتقبل ما لا أفهمه.","لينعم سلامك في قلبي."];
+AR.defaultTestimonials = ["« سلام عميق. »","« مكان صمت ثمين. »"];
+AR.carnetPrompt = "✨<br><br>« ما هو النور الصغير الذي يمكنك تدوينه اليوم؟ »";
+AR.carnetPlaceholder = "نوري الصغير..."; AR.saveBtn = "💾 حفظ"; AR.copyBtn = "🔗 نسخ الرابط"; AR.shareBtn = "📤 مشاركة";
+AR.carnetInfo = "يمكنك العودة لاحقاً باستخدام الرابط.";
+AR.modes = { discernement: "🤲 تمييز", consolation: "🙏 عزاء", lecture: "📖 قراءة الكتاب المقدس", priere: "❤️ صلاة" };
+AR.homelieTitle = "تحضير العظة"; AR.homelieDescription = "أدخل القراءات أو حمّلها من AELF.";
+AR.labelLecture1 = "القراءة الأولى:"; AR.labelPsaume = "المزمور:";
+AR.labelLecture2 = "القراءة الثانية:"; AR.labelEvangile = "الإنجيل:";
+AR.labelTheme = "الموضوع (اختياري):"; AR.homelieButton = "توليد عظة";
+AR.homelieLoading = "تحضير العظة...";
+AR.ecouteList = ["طوارئ: اتصل برقم الطوارئ في بلدك","مراكز الإصغاء: befrienders.org","عند الشدة: تحدّث فوراً مع شخص تثق به"];
+AR.contactPretreText = "البحث عن كاهن"; AR.contactPretreUrl = "https://www.lpj.org/fr/paroisses";
+AR.contactCommunauteText = "جماعة قريبة منك"; AR.contactCommunauteUrl = "https://www.catholicchurch-holyland.com/";
+AR.pageExamen = { title: "🕯️ الفحص الموجه", intro: "خمس خطوات، على إيقاعك، في صمت.",
+    steps: [{ t: "الشكر", d: "اشكر. راجع يومك." },{ t: "النور", d: "اطلب نعمة أن تنظر بعيني الله." },{ t: "المراجعة", d: "عد على الساعات الماضية." },{ t: "التسليم", d: "سلّم ما يثقلك." },{ t: "الغد", d: "انظر إلى الغد برجاء." }],
+    end: "🙏 اختم بصلاة بسيطة.", prev: "→ السابق", next: "التالي ←" };
+
+const translations = { fr: FR, en: EN, zh: ZH, hi: HI, es: ES, ar: AR };
+
+/* ============================================================
+   PAGES INTERNES
+   ============================================================ */
 const CARLO_FR = `<div class="bloc" style="background:#fff8f0;border:1px solid #e8d5b7;border-left:4px solid #c49a6c;"><h3 style="color:#8b5e3c;">🔥 Saint Carlo Acutis (1991–2006) — Le saint des développeurs</h3><p style="font-style:italic;color:#6b4c2a;font-size:1.05rem;">« Tous naissent comme des originaux, mais beaucoup meurent comme des photocopies. »<br><span style="font-size:0.8rem;color:#8b7355;">— Phrase que Carlo aimait à répéter</span></p><p>Canonisé en 2025, Carlo Acutis est le premier saint de l'ère numérique. Passionné d'informatique, il a utilisé le web pour créer une <a href="https://www.miracolieucaristici.org/" target="_blank" rel="noopener">exposition internationale sur les miracles eucharistiques</a>. Il disait : <em>« L'Eucharistie est mon autoroute vers le Ciel. »</em></p><blockquote style="border-left:3px solid #c49a6c;margin:1rem 0;padding-left:1rem;color:#5a4f42;line-height:1.7;"><p>« Notre objectif doit être l'infini, non pas le fini. L'Infini est notre patrie. »</p><p>« Être toujours uni à Jésus, tel est le but de ma vie. »</p><p>« Quand on s'expose au soleil, on bronze ; quand on se met devant Jésus Eucharistie, on devient saint ! »</p><p>« Le bonheur, c'est d'avoir le regard tourné vers Dieu. La tristesse, c'est de l'avoir tourné vers soi-même. »</p><p>« Ne perds pas ton temps à ne rien faire. Consacre-le à Dieu. »</p></blockquote><p style="font-size:0.85rem;color:#8b7355;margin-top:1rem;padding-top:0.8rem;border-top:1px dashed #d4c5b3;">📖 Pour aller plus loin : <em>Carlo Acutis, une âme de feu</em> — Marie et Jean-Baptiste Maillard, éd. Artège, 2025.</p><p style="font-size:0.8rem;color:#8b7355;font-style:italic;">🕯️ Prière : Saint Carlo Acutis, toi qui as fait de ton ordinateur un instrument d'évangélisation, apprends-nous à mettre nos talents numériques au service du Bien et de la Vérité. Amen.</p></div>`;
 
 const CARLO_EN = `<div class="bloc" style="background:#fff8f0;border:1px solid #e8d5b7;border-left:4px solid #c49a6c;"><h3 style="color:#8b5e3c;">🔥 Saint Carlo Acutis (1991–2006) — The developer saint</h3><p style="font-style:italic;">« Everyone is born as an original, but many die as photocopies. »</p><p>Canonized in 2025, Carlo Acutis is the first saint of the digital age. He used the web to create an <a href="https://www.miracolieucaristici.org/" target="_blank" rel="noopener">international exhibition on Eucharistic miracles</a>. He said: <em>« The Eucharist is my highway to Heaven. »</em></p><blockquote style="border-left:3px solid #c49a6c;padding-left:1rem;color:#5a4f42;line-height:1.7;"><p>« Our goal must be the infinite, not the finite. »</p><p>« To always be united with Jesus — that is the goal of my life. »</p><p>« Sadness is looking at yourself; happiness is looking at God. »</p></blockquote><p style="font-size:0.85rem;color:#8b7355;">📖 To go further: <em>Carlo Acutis, une âme de feu</em> — Marie & Jean-Baptiste Maillard, Artège, 2025.</p></div>`;
@@ -138,7 +328,9 @@ const pageContent = {
 };
 ['zh','hi','es','ar'].forEach(l => { pageContent[l] = pageContent.fr; });
 
-/* ---------- HELPERS ---------- */
+/* ============================================================
+   HELPERS
+   ============================================================ */
 function escapeHtml(t) {
     if (t === null || t === undefined) return '';
     return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
@@ -210,14 +402,15 @@ const FoyerUI = {
     scrollTop() { const prm = matchMedia('(prefers-reduced-motion: reduce)').matches; window.scrollTo({ top: 0, behavior: prm ? 'auto' : 'smooth' }); }
 };
 
-/* ---------- CARNET ---------- */
+/* ============================================================
+   CARNET
+   ============================================================ */
 function getCarnetId() {
     let id = null; try { id = localStorage.getItem(STORAGE_KEYS.CARNET_ID); } catch (e) {}
     if (!id) { id = 'carnet_' + Date.now() + '_' + Math.random().toString(36).slice(2, 11); try { localStorage.setItem(STORAGE_KEYS.CARNET_ID, id); } catch (e) {} }
     return id;
 }
 function carnetKey() { return STORAGE_KEYS.CARNET_PREFIX + getCarnetId(); }
-
 function loadCarnet() { const e = document.getElementById('carnet-entry'); if (!e) return; try { const d = localStorage.getItem(carnetKey()); if (d) e.value = d; } catch (err) {} }
 function saveCarnet() {
     const e = document.getElementById('carnet-entry'); if (!e) return;
@@ -234,8 +427,10 @@ function clearCarnet() {
     });
 }
 
-/* ---------- TÉMOIGNAGES ---------- */
-const LABEL_MOI = { fr: '— Vous (cet appareil)', en: '— You (this device)' };
+/* ============================================================
+   TÉMOIGNAGES
+   ============================================================ */
+const LABEL_MOI = { fr: '— Vous (cet appareil)', en: '— You (this device)', zh: '— 您（此设备）', hi: '— आप', es: '— Tú', ar: '— أنت' };
 function getTemoignages() { try { return JSON.parse(localStorage.getItem(STORAGE_KEYS.TEMOIGNAGES) || '[]'); } catch (e) { return []; } }
 function renderTemoignages() {
     const l = document.getElementById('temoignagesListe'); if (!l) return;
@@ -259,7 +454,9 @@ function clearTemoignages() {
     });
 }
 
-/* ---------- ROUTEUR ---------- */
+/* ============================================================
+   ROUTEUR
+   ============================================================ */
 function routeFromHash() { const h = window.location.hash.replace(/^#/, ''); return ROUTES[h] || 'accueil'; }
 function retourLink() { const t = translations[currentLang] || FR; return '<a class="retour" href="#/">' + escapeHtml(t.retour || '← Retour') + '</a>'; }
 function renderExamen(ex) {
@@ -288,24 +485,28 @@ function showPage() {
     FoyerUI.scrollTop();
 }
 
-/* ---------- RESSOURCES ---------- */
+/* ============================================================
+   RESSOURCES
+   ============================================================ */
 function updateRessources(key) {
     const langData = translations[currentLang] || FR;
     const fallback = FR.textesParSituation || {};
     const texts = (langData.textesParSituation && langData.textesParSituation[key]) || (langData.textesParSituation && langData.textesParSituation.AUTRE) || fallback.AUTRE || [];
     const tl = document.getElementById('ressources-textes-list');
     if (tl) { tl.innerHTML = ''; texts.forEach(it => { const li = document.createElement('li'); li.innerHTML = '<strong>' + escapeHtml(it.ref) + '</strong> – « ' + escapeHtml(it.texte) + ' » <a href="' + escapeHtml(it.lien) + '" target="_blank" rel="noopener" style="font-size:0.85rem;">(lire)</a>'; tl.appendChild(li); }); }
-    const pr = (langData.prieresParSituation && (langData.prieresParSituation[key] || langData.prieresParSituation.defaut)) || [];
+    const pr = (langData.prieresParSituation && (langData.prieresParSituation[key] || langData.prieresParSituation.defaut)) || FR.prieresParSituation.defaut;
     const pl = document.getElementById('ressources-prieres-list');
     if (pl) { pl.innerHTML = ''; pr.forEach(p => { const li = document.createElement('li'); li.innerHTML = '<strong>' + escapeHtml(p.titre) + '</strong><br><span style="font-size:0.9rem;">' + escapeHtml(p.texte) + '</span>'; pl.appendChild(li); }); }
     const il = document.getElementById('ressources-ignaciens-list');
-    if (il) { il.innerHTML = ''; (langData.exercicesIgnatiens || []).forEach(it => { const li = document.createElement('li'); li.innerHTML = '<strong>' + escapeHtml(it.titre) + '</strong><br><span style="font-size:0.9rem;">' + escapeHtml(it.texte) + '</span>'; il.appendChild(li); }); }
-    const ex = { fr: ["Noter une petite lumière demain", "5 minutes de silence le soir", "3 respirations : « Je suis aimé(e) »"], en: ["Note a little light tomorrow", "5 minutes of silence in the evening", "3 deep breaths: « I am loved »"] }[currentLang] || [];
+    if (il) { il.innerHTML = ''; ((langData.exercicesIgnatiens && langData.exercicesIgnatiens.length ? langData.exercicesIgnatiens : FR.exercicesIgnatiens) || []).forEach(it => { const li = document.createElement('li'); li.innerHTML = '<strong>' + escapeHtml(it.titre) + '</strong><br><span style="font-size:0.9rem;">' + escapeHtml(it.texte) + '</span>'; il.appendChild(li); }); }
+    const ex = { fr: ["Noter une petite lumière demain", "5 minutes de silence le soir", "3 respirations : « Je suis aimé(e) »"], en: ["Note a little light tomorrow", "5 minutes of silence in the evening", "3 deep breaths: « I am loved »"], zh: ["明天记下一束小光","晚上静默5分钟","三次深呼吸：« 我被爱 »"], hi: ["कल एक छोटी रोशनी नोट करें","शाम को 5 मिनट मौन","3 गहरी साँसें: « मैं प्रिय हूँ »"], es: ["Anotar una pequeña luz mañana","5 minutos de silencio por la noche","3 respiraciones: « Soy amado(a) »"], ar: ["دوّن نوراً صغيراً غداً","5 دقائق من الصمت مساءً","3 أنفاس عميقة: « أنا محبوب »"] }[currentLang] || [];
     const el = document.getElementById('ressources-exercices-list');
     if (el) { el.innerHTML = ''; ex.forEach(e => { const li = document.createElement('li'); li.textContent = e; el.appendChild(li); }); }
 }
 
-/* ---------- RÉPONSE ---------- */
+/* ============================================================
+   RÉPONSE
+   ============================================================ */
 function showResponse(text) {
     document.getElementById('response-container').style.display = 'block';
     document.getElementById('response-lecture').style.display = 'block';
@@ -323,7 +524,9 @@ function buildFallback(situation, t) {
     return "Pour discerner (« " + situation + " »), saint Ignace nous invite au calme intérieur.\n\n" + tx + "\n\n" + pr;
 }
 
-/* ---------- SOUMISSION ---------- */
+/* ============================================================
+   SOUMISSION
+   ============================================================ */
 async function handleSubmit() {
     const radio = document.querySelector('input[name="situation-choisie"]:checked');
     const rk = radio ? radio.value : null;
@@ -358,7 +561,9 @@ async function handleSubmit() {
     if (btn) btn.disabled = false;
 }
 
-/* ---------- AELF ---------- */
+/* ============================================================
+   AELF
+   ============================================================ */
 function initAelfDate() {
     const i = document.getElementById('date-aelf'); if (!i) return;
     const now = new Date();
@@ -457,13 +662,22 @@ function genererHomelieLocale(lecture1, psaume, lecture2, evangile, theme) {
     return { html, wordCount: wc, maxLimit: max, isSunday };
 }
 
-/* ---------- LANGUAGE ---------- */
+/* ============================================================
+   LANGUAGE
+   ============================================================ */
 function updateLanguage(lang) {
     if (!translations[lang]) lang = 'fr';
     currentLang = lang;
     document.documentElement.lang = lang;
     document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
     const t = translations[lang];
+
+    // Synchronisation des boutons de langue (fix du double-actif)
+    document.querySelectorAll('.lang-btn').forEach(b => {
+        const active = b.dataset.lang === lang;
+        b.classList.toggle('active', active);
+        b.setAttribute('aria-pressed', active ? 'true' : 'false');
+    });
 
     setHtml('mainTitle', escapeHtml(t.title));
     setText('mainSubtitle', t.subtitle);
@@ -567,12 +781,12 @@ function updateLanguage(lang) {
     if (currentSituationKey) updateRessources(currentSituationKey);
 }
 
-/* ---------- EVENTS ---------- */
+/* ============================================================
+   EVENTS
+   ============================================================ */
 function bindEvents() {
     document.querySelectorAll('.lang-btn').forEach(btn => {
         btn.addEventListener('click', function() {
-            document.querySelectorAll('.lang-btn').forEach(b => { b.classList.remove('active'); b.setAttribute('aria-pressed', 'false'); });
-            this.classList.add('active'); this.setAttribute('aria-pressed', 'true');
             try { localStorage.setItem(STORAGE_KEYS.LANG, this.dataset.lang); } catch (e) {}
             updateLanguage(this.dataset.lang);
             const names = { fr: 'Français', en: 'English', zh: '中文', hi: 'हिन्दी', es: 'Español', ar: 'العربية' };
@@ -804,7 +1018,9 @@ async function handleGenererHomelie() {
     hd.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
 
-/* ---------- INIT ---------- */
+/* ============================================================
+   INIT
+   ============================================================ */
 function init() {
     const up = new URLSearchParams(window.location.search);
     if (up.get('carnet')) { try { localStorage.setItem(STORAGE_KEYS.CARNET_ID, up.get('carnet')); } catch (e) {} }
@@ -814,7 +1030,6 @@ function init() {
     let lang = '';
     try { lang = localStorage.getItem(STORAGE_KEYS.LANG) || ''; } catch (e) {}
     if (LANGS.indexOf(lang) === -1) { const n = (navigator.language || '').slice(0, 2).toLowerCase(); lang = LANGS.indexOf(n) !== -1 ? n : 'fr'; }
-    document.querySelectorAll('.lang-btn').forEach(b => { const a = b.dataset.lang === lang; b.classList.toggle('active', a); b.setAttribute('aria-pressed', a ? 'true' : 'false'); });
     updateLanguage(lang);
     showPage();
 }
