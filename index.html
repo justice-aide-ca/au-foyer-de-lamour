@@ -8,154 +8,16 @@
 <meta name="theme-color" content="#4a6f5e">
 <link rel="icon" type="image/png" href="/favicon.png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-
-<meta property="og:title" content="Au Foyer de l'Amour – Discernement et la petite lumière">
+<meta property="og:title" content="Au Foyer de l'Amour">
 <meta property="og:description" content="Un espace de discernement et d'écoute. Une petite lumière dans ta nuit.">
-<meta property="og:image" content="https://amour-et-verite-app.netlify.app/og-image.png">
+<meta property="og:image" content="https://compagnon-voyage.netlify.app/og-image.png">
 <meta property="og:url" content="https://compagnon-voyage.netlify.app">
 <meta property="og:type" content="website">
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "Au Foyer de l'Amour",
-  "url": "https://compagnon-voyage.netlify.app",
-  "inLanguage": ["fr", "en", "zh", "hi", "es", "ar"]
-}
-</script>
-
-<style>
-    *, *::before, *::after { box-sizing: border-box; }
-    body { font-family: Georgia, serif; background: linear-gradient(135deg, #f6f3ef, #e0d8cc); background-size: cover; padding: 20px; margin: 0; }
-    .container { max-width: 800px; margin: auto; background: rgba(255,255,255,0.92); padding: 2rem; border-radius: 16px; }
-    h1, h2, h3 { color: #4a3b2c; }
-    h1 { text-align: center; margin-bottom: 0; }
-    .sous-titre { text-align: center; color: #5a4f42; font-style: italic; margin-top: 0.2rem; margin-bottom: 1.5rem; }
-
-    .nav-menu { display: flex; justify-content: center; flex-wrap: wrap; gap: 0.8rem; margin: 1rem 0 1.5rem; padding: 0.5rem 0; border-top: 1px solid #e6e4e0; border-bottom: 1px solid #e6e4e0; }
-    .nav-menu a { color: #4a3b2c; text-decoration: none; font-size: 0.9rem; padding: 0.3rem 0.6rem; border-radius: 30px; }
-    .nav-menu a:hover { background: #f0ede8; color: #4a6f5e; }
-    .nav-menu a.active { background: #4a6f5e; color: white; }
-
-    .language-selector { display: flex; justify-content: center; flex-wrap: wrap; gap: 0.4rem; margin: 0.5rem 0 1.5rem; }
-    .lang-btn { background: #f0ede8; border: 1px solid #c4b8a8; padding: 0.2rem 0.6rem; border-radius: 30px; cursor: pointer; font-size: 0.75rem; color: #2c2b28; }
-    .lang-btn.active { background: #4a6f5e; color: white; border-color: #4a6f5e; }
-
-    .mode-selector { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem; margin: 1rem 0; }
-    .mode-btn { background: #f0ede8; border: 1px solid #c4b8a8; padding: 0.4rem 1rem; border-radius: 30px; cursor: pointer; font-size: 0.85rem; color: #2c2b28; }
-    .mode-btn.active { background: #4a6f5e; color: white; border-color: #4a6f5e; }
-
-    textarea, input[type="text"] { width: 100%; padding: 8px; margin: 10px 0; border: 1px solid #ddd; border-radius: 8px; font-family: inherit; }
-    button { background: #4a6f5e; color: white; padding: 10px 20px; border: none; border-radius: 40px; cursor: pointer; font-size: 1rem; }
-    .reponse-card { background: #fefaf5; padding: 15px; border-left: 4px solid #4a6f5e; margin-top: 20px; line-height: 1.5; white-space: pre-line; }
-    .error { color: #c0392b; background: #fdecea; padding: 10px; border-radius: 8px; margin-top: 20px; }
-
-    .situations-container { margin: 1.5rem 0; padding: 1.2rem; background: #f6f3ef; border-radius: 12px; border: 1px solid #e2dad0; }
-    .situations-container legend { font-weight: bold; color: #4a3b2c; padding: 0 0.5rem; margin-bottom: 0.5rem; }
-    .situations-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.4rem 1rem; }
-    .situations-grid label { display: flex; align-items: center; gap: 0.4rem; font-size: 0.9rem; color: #4a3b2c; cursor: pointer; padding: 0.3rem 0; }
-    .situations-grid input[type="radio"] { width: auto; margin: 0; }
-    #precision-situation { margin-top: 0.8rem; width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 8px; font-size: 0.9rem; }
-
-    #response-container { margin-top: 2rem; display: none; }
-    #carnet-container { display: none; margin-top: 2rem; text-align: center; }
-    .silence-message { font-size: 1.2rem; color: #4a3b2c; margin: 1rem 0; }
-    .carnet-box { background: #f6f3ef; padding: 1.5rem; border-radius: 12px; margin: 1rem 0; }
-    .carnet-box textarea { width: 100%; height: 100px; margin: 0.5rem 0; }
-    .carnet-actions { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-top: 1rem; }
-    .btn-carnet { background: #4a6f5e; color: white; border: none; padding: 0.5rem 1rem; border-radius: 40px; cursor: pointer; font-size: 0.9rem; }
-    .btn-carnet.outline { background: transparent; color: #4a6f5e; border: 1px solid #4a6f5e; }
-    .carnet-info { font-size: 0.8rem; color: #5a4f42; margin-top: 0.8rem; }
-
-    #ressources-container { display: none; margin-top: 2rem; }
-    .ressources-section { background: #f6f3ef; padding: 1.2rem; border-radius: 12px; margin: 1rem 0; }
-    .ressources-section h3 { margin-top: 0; }
-    .ressources-section ul { list-style: none; padding-left: 0; }
-    .ressources-section li { margin: 0.4rem 0; }
-    .ressources-section a { color: #4a6f5e; text-decoration: none; }
-    .btn-ressources { background: #4a6f5e; color: white; border: none; padding: 0.8rem 1.5rem; border-radius: 40px; cursor: pointer; font-size: 1rem; margin-top: 1rem; }
-
-    .ai-warning { margin-top: 1rem; padding: 0.6rem 1rem; background: #fefaf5; border: 1px solid #e6e4e0; border-radius: 8px; font-size: 0.85rem; color: #5a4f42; text-align: center; line-height: 1.5; }
-    .ai-warning a { color: #4a6f5e; text-decoration: underline; cursor: pointer; }
-    .emergency-numbers { display: none; margin-top: 0.5rem; font-size: 0.8rem; color: #4a3b2c; }
-    .emergency-numbers.visible { display: block; }
-
-    footer { text-align: center; margin-top: 2rem; font-size: 0.8rem; color: #aaa39a; line-height: 2; }
-    footer a { color: #5a4f42; text-decoration: none; margin: 0 0.4rem; }
-    .clause { margin-top: 1.5rem; padding: 0.8rem 1rem; background: #f6f3ef; border-radius: 8px; border-left: 4px solid #4a6f5e; font-size: 0.8rem; color: #5a4f42; line-height: 1.6; text-align: left; }
-    .clause p { margin: 0; }
-
-    .section-card { background: #f6f3ef; padding: 1.2rem; border-radius: 12px; margin: 1.5rem 0; }
-    .section-card h3 { margin-top: 0; }
-    .examen-step { display: none; margin-top: 1rem; }
-    .examen-step.active { display: block; }
-    .btn-examen { background: #4a6f5e; color: white; border: none; padding: 0.4rem 1.2rem; border-radius: 40px; cursor: pointer; margin-right: 0.5rem; }
-    .btn-examen:disabled { opacity: 0.4; cursor: default; }
-    .temoignage-affiche { background: #fefaf5; padding: 0.8rem 1.2rem; border-radius: 12px; border-left: 4px solid #4a6f5e; margin: 0.5rem 0; font-style: italic; }
-    .temoignage-affiche .source { font-style: normal; font-size: 0.75rem; color: #888; margin-top: 0.3rem; }
-    .encart-projets { margin-top: 2rem; padding: 1.2rem; background: #f6f3ef; border-radius: 16px; text-align: center; }
-    .encart-projets a { color: #4a6f5e; text-decoration: none; margin: 0 0.4rem; }
-
-    @media (max-width: 600px) { .situations-grid { grid-template-columns: 1fr; } }
-
-    [dir="rtl"] .reponse-card, [dir="rtl"] .clause, [dir="rtl"] .temoignage-affiche { border-left: none; border-right: 4px solid #4a6f5e; }
-    [dir="rtl"] .clause { text-align: right; }
-
-    .page { display: none; }
-    .page.active { display: block; }
-    .page h2 { text-align: center; margin: 0.5rem 0 0.8rem; }
-    .page-intro { text-align: center; color: #5a4f42; font-style: italic; margin: 0 0 1rem; }
-    .retour { display: inline-block; margin: 0.3rem 0 0.8rem; color: #4a6f5e; text-decoration: none; font-size: 0.9rem; }
-    .page .bloc { background: #f6f3ef; padding: 1.2rem; border-radius: 12px; margin: 1rem 0; }
-    .page .bloc h3 { margin-top: 0; }
-    .page .bloc p, .page .bloc li { font-size: 0.95rem; line-height: 1.6; color: #4a3b2c; }
-    .page .bloc a { color: #4a6f5e; }
-    .examen-nav { text-align: center; margin-top: 1rem; }
-
-    .toast-container { position: fixed; top: 20px; right: 20px; z-index: 10000; display: flex; flex-direction: column; gap: 10px; max-width: 380px; pointer-events: none; }
-    .toast { padding: 12px 18px; border-radius: 8px; color: #fff; font-size: 0.92rem; font-weight: 500; line-height: 1.4; box-shadow: 0 4px 16px rgba(0,0,0,0.18); opacity: 0; transform: translateY(-12px); transition: opacity 0.3s, transform 0.3s; pointer-events: auto; word-break: break-word; }
-    .toast.show { opacity: 1; transform: translateY(0); }
-    .toast-info { background-color: #2e7d32; border-left: 5px solid #1b5e20; }
-    .toast-warn { background-color: #f57c00; border-left: 5px solid #e65100; }
-    .toast-error { background-color: #d32f2f; border-left: 5px solid #b71c1c; }
-
-    :focus-visible { outline: 2px solid #4a6f5e; outline-offset: 2px; }
-    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
-    button, .lang-btn, .mode-btn, .btn-carnet { min-height: 44px; display: inline-flex; align-items: center; justify-content: center; }
-    .lang-btn { min-width: 44px; padding: 0.4rem 0.8rem; }
-
-    .skeleton-card { background: #f6f3ef; border-radius: 12px; padding: 1.5rem; margin: 1.5rem 0; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
-    .skeleton-header { display: flex; align-items: center; gap: 8px; margin-bottom: 14px; font-weight: bold; color: #4a6f5e; }
-    .skeleton-line { height: 14px; margin-bottom: 12px; border-radius: 6px; background: linear-gradient(90deg, #e5dfd5 25%, #f2eee8 50%, #e5dfd5 75%); background-size: 200% 100%; animation: skeleton-shimmer 1.5s infinite ease-in-out; }
-    .skeleton-line.title { height: 22px; width: 55%; margin-bottom: 18px; }
-    .skeleton-line.short { width: 40%; }
-    .skeleton-line.medium { width: 75%; }
-    .skeleton-line.full { width: 100%; }
-    @keyframes skeleton-shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
-
-    #back-to-top { position: fixed; bottom: 25px; right: 25px; background: #4a6f5e; color: #fff; border: none; border-radius: 50%; width: 48px; height: 48px; font-size: 1.2rem; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.2); display: none; align-items: center; justify-content: center; z-index: 1000; }
-    #back-to-top:hover { background: #39574a; }
-
-    .modal-overlay { position: fixed; inset: 0; background: rgba(30,25,20,0.55); z-index: 9999; display: flex; align-items: center; justify-content: center; padding: 1rem; }
-    .modal-overlay[hidden] { display: none; }
-    .modal-box { background: #fff; border-radius: 14px; padding: 1.6rem; max-width: 440px; width: 100%; box-shadow: 0 12px 40px rgba(0,0,0,0.25); }
-    .modal-box h3 { margin: 0 0 0.7rem; color: #4a3b2c; }
-    .modal-box p { margin: 0 0 1.3rem; color: #4a3b2c; line-height: 1.5; }
-    .modal-actions { display: flex; gap: 0.8rem; justify-content: flex-end; flex-wrap: wrap; }
-    .modal-actions button { min-height: 44px; padding: 0.5rem 1.3rem; border-radius: 30px; cursor: pointer; font-size: 0.95rem; border: none; }
-    .btn-cancel { background: #f0ede8; color: #4a3b2c; }
-    .btn-danger { background: #c0392b; color: white; }
-
-    @media (prefers-reduced-motion: reduce) {
-        *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
-        .skeleton-line { animation: none !important; background: #e5dfd5 !important; }
-    }
-</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Au Foyer de l'Amour","url":"https://compagnon-voyage.netlify.app","inLanguage":["fr","en","zh","hi","es","ar"]}</script>
+<link rel="stylesheet" href="/styles.css">
 </head>
 <body>
 <div id="toast-container" class="toast-container" aria-live="polite" aria-atomic="true"></div>
-
 <div class="container">
     <h1 id="mainTitle">🕯️ Au Foyer de l'Amour</h1>
     <div class="sous-titre" id="mainSubtitle">Discernement et la petite lumière</div>
@@ -171,52 +33,45 @@
     </nav>
 
     <div class="language-selector" role="group" aria-label="Sélection de la langue">
-        <button type="button" class="lang-btn active" data-lang="fr" aria-label="Français" aria-pressed="true">🇫🇷 Français</button>
-        <button type="button" class="lang-btn" data-lang="en" aria-label="English" aria-pressed="false">🇬🇧 English</button>
-        <button type="button" class="lang-btn" data-lang="zh" aria-label="中文" aria-pressed="false">🇨🇳 中文</button>
-        <button type="button" class="lang-btn" data-lang="hi" aria-label="हिन्दी" aria-pressed="false">🇮🇳 हिन्दी</button>
-        <button type="button" class="lang-btn" data-lang="es" aria-label="Español" aria-pressed="false">🇪🇸 Español</button>
-        <button type="button" class="lang-btn" data-lang="ar" aria-label="العربية" aria-pressed="false">🇸🇦 العربية</button>
+        <button type="button" class="lang-btn active" data-lang="fr" aria-pressed="true">🇫🇷 Français</button>
+        <button type="button" class="lang-btn" data-lang="en" aria-pressed="false">🇬🇧 English</button>
+        <button type="button" class="lang-btn" data-lang="zh" aria-pressed="false">🇨🇳 中文</button>
+        <button type="button" class="lang-btn" data-lang="hi" aria-pressed="false">🇮🇳 हिन्दी</button>
+        <button type="button" class="lang-btn" data-lang="es" aria-pressed="false">🇪🇸 Español</button>
+        <button type="button" class="lang-btn" data-lang="ar" aria-pressed="false">🇸🇦 العربية</button>
     </div>
 
     <div id="page-accueil" class="page active">
-        <div class="mode-selector" role="group" aria-label="Mode d'accompagnement spirituel">
-            <button type="button" class="mode-btn active" data-mode="discernement" id="mode-discernement" aria-label="Mode Discernement" aria-pressed="true">🤲 Discernement</button>
-            <button type="button" class="mode-btn" data-mode="consolation" id="mode-consolation" aria-label="Mode Consolation" aria-pressed="false">🙏 Consolation</button>
-            <button type="button" class="mode-btn" data-mode="lecture" id="mode-lecture" aria-label="Mode Lecture biblique" aria-pressed="false">📖 Lecture biblique</button>
-            <button type="button" class="mode-btn" data-mode="priere" id="mode-priere" aria-label="Mode Prière" aria-pressed="false">❤️ Prière</button>
+        <div class="mode-selector" role="group" aria-label="Mode">
+            <button type="button" class="mode-btn active" data-mode="discernement" id="mode-discernement" aria-pressed="true">🤲 Discernement</button>
+            <button type="button" class="mode-btn" data-mode="consolation" id="mode-consolation" aria-pressed="false">🙏 Consolation</button>
+            <button type="button" class="mode-btn" data-mode="lecture" id="mode-lecture" aria-pressed="false">📖 Lecture biblique</button>
+            <button type="button" class="mode-btn" data-mode="priere" id="mode-priere" aria-pressed="false">❤️ Prière</button>
         </div>
 
-        <label for="situation" class="sr-only">Votre situation personnelle</label>
+        <label for="situation" class="sr-only">Votre situation</label>
         <textarea id="situation" rows="6" placeholder="Décrivez votre situation..."></textarea>
-        <label for="role" class="sr-only">Votre rôle ou vocation</label>
+        <label for="role" class="sr-only">Votre rôle</label>
         <input type="text" id="role" placeholder="Qui êtes-vous ? (optionnel)">
 
         <fieldset class="situations-container">
             <legend id="situations-title">Ou choisissez ce qui correspond le mieux à ce que vous vivez :</legend>
             <div class="situations-grid" id="situations-list"></div>
-            <label for="precision-situation" class="sr-only">Précisions supplémentaires</label>
+            <label for="precision-situation" class="sr-only">Précisions</label>
             <textarea id="precision-situation" rows="2" placeholder="Tu peux préciser ce que tu vis, si tu le souhaites..."></textarea>
         </fieldset>
 
-        <button type="button" id="submitBtn" aria-label="Recevoir une aide au discernement">Recevoir une aide au discernement →</button>
+        <button type="button" id="submitBtn">Recevoir une aide au discernement →</button>
 
         <div id="response-container" aria-live="polite">
-            <div id="response-lecture">
-                <div id="reponse" class="reponse-card"></div>
-            </div>
+            <div id="response-lecture"><div id="reponse" class="reponse-card"></div></div>
         </div>
 
-        <div id="loading" class="loading" style="display:none;" aria-live="polite" aria-busy="true">
+        <div id="loading" style="display:none;" aria-live="polite" aria-busy="true">
             <div class="skeleton-card">
-                <div class="skeleton-header">
-                    <span aria-hidden="true">🕯️</span>
-                    <span id="loading-text">Discernement en cours...</span>
-                </div>
-                <div class="skeleton-line title"></div>
-                <div class="skeleton-line full"></div>
-                <div class="skeleton-line medium"></div>
-                <div class="skeleton-line full"></div>
+                <div class="skeleton-header"><span>🕯️</span><span id="loading-text">Discernement en cours...</span></div>
+                <div class="skeleton-line title"></div><div class="skeleton-line full"></div>
+                <div class="skeleton-line medium"></div><div class="skeleton-line full"></div>
                 <div class="skeleton-line short"></div>
             </div>
         </div>
@@ -225,13 +80,13 @@
         <div id="carnet-container">
             <div class="silence-message" id="carnet-prompt"></div>
             <div class="carnet-box">
-                <label for="carnet-entry" class="sr-only">Votre note de carnet</label>
+                <label for="carnet-entry" class="sr-only">Note de carnet</label>
                 <textarea id="carnet-entry" placeholder="Ma petite lumière..."></textarea>
                 <div class="carnet-actions">
                     <button type="button" class="btn-carnet" id="save-carnet">💾 Sauvegarder</button>
                     <button type="button" class="btn-carnet outline" id="copy-carnet-link">🔗 Copier mon lien</button>
                     <button type="button" class="btn-carnet outline" id="share-carnet">📤 Partager</button>
-                    <button type="button" class="btn-carnet outline" id="clear-carnet" style="color:#b33927; border-color:#d49b91;">🗑️ Effacer mon carnet</button>
+                    <button type="button" class="btn-carnet outline" id="clear-carnet" style="color:#b33927;border-color:#d49b91;">🗑️ Effacer mon carnet</button>
                 </div>
                 <div id="carnet-feedback" class="carnet-info" role="status"></div>
                 <div class="carnet-info" id="carnet-info-text"></div>
@@ -239,137 +94,88 @@
             <button type="button" class="btn-ressources" id="btn-continuer-discernement">🌿 Continuer le discernement</button>
         </div>
 
-        <div class="section-card" id="homelie-section" style="background:#fff; border-radius:16px; padding:2rem; box-shadow:0 4px 20px rgba(0,0,0,0.06); border:1px solid #e8e2d8; margin:2rem 0;">
-            <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:0.5rem; margin-bottom:0.5rem;">
-                <h3 style="margin:0; font-size:1.4rem; color:#2c221e;">📖 <span id="homelie-title">Préparation d'homélie</span></h3>
-                <span style="font-size:0.75rem; background:#4a6f5e; color:white; padding:3px 14px; border-radius:30px; font-weight:500;">ÉCOUTE DE LA PAROLE</span>
+        <div class="section-card" style="background:#fff;border-radius:16px;padding:2rem;border:1px solid #e8e2d8;margin:2rem 0;">
+            <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0.5rem;margin-bottom:0.5rem;">
+                <h3 style="margin:0;font-size:1.4rem;">📖 <span id="homelie-title">Préparation d'homélie</span></h3>
+                <span style="font-size:0.75rem;background:#4a6f5e;color:white;padding:3px 14px;border-radius:30px;">ÉCOUTE DE LA PAROLE</span>
             </div>
-            <p id="homelie-description" style="color:#5a4f42; font-size:0.95rem; margin-bottom:1.5rem;">
-                Entrez les lectures ou chargez-les directement depuis l'AELF pour recevoir une homélie pastorale continue.
-            </p>
+            <p id="homelie-description" style="color:#5a4f42;font-size:0.95rem;">Entrez les lectures ou chargez-les depuis l'AELF.</p>
 
-            <div style="background:#f4f0e8; border:1px solid #dfd7ca; border-radius:10px; padding:1.2rem; margin-bottom:1.5rem;">
-                <div style="font-weight:bold; color:#4a6f5e; margin-bottom:0.6rem; font-size:0.95rem;">
-                    <label for="date-aelf" style="cursor:pointer;">📅 Charger les lectures liturgiques officielles via l'AELF</label>
+            <div style="background:#f4f0e8;border:1px solid #dfd7ca;border-radius:10px;padding:1.2rem;margin-bottom:1.5rem;">
+                <div style="font-weight:bold;color:#4a6f5e;margin-bottom:0.6rem;font-size:0.95rem;">
+                    <label for="date-aelf">📅 Charger les lectures liturgiques officielles via l'AELF</label>
                 </div>
-                <div style="display:flex; gap:0.8rem; align-items:center; flex-wrap:wrap;">
-                    <input type="date" id="date-aelf" style="padding:8px 12px; border:1px solid #c2b5a3; border-radius:6px; font-size:0.92rem; background:#fff; color:#3b322a;">
-                    <button type="button" id="btn-charger-aelf" style="background:#4a6f5e; color:#fff; border:none; padding:8px 16px; border-radius:6px; font-weight:600; cursor:pointer; font-size:0.92rem;">
-                        📥 Charger le texte officiel (AELF)
-                    </button>
-                    <button type="button" id="btn-homelie-du-jour" style="background:#8b5e3c; color:#fff; border:none; padding:8px 16px; border-radius:6px; font-weight:600; cursor:pointer; font-size:0.92rem;">
-                        🕊️ Générer l'homélie du jour
-                    </button>
-                    <span id="aelf-status" style="font-size:0.85rem; color:#4a6f5e; font-style:italic;" role="status"></span>
+                <div style="display:flex;gap:0.8rem;align-items:center;flex-wrap:wrap;">
+                    <input type="date" id="date-aelf" style="width:auto;">
+                    <button type="button" id="btn-charger-aelf">📥 Charger (AELF)</button>
+                    <button type="button" id="btn-homelie-du-jour" style="background:#8b5e3c;">🕊️ Générer l'homélie du jour</button>
+                    <span id="aelf-status" style="font-size:0.85rem;color:#4a6f5e;font-style:italic;" role="status"></span>
                 </div>
-                <div id="aelf-jour-nom" style="font-size:0.9rem; font-weight:600; color:#325c48; margin-top:0.6rem;"></div>
-
-                <div id="aelf-lectures-display" style="display:none; background:#fff; border:1px solid #d4c5b3; border-radius:8px; padding:1rem; margin-top:1rem; max-height:260px; overflow-y:auto;">
-                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">
-                        <strong style="color:#5b4636; font-size:0.95rem;">📖 Textes liturgiques officiels :</strong>
-                        <button type="button" id="btn-fermer-lectures" style="background:none; border:none; color:#888; cursor:pointer; font-size:0.85rem;">✕ Masquer</button>
+                <div id="aelf-jour-nom" style="font-size:0.9rem;font-weight:600;color:#325c48;margin-top:0.6rem;"></div>
+                <div id="aelf-lectures-display" style="display:none;background:#fff;border:1px solid #d4c5b3;border-radius:8px;padding:1rem;margin-top:1rem;max-height:260px;overflow-y:auto;">
+                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem;">
+                        <strong style="color:#5b4636;">📖 Textes liturgiques :</strong>
+                        <button type="button" id="btn-fermer-lectures" style="background:none;border:none;color:#888;cursor:pointer;">✕ Masquer</button>
                     </div>
-                    <div id="aelf-lectures-body" style="font-size:0.92rem; line-height:1.7; color:#3b322a;"></div>
+                    <div id="aelf-lectures-body" style="font-size:0.92rem;line-height:1.7;"></div>
                 </div>
             </div>
 
-            <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-top:1rem;">
-                <div>
-                    <label for="lecture1" id="label-lecture1" style="font-weight:bold; display:block; margin-bottom:0.3rem;">Première lecture :</label>
-                    <input type="text" id="lecture1" placeholder="Ex: Isaïe 22,19-23">
-                </div>
-                <div>
-                    <label for="psaume" id="label-psaume" style="font-weight:bold; display:block; margin-bottom:0.3rem;">Psaume :</label>
-                    <input type="text" id="psaume" placeholder="Ex: Psaume 24 (25)">
-                </div>
-                <div>
-                    <label for="lecture2" id="label-lecture2" style="font-weight:bold; display:block; margin-bottom:0.3rem;">Deuxième lecture :</label>
-                    <input type="text" id="lecture2" placeholder="Ex: Philippiens 2,1-11">
-                </div>
-                <div>
-                    <label for="evangile" id="label-evangile" style="font-weight:bold; display:block; margin-bottom:0.3rem;"><span id="label-evangile-text">Évangile :</span> <span style="color:#c0392b;">*</span></label>
-                    <input type="text" id="evangile" placeholder="Ex: Matthieu 21,28-32">
-                </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+                <div><label for="lecture1" id="label-lecture1" style="font-weight:bold;">Première lecture :</label><input type="text" id="lecture1" placeholder="Ex: Isaïe 22,19-23"></div>
+                <div><label for="psaume" id="label-psaume" style="font-weight:bold;">Psaume :</label><input type="text" id="psaume" placeholder="Ex: Psaume 24"></div>
+                <div><label for="lecture2" id="label-lecture2" style="font-weight:bold;">Deuxième lecture :</label><input type="text" id="lecture2" placeholder="Ex: Philippiens 2,1-11"></div>
+                <div><label for="evangile" id="label-evangile" style="font-weight:bold;"><span id="label-evangile-text">Évangile :</span> <span style="color:#c0392b;">*</span></label><input type="text" id="evangile" placeholder="Ex: Matthieu 21,28-32"></div>
+            </div>
+            <div style="margin-top:1rem;"><label for="theme" id="label-theme" style="font-weight:bold;">Message retenu (optionnel) :</label><input type="text" id="theme" placeholder="Ex: Dire oui par ses actes..."></div>
+
+            <div style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap;margin-top:1.2rem;">
+                <button type="button" id="genererHomelie">🕊️ <span id="homelie-button-text">Générer une proposition d'homélie</span></button>
+                <button type="button" id="btn-prefill-example" style="background:transparent;border:1px solid #a89f91;color:#5b4636;padding:8px 16px;border-radius:20px;font-size:0.85rem;">💡 Exemple</button>
             </div>
 
-            <div style="margin-top:1rem;">
-                <label for="theme" id="label-theme" style="font-weight:bold; display:block; margin-bottom:0.3rem;">Message retenu (optionnel) :</label>
-                <input type="text" id="theme" placeholder="Ex: Dire oui par ses actes...">
-            </div>
-
-            <div style="display:flex; align-items:center; gap:1rem; flex-wrap:wrap; margin-top:1.2rem;">
-                <button type="button" id="genererHomelie" aria-label="Générer une proposition d'homélie" style="background:#4a6f5e; color:white; padding:12px 30px; border:none; border-radius:40px; cursor:pointer; font-size:1rem; font-weight:600;">
-                    🕊️ <span id="homelie-button-text">Générer une proposition d'homélie</span>
-                </button>
-                <button type="button" id="btn-prefill-example" style="background:transparent; border:1px solid #a89f91; color:#5b4636; padding:8px 16px; border-radius:20px; cursor:pointer; font-size:0.85rem;">
-                    💡 Exemple type
-                </button>
-            </div>
-
-            <div id="homelieLoading" style="display:none; margin-top:1rem;" aria-live="polite" aria-busy="true">
+            <div id="homelieLoading" style="display:none;margin-top:1rem;" aria-live="polite" aria-busy="true">
                 <div class="skeleton-card">
-                    <div class="skeleton-header">
-                        <span aria-hidden="true">🕯️</span>
-                        <span id="homelie-loading-text">Préparation de l'homélie...</span>
-                    </div>
-                    <div class="skeleton-line title"></div>
-                    <div class="skeleton-line full"></div>
-                    <div class="skeleton-line medium"></div>
-                    <div class="skeleton-line full"></div>
+                    <div class="skeleton-header"><span>🕯️</span><span id="homelie-loading-text">Préparation de l'homélie...</span></div>
+                    <div class="skeleton-line title"></div><div class="skeleton-line full"></div>
+                    <div class="skeleton-line medium"></div><div class="skeleton-line full"></div>
                 </div>
             </div>
-
-            <div id="homelieResponse" style="display:none; margin-top:1.5rem; background:#f8f5f0; padding:1.8rem; border-radius:12px; border-left:5px solid #4a6f5e; line-height:1.85; color:#2c221e;"></div>
+            <div id="homelieResponse" style="display:none;margin-top:1.5rem;background:#f8f5f0;padding:1.8rem;border-radius:12px;border-left:5px solid #4a6f5e;line-height:1.85;"></div>
         </div>
 
         <div id="ressources-container">
             <h2 id="ressources-title" style="text-align:center;">Pour continuer...</h2>
-            <div class="ressources-section" style="background:#eef6fa; border:1px solid #b8d4e4; border-left:6px solid #1f4b66; border-radius:10px; padding:1.25rem; margin-bottom:1.5rem;">
-                <h3 style="margin:0; color:#1f4b66; font-size:1.2rem;">📖 Prions en Église — Textes et lectures du jour</h3>
-                <p style="color:#2c3e50; font-size:0.95rem; margin:0.5rem 0 1rem 0;">Pour approfondir votre prière quotidienne, consultez le site de <strong>Prions en Église</strong>, publié par les éditions Novalis.</p>
-                <a href="https://fr.novalis.ca/" target="_blank" rel="noopener noreferrer" style="background:#1f4b66; color:#ffffff; padding:0.65rem 1.25rem; border-radius:6px; text-decoration:none; display:inline-flex; align-items:center; gap:0.5rem; font-weight:bold;">
-                    <span>Ouvrir Prions en Église (Novalis)</span>
-                    <span aria-hidden="true">↗</span>
-                </a>
+            <div class="ressources-section" style="background:#eef6fa;border:1px solid #b8d4e4;border-left:6px solid #1f4b66;border-radius:10px;padding:1.25rem;margin-bottom:1.5rem;">
+                <h3 style="margin:0;color:#1f4b66;font-size:1.2rem;">📖 Prions en Église — Textes et lectures du jour</h3>
+                <p style="color:#2c3e50;font-size:0.95rem;margin:0.5rem 0 1rem 0;">Pour approfondir votre prière quotidienne, consultez le site de <strong>Prions en Église</strong> (Novalis).</p>
+                <a href="https://fr.novalis.ca/" target="_blank" rel="noopener noreferrer" style="background:#1f4b66;color:#ffffff;padding:0.65rem 1.25rem;border-radius:6px;text-decoration:none;display:inline-flex;align-items:center;gap:0.5rem;font-weight:bold;">Ouvrir Prions en Église ↗</a>
             </div>
-
             <div class="ressources-section"><h3 id="ressources-textes-title">📖 Textes à méditer</h3><ul id="ressources-textes-list"></ul></div>
             <div class="ressources-section"><h3 id="ressources-prieres-title">🙏 Prières</h3><ul id="ressources-prieres-list"></ul></div>
-            <div class="ressources-section">
-                <h3 id="ressources-contacts-title">👤 Contacts humains</h3>
-                <ul>
-                    <li><a id="ressources-contact-pretre-link" target="_blank" rel="noopener"><span id="ressources-contact-pretre-text"></span></a></li>
-                    <li><a id="ressources-contact-communaute-link" target="_blank" rel="noopener"><span id="ressources-contact-communaute-text"></span></a></li>
-                </ul>
-            </div>
+            <div class="ressources-section"><h3 id="ressources-contacts-title">👤 Contacts humains</h3><ul>
+                <li><a id="ressources-contact-pretre-link" target="_blank" rel="noopener"><span id="ressources-contact-pretre-text"></span></a></li>
+                <li><a id="ressources-contact-communaute-link" target="_blank" rel="noopener"><span id="ressources-contact-communaute-text"></span></a></li>
+            </ul></div>
             <div class="ressources-section"><h3 id="ressources-ecoute-title">🆘 Services d'écoute</h3><ul id="ressources-ecoute-list"></ul></div>
             <div class="ressources-section"><h3 id="ressources-exercices-title">✨ Exercices spirituels</h3><ul id="ressources-exercices-list"></ul></div>
             <div class="ressources-section"><h3>🕯️ Exercices ignatiens</h3><ul id="ressources-ignaciens-list"></ul></div>
-            <div class="ressources-section">
-                <h3 id="ressources-revenir-title">🔄 Revenir</h3>
-                <p>
-                    <a href="#/" id="ressources-revenir-recommencer">Recommencer</a> |
-                    <a href="#" id="save-link-ressources">Sauvegarder mon lien</a>
-                </p>
-            </div>
+            <div class="ressources-section"><h3 id="ressources-revenir-title">🔄 Revenir</h3><p><a href="#/" id="ressources-revenir-recommencer">Recommencer</a> | <a href="#" id="save-link-ressources">Sauvegarder mon lien</a></p></div>
         </div>
 
-        <div class="section-card">
-            <h3 id="priere-title">📖 Prière du jour</h3>
-            <div id="priereDuJour" style="font-style:italic; color:#4a3b2c;">« Seigneur, apprends-moi à écouter le silence. »</div>
-        </div>
+        <div class="section-card"><h3 id="priere-title">📖 Prière du jour</h3><div id="priereDuJour" style="font-style:italic;color:#4a3b2c;"></div></div>
 
         <div class="section-card">
             <h3 id="temoignages-title">💬 Vous avez utilisé Au Foyer de l'Amour ?</h3>
             <p id="temoignages-intro">Partagez votre expérience (anonyme) :</p>
-            <label for="temoignage" class="sr-only">Votre témoignage anonyme</label>
+            <label for="temoignage" class="sr-only">Votre témoignage</label>
             <textarea id="temoignage" rows="3" placeholder="Votre témoignage..."></textarea>
             <button type="button" id="envoyerTemoignage">Envoyer</button>
-            <div id="merciTemoignage" style="display:none; color:#4a6f5e;" role="status">🙏 Merci !</div>
+            <div id="merciTemoignage" style="display:none;color:#4a6f5e;" role="status">🙏 Merci !</div>
             <div style="margin-top:1.5rem;">
-                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem; margin-bottom:0.6rem;">
-                    <h4 id="temoignages-recus-title" style="margin:0;">💬 Vos témoignages (sur cet appareil)</h4>
-                    <button type="button" id="clear-temoignages" style="background:transparent; border:1px solid #d49b91; color:#b33927; padding:0.25rem 0.6rem; border-radius:20px; font-size:0.8rem; cursor:pointer; min-height:36px;">🗑️ Effacer mes témoignages</button>
+                <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.5rem;margin-bottom:0.6rem;">
+                    <h4 id="temoignages-recus-title" style="margin:0;">💬 Vos témoignages</h4>
+                    <button type="button" id="clear-temoignages" style="background:transparent;border:1px solid #d49b91;color:#b33927;padding:0.25rem 0.6rem;border-radius:20px;font-size:0.8rem;cursor:pointer;min-height:36px;">🗑️ Effacer</button>
                 </div>
                 <div id="temoignagesListe"></div>
             </div>
@@ -380,7 +186,7 @@
             <a href="https://justice-ai-anonyme-2.onrender.com" target="_blank" rel="noopener">⚖️ Justice AI</a> |
             <a href="https://bridge-your-project.lovable.app" target="_blank" rel="noopener">🌍 ONBRIDGE AI</a> |
             <a href="https://cartepastorale-v5.onrender.com/" target="_blank" rel="noopener">📜 Carta Pastorale</a>
-            <p id="projets-credit" style="font-size:0.75rem; color:#aaa39a; margin-top:0.4rem;">Des outils pour la justice, la paix et le discernement.</p>
+            <p id="projets-credit" style="font-size:0.75rem;color:#aaa39a;margin-top:0.4rem;">Des outils pour la justice, la paix et le discernement.</p>
         </div>
     </div>
 
@@ -391,7 +197,7 @@
     <div id="page-contact" class="page"></div>
     <div id="page-confidentialite" class="page"></div>
 
-    <footer id="mainFooter">
+    <footer>
         <span id="footer-nothing">🔒 Rien n'est enregistré · 🕊️ Un compagnon silencieux</span><br>
         <a href="#/" id="footer-home">🏠 Accueil</a> |
         <a href="#/sagesse" id="footer-sagesse">📖 Sagesse</a> |
@@ -408,11 +214,11 @@
     </footer>
 </div>
 
-<button type="button" id="back-to-top" aria-label="Retour en haut de page" title="Haut de page">↑</button>
+<button type="button" id="back-to-top" aria-label="Haut de page">↑</button>
 
-<div id="confirm-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="confirm-title" hidden>
+<div id="confirm-modal" class="modal-overlay" role="dialog" aria-modal="true" hidden>
     <div class="modal-box">
-        <h3 id="confirm-title">Confirmation</h3>
+        <h3>Confirmation</h3>
         <p id="confirm-message"></p>
         <div class="modal-actions">
             <button type="button" class="btn-cancel" id="confirm-cancel">Annuler</button>
@@ -421,1257 +227,6 @@
     </div>
 </div>
 
-<script>
-(function() {
-'use strict';
-
-const STORAGE_KEYS = {
-    LANG: 'foyer_lang',
-    CARNET_ID: 'foyer_carnet_id',
-    CARNET_PREFIX: 'foyer_carnet_',
-    TEMOIGNAGES: 'foyer_temoignages'
-};
-
-const SITUATION_KEYS = [
-    "SOUFFRANCE", "SENS_VIE", "COUPLE", "DEUIL", "SOLITUDE",
-    "COLERE_DIEU", "DOUTE_FOI", "DECISION", "MALADIE", "PEUR_AVENIR",
-    "EPUISEMENT", "CONFLIT_FAMILIAL", "ACCOMPAGNEMENT", "RECHERCHE_SENS", "AUTRE"
-];
-
-const LANGS = ['fr', 'en', 'zh', 'hi', 'es', 'ar'];
-const TOAST_ICONS = { info: "✅", warn: "⚠️", error: "🚫" };
-const ROUTES = {
-    '': 'accueil', '/': 'accueil', '/sagesse': 'sagesse',
-    '/a-propos': 'apropos', '/examen': 'examen', '/sources': 'sources',
-    '/contact': 'contact', '/confidentialite': 'confidentialite'
-};
-
-// ⚠️ LIMITES DE MOTS : dimanche = 300, semaine = 200
-const WORD_LIMITS = { sunday: 300, weekday: 200 };
-
-let currentLang = 'fr';
-let currentMode = 'discernement';
-let currentResponseText = '';
-let currentSituationKey = null;
-let examenIdx = 0;
-let aelfLectures = [];
-
-/* ============================================================
-   TRADUCTIONS (extraits essentiels — voir fichier complet précédent)
-   ============================================================ */
-const translations = {
-    fr: {
-        title: "🕯️ Au Foyer de l'Amour", subtitle: "Discernement et la petite lumière",
-        placeholder: "Décrivez votre situation...", role: "Qui êtes-vous ? (optionnel)",
-        submit: "Recevoir une aide au discernement →", loading: "Discernement en cours...",
-        alertSituation: "Veuillez décrire votre situation ou choisir une option.",
-        situationsTitle: "Ou choisissez ce qui correspond le mieux à ce que vous vivez :",
-        precisionPlaceholder: "Tu peux préciser ce que tu vis, si tu le souhaites...",
-        btnContinuer: "🌿 Continuer le discernement", ressourcesTitle: "Pour continuer...",
-        textesTitle: "📖 Textes à méditer", prieresTitle: "🙏 Prières", contactsTitle: "👤 Contacts humains",
-        ecouteTitle: "🆘 Services d'écoute", exercicesTitle: "✨ Exercices spirituels",
-        revenirTitle: "🔄 Revenir", revenirRecommencer: "Recommencer", saveLink: "Sauvegarder mon lien",
-        priereJourTitle: "📖 Prière du jour",
-        temoignagesTitle: "💬 Vous avez utilisé Au Foyer de l'Amour ?",
-        temoignagesIntro: "Partagez votre expérience (anonyme) :",
-        temoignagesPlaceholder: "Votre témoignage...", envoyer: "Envoyer",
-        merci: "🙏 Merci ! Votre témoignage reste sur votre appareil.",
-        temoignagesRecus: "💬 Vos témoignages (sur cet appareil)",
-        projetsPsaume: "🌱 « La justice et la paix s'embrassent. » — Psaume 85,11",
-        projetsCredit: "Des outils pour la justice, la paix et le discernement.",
-        footerNothing: "🔒 Rien n'est enregistré · 🕊️ Un compagnon silencieux",
-        footerHome: "🏠 Accueil", footerSagesse: "📖 Sagesse", footerAbout: "📖 À propos",
-        footerSources: "📚 Sources", footerPrivacy: "🔒 Confidentialité", footerContact: "✉️ Contact",
-        navHome: "🏠 Accueil", navSagesse: "📖 Sagesse", navAbout: "📖 À propos",
-        navExamen: "🕯️ Examen", navSources: "📚 Sources", navContact: "✉️ Contact", navPrivacy: "🔒 Confidentialité",
-        aiWarning: "Je suis une intelligence artificielle. Je ne remplace pas un accompagnement humain, un prêtre, un psychologue ou un médecin.",
-        toggleUrgence: "Voir les numéros d'urgence",
-        clauseText: "🙏 <strong>À propos d'Au Foyer de l'Amour</strong><br>Cet outil offre une <strong>première écoute</strong> et une <strong>aide au discernement</strong>, sans remplacer un accompagnement humain.",
-        retour: "← Retour à l'accueil",
-        situations: [
-            "Je traverse une grande souffrance", "Je ne vois plus de sens à ma vie",
-            "Mon couple va mal", "J'ai perdu un être cher",
-            "Je me sens seul(e)", "Je suis en colère contre Dieu",
-            "Je ne sais plus quoi croire", "Je dois prendre une décision difficile",
-            "Je vis une maladie ou un handicap", "J'ai peur de l'avenir",
-            "Je suis épuisé(e)", "Je vis un conflit familial",
-            "J'accompagne une personne en souffrance", "Je cherche un sens à ma vie",
-            "Autre chose"
-        ],
-        prieres: ["Seigneur, apprends-moi à écouter le silence.", "Donne-moi la force d'accueillir ce que je ne comprends pas.", "Que Ta paix habite mon cœur."],
-        defaultTestimonials: ["« Une paix profonde. »", "« Un espace de silence précieux. »"],
-        carnetPrompt: "✨<br><br>« Et toi, quelle petite lumière pourrais-tu noter aujourd'hui ? »",
-        carnetPlaceholder: "Ma petite lumière...",
-        saveBtn: "💾 Sauvegarder", copyBtn: "🔗 Copier mon lien", shareBtn: "📤 Partager",
-        carnetInfo: "Tu pourras revenir plus tard avec ton lien. Rien n'est lié à un compte.",
-        modes: { discernement: "🤲 Discernement", consolation: "🙏 Consolation", lecture: "📖 Lecture biblique", priere: "❤️ Prière" },
-        homelieTitle: "Préparation d'homélie",
-        homelieDescription: "Entrez les lectures ou chargez-les directement depuis l'AELF.",
-        labelLecture1: "Première lecture :", labelPsaume: "Psaume :",
-        labelLecture2: "Deuxième lecture :", labelEvangile: "Évangile :",
-        labelTheme: "Message retenu (optionnel) :", homelieButton: "Générer une proposition d'homélie",
-        homelieLoading: "Préparation de l'homélie...",
-        ecouteList: [
-            "Urgence : composez le numéro d'urgence de votre pays",
-            "Centres d'écoute dans le monde entier : befrienders.org",
-            "En détresse : parlez-en à une personne de confiance"
-        ],
-        contactPretreText: "Trouver un prêtre ou un accompagnant", contactPretreUrl: "https://www.cccb.ca/fr/dioceses/",
-        contactCommunauteText: "Communauté près de chez vous", contactCommunauteUrl: "https://www.cccb.ca/fr/paroisses/",
-        textesParSituation: {
-            SOUFFRANCE: [
-                { ref: "Psaume 22", texte: "Mon Dieu, mon Dieu, pourquoi m'as-tu abandonné ?", lien: "https://www.aelf.org/bible/Ps/22" },
-                { ref: "Isaïe 53", texte: "C'étaient nos souffrances qu'il portait", lien: "https://www.aelf.org/bible/Is/53" },
-                { ref: "Matthieu 5,4", texte: "Heureux ceux qui pleurent", lien: "https://www.aelf.org/bible/Mt/5" }
-            ],
-            AUTRE: [
-                { ref: "Psaume 62", texte: "En Dieu seul mon repos", lien: "https://www.aelf.org/bible/Ps/62" },
-                { ref: "Isaïe 41,10", texte: "Ne crains rien, je suis avec toi", lien: "https://www.aelf.org/bible/Is/41" },
-                { ref: "Matthieu 11,28", texte: "Venez à moi, vous qui peinez", lien: "https://www.aelf.org/bible/Mt/11" }
-            ]
-        },
-        prieresParSituation: {
-            defaut: [
-                { titre: "Prière du matin", texte: "Seigneur, en ce matin, je te confie ma journée. Apprends-moi à écouter le silence. Amen." },
-                { titre: "Prière pour les jours difficiles", texte: "Seigneur, je te confie mes peurs et mes doutes. Quand la nuit est profonde, tiens-moi par la main. Amen." },
-                { titre: "Prière du soir", texte: "Seigneur, je te remercie pour ce jour qui s'achève. Accorde-moi le repos du corps et du cœur. Amen." }
-            ]
-        },
-        exercicesIgnatiens: [
-            { titre: "L'examen de conscience", texte: "Passe en revue ta journée. Où as-tu ressenti de la paix ? Où du trouble ?" },
-            { titre: "La relecture de vie", texte: "Choisis un événement. Relis-le à la lumière de Dieu." },
-            { titre: "Le discernement des esprits", texte: "Ce qui apporte une paix profonde vient de Dieu." },
-            { titre: "L'oraison silencieuse", texte: "Choisis un mot (Jésus, paix, lumière) et répète-le doucement." }
-        ],
-        pageExamen: {
-            title: "🕯️ Examen de conscience guidé",
-            intro: "Cinq étapes, à votre rythme, dans le silence.",
-            steps: [
-                { t: "Gratitude", d: "Remerciez. Repassez votre journée." },
-                { t: "Lumière", d: "Demandez la grâce de regarder avec les yeux de Dieu." },
-                { t: "Relecture", d: "Où avez-vous ressenti la paix ? Où le trouble ?" },
-                { t: "Confier", d: "Confiez ce qui pèse. Demandez pardon." },
-                { t: "Demain", d: "Quel petit pas voulez-vous vivre ?" }
-            ],
-            end: "🙏 Terminez par une prière simple.",
-            prev: "← Précédent", next: "Suivant →"
-        }
-    }
-};
-
-// Fallback minimal pour EN (étendre selon besoin)
-translations.en = {
-    ...translations.fr,
-    title: "🕯️ Home of Love", subtitle: "Discernment and the little light",
-    placeholder: "Describe your situation...", role: "Who are you? (optional)",
-    submit: "Receive discernment help →", loading: "Discernment in progress...",
-    alertSituation: "Please describe your situation or choose an option.",
-    situationsTitle: "Or choose what best matches what you are experiencing:",
-    precisionPlaceholder: "You can specify what you are experiencing, if you wish...",
-    btnContinuer: "🌿 Continue discernment", ressourcesTitle: "To continue...",
-    textesTitle: "📖 Texts to meditate on", prieresTitle: "🙏 Prayers", contactsTitle: "👤 Human contacts",
-    ecouteTitle: "🆘 Listening services", exercicesTitle: "✨ Spiritual exercises",
-    revenirTitle: "🔄 Return", revenirRecommencer: "Start over", saveLink: "Save my link",
-    priereJourTitle: "📖 Prayer of the day",
-    temoignagesTitle: "💬 Have you used Home of Love?",
-    temoignagesIntro: "Share your experience (anonymous):",
-    temoignagesPlaceholder: "Your testimony...", envoyer: "Send",
-    merci: "🙏 Thank you! Your testimony stays on your device.",
-    temoignagesRecus: "💬 Your testimonials (on this device)",
-    projetsPsaume: "🌱 « Justice and peace embrace. » — Psalm 85:11",
-    projetsCredit: "Tools for justice, peace and discernment.",
-    footerNothing: "🔒 Nothing is recorded · 🕊️ A silent companion",
-    footerHome: "🏠 Home", footerSagesse: "📖 Wisdom", footerAbout: "📖 About",
-    footerSources: "📚 Sources", footerPrivacy: "🔒 Privacy", footerContact: "✉️ Contact",
-    navHome: "🏠 Home", navSagesse: "📖 Wisdom", navAbout: "📖 About",
-    navExamen: "🕯️ Examination", navSources: "📚 Sources", navContact: "✉️ Contact", navPrivacy: "🔒 Privacy",
-    aiWarning: "I am an artificial intelligence. I do not replace human support.",
-    toggleUrgence: "See emergency numbers",
-    clauseText: "🙏 <strong>About Home of Love</strong><br>This tool offers <strong>initial listening</strong> and <strong>discernment help</strong>.",
-    retour: "← Back to home",
-    situations: [
-        "I am going through great suffering", "I no longer see meaning in my life",
-        "My relationship is in trouble", "I have lost a loved one",
-        "I feel alone", "I am angry with God",
-        "I don't know what to believe anymore", "I have a difficult decision to make",
-        "I am living with illness or disability", "I am afraid of the future",
-        "I am exhausted", "I am experiencing family conflict",
-        "I am accompanying someone in suffering", "I am searching for meaning in my life",
-        "Something else"
-    ],
-    prieres: ["Lord, teach me to listen to silence.", "Give me strength to embrace what I do not understand.", "Let Your peace dwell in my heart."],
-    defaultTestimonials: ["« A deep peace. »", "« A precious space of silence. »"],
-    carnetPrompt: "✨<br><br>« And you, what little light could you note today? »",
-    carnetPlaceholder: "My little light...", saveBtn: "💾 Save", copyBtn: "🔗 Copy my link", shareBtn: "📤 Share",
-    carnetInfo: "You can come back later with your link.",
-    modes: { discernement: "🤲 Discernment", consolation: "🙏 Consolation", lecture: "📖 Bible Reading", priere: "❤️ Prayer" },
-    homelieTitle: "Homily Preparation", homelieDescription: "Enter the readings or load them from AELF.",
-    labelLecture1: "First Reading:", labelPsaume: "Psalm:",
-    labelLecture2: "Second Reading:", labelEvangile: "Gospel:",
-    labelTheme: "Theme (optional):", homelieButton: "Generate a homily",
-    homelieLoading: "Preparing the homily...",
-    ecouteList: [
-        "Emergency: dial your country's emergency number",
-        "Listening centres worldwide: befrienders.org",
-        "In distress: reach out to someone you trust"
-    ],
-    contactPretreText: "Find a priest", contactPretreUrl: "https://www.usccb.org/parish-finder",
-    contactCommunauteText: "Community near you", contactCommunauteUrl: "https://www.catholic.org/parishes/",
-    pageExamen: {
-        title: "🕯️ Guided Examen", intro: "Five steps, at your own pace, in silence.",
-        steps: [
-            { t: "Gratitude", d: "Give thanks. Review your day." },
-            { t: "Light", d: "Ask for the grace to see with God's eyes." },
-            { t: "Review", d: "Where did you feel peace? Where disturbance?" },
-            { t: "Entrust", d: "Entrust what weighs on you." },
-            { t: "Tomorrow", d: "Look at tomorrow with hope." }
-        ],
-        end: "🙏 Finish with a simple prayer.",
-        prev: "← Previous", next: "Next →"
-    }
-};
-
-['zh', 'hi', 'es', 'ar'].forEach(l => { translations[l] = translations.en; });
-
-/* ============================================================
-   PAGES INTERNES
-   ============================================================ */
-const CARLO_ACUTIS_BLOCK_FR = `
-<div class="bloc" style="background:#fff8f0; border:1px solid #e8d5b7; border-left:4px solid #c49a6c;">
-<h3 style="color:#8b5e3c;">🔥 Saint Carlo Acutis (1991–2006) — Le saint des développeurs</h3>
-<p style="font-style:italic; color:#6b4c2a; font-size:1.05rem;">
-« Tous naissent comme des originaux, mais beaucoup meurent comme des photocopies. »
-<br><span style="font-size:0.8rem; color:#8b7355;">— Phrase que Carlo aimait à répéter</span>
-</p>
-<p>Canonnisé en 2025, Carlo Acutis est le premier saint de l'ère numérique. Passionné d'informatique, il a utilisé le web pour créer une <a href="https://www.miracolieucaristici.org/" target="_blank" rel="noopener">exposition internationale sur les miracles eucharistiques</a>. Il disait : <em>« L'Eucharistie est mon autoroute vers le Ciel. »</em></p>
-<blockquote style="border-left:3px solid #c49a6c; margin:1rem 0; padding-left:1rem; color:#5a4f42; line-height:1.7;">
-<p>« Notre objectif doit être l'infini, non pas le fini. L'Infini est notre patrie. »</p>
-<p>« Être toujours uni à Jésus, tel est le but de ma vie. »</p>
-<p>« Quand on s'expose au soleil, on bronze ; quand on se met devant Jésus Eucharistie, on devient saint ! »</p>
-<p>« Le bonheur, c'est d'avoir le regard tourné vers Dieu. La tristesse, c'est de l'avoir tourné vers soi-même. »</p>
-<p>« Ne perds pas ton temps à ne rien faire. Consacre-le à Dieu. »</p>
-</blockquote>
-<p style="font-size:0.85rem; color:#8b7355; margin-top:1rem; padding-top:0.8rem; border-top:1px dashed #d4c5b3;">
-📖 Pour aller plus loin : <em>Carlo Acutis, une âme de feu</em> — Marie et Jean-Baptiste Maillard, éd. Artège, 2025.
-</p>
-<p style="font-size:0.8rem; color:#8b7355; font-style:italic;">
-🕯️ Prière : Saint Carlo Acutis, toi qui as fait de ton ordinateur un instrument d'évangélisation, apprends-nous à mettre nos talents numériques au service du Bien et de la Vérité. Amen.
-</p>
-</div>`;
-
-const CARLO_ACUTIS_BLOCK_EN = `
-<div class="bloc" style="background:#fff8f0; border:1px solid #e8d5b7; border-left:4px solid #c49a6c;">
-<h3 style="color:#8b5e3c;">🔥 Saint Carlo Acutis (1991–2006) — The developer saint</h3>
-<p style="font-style:italic;">« Everyone is born as an original, but many die as photocopies. »</p>
-<p>Canonized in 2025, Carlo Acutis is the first saint of the digital age. A teenager passionate about computing, he used the web to create an <a href="https://www.miracolieucaristici.org/" target="_blank" rel="noopener">international exhibition on Eucharistic miracles</a>. He said: <em>« The Eucharist is my highway to Heaven. »</em></p>
-<blockquote style="border-left:3px solid #c49a6c; padding-left:1rem; color:#5a4f42; line-height:1.7;">
-<p>« Our goal must be the infinite, not the finite. »</p>
-<p>« To always be united with Jesus — that is the goal of my life. »</p>
-<p>« Sadness is looking at yourself; happiness is looking at God. »</p>
-</blockquote>
-<p style="font-size:0.85rem; color:#8b7355;">📖 To go further: <em>Carlo Acutis, une âme de feu</em> — Marie & Jean-Baptiste Maillard, Artège, 2025.</p>
-</div>`;
-
-const pageContent = {
-    fr: {
-        sagesse: `<h2>📖 Sagesse</h2>
-<p class="page-intro">Quelques textes pour nourrir la méditation et la prière.</p>
-<div class="bloc"><h3>Paroles de Jésus</h3>
-<p>« Venez à moi, vous tous qui peinez et ployez sous le fardeau, et moi, je vous donnerai le repos. » — Mt 11,28</p>
-<p>« Je vous laisse la paix, je vous donne ma paix. » — Jn 14,27</p></div>
-<div class="bloc"><h3>Psaumes</h3>
-<p>« Le Seigneur est mon berger : je ne manque de rien. » — Ps 23,1</p>
-<p>« Oui, mon âme se repose en Dieu. » — Ps 62,2</p></div>
-${CARLO_ACUTIS_BLOCK_FR}
-<div class="bloc"><h3>Aller plus loin</h3><p>Pour une écoute personnalisée, revenez à <a href="#/">l'accueil</a> ou faites l'<a href="#/examen">examen de conscience guidé</a>.</p></div>`,
-        apropos: `<h2>📖 À propos</h2>
-<div class="bloc"><h3>Qu'est-ce qu'Au Foyer de l'Amour ?</h3>
-<p>Un espace de paix, d'écoute et de prière. Cet outil offre une première écoute et une aide au discernement, enracinée dans la tradition chrétienne et la spiritualité ignatienne.</p></div>
-<div class="bloc"><h3>Comment ça marche ?</h3>
-<p>1. Décrivez votre situation.<br>2. Une IA vous propose une réponse personnalisée.<br>3. Notez votre « petite lumière ».<br>4. Poursuivez avec textes, prières et exercices.</p></div>
-<div class="bloc"><h3>Ce que ce site n'est pas</h3>
-<p>Il ne remplace ni un accompagnement humain, ni un prêtre, ni un psychologue, ni un médecin.</p></div>`,
-        sources: `<h2>📚 Sources</h2>
-<div class="bloc"><h3>Un projet porté par un prêtre catholique</h3>
-<p>Ce site est conçu et porté par un prêtre catholique, à titre personnel. Le discernement proposé demeure toujours aligné sur l'enseignement officiel de l'Église catholique.</p></div>
-<div class="bloc"><h3>Textes bibliques</h3>
-<p>Les citations renvoient vers la Bible liturgique francophone <a href="https://www.aelf.org" target="_blank" rel="noopener">AELF</a> et <a href="https://www.biblegateway.com" target="_blank" rel="noopener">BibleGateway</a>.</p></div>
-<div class="bloc"><h3>Magistère et Tradition</h3>
-<p><a href="https://www.vatican.va/archive/FRA0013/_INDEX.HTM" target="_blank" rel="noopener">Catéchisme de l'Église catholique</a></p></div>
-<div class="bloc"><h3>Spiritualité ignatienne</h3>
-<p>Les exercices proposés s'inspirent des <em>Exercices spirituels</em> de saint Ignace de Loyola.</p></div>
-<div class="bloc"><h3>Saint Carlo Acutis</h3>
-<p>Les citations proviennent de ses écrits personnels, largement diffusés par l'Église. Pour approfondir : <em>Carlo Acutis, une âme de feu</em> de Marie et Jean-Baptiste Maillard (Artège, 2025).</p></div>`,
-        contact: `<h2>✉️ Contact</h2>
-<div class="bloc"><h3>Partager votre expérience</h3>
-<p>Laissez un témoignage anonyme depuis <a href="#/">la page d'accueil</a>.</p></div>
-<div class="bloc"><h3>Une urgence ?</h3>
-<p>Contactez les services d'écoute listés en bas de page.</p></div>`,
-        confidentialite: `<h2>🔒 Confidentialité</h2>
-<div class="bloc"><h3>En bref</h3>
-<p>Pas de compte. Pas de cookies de suivi. Pas de publicité.</p></div>
-<div class="bloc"><h3>Ce qui reste sur votre appareil</h3>
-<p>Le carnet, les témoignages et la langue sont stockés dans localStorage.</p></div>`
-    },
-    en: {
-        sagesse: `<h2>📖 Wisdom</h2>
-<p class="page-intro">A few texts to nourish meditation and prayer.</p>
-<div class="bloc"><h3>Words of Jesus</h3>
-<p>« Come to me, all you who are weary and burdened. » — Mt 11:28</p>
-<p>« Peace I leave with you; my peace I give you. » — Jn 14:27</p></div>
-${CARLO_ACUTIS_BLOCK_EN}
-<div class="bloc"><h3>Go further</h3><p>Return to the <a href="#/">home page</a> or take the <a href="#/examen">guided examen</a>.</p></div>`,
-        apropos: `<h2>📖 About</h2>
-<div class="bloc"><h3>What is Home of Love?</h3>
-<p>A space of peace, listening and prayer, rooted in the Christian tradition and Ignatian spirituality.</p></div>
-<div class="bloc"><h3>What this site is not</h3>
-<p>It replaces neither human support, nor a priest, nor a psychologist, nor a doctor.</p></div>`,
-        sources: `<h2>📚 Sources</h2>
-<div class="bloc"><h3>A project led by a Catholic priest</h3>
-<p>This site is created and maintained by a Catholic priest.</p></div>
-<div class="bloc"><h3>Biblical texts</h3>
-<p>Links point to <a href="https://www.aelf.org" target="_blank" rel="noopener">AELF</a> and <a href="https://www.biblegateway.com" target="_blank" rel="noopener">BibleGateway</a>.</p></div>`,
-        contact: `<h2>✉️ Contact</h2>
-<div class="bloc"><h3>Share your experience</h3>
-<p>Leave an anonymous testimony from the <a href="#/">home page</a>.</p></div>`,
-        confidentialite: `<h2>🔒 Privacy</h2>
-<div class="bloc"><h3>In short</h3>
-<p>No account. No tracking cookies. No advertising.</p></div>`
-    }
-};
-['zh', 'hi', 'es', 'ar'].forEach(l => { pageContent[l] = pageContent.fr; });
-
-const extraLabels = {
-    fr: { navSources: '📚 Sources', footerSources: '📚 Sources', footerPrivacy: '🔒 Confidentialité', retour: "← Retour à l'accueil" },
-    en: { navSources: '📚 Sources', footerSources: '📚 Sources', footerPrivacy: '🔒 Privacy', retour: '← Back to home' },
-    zh: { navSources: '📚 来源', footerSources: '📚 来源', footerPrivacy: '🔒 隐私', retour: '← 返回首页' },
-    hi: { navSources: '📚 स्रोत', footerSources: '📚 स्रोत', footerPrivacy: '🔒 गोपनीयता', retour: '← होम पर लौटें' },
-    es: { navSources: '📚 Fuentes', footerSources: '📚 Fuentes', footerPrivacy: '🔒 Privacidad', retour: '← Volver al inicio' },
-    ar: { navSources: '📚 المصادر', footerSources: '📚 المصادر', footerPrivacy: '🔒 الخصوصية', retour: '→ العودة إلى الرئيسية' }
-};
-Object.keys(extraLabels).forEach(l => { if (translations[l]) Object.assign(translations[l], extraLabels[l]); });
-
-/* ============================================================
-   UTILITAIRES
-   ============================================================ */
-function escapeHtml(text) {
-    if (text === null || text === undefined) return '';
-    return String(text)
-        .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
-}
-
-function fetchWithTimeout(url, options = {}, timeoutMs = 20000) {
-    const controller = new AbortController();
-    const timer = setTimeout(() => controller.abort(), timeoutMs);
-    return fetch(url, { ...options, signal: controller.signal }).finally(() => clearTimeout(timer));
-}
-
-async function callDiscernAPI(payload) {
-    try {
-        const res = await fetchWithTimeout('/.netlify/functions/discern', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload)
-        }, 30000);
-        const contentType = res.headers.get('content-type') || '';
-        if (!contentType.includes('application/json')) {
-            return { ok: false, data: null, error: 'Non-JSON response' };
-        }
-        const data = await res.json();
-        if (res.ok && data && data.response) return { ok: true, data, error: null };
-        return { ok: false, data: null, error: (data && data.error) || 'API error' };
-    } catch (err) {
-        return { ok: false, data: null, error: (err && err.message) || 'Network error' };
-    }
-}
-
-/* ============================================================
-   TOASTS
-   ============================================================ */
-function showToast(message, type = 'info', duration = 4000) {
-    const container = document.getElementById('toast-container');
-    if (!container) return;
-    const toast = document.createElement('div');
-    toast.className = 'toast toast-' + type;
-    toast.textContent = ((TOAST_ICONS[type] || '') + ' ' + message).trim();
-    container.appendChild(toast);
-    (window.requestAnimationFrame || (cb => setTimeout(cb, 16)))(() => toast.classList.add('show'));
-    setTimeout(() => {
-        toast.classList.remove('show');
-        setTimeout(() => toast.remove(), 300);
-    }, duration);
-}
-
-/* ============================================================
-   MODAL DE CONFIRMATION
-   ============================================================ */
-function confirmAction(message, confirmLabel) {
-    return new Promise(resolve => {
-        const modal = document.getElementById('confirm-modal');
-        const msgEl = document.getElementById('confirm-message');
-        const okBtn = document.getElementById('confirm-ok');
-        const cancelBtn = document.getElementById('confirm-cancel');
-        if (!modal || !msgEl || !okBtn || !cancelBtn) { resolve(window.confirm(message)); return; }
-        msgEl.textContent = message;
-        if (confirmLabel) okBtn.textContent = confirmLabel;
-        modal.hidden = false;
-        const previousFocus = document.activeElement;
-        cancelBtn.focus();
-        const cleanup = () => {
-            modal.hidden = true;
-            okBtn.removeEventListener('click', onOk);
-            cancelBtn.removeEventListener('click', onCancel);
-            modal.removeEventListener('click', onBackdrop);
-            document.removeEventListener('keydown', onKey);
-            if (previousFocus && previousFocus.focus) previousFocus.focus();
-        };
-        const onOk = () => { cleanup(); resolve(true); };
-        const onCancel = () => { cleanup(); resolve(false); };
-        const onBackdrop = (e) => { if (e.target === modal) onCancel(); };
-        const onKey = (e) => { if (e.key === 'Escape') onCancel(); };
-        okBtn.addEventListener('click', onOk);
-        cancelBtn.addEventListener('click', onCancel);
-        modal.addEventListener('click', onBackdrop);
-        document.addEventListener('keydown', onKey);
-    });
-}
-
-/* ============================================================
-   FOYER UI
-   ============================================================ */
-const FoyerUI = {
-    timers: {},
-    startLoading(containerId, textId, text) {
-        const container = document.getElementById(containerId);
-        const textEl = document.getElementById(textId);
-        if (!container) return;
-        container.style.display = 'block';
-        if (textEl && text) textEl.textContent = text;
-        this.clearTimers(containerId);
-        this.timers[containerId] = [
-            setTimeout(() => { if (container.style.display !== 'none' && textEl) textEl.textContent = text + ' (connexion en cours...)'; }, 5000),
-            setTimeout(() => { if (container.style.display !== 'none' && textEl) textEl.textContent = 'La méditation demande parfois un peu de temps...'; }, 10000)
-        ];
-    },
-    stopLoading(containerId) {
-        const container = document.getElementById(containerId);
-        if (container) container.style.display = 'none';
-        this.clearTimers(containerId);
-    },
-    clearTimers(containerId) {
-        if (this.timers[containerId]) {
-            this.timers[containerId].forEach(clearTimeout);
-            this.timers[containerId] = null;
-        }
-    },
-    scrollToTop() {
-        const prm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        window.scrollTo({ top: 0, behavior: prm ? 'auto' : 'smooth' });
-    }
-};
-
-/* ============================================================
-   CARNET
-   ============================================================ */
-function getOrCreateCarnetId() {
-    let id = null;
-    try { id = localStorage.getItem(STORAGE_KEYS.CARNET_ID); } catch (e) {}
-    if (!id) {
-        id = 'carnet_' + Date.now() + '_' + Math.random().toString(36).slice(2, 11);
-        try { localStorage.setItem(STORAGE_KEYS.CARNET_ID, id); } catch (e) {}
-    }
-    return id;
-}
-function carnetStorageKey() { return STORAGE_KEYS.CARNET_PREFIX + getOrCreateCarnetId(); }
-function loadCarnet() {
-    const entry = document.getElementById('carnet-entry');
-    if (!entry) return;
-    try {
-        const data = localStorage.getItem(carnetStorageKey());
-        if (data) entry.value = data;
-    } catch (e) {}
-}
-function saveCarnet() {
-    const entry = document.getElementById('carnet-entry');
-    const feedback = document.getElementById('carnet-feedback');
-    if (!entry) return;
-    try {
-        localStorage.setItem(carnetStorageKey(), entry.value.trim());
-        if (feedback) feedback.textContent = '✨ Sauvegardé.';
-        showToast('Carnet sauvegardé avec succès.', 'info');
-    } catch (e) {
-        showToast('Impossible de sauvegarder.', 'warn');
-    }
-    setTimeout(() => { if (feedback) feedback.textContent = ''; }, 3000);
-}
-function clearCarnet() {
-    return confirmAction("Êtes-vous certain de vouloir effacer toutes les notes de votre carnet ? Cette action est irréversible.", "Effacer").then(confirmed => {
-        if (!confirmed) return;
-        try { localStorage.removeItem(carnetStorageKey()); } catch (e) {}
-        const entry = document.getElementById('carnet-entry');
-        if (entry) entry.value = '';
-        showToast('Votre carnet a été réinitialisé.', 'info');
-    });
-}
-
-/* ============================================================
-   TÉMOIGNAGES
-   ============================================================ */
-const LABEL_MOI = {
-    fr: '— Vous (sur cet appareil)', en: '— You (on this device)',
-    zh: '— 您（此设备）', hi: '— आप (इस डिवाइस पर)',
-    es: '— Tú (en este dispositivo)', ar: '— أنت (على هذا الجهاز)'
-};
-function getTemoignagesLocaux() {
-    try { return JSON.parse(localStorage.getItem(STORAGE_KEYS.TEMOIGNAGES) || '[]'); } catch (e) { return []; }
-}
-function appendTemoignageItem(liste, msg) {
-    if (!liste) return;
-    const div = document.createElement('div');
-    div.className = 'temoignage-affiche';
-    div.textContent = '« ' + msg + ' »';
-    const src = document.createElement('div');
-    src.className = 'source';
-    src.textContent = LABEL_MOI[currentLang] || LABEL_MOI.fr;
-    div.appendChild(src);
-    liste.appendChild(div);
-}
-function renderTemoignages(localOnly) {
-    const liste = document.getElementById('temoignagesListe');
-    if (!liste) return;
-    liste.innerHTML = '';
-    const t = translations[currentLang] || translations.fr;
-    if (!localOnly && t.defaultTestimonials) {
-        t.defaultTestimonials.forEach(msg => appendTemoignageItem(liste, msg.replace(/^«\s*|\s*»$/g, '')));
-    }
-    getTemoignagesLocaux().forEach(msg => appendTemoignageItem(liste, msg));
-}
-function clearTemoignages() {
-    return confirmAction("Souhaitez-vous effacer l'historique de vos témoignages ?", "Effacer").then(confirmed => {
-        if (!confirmed) return;
-        try { localStorage.removeItem(STORAGE_KEYS.TEMOIGNAGES); } catch (e) {}
-        renderTemoignages(true);
-        showToast('Vos témoignages locaux ont été effacés.', 'info');
-    });
-}
-
-/* ============================================================
-   ROUTEUR
-   ============================================================ */
-function routeFromHash() {
-    const h = window.location.hash.replace(/^#/, '');
-    return ROUTES[h] || 'accueil';
-}
-function retourLink() {
-    const t = translations[currentLang] || translations.fr;
-    return '<a class="retour" href="#/">' + escapeHtml(t.retour || '← Retour') + '</a>';
-}
-function renderExamen(ex) {
-    const el = document.getElementById('page-examen');
-    if (!el || !ex) return;
-    const total = ex.steps.length;
-    if (examenIdx > total) examenIdx = total;
-    let html = retourLink() + '<h2>' + escapeHtml(ex.title) + '</h2><p class="page-intro">' + escapeHtml(ex.intro) + '</p><div class="bloc">';
-    ex.steps.forEach((s, i) => {
-        html += '<div class="examen-step' + (i === examenIdx ? ' active' : '') + '"><h3>' + (i + 1) + ' / ' + total + ' — ' + escapeHtml(s.t) + '</h3><p>' + escapeHtml(s.d) + '</p></div>';
-    });
-    html += '<div class="examen-step' + (examenIdx === total ? ' active' : '') + '"><p style="text-align:center;">' + escapeHtml(ex.end) + '</p></div>';
-    html += '<div class="examen-nav"><button type="button" class="btn-examen" id="examen-prev"' + (examenIdx === 0 ? ' disabled' : '') + '>' + escapeHtml(ex.prev) + '</button><button type="button" class="btn-examen" id="examen-next"' + (examenIdx === total ? ' disabled' : '') + '>' + escapeHtml(ex.next) + '</button></div></div>';
-    el.innerHTML = html;
-}
-function renderPages() {
-    const pc = pageContent[currentLang] || pageContent.fr;
-    ['sagesse', 'apropos', 'sources', 'contact', 'confidentialite'].forEach(id => {
-        const el = document.getElementById('page-' + id);
-        if (el && pc[id]) el.innerHTML = retourLink() + pc[id];
-    });
-    const t = translations[currentLang] || translations.fr;
-    renderExamen(t.pageExamen || translations.fr.pageExamen);
-}
-function showPage() {
-    const page = routeFromHash();
-    document.querySelectorAll('.page').forEach(p => p.classList.toggle('active', p.id === 'page-' + page));
-    document.querySelectorAll('.nav-menu a').forEach(a => a.classList.toggle('active', a.dataset.page === page));
-    if (page === 'examen') { examenIdx = 0; renderPages(); }
-    FoyerUI.scrollToTop();
-}
-
-/* ============================================================
-   RESSOURCES
-   ============================================================ */
-function updateRessources(situationKey) {
-    const langData = translations[currentLang] || translations.fr;
-    const fallbackTexts = translations.fr.textesParSituation || {};
-    const texts = (langData.textesParSituation && langData.textesParSituation[situationKey])
-        || (langData.textesParSituation && langData.textesParSituation.AUTRE)
-        || fallbackTexts.AUTRE || [];
-
-    const textesList = document.getElementById('ressources-textes-list');
-    if (textesList) {
-        textesList.innerHTML = '';
-        texts.forEach(item => {
-            const li = document.createElement('li');
-            li.innerHTML = '<strong>' + escapeHtml(item.ref) + '</strong> – « ' + escapeHtml(item.texte) +
-                ' » <a href="' + escapeHtml(item.lien) + '" target="_blank" rel="noopener" style="font-size:0.85rem;">(lire)</a>';
-            textesList.appendChild(li);
-        });
-    }
-
-    const prieres = (langData.prieresParSituation && (langData.prieresParSituation[situationKey] || langData.prieresParSituation.defaut)) || [];
-    const prieresList = document.getElementById('ressources-prieres-list');
-    if (prieresList) {
-        prieresList.innerHTML = '';
-        prieres.forEach(p => {
-            const li = document.createElement('li');
-            li.innerHTML = '<strong>' + escapeHtml(p.titre) + '</strong><br><span style="font-size:0.9rem;">' + escapeHtml(p.texte) + '</span>';
-            prieresList.appendChild(li);
-        });
-    }
-
-    const ignaciensList = document.getElementById('ressources-ignaciens-list');
-    if (ignaciensList) {
-        ignaciensList.innerHTML = '';
-        (langData.exercicesIgnatiens || []).forEach(item => {
-            const li = document.createElement('li');
-            li.innerHTML = '<strong>' + escapeHtml(item.titre) + '</strong><br><span style="font-size:0.9rem;">' + escapeHtml(item.texte) + '</span>';
-            ignaciensList.appendChild(li);
-        });
-    }
-
-    const exercicesSimples = {
-        fr: ["Noter une nouvelle petite lumière demain", "Prendre 5 minutes de silence le soir", "3 respirations profondes : « Je suis aimé(e) »"],
-        en: ["Note a new little light tomorrow", "Take 5 minutes of silence in the evening", "3 deep breaths: « I am loved »"]
-    };
-    const exSimples = exercicesSimples[currentLang] || exercicesSimples.fr;
-    const exercicesList = document.getElementById('ressources-exercices-list');
-    if (exercicesList) {
-        exercicesList.innerHTML = '';
-        exSimples.forEach(e => {
-            const li = document.createElement('li');
-            li.textContent = e;
-            exercicesList.appendChild(li);
-        });
-    }
-}
-
-/* ============================================================
-   RÉPONSE
-   ============================================================ */
-function showResponse(text) {
-    currentResponseText = text;
-    document.getElementById('response-container').style.display = 'block';
-    document.getElementById('response-lecture').style.display = 'block';
-    document.getElementById('carnet-container').style.display = 'block';
-    document.getElementById('ressources-container').style.display = 'none';
-    document.getElementById('reponse').textContent = text;
-    FoyerUI.stopLoading('loading');
-}
-
-function buildFallbackResponse(situation, t) {
-    const priereAlea = (t.prieres && t.prieres[Math.floor(Math.random() * t.prieres.length)]) || "Seigneur, éclaire notre route et donne-nous la paix.";
-    const texteAlea = "« Venez à moi, vous tous qui peinez, et je vous donnerai le repos. » (Mt 11,28)";
-    if (currentMode === 'consolation') {
-        return "Dans l'épreuve que vous traversez (« " + situation + " »), sachez que vous n'êtes pas seul(e).\n\nParole d'espérance :\n" + texteAlea + "\n\nPrière :\n" + priereAlea;
-    }
-    if (currentMode === 'priere') {
-        return "Seigneur, nous te confions cette situation : « " + situation + " ». Viens y déposer ta paix.\n\n" + priereAlea + "\n\n" + texteAlea;
-    }
-    if (currentMode === 'lecture') {
-        return "Voici une parole de réconfort :\n\n" + texteAlea + "\n\nPrenez quelques instants de silence.";
-    }
-    return "Pour discerner dans cette situation (« " + situation + " »), saint Ignace nous invite au calme intérieur.\n\nParole d'Écriture :\n" + texteAlea + "\n\nPrière :\n" + priereAlea;
-}
-
-/* ============================================================
-   SOUMISSION
-   ============================================================ */
-async function handleSubmit() {
-    const radioChecked = document.querySelector('input[name="situation-choisie"]:checked');
-    const radioKey = radioChecked ? radioChecked.value : null;
-    currentSituationKey = radioKey || "AUTRE";
-
-    const situationVal = document.getElementById('situation').value.trim();
-    const precisionVal = document.getElementById('precision-situation').value.trim();
-    const role = document.getElementById('role').value.trim();
-
-    const radioText = radioChecked ? (radioChecked.parentElement ? radioChecked.parentElement.textContent.trim() : radioKey) : '';
-
-    let situation = '';
-    if (radioChecked && !situationVal) situation = radioText;
-    else if (radioChecked && situationVal) situation = 'Situation choisie : ' + radioText + '. Précisions : ' + situationVal;
-    else situation = situationVal;
-    if (precisionVal) situation = situation ? situation + '. Précisions : ' + precisionVal : precisionVal;
-
-    if (!situation) {
-        const t = translations[currentLang] || translations.fr;
-        showToast(t.alertSituation || 'Veuillez décrire votre situation.', 'warn');
-        return;
-    }
-
-    const submitBtn = document.getElementById('submitBtn');
-    document.getElementById('response-container').style.display = 'none';
-    document.getElementById('error').style.display = 'none';
-    if (submitBtn) submitBtn.disabled = true;
-    const t = translations[currentLang] || translations.fr;
-    FoyerUI.startLoading('loading', 'loading-text', t.loading || 'Discernement en cours...');
-
-    let reponse = '';
-    const apiResult = await callDiscernAPI({ situation, role, lang: currentLang, mode: currentMode });
-    if (apiResult.ok && apiResult.data && apiResult.data.response) {
-        reponse = apiResult.data.response;
-    } else if (apiResult.error) {
-        console.log('Netlify indisponible, repli local.');
-        showToast('Mode autonome : réflexion locale activée', 'info', 3500);
-    }
-    if (!reponse) reponse = buildFallbackResponse(situation, t);
-
-    showResponse(reponse);
-    updateRessources(currentSituationKey);
-    FoyerUI.stopLoading('loading');
-    if (submitBtn) submitBtn.disabled = false;
-}
-
-/* ============================================================
-   AELF
-   ============================================================ */
-function initAelfDate() {
-    const input = document.getElementById('date-aelf');
-    if (!input) return;
-    const now = new Date();
-    const diff = (7 - now.getDay()) % 7;
-    const nextSunday = new Date(now);
-    nextSunday.setDate(now.getDate() + diff);
-    const yyyy = nextSunday.getFullYear();
-    const mm = String(nextSunday.getMonth() + 1).padStart(2, '0');
-    const dd = String(nextSunday.getDate()).padStart(2, '0');
-    input.value = yyyy + '-' + mm + '-' + dd;
-}
-
-function parseAelfLectures(lecturesArr) {
-    const lectures = Array.isArray(lecturesArr) ? lecturesArr : [];
-    const find = (kinds) => {
-        for (const kind of kinds) {
-            const found = lectures.find(l => (l.type || '').toLowerCase().includes(kind));
-            if (found) return found;
-        }
-        return null;
-    };
-    return {
-        lect1: find(['lecture_1', 'premiere']),
-        psaume: find(['psaume', 'cantique']),
-        lect2: find(['lecture_2', 'deuxieme']),
-        evangile: find(['evangile'])
-    };
-}
-
-function stripHtml(h) {
-    const div = document.createElement('div');
-    div.innerHTML = h || '';
-    return (div.textContent || div.innerText || '').replace(/\s+/g, ' ').trim();
-}
-
-function countWordsInHtml(html) {
-    if (!html) return 0;
-    const text = html.replace(/<[^>]*>/g, ' ').replace(/&[a-z#0-9]+;/gi, ' ');
-    return text.trim().split(/\s+/).filter(w => w.length > 0).length;
-}
-
-function truncateHtmlToMaxWords(html, maxWords) {
-    if (!html) return { html: '', count: 0, wasTruncated: false };
-    const plainText = html.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
-    const words = plainText.split(' ').filter(w => w.length > 0);
-    if (words.length <= maxWords) return { html, count: words.length, wasTruncated: false };
-    const truncated = words.slice(0, maxWords).join(' ') + '…';
-    return {
-        html: '<p>' + truncated + '</p><p style="font-size:0.82rem; color:#8c6b32; font-style:italic;">⚠️ Texte calibré à ' + maxWords + ' mots.</p>',
-        count: maxWords,
-        wasTruncated: true
-    };
-}
-
-const LEGAL_NOTICE_HOMILIE =
-    "<div style='margin-top:1.5rem; padding:1rem; background:#f5f3ef; border:1px solid #dcd5c9; border-left:4px solid #4a6f5e; border-radius:6px; font-size:0.84rem; color:#443b34; line-height:1.55;'>" +
-    "<div style='font-weight:700; color:#2d463b; margin-bottom:0.4rem;'>⚖️ Distinction légale : Inspiration vs Reproduction</div>" +
-    "Cette homélie est une <strong>création originale inspirée</strong> de la démarche de <strong>Mgr Joseph A. Pellegrino</strong> (<a href='https://frjoeshomilies.net/' target='_blank' rel='noopener noreferrer' style='color:#2a503e;'>frjoeshomilies.net</a>) et du <strong>Père Tony Kadavil</strong> (<a href='https://frtonyshomilies.com/' target='_blank' rel='noopener noreferrer' style='color:#2a503e;'>frtonyshomilies.com</a>). " +
-    "Elle ne constitue en aucun cas une reproduction intégrale de leurs écrits protégés, mais une appropriation spirituelle autonome dans le respect du droit d'auteur, du <em>Directoire sur l'homélie</em> et des textes de l'AELF." +
-    "</div>";
-
-function detectAuthorContext(refStr, textStr) {
-    const full = ((refStr || '') + ' ' + (textStr || '')).toLowerCase();
-    if (/matthieu|matthew|mateo|\bmt\b/.test(full)) return { nom: 'saint Matthieu', lienAelf: 'https://www.aelf.org/bible/Mt' };
-    if (/marc|mark|marcos|\bmc\b/.test(full)) return { nom: 'saint Marc', lienAelf: 'https://www.aelf.org/bible/Mc' };
-    if (/luc|luke|lucas|\blc\b/.test(full)) return { nom: 'saint Luc', lienAelf: 'https://www.aelf.org/bible/Lc' };
-    if (/jean|john|juan|\bjn\b/.test(full)) return { nom: 'saint Jean', lienAelf: 'https://www.aelf.org/bible/Jn' };
-    return { nom: "l'Écriture inspirée", lienAelf: 'https://www.aelf.org/bible' };
-}
-
-function buildSourcesBlock(ctxEv) {
-    return "<div style='margin-top:2rem; background:#f4f1eb; border:1px solid #d9d2c5; border-left:4px solid #7c6f5d; border-radius:8px; padding:1.2rem; font-size:0.88rem; color:#4a4036; line-height:1.6;'>" +
-        "<strong style='color:#2c221e; font-size:0.95rem;'>📚 Sources officielles & respect de la propriété intellectuelle</strong>" +
-        "<ul style='margin:0.5rem 0 0; padding-left:1.3rem; list-style-type:square; font-size:0.85rem;'>" +
-        "<li><strong>Textes liturgiques officiels :</strong> <a href='" + escapeHtml(ctxEv.lienAelf) + "' target='_blank' rel='noopener noreferrer' style='color:#325c48;'>AELF</a>.</li>" +
-        "<li><strong>Prédication dominicale :</strong> Inspirée de Mgr Pellegrino (<a href='https://frjoeshomilies.net/' target='_blank' rel='noopener noreferrer' style='color:#325c48;'>frjoeshomilies.net</a>) et du P. Tony Kadavil (<a href='https://frtonyshomilies.com/' target='_blank' rel='noopener noreferrer' style='color:#325c48;'>frtonyshomilies.com</a>).</li>" +
-        "<li><strong>Méditation de semaine :</strong> Inspirée des homélies du P. Tony Kadavil.</li>" +
-        "<li><strong>Herméneutique :</strong> Concile Vatican II, <a href='https://www.vatican.va/archive/hist_councils/ii_vatican_council/documents/vat-ii_const_19651118_dei-verbum_fr.html' target='_blank' rel='noopener noreferrer' style='color:#325c48;'>Dei Verbum, n. 12</a>.</li>" +
-        "<li><strong>Normes :</strong> <a href='https://www.vatican.va/roman_curia/congregations/ccdds/documents/rc_con_ccdds_doc_20140629_direttorio-omiletico_fr.html' target='_blank' rel='noopener noreferrer' style='color:#325c48;'>Directoire sur l'homélie (2014)</a>.</li>" +
-        "</ul></div>";
-}
-
-/* Générateur local de secours */
-function buildHomelieDominicaleLocally(data) {
-    const { evRef, l1Ref, l2Ref, evQuote, psalmRefrain } = data;
-    let h = '';
-    h += "<p>Un homme avait planté un petit potager derrière sa maison. Il avait préparé la terre, semé avec soin, arrosé chaque jour et attendu patiemment. Un jour, son voisin lui demanda : <em>« Comment va ton potager ? »</em> L'homme répondit : <em>« Les feuilles poussent à merveille. Il n'y a qu'un problème : je ne vois encore aucun légume ! »</em> Le voisin sourit : <em>« Mais un jardin est fait pour produire quelque chose ! »</em></p>";
-    h += "<p>C'est exactement le message de nos lectures d'aujourd'hui : Dieu a planté pour nous une vigne, et Il attend qu'elle produise de bons fruits.";
-    if (l1Ref) h += " La première lecture (<strong>" + escapeHtml(l1Ref) + "</strong>)";
-    h += ".";
-    if (evRef) h += " L'Évangile (<strong>" + escapeHtml(evRef) + "</strong>)";
-    if (evQuote) h += " prolonge cet appel : « <em>" + escapeHtml(evQuote) + "</em> »";
-    h += " Cette Parole nous interpelle : quels fruits portons-nous aujourd'hui ?</p>";
-    h += "<p>";
-    if (l2Ref) h += "Saint Paul, dans la deuxième lecture (<strong>" + escapeHtml(l2Ref) + "</strong>), ";
-    else h += "L'Écriture ";
-    h += "nous invite à tourner nos cœurs vers ce qui est vrai, juste et digne d'éloge.";
-    if (psalmRefrain) h += " Comme le chante le psaume : « <em>" + escapeHtml(psalmRefrain) + "</em> »";
-    h += ".</p>";
-    h += "<p>Dieu nous a confié une vigne : notre vie, nos familles, notre communauté. Il n'attend pas des fruits parfaits, mais de vrais fruits : un appel à un isolé, un pardon accordé, une parole encourageante.<br><br><em>Amen.</em></p>";
-    return h;
-}
-
-function buildHomelieFerieLocally(data) {
-    const { evRef, evQuote, theme } = data;
-    const displayTitle = theme || "Fidélité au cœur du quotidien";
-    let h = "<h3 style='color:#3a584a; margin-top:0; font-family:Georgia,serif; font-size:1.15rem;'>" + escapeHtml(displayTitle) + "</h3>";
-    h += "<p>Dans le travail ordinaire de notre journée";
-    if (evRef) h += " (<strong>" + escapeHtml(evRef) + "</strong>)";
-    h += ", le Christ nous attend. ";
-    if (evQuote) h += "Il nous redit : « <em>" + escapeHtml(evQuote) + "</em> » ";
-    h += "Vivons nos devoirs d'aujourd'hui comme une prière silencieuse et posons un geste concret de patience ou d'écoute fraternelle.</p>";
-    h += "<p><em>Prière : Seigneur, conduis nos pas dans ta paix aujourd'hui. Amen.</em></p>";
-    return h;
-}
-
-function genererHomelieLocale(lecture1, psaume, lecture2, evangile, theme) {
-    const parsed = parseAelfLectures(aelfLectures);
-    const aLect1 = parsed.lect1, aPsaume = parsed.psaume, aLect2 = parsed.lect2, aEvangile = parsed.evangile;
-
-    const evRef = (aEvangile && aEvangile.ref) || evangile || '';
-    const l1Ref = (aLect1 && aLect1.ref) || lecture1 || '';
-    const l2Ref = (aLect2 && aLect2.ref) || lecture2 || '';
-    const evText = aEvangile && aEvangile.contenu ? stripHtml(aEvangile.contenu) : '';
-
-    const ctxEv = detectAuthorContext(evRef, evText);
-    let evQuote = '';
-    if (evText) {
-        const sentences = evText.split(/(?<=[.!?…])\s+/).map(s => s.trim()).filter(s => s.length > 25);
-        if (sentences.length) {
-            const sorted = sentences.slice().sort((a, b) => Math.abs(a.length - 110) - Math.abs(b.length - 110));
-            evQuote = sorted[0].length > 140 ? sorted[0].slice(0, 140) + '…' : sorted[0];
-        }
-    }
-
-    let psalmRefrain = '';
-    if (aPsaume && aPsaume.contenu) {
-        const lines = stripHtml(aPsaume.contenu).split(/\n|\r/).map(l => l.trim()).filter(l => l.length > 5);
-        if (lines.length) psalmRefrain = lines[0];
-    }
-
-    let isSunday = true;
-    const dateInput = document.getElementById('date-aelf');
-    if (dateInput && dateInput.value) {
-        const parts = dateInput.value.split('-');
-        if (parts.length === 3) {
-            const d = new Date(parseInt(parts[0], 10), parseInt(parts[1], 10) - 1, parseInt(parts[2], 10));
-            isSunday = (d.getDay() === 0);
-        }
-    }
-
-    const data = { evRef, l1Ref, l2Ref, evQuote, psalmRefrain, theme };
-    let html = isSunday ? buildHomelieDominicaleLocally(data) : buildHomelieFerieLocally(data);
-
-    // ✅ NOUVELLES LIMITES : 300 (dimanche) / 200 (semaine)
-    const maxLimit = isSunday ? WORD_LIMITS.sunday : WORD_LIMITS.weekday;
-    let wordCount = countWordsInHtml(html);
-    if (wordCount > maxLimit) {
-        const trunc = truncateHtmlToMaxWords(html, maxLimit);
-        html = trunc.html;
-        wordCount = trunc.count;
-    }
-    html += buildSourcesBlock(ctxEv);
-    return { html, wordCount, maxLimit, isSunday };
-}
-
-/* ============================================================
-   UPDATE LANGUAGE
-   ============================================================ */
-function setText(id, value) { const el = document.getElementById(id); if (el) el.textContent = value; }
-function setHtml(id, value) { const el = document.getElementById(id); if (el) el.innerHTML = value; }
-function setPlaceholder(id, value) { const el = document.getElementById(id); if (el) el.placeholder = value; }
-
-function updateLanguage(lang) {
-    if (!translations[lang]) lang = 'fr';
-    currentLang = lang;
-    document.documentElement.lang = lang;
-    document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
-    const t = translations[lang];
-
-    setHtml('mainTitle', escapeHtml(t.title));
-    setText('mainSubtitle', t.subtitle);
-    setPlaceholder('situation', t.placeholder);
-    setPlaceholder('role', t.role);
-    setPlaceholder('precision-situation', t.precisionPlaceholder);
-    setText('submitBtn', t.submit);
-
-    const grid = document.querySelector('.situations-grid');
-    if (grid) {
-        grid.innerHTML = '';
-        SITUATION_KEYS.forEach((key, idx) => {
-            const labelText = t.situations[idx] || key;
-            const label = document.createElement('label');
-            label.dataset.key = key;
-            const input = document.createElement('input');
-            input.type = 'radio';
-            input.name = 'situation-choisie';
-            input.value = key;
-            label.appendChild(input);
-            label.appendChild(document.createTextNode(' ' + labelText));
-            grid.appendChild(label);
-        });
-    }
-    setText('situations-title', t.situationsTitle);
-
-    setHtml('carnet-prompt', t.carnetPrompt);
-    setPlaceholder('carnet-entry', t.carnetPlaceholder);
-    setText('save-carnet', t.saveBtn);
-    setText('copy-carnet-link', t.copyBtn);
-    setText('share-carnet', t.shareBtn);
-    setText('carnet-info-text', t.carnetInfo);
-    setText('btn-continuer-discernement', t.btnContinuer);
-
-    setText('ressources-title', t.ressourcesTitle);
-    setText('ressources-textes-title', t.textesTitle);
-    setText('ressources-prieres-title', t.prieresTitle);
-    setText('ressources-contacts-title', t.contactsTitle);
-    setText('ressources-ecoute-title', t.ecouteTitle);
-    setText('ressources-exercices-title', t.exercicesTitle);
-    setText('ressources-revenir-title', t.revenirTitle);
-    setText('ressources-revenir-recommencer', t.revenirRecommencer);
-    setText('save-link-ressources', t.saveLink);
-
-    setText('ressources-contact-pretre-text', t.contactPretreText || '');
-    const pretreLink = document.getElementById('ressources-contact-pretre-link');
-    if (pretreLink) pretreLink.href = t.contactPretreUrl || '#';
-    setText('ressources-contact-communaute-text', t.contactCommunauteText || '');
-    const commLink = document.getElementById('ressources-contact-communaute-link');
-    if (commLink) commLink.href = t.contactCommunauteUrl || '#';
-
-    const ecouteList = document.getElementById('ressources-ecoute-list');
-    if (ecouteList && t.ecouteList) {
-        ecouteList.innerHTML = '';
-        t.ecouteList.forEach(s => {
-            const li = document.createElement('li');
-            li.textContent = s;
-            ecouteList.appendChild(li);
-        });
-    }
-
-    setText('priere-title', t.priereJourTitle);
-    if (t.prieres && t.prieres.length) {
-        const rp = t.prieres[Math.floor(Math.random() * t.prieres.length)];
-        setText('priereDuJour', '« ' + rp + ' »');
-    }
-
-    setText('temoignages-title', t.temoignagesTitle);
-    setText('temoignages-intro', t.temoignagesIntro);
-    setPlaceholder('temoignage', t.temoignagesPlaceholder);
-    setText('envoyerTemoignage', t.envoyer);
-    setText('merciTemoignage', t.merci);
-    setText('temoignages-recus-title', t.temoignagesRecus);
-    renderTemoignages();
-
-    setText('projets-psaume', t.projetsPsaume);
-    setText('projets-credit', t.projetsCredit);
-
-    setText('footer-nothing', t.footerNothing);
-    setText('footer-home', t.footerHome);
-    setText('footer-sagesse', t.footerSagesse);
-    setText('footer-about', t.footerAbout);
-    setText('footer-contact', t.footerContact);
-    setText('ai-warning-text', t.aiWarning);
-    setText('toggle-urgence', t.toggleUrgence);
-    setHtml('clause-text', t.clauseText);
-
-    setText('navHome', t.navHome);
-    setText('navSagesse', t.navSagesse);
-    setText('navAbout', t.navAbout);
-    setText('navExamen', t.navExamen);
-    setText('navContact', t.navContact);
-    setText('navSources', t.navSources);
-    setText('navPrivacy', t.navPrivacy);
-    setText('footer-sources', t.footerSources);
-    setText('footer-privacy', t.footerPrivacy);
-
-    const urgenceList = document.getElementById('urgence-list');
-    if (urgenceList && t.ecouteList) {
-        urgenceList.innerHTML = '';
-        t.ecouteList.forEach(item => {
-            const p = document.createElement('p');
-            const idx = item.indexOf(':');
-            if (idx > 0) {
-                const strong = document.createElement('strong');
-                strong.textContent = item.slice(0, idx);
-                p.appendChild(strong);
-                p.appendChild(document.createTextNode(': ' + item.slice(idx + 1)));
-            } else p.textContent = item;
-            urgenceList.appendChild(p);
-        });
-    }
-
-    if (t.modes) {
-        setText('mode-discernement', t.modes.discernement);
-        setText('mode-consolation', t.modes.consolation);
-        setText('mode-lecture', t.modes.lecture);
-        setText('mode-priere', t.modes.priere);
-    }
-
-    setText('homelie-title', t.homelieTitle);
-    setText('homelie-description', t.homelieDescription);
-    setText('label-lecture1', t.labelLecture1);
-    setText('label-psaume', t.labelPsaume);
-    setText('label-lecture2', t.labelLecture2);
-    setText('label-evangile-text', t.labelEvangile);
-    setText('label-theme', t.labelTheme);
-    setText('homelie-button-text', t.homelieButton);
-    setText('homelie-loading-text', t.homelieLoading);
-
-    examenIdx = 0;
-    renderPages();
-    if (currentSituationKey) updateRessources(currentSituationKey);
-}
-
-/* ============================================================
-   ÉVÉNEMENTS
-   ============================================================ */
-function bindStaticEvents() {
-    document.querySelectorAll('.lang-btn').forEach(btn => {
-        btn.addEventListener('click', function() {
-            document.querySelectorAll('.lang-btn').forEach(b => {
-                b.classList.remove('active');
-                b.setAttribute('aria-pressed', 'false');
-            });
-            this.classList.add('active');
-            this.setAttribute('aria-pressed', 'true');
-            try { localStorage.setItem(STORAGE_KEYS.LANG, this.dataset.lang); } catch (e) {}
-            updateLanguage(this.dataset.lang);
-            const langNames = { fr: 'Français', en: 'English', zh: '中文', hi: 'हिन्दी', es: 'Español', ar: 'العربية' };
-            showToast('Langue : ' + (langNames[this.dataset.lang] || this.dataset.lang.toUpperCase()), 'info', 2500);
-        });
-    });
-
-    document.querySelectorAll('.mode-btn').forEach(btn => {
-        btn.addEventListener('click', function() {
-            document.querySelectorAll('.mode-btn').forEach(b => {
-                b.classList.remove('active');
-                b.setAttribute('aria-pressed', 'false');
-            });
-            this.classList.add('active');
-            this.setAttribute('aria-pressed', 'true');
-            currentMode = this.dataset.mode;
-        });
-    });
-
-    const submitBtn = document.getElementById('submitBtn');
-    if (submitBtn) submitBtn.addEventListener('click', handleSubmit);
-
-    const saveCarnetBtn = document.getElementById('save-carnet');
-    if (saveCarnetBtn) saveCarnetBtn.addEventListener('click', saveCarnet);
-    const clearCarnetBtn = document.getElementById('clear-carnet');
-    if (clearCarnetBtn) clearCarnetBtn.addEventListener('click', clearCarnet);
-    const copyCarnetBtn = document.getElementById('copy-carnet-link');
-    if (copyCarnetBtn) copyCarnetBtn.addEventListener('click', () => {
-        const link = window.location.origin + window.location.pathname + '?carnet=' + getOrCreateCarnetId();
-        navigator.clipboard.writeText(link).then(() => {
-            const fb = document.getElementById('carnet-feedback');
-            if (fb) fb.textContent = '🔗 Lien copié !';
-            showToast('Lien du carnet copié !', 'info');
-            setTimeout(() => { if (fb) fb.textContent = ''; }, 4000);
-        }).catch(() => showToast('Impossible de copier.', 'warn'));
-    });
-    const shareCarnetBtn = document.getElementById('share-carnet');
-    if (shareCarnetBtn) shareCarnetBtn.addEventListener('click', () => {
-        const link = window.location.origin + window.location.pathname + '?carnet=' + getOrCreateCarnetId();
-        if (navigator.share) navigator.share({ title: 'Ma petite lumière', url: link }).catch(() => {});
-        else window.location.href = 'mailto:?subject=Ma petite lumière&body=' + encodeURIComponent(link);
-    });
-
-    const continueBtn = document.getElementById('btn-continuer-discernement');
-    if (continueBtn) continueBtn.addEventListener('click', () => {
-        updateRessources(currentSituationKey);
-        const cont = document.getElementById('ressources-container');
-        if (cont) { cont.style.display = 'block'; cont.scrollIntoView({ behavior: 'smooth' }); }
-    });
-
-    const saveLinkBtn = document.getElementById('save-link-ressources');
-    if (saveLinkBtn) saveLinkBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        const link = window.location.origin + window.location.pathname + '?carnet=' + getOrCreateCarnetId();
-        navigator.clipboard.writeText(link).then(() => showToast('Lien copié !', 'info')).catch(() => showToast('Impossible de copier.', 'warn'));
-    });
-
-    const toggleUrg = document.getElementById('toggle-urgence');
-    if (toggleUrg) toggleUrg.addEventListener('click', (e) => {
-        e.preventDefault();
-        const list = document.getElementById('urgence-list');
-        if (list) {
-            const isVisible = list.classList.toggle('visible');
-            toggleUrg.setAttribute('aria-expanded', isVisible ? 'true' : 'false');
-        }
-    });
-
-    const envoyerBtn = document.getElementById('envoyerTemoignage');
-    if (envoyerBtn) envoyerBtn.addEventListener('click', () => {
-        const input = document.getElementById('temoignage');
-        const msg = input ? input.value.trim() : '';
-        if (!msg) return;
-        const arr = getTemoignagesLocaux();
-        arr.push(msg.slice(0, 500));
-        try { localStorage.setItem(STORAGE_KEYS.TEMOIGNAGES, JSON.stringify(arr.slice(-20))); } catch (e) {}
-        const merci = document.getElementById('merciTemoignage');
-        if (merci) merci.style.display = 'block';
-        if (input) input.value = '';
-        renderTemoignages(true);
-        showToast('Témoignage enregistré.', 'info');
-    });
-    const clearTemBtn = document.getElementById('clear-temoignages');
-    if (clearTemBtn) clearTemBtn.addEventListener('click', clearTemoignages);
-
-    document.addEventListener('click', (e) => {
-        if (!e.target) return;
-        if (e.target.id === 'examen-prev') { examenIdx = Math.max(0, examenIdx - 1); renderPages(); }
-        if (e.target.id === 'examen-next') { examenIdx = examenIdx + 1; renderPages(); }
-    });
-
-    const backBtn = document.getElementById('back-to-top');
-    if (backBtn) {
-        window.addEventListener('scroll', () => {
-            backBtn.style.display = window.scrollY > 600 ? 'flex' : 'none';
-        }, { passive: true });
-        backBtn.addEventListener('click', FoyerUI.scrollToTop);
-    }
-
-    window.addEventListener('hashchange', showPage);
-
-    const prefillBtn = document.getElementById('btn-prefill-example');
-    if (prefillBtn) prefillBtn.addEventListener('click', () => {
-        document.getElementById('lecture1').value = "Ézéchiel 18, 25-28";
-        document.getElementById('psaume').value = "Psaume 24 (25)";
-        document.getElementById('lecture2').value = "Philippiens 2, 1-11";
-        document.getElementById('evangile').value = "Matthieu 21, 28-32";
-        document.getElementById('theme').value = "La cohérence entre nos paroles et nos actes";
-    });
-
-    const fermerBtn = document.getElementById('btn-fermer-lectures');
-    if (fermerBtn) fermerBtn.addEventListener('click', () => {
-        const el = document.getElementById('aelf-lectures-display');
-        if (el) el.style.display = 'none';
-    });
-
-    const aelfBtn = document.getElementById('btn-charger-aelf');
-    if (aelfBtn) aelfBtn.addEventListener('click', handleChargeAelf);
-
-    const homelieJourBtn = document.getElementById('btn-homelie-du-jour');
-    if (homelieJourBtn) homelieJourBtn.addEventListener('click', genererHomelieDuJour);
-
-    const genererBtn = document.getElementById('genererHomelie');
-    if (genererBtn) genererBtn.addEventListener('click', handleGenererHomelie);
-
-    ['lecture1', 'psaume', 'lecture2', 'evangile', 'theme'].forEach(id => {
-        const el = document.getElementById(id);
-        if (el) el.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                const btn = document.getElementById('genererHomelie');
-                if (btn) btn.click();
-            }
-        });
-    });
-}
-
-async function handleChargeAelf() {
-    const inputDate = document.getElementById('date-aelf');
-    const statusEl = document.getElementById('aelf-status');
-    const jourNomEl = document.getElementById('aelf-jour-nom');
-    const displayEl = document.getElementById('aelf-lectures-display');
-    const bodyEl = document.getElementById('aelf-lectures-body');
-    const btn = document.getElementById('btn-charger-aelf');
-    if (!inputDate || !inputDate.value) { showToast('Veuillez choisir une date.', 'warn'); return; }
-
-    if (statusEl) statusEl.textContent = '⏳ Chargement des lectures AELF...';
-    if (btn) btn.disabled = true;
-    aelfLectures = [];
-
-    try {
-        const res = await fetchWithTimeout('https://api.aelf.org/v1/messes/' + inputDate.value + '/france', {}, 20000);
-        if (!res.ok) throw new Error('Code HTTP ' + res.status);
-        const data = await res.json();
-        const messes = data.messes || [];
-        if (!messes.length || !messes[0].lectures) throw new Error('Aucune lecture disponible.');
-
-        const messe = messes[0];
-        if (jourNomEl) jourNomEl.textContent = '🕊️ Liturgie : ' + (messe.nom || (data.informations && data.informations.jour) || 'Office du jour');
-
-        let lect1 = '', ps = '', lect2 = '', ev = '';
-        let bodyHtml = '';
-        messe.lectures.forEach(l => {
-            const type = (l.type || '').toLowerCase();
-            const titre = l.titre || l.type || '';
-            const ref = l.ref || '';
-            const contenu = l.contenu || '';
-            bodyHtml += '<div style="margin-bottom:1.2rem; padding-bottom:1rem; border-bottom:1px solid #eee;">' +
-                '<div style="font-weight:bold; color:#4a6f5e;">' + escapeHtml(titre) + (ref ? ' (' + escapeHtml(ref) + ')' : '') + '</div>' +
-                '<div style="margin-top:0.3rem;">' + contenu + '</div></div>';
-            aelfLectures.push({ type, titre, ref, contenu });
-            if (type.includes('lecture_1') || type.includes('premiere') || type === 'lecture') {
-                if (!lect1) lect1 = (titre + ' ' + ref).trim();
-            } else if (type.includes('psaume') || type.includes('cantique')) {
-                if (!ps) ps = (titre + ' ' + ref).trim();
-            } else if (type.includes('lecture_2') || type.includes('deuxieme')) {
-                if (!lect2) lect2 = (titre + ' ' + ref).trim();
-            } else if (type.includes('evangile')) {
-                if (!ev) ev = (titre + ' ' + ref).trim();
-            }
-        });
-
-        if (lect1) document.getElementById('lecture1').value = lect1;
-        if (ps) document.getElementById('psaume').value = ps;
-        if (lect2) document.getElementById('lecture2').value = lect2;
-        if (ev) document.getElementById('evangile').value = ev;
-        if (bodyEl) bodyEl.innerHTML = bodyHtml;
-        if (displayEl) displayEl.style.display = 'block';
-        if (statusEl) statusEl.textContent = '✅ Lectures chargées !';
-    } catch (err) {
-        if (statusEl) statusEl.textContent = '⚠️ Erreur AELF (' + err.message + ').';
-        showToast('Erreur AELF : ' + err.message, 'error', 4000);
-    } finally {
-        if (btn) btn.disabled = false;
-    }
-}
-
-/* ============================================================
-   HOMÉLIE DU JOUR
-   ============================================================ */
-async function genererHomelieDuJour() {
-    const dateInput = document.getElementById('date-aelf');
-    if (!dateInput || !dateInput.value) {
-        showToast("Veuillez d'abord choisir une date.", 'warn');
-        return;
-    }
-    const btn = document.getElementById('btn-homelie-du-jour');
-    const originalText = btn ? btn.textContent : '';
-    if (btn) { btn.disabled = true; btn.textContent = '⏳ Chargement AELF...'; }
-
-    try {
-        await handleChargeAelf();
-        const evangileEl = document.getElementById('evangile');
-        if (!evangileEl || !evangileEl.value.trim()) {
-            showToast("Aucune lecture trouvée pour cette date.", '
+<script src="/app.js" defer></script>
+</body>
+</html>
