@@ -12,7 +12,7 @@ let currentLang = 'fr';
 let currentMode = 'discernement';
 let currentSituationKey = null;
 let examenIdx = 0;
-let aelfLectures = [];
+let aelfLectures = []; 
 
 /* ============================================================
    TRADUCTIONS
