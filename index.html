@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Au Foyer de l'Amour – Discernement et la petite lumière</title>
 <meta name="description" content="Au Foyer de l'Amour est un outil d'aide au discernement enraciné dans la foi chrétienne, pour ceux qui cherchent la paix, la justice et un sens à leur vie.">
-<meta name="keywords" content="discernement, spiritualité, foi chrétienne, prière, examen de conscience, paix intérieure, justice, amour, vérité">
+<meta name="keywords" content="discernement, spiritualité, foi chrétienne, prière, examen de conscience, paix intérieure, justice, amour, vérité, Carlo Acutis">
 <meta name="theme-color" content="#4a6f5e">
 <link rel="canonical" href="https://amour-et-verite-app.netlify.app">
 <link rel="icon" type="image/png" href="/favicon.png">
@@ -21,11 +21,6 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Au Foyer de l'Amour">
 <meta property="og:locale" content="fr_FR">
-<meta property="og:locale:alternate" content="en_US">
-<meta property="og:locale:alternate" content="zh_CN">
-<meta property="og:locale:alternate" content="hi_IN">
-<meta property="og:locale:alternate" content="es_ES">
-<meta property="og:locale:alternate" content="ar_SA">
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Au Foyer de l'Amour – Discernement et la petite lumière">
@@ -150,7 +145,6 @@
     .examen-nav { text-align: center; margin-top: 1rem; }
     [dir="rtl"] .page .bloc p, [dir="rtl"] .page .bloc li { text-align: right; }
 
-    /* Toasts */
     .toast-container { position: fixed; top: 20px; right: 20px; z-index: 10000; display: flex; flex-direction: column; gap: 10px; max-width: 380px; pointer-events: none; }
     .toast { padding: 12px 18px; border-radius: 8px; color: #fff; font-size: 0.92rem; font-weight: 500; line-height: 1.4; box-shadow: 0 4px 16px rgba(0,0,0,0.18); opacity: 0; transform: translateY(-12px); transition: opacity 0.3s cubic-bezier(0.16,1,0.3,1), transform 0.3s cubic-bezier(0.16,1,0.3,1); pointer-events: auto; word-break: break-word; }
     .toast.show { opacity: 1; transform: translateY(0); }
@@ -158,13 +152,11 @@
     .toast-warn { background-color: #f57c00; border-left: 5px solid #e65100; }
     .toast-error { background-color: #d32f2f; border-left: 5px solid #b71c1c; }
 
-    /* Accessibilité */
     :focus-visible { outline: 2px solid #4a6f5e; outline-offset: 2px; }
     .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
     button, .lang-btn, .mode-btn, .btn-carnet { min-height: 44px; display: inline-flex; align-items: center; justify-content: center; }
     .lang-btn { min-width: 44px; padding: 0.4rem 0.8rem; }
 
-    /* Skeleton loader */
     .skeleton-card { background: #f6f3ef; border-radius: 12px; padding: 1.5rem; margin: 1.5rem 0; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
     .skeleton-header { display: flex; align-items: center; gap: 8px; margin-bottom: 14px; font-weight: bold; color: #4a6f5e; }
     .skeleton-line { height: 14px; margin-bottom: 12px; border-radius: 6px; background: linear-gradient(90deg, #e5dfd5 25%, #f2eee8 50%, #e5dfd5 75%); background-size: 200% 100%; animation: skeleton-shimmer 1.5s infinite ease-in-out; }
@@ -174,12 +166,10 @@
     .skeleton-line.full { width: 100%; }
     @keyframes skeleton-shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
 
-    /* Bouton retour en haut */
     #back-to-top { position: fixed; bottom: 25px; right: 25px; background: #4a6f5e; color: #fff; border: none; border-radius: 50%; width: 48px; height: 48px; font-size: 1.2rem; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.2); display: none; align-items: center; justify-content: center; z-index: 1000; transition: opacity 0.3s, transform 0.2s; }
     #back-to-top:hover { background: #39574a; transform: translateY(-2px); }
     #back-to-top:active { transform: translateY(0); }
 
-    /* Modal de confirmation */
     .modal-overlay { position: fixed; inset: 0; background: rgba(30,25,20,0.55); z-index: 9999; display: flex; align-items: center; justify-content: center; padding: 1rem; }
     .modal-overlay[hidden] { display: none; }
     .modal-box { background: #fff; border-radius: 14px; padding: 1.6rem; max-width: 440px; width: 100%; box-shadow: 0 12px 40px rgba(0,0,0,0.25); }
@@ -191,8 +181,6 @@
     .btn-cancel:hover { background: #e0d8cc; }
     .btn-danger { background: #c0392b; color: white; }
     .btn-danger:hover { background: #a5281c; }
-    .btn-confirm { background: #4a6f5e; color: white; }
-    .btn-confirm:hover { background: #39574a; }
 
     @media (prefers-reduced-motion: reduce) {
         *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
@@ -228,7 +216,6 @@
         <button type="button" class="lang-btn" data-lang="ar" aria-label="العربية" aria-pressed="false">🇸🇦 العربية</button>
     </div>
 
-    <!-- ==================== PAGE ACCUEIL ==================== -->
     <div id="page-accueil" class="page active">
         <div class="mode-selector" role="group" aria-label="Mode d'accompagnement spirituel">
             <button type="button" class="mode-btn active" data-mode="discernement" id="mode-discernement" aria-label="Mode Discernement" aria-pressed="true">🤲 Discernement</button>
@@ -272,7 +259,6 @@
         </div>
         <div id="error" class="error" style="display:none;" role="alert"></div>
 
-        <!-- Carnet -->
         <div id="carnet-container">
             <div class="silence-message" id="carnet-prompt"></div>
             <div class="carnet-box">
@@ -290,7 +276,6 @@
             <button type="button" class="btn-ressources" id="btn-continuer-discernement">🌿 Continuer le discernement</button>
         </div>
 
-        <!-- Préparation d'homélie -->
         <div class="section-card" id="homelie-section" style="background:#fff; border-radius:16px; padding:2rem; box-shadow:0 4px 20px rgba(0,0,0,0.06); border:1px solid #e8e2d8; margin:2rem 0;">
             <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:0.5rem; margin-bottom:0.5rem;">
                 <h3 style="margin:0; font-size:1.4rem; color:#2c221e;">📖 <span id="homelie-title">Préparation d'homélie</span></h3>
@@ -302,12 +287,15 @@
 
             <div style="background:#f4f0e8; border:1px solid #dfd7ca; border-radius:10px; padding:1.2rem; margin-bottom:1.5rem;">
                 <div style="font-weight:bold; color:#4a6f5e; margin-bottom:0.6rem; font-size:0.95rem;">
-                    <label for="date-aelf" style="cursor:pointer;">📅 Charger les lectures liturgiques officielles du dimanche via l'AELF</label>
+                    <label for="date-aelf" style="cursor:pointer;">📅 Charger les lectures liturgiques officielles du jour via l'AELF</label>
                 </div>
                 <div style="display:flex; gap:0.8rem; align-items:center; flex-wrap:wrap;">
                     <input type="date" id="date-aelf" style="padding:8px 12px; border:1px solid #c2b5a3; border-radius:6px; font-size:0.92rem; background:#fff; color:#3b322a;">
                     <button type="button" id="btn-charger-aelf" style="background:#4a6f5e; color:#fff; border:none; padding:8px 16px; border-radius:6px; font-weight:600; cursor:pointer; font-size:0.92rem;">
                         📥 Charger le texte officiel (AELF)
+                    </button>
+                    <button type="button" id="btn-homelie-du-jour" style="background:#8b5e3c; color:#fff; border:none; padding:8px 16px; border-radius:6px; font-weight:600; cursor:pointer; font-size:0.92rem; display:inline-flex; align-items:center; gap:0.4rem;">
+                        🕊️ Générer l'homélie du jour
                     </button>
                     <span id="aelf-status" style="font-size:0.85rem; color:#4a6f5e; font-style:italic;" role="status"></span>
                 </div>
@@ -371,7 +359,6 @@
             <div id="homelieResponse" style="display:none; margin-top:1.5rem; background:#f8f5f0; padding:1.8rem; border-radius:12px; border-left:5px solid #4a6f5e; line-height:1.85; color:#2c221e;"></div>
         </div>
 
-        <!-- Ressources -->
         <div id="ressources-container">
             <h2 id="ressources-title" style="text-align:center;">Pour continuer...</h2>
 
@@ -388,7 +375,6 @@
                         <span>Ouvrir Prions en Église (Novalis)</span>
                         <span aria-hidden="true">↗</span>
                     </a>
-                    <span style="font-size:0.82rem; color:#687b87; font-style:italic;">(S'ouvre dans un nouvel onglet)</span>
                 </div>
             </div>
 
@@ -458,7 +444,6 @@
         </div>
     </div>
 
-    <!-- Pages internes -->
     <div id="page-sagesse" class="page"></div>
     <div id="page-apropos" class="page"></div>
     <div id="page-examen" class="page"></div>
@@ -487,7 +472,6 @@
 
 <button type="button" id="back-to-top" aria-label="Retour en haut de page" title="Haut de page">↑</button>
 
-<!-- Modal de confirmation accessible -->
 <div id="confirm-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="confirm-title" hidden>
     <div class="modal-box">
         <h3 id="confirm-title">Confirmation</h3>
@@ -722,7 +706,6 @@ const translations = {
             prev: "← Précédent", next: "Suivant →"
         }
     },
-    /* EN, ZH, HI, ES, AR — versions complètes conservées ci-dessous */
     en: {
         title: "🕯️ Home of Love", subtitle: "Discernment and the little light",
         placeholder: "Describe your situation...", role: "Who are you? (optional)",
@@ -859,7 +842,7 @@ const translations = {
         carnetPrompt: "✨<br><br>« 今天你能记下什么小小的光？ »",
         carnetPlaceholder: "我的小光...", saveBtn: "💾 保存", copyBtn: "🔗 复制我的链接",
         shareBtn: "📤 分享",
-        carnetInfo: "你可以稍后通过链接返回。没有任何与账户关联的内容。",
+        carnetInfo: "你可以稍后通过链接返回。",
         modes: { discernement: "🤲 辨别", consolation: "🙏 安慰", lecture: "📖 读经", priere: "❤️ 祷告" },
         homelieTitle: "讲道准备",
         homelieDescription: "输入主日读经，以接收完整的讲道建议。",
@@ -1084,26 +1067,49 @@ const translations = {
     }
 };
 
-/* Fallbacks pour langues secondaires (zh/hi/es/ar) */
 ['zh', 'hi', 'es', 'ar'].forEach(lang => {
     const t = translations[lang];
-    if (!t.prieresParSituation || !t.prieresParSituation.defaut || t.prieresParSituation.defaut.length === 0) {
-        t.prieresParSituation = translations.fr.prieresParSituation;
-    }
-    if (!t.exercicesIgnatiens || t.exercicesIgnatiens.length === 0) {
-        t.exercicesIgnatiens = translations.fr.exercicesIgnatiens;
-    }
-    if (!t.prieres || t.prieres.length === 0) {
-        t.prieres = translations.fr.prieres;
-    }
-    if (!t.defaultTestimonials || t.defaultTestimonials.length === 0) {
-        t.defaultTestimonials = translations.fr.defaultTestimonials;
-    }
+    if (!t.prieresParSituation || !t.prieresParSituation.defaut || t.prieresParSituation.defaut.length === 0) t.prieresParSituation = translations.fr.prieresParSituation;
+    if (!t.exercicesIgnatiens || t.exercicesIgnatiens.length === 0) t.exercicesIgnatiens = translations.fr.exercicesIgnatiens;
+    if (!t.prieres || t.prieres.length === 0) t.prieres = translations.fr.prieres;
+    if (!t.defaultTestimonials || t.defaultTestimonials.length === 0) t.defaultTestimonials = translations.fr.defaultTestimonials;
 });
 
 /* ============================================================
    CONTENU DES PAGES INTERNES
    ============================================================ */
+const CARLO_ACUTIS_BLOCK = `
+<div class="bloc" id="sagesse-carlo-acutis" style="background:#fff8f0; border:1px solid #e8d5b7; border-left:4px solid #c49a6c;">
+<h3 style="color:#8b5e3c;">🔥 Saint Carlo Acutis (1991–2006) — Le saint des développeurs</h3>
+<p style="font-style:italic; color:#6b4c2a; font-size:1.05rem;">
+« Tous naissent comme des originaux, mais beaucoup meurent comme des photocopies. »
+<br><span style="font-size:0.8rem; color:#8b7355;">— Phrase que Carlo aimait à répéter</span>
+</p>
+<p>
+Canonisé en 2025, Carlo Acutis est le premier saint de l'ère numérique. Adolescent passionné d'informatique,
+il a utilisé le web pour créer une <a href="https://www.miracolieucaristici.org/" target="_blank" rel="noopener">exposition internationale sur les miracles eucharistiques</a>.
+Il disait : <em>« L'Eucharistie est mon autoroute vers le Ciel. »</em>
+</p>
+<blockquote style="border-left:3px solid #c49a6c; margin:1rem 0; padding-left:1rem; color:#5a4f42; line-height:1.7;">
+<p>« Notre objectif doit être l'infini, non pas le fini. L'Infini est notre patrie. »</p>
+<p>« Être toujours uni à Jésus, tel est le but de ma vie. »</p>
+<p>« Quand on s'expose au soleil, on bronze ; quand on se met devant Jésus Eucharistie, on devient saint ! »</p>
+<p>« Le bonheur, c'est d'avoir le regard tourné vers Dieu. La tristesse, c'est de l'avoir tourné vers soi-même. »</p>
+<p>« La tristesse, c'est regarder vers soi-même ; le bonheur, c'est regarder vers Dieu. »</p>
+<p>« Ne perds pas ton temps à ne rien faire. Consacre-le à Dieu. »</p>
+</blockquote>
+<p style="font-size:0.85rem; color:#8b7355; margin-top:1rem; padding-top:0.8rem; border-top:1px dashed #d4c5b3;">
+📖 Pour aller plus loin : <em>Carlo Acutis, une âme de feu</em> — Marie et Jean-Baptiste Maillard, éd. Artège, 2025.
+Ouvrage de référence comprenant 15 méditations de Carlo pour les jeunes et leurs familles.
+<a href="https://www.artege.fr/" target="_blank" rel="noopener">Voir l'éditeur →</a>
+</p>
+<p style="font-size:0.8rem; color:#8b7355; font-style:italic;">
+🕯️ Prière : Saint Carlo Acutis, toi qui as fait de ton ordinateur un instrument d'évangélisation,
+apprends-nous à mettre nos talents numériques au service du Bien et de la Vérité. Intercède pour
+les développeurs, les créateurs et tous ceux qui travaillent dans le numérique. Amen.
+</p>
+</div>`;
+
 const pageContent = {
     fr: {
         sagesse: `<h2>📖 Sagesse</h2>
@@ -1115,6 +1121,7 @@ const pageContent = {
 <div class="bloc"><h3>Psaumes</h3>
 <p>« Le Seigneur est mon berger : je ne manque de rien. » — Ps 23,1</p>
 <p>« Oui, mon âme se repose en Dieu. » — Ps 62,2</p></div>
+${CARLO_ACUTIS_BLOCK}
 <div class="bloc"><h3>🎵 Psaumes chantés et prière audio</h3>
 <p><a href="https://serenitechantee.com/150-psaumes-chantes-yt" target="_blank" rel="noopener">🎵 Écouter les 150 psaumes chantés</a></p>
 <p><a href="https://neumz.com/fr/francais/" target="_blank" rel="noopener">🎵 Chant grégorien en direct — Neumz</a><br>
@@ -1135,7 +1142,9 @@ const pageContent = {
 <div class="bloc"><h3>Magistère et Tradition</h3>
 <p><a href="https://www.vatican.va/archive/FRA0013/_INDEX.HTM" target="_blank" rel="noopener">Catéchisme de l'Église catholique</a> · <a href="https://www.vatican.va/content/vatican/fr.html" target="_blank" rel="noopener">Documents officiels du Saint-Siège</a></p></div>
 <div class="bloc"><h3>Spiritualité ignatienne</h3>
-<p>Les exercices proposés s'inspirent des <em>Exercices spirituels</em> de saint Ignace de Loyola (domaine public).</p></div>`,
+<p>Les exercices proposés s'inspirent des <em>Exercices spirituels</em> de saint Ignace de Loyola (domaine public).</p></div>
+<div class="bloc"><h3>Saint Carlo Acutis</h3>
+<p>Les citations de Carlo Acutis proviennent de ses écrits personnels et de son témoignage, largement diffusés par l'Église. Pour approfondir : <em>Carlo Acutis, une âme de feu</em> de Marie et Jean-Baptiste Maillard (Artège, 2025).</p></div>`,
         contact: `<h2>✉️ Contact</h2>
 <div class="bloc"><h3>Partager votre expérience</h3>
 <p>Le plus simple : laissez un témoignage anonyme depuis <a href="#/">la page d'accueil</a>.</p></div>
@@ -1160,6 +1169,17 @@ const pageContent = {
 <div class="bloc"><h3>Psalms</h3>
 <p>« The Lord is my shepherd; I shall not want. » — Ps 23:1</p>
 <p>« Truly my soul finds rest in God. » — Ps 62:1</p></div>
+<div class="bloc" style="background:#fff8f0; border-left:4px solid #c49a6c;">
+<h3 style="color:#8b5e3c;">🔥 Saint Carlo Acutis (1991–2006) — The developer saint</h3>
+<p style="font-style:italic;">« Everyone is born as an original, but many die as photocopies. »</p>
+<p>Canonized in 2025, Carlo Acutis is the first saint of the digital age. A teenager passionate about computing, he used the web to create an <a href="https://www.miracolieucaristici.org/" target="_blank" rel="noopener">international exhibition on Eucharistic miracles</a>. He said: <em>« The Eucharist is my highway to Heaven. »</em></p>
+<blockquote style="border-left:3px solid #c49a6c; padding-left:1rem; color:#5a4f42;">
+<p>« Our goal must be the infinite, not the finite. »</p>
+<p>« To always be united with Jesus — that is the goal of my life. »</p>
+<p>« Sadness is looking at yourself; happiness is looking at God. »</p>
+</blockquote>
+<p style="font-size:0.85rem; color:#8b7355;">📖 To go further: <em>Carlo Acutis, une âme de feu</em> — Marie & Jean-Baptiste Maillard, Artège, 2025.</p>
+</div>
 <div class="bloc"><h3>Go further</h3><p>Return to the <a href="#/">home page</a> or take the <a href="#/examen">guided examen</a>.</p></div>`,
         apropos: `<h2>📖 About</h2>
 <div class="bloc"><h3>What is Home of Love?</h3>
@@ -1187,10 +1207,8 @@ const pageContent = {
 <p>The journal, testimonies and language are stored in localStorage.</p></div>`
     }
 };
-/* Pages internes : fallback FR pour zh/hi/es/ar */
 ['zh', 'hi', 'es', 'ar'].forEach(l => { pageContent[l] = pageContent.fr; });
 
-/* Extra labels (nav) */
 const extraLabels = {
     fr: { navSources: '📚 Sources', footerSources: '📚 Sources', footerPrivacy: '🔒 Confidentialité', retour: "← Retour à l'accueil" },
     en: { navSources: '📚 Sources', footerSources: '📚 Sources', footerPrivacy: '🔒 Privacy', retour: '← Back to home' },
@@ -1226,7 +1244,7 @@ async function callDiscernAPI(payload) {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(payload)
-        }, 20000);
+        }, 30000);
         const contentType = res.headers.get('content-type') || '';
         if (!contentType.includes('application/json')) {
             return { ok: false, data: null, error: 'Non-JSON response' };
@@ -1257,7 +1275,7 @@ function showToast(message, type = 'info', duration = 4000) {
 }
 
 /* ============================================================
-   MODAL DE CONFIRMATION (remplace confirm())
+   MODAL DE CONFIRMATION
    ============================================================ */
 function confirmAction(message, confirmLabel) {
     return new Promise(resolve => {
@@ -1294,38 +1312,33 @@ function confirmAction(message, confirmLabel) {
 }
 
 /* ============================================================
-   FOYER UI (skeleton loader préservé)
+   FOYER UI
    ============================================================ */
 const FoyerUI = {
     timers: {},
-
     startLoading(containerId, textId, text) {
         const container = document.getElementById(containerId);
         const textEl = document.getElementById(textId);
         if (!container) return;
         container.style.display = 'block';
         if (textEl && text) textEl.textContent = text;
-
         this.clearTimers(containerId);
         this.timers[containerId] = [
             setTimeout(() => { if (container.style.display !== 'none' && textEl) textEl.textContent = text + ' (connexion en cours...)'; }, 5000),
             setTimeout(() => { if (container.style.display !== 'none' && textEl) textEl.textContent = 'La méditation demande parfois un peu de temps...'; }, 10000)
         ];
     },
-
     stopLoading(containerId) {
         const container = document.getElementById(containerId);
         if (container) container.style.display = 'none';
         this.clearTimers(containerId);
     },
-
     clearTimers(containerId) {
         if (this.timers[containerId]) {
             this.timers[containerId].forEach(clearTimeout);
             this.timers[containerId] = null;
         }
     },
-
     scrollToTop() {
         const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         window.scrollTo({ top: 0, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
@@ -1640,35 +1653,6 @@ function stripHtml(h) {
     return (div.textContent || div.innerText || '').replace(/\s+/g, ' ').trim();
 }
 
-function pickQuote(aObj, maxLen) {
-    const text = aObj && aObj.contenu ? stripHtml(aObj.contenu) : '';
-    if (!text) return '';
-    const sentences = text.split(/(?<=[.!?…])\s+/).map(s => s.trim()).filter(s => s.length > 25);
-    if (!sentences.length) return '';
-    const sorted = sentences.slice().sort((a, b) => Math.abs(a.length - 110) - Math.abs(b.length - 110));
-    const chosen = sorted[0];
-    return chosen.length > maxLen ? chosen.slice(0, maxLen) + '…' : chosen;
-}
-
-function detectAuthorContext(refStr, textStr) {
-    const full = ((refStr || '') + ' ' + (textStr || '')).toLowerCase();
-    if (/matthieu|matthew|mateo|\bmt\b/.test(full)) return { nom: 'saint Matthieu', lienAelf: 'https://www.aelf.org/bible/Mt' };
-    if (/marc|mark|marcos|\bmc\b/.test(full)) return { nom: 'saint Marc', lienAelf: 'https://www.aelf.org/bible/Mc' };
-    if (/luc|luke|lucas|\blc\b/.test(full)) return { nom: 'saint Luc', lienAelf: 'https://www.aelf.org/bible/Lc' };
-    if (/jean|john|juan|\bjn\b/.test(full)) return { nom: 'saint Jean', lienAelf: 'https://www.aelf.org/bible/Jn' };
-    if (/ézéchiel|ezechiel|\bez\b/.test(full)) return { nom: 'Ézéchiel', lienAelf: 'https://www.aelf.org/bible/Ez' };
-    if (/isaïe|isaie|\bis\b/.test(full)) return { nom: 'Isaïe', lienAelf: 'https://www.aelf.org/bible/Is' };
-    if (/philippiens|\bph\b/.test(full)) return { nom: 'saint Paul', lienAelf: 'https://www.aelf.org/bible/Ph' };
-    return { nom: "l'Écriture inspirée", lienAelf: 'https://www.aelf.org/bible' };
-}
-
-const LEGAL_NOTICE_HOMILIE =
-    "<div class='notice-inspiration-reproduction' style='margin-top:1.5rem; padding:1rem; background:#f5f3ef; border:1px solid #dcd5c9; border-left:4px solid #4a6f5e; border-radius:6px; font-size:0.84rem; color:#443b34; line-height:1.55;'>" +
-    "<div style='font-weight:700; color:#2d463b; margin-bottom:0.4rem;'>⚖️ Distinction légale : Inspiration vs Reproduction</div>" +
-    "Cette homélie est une <strong>création originale inspirée</strong> de la démarche de <strong>Mgr Joseph A. Pellegrino</strong> (<a href='https://frjoeshomilies.net/' target='_blank' rel='noopener noreferrer' style='color:#2a503e;'>frjoeshomilies.net</a>) et du <strong>Père Tony Kadavil</strong> (<a href='https://frtonyshomilies.com/' target='_blank' rel='noopener noreferrer' style='color:#2a503e;'>frtonyshomilies.com</a>). " +
-    "Elle ne constitue en aucun cas une reproduction intégrale de leurs écrits protégés, mais une appropriation spirituelle autonome dans le respect du droit d'auteur, du <em>Directoire sur l'homélie</em> et des textes de l'AELF." +
-    "</div>";
-
 function countWordsInHtml(html) {
     if (!html) return 0;
     const text = html.replace(/<[^>]*>/g, ' ').replace(/&[a-z#0-9]+;/gi, ' ');
@@ -1688,15 +1672,18 @@ function truncateHtmlToMaxWords(html, maxWords) {
     };
 }
 
-/* --- Générateur local enrichi (utilise citations et refrain) --- */
+const LEGAL_NOTICE_HOMILIE =
+    "<div class='notice-inspiration-reproduction' style='margin-top:1.5rem; padding:1rem; background:#f5f3ef; border:1px solid #dcd5c9; border-left:4px solid #4a6f5e; border-radius:6px; font-size:0.84rem; color:#443b34; line-height:1.55;'>" +
+    "<div style='font-weight:700; color:#2d463b; margin-bottom:0.4rem;'>⚖️ Distinction légale : Inspiration vs Reproduction</div>" +
+    "Cette homélie est une <strong>création originale inspirée</strong> de la démarche de <strong>Mgr Joseph A. Pellegrino</strong> (<a href='https://frjoeshomilies.net/' target='_blank' rel='noopener noreferrer' style='color:#2a503e;'>frjoeshomilies.net</a>) et du <strong>Père Tony Kadavil</strong> (<a href='https://frtonyshomilies.com/' target='_blank' rel='noopener noreferrer' style='color:#2a503e;'>frtonyshomilies.com</a>). " +
+    "Elle ne constitue en aucun cas une reproduction intégrale de leurs écrits protégés, mais une appropriation spirituelle autonome dans le respect du droit d'auteur, du <em>Directoire sur l'homélie</em> et des textes de l'AELF." +
+    "</div>";
+
+/* Générateur local (fallback) */
 function buildHomelieDominicaleLocally(data) {
     const { evRef, l1Ref, l2Ref, psRef, evQuote, l1Quote, psalmRefrain } = data;
     let h = '';
-
-    // P1 : histoire concrète
     h += "<p>Un homme avait planté un petit potager derrière sa maison. Il avait préparé la terre, semé avec soin, arrosé chaque jour et attendu patiemment. Un jour, son voisin lui demanda : <em>« Comment va ton potager ? »</em> L'homme répondit : <em>« Les feuilles poussent à merveille. Il n'y a qu'un problème : je ne vois encore aucun légume ! »</em> Le voisin sourit : <em>« Mais un jardin est fait pour produire quelque chose ! »</em></p>";
-
-    // P2 : 1ère lecture + Évangile
     h += "<p>C'est exactement le message de nos lectures d'aujourd'hui : Dieu a planté pour nous une vigne, et Il attend qu'elle produise de bons fruits.";
     if (l1Ref) h += " La première lecture (<strong>" + escapeHtml(l1Ref) + "</strong>)";
     if (l1Quote) h += " nous rappelle que « <em>" + escapeHtml(l1Quote) + "</em> »";
@@ -1704,18 +1691,13 @@ function buildHomelieDominicaleLocally(data) {
     if (evRef) h += " L'Évangile (<strong>" + escapeHtml(evRef) + "</strong>)";
     if (evQuote) h += " prolonge cet appel : « <em>" + escapeHtml(evQuote) + "</em> »";
     h += " Cette Parole nous interpelle : quels fruits portons-nous aujourd'hui ?</p>";
-
-    // P3 : 2ème lecture + Psaume
     h += "<p>";
     if (l2Ref) h += "Saint Paul, dans la deuxième lecture (<strong>" + escapeHtml(l2Ref) + "</strong>), ";
     else h += "L'Écriture ";
     h += "nous invite à ne pas nous laisser dominer par l'inquiétude, mais à tourner nos cœurs vers ce qui est vrai, juste et digne d'éloge.";
     if (psalmRefrain) h += " Comme le chante le psaume : « <em>" + escapeHtml(psalmRefrain) + "</em> »";
     h += ".</p>";
-
-    // P4 : actualisation + Amen
-    h += "<p>Dieu nous a confié une vigne : notre vie, nos familles, notre communauté. Nous n'en sommes pas les propriétaires, mais les intendants. Il n'attend pas des fruits parfaits, mais de vrais fruits : un appel à un isolé, un pardon accordé, une parole encourageante.<br><br><em>Amen.</em></p>";
-
+    h += "<p>Dieu nous a confié une vigne : notre vie, nos familles, notre communauté. Il n'attend pas des fruits parfaits, mais de vrais fruits : un appel à un isolé, un pardon accordé, une parole encourageante.<br><br><em>Amen.</em></p>";
     return h;
 }
 
@@ -1744,6 +1726,18 @@ function buildSourcesBlock(ctxEv) {
         "</ul></div>";
 }
 
+function detectAuthorContext(refStr, textStr) {
+    const full = ((refStr || '') + ' ' + (textStr || '')).toLowerCase();
+    if (/matthieu|matthew|mateo|\bmt\b/.test(full)) return { nom: 'saint Matthieu', lienAelf: 'https://www.aelf.org/bible/Mt' };
+    if (/marc|mark|marcos|\bmc\b/.test(full)) return { nom: 'saint Marc', lienAelf: 'https://www.aelf.org/bible/Mc' };
+    if (/luc|luke|lucas|\blc\b/.test(full)) return { nom: 'saint Luc', lienAelf: 'https://www.aelf.org/bible/Lc' };
+    if (/jean|john|juan|\bjn\b/.test(full)) return { nom: 'saint Jean', lienAelf: 'https://www.aelf.org/bible/Jn' };
+    if (/ézéchiel|ezechiel|\bez\b/.test(full)) return { nom: 'Ézéchiel', lienAelf: 'https://www.aelf.org/bible/Ez' };
+    if (/isaïe|isaie|\bis\b/.test(full)) return { nom: 'Isaïe', lienAelf: 'https://www.aelf.org/bible/Is' };
+    if (/philippiens|\bph\b/.test(full)) return { nom: 'saint Paul', lienAelf: 'https://www.aelf.org/bible/Ph' };
+    return { nom: "l'Écriture inspirée", lienAelf: 'https://www.aelf.org/bible' };
+}
+
 function genererHomelieLocale(lecture1, psaume, lecture2, evangile, theme) {
     const parsed = parseAelfLectures(aelfLectures);
     const aLect1 = parsed.lect1, aPsaume = parsed.psaume, aLect2 = parsed.lect2, aEvangile = parsed.evangile;
@@ -1755,8 +1749,14 @@ function genererHomelieLocale(lecture1, psaume, lecture2, evangile, theme) {
     const evText = aEvangile && aEvangile.contenu ? stripHtml(aEvangile.contenu) : '';
 
     const ctxEv = detectAuthorContext(evRef, evText);
-    const evQuote = pickQuote(aEvangile, 140);
-    const l1Quote = pickQuote(aLect1, 120);
+    let evQuote = '';
+    if (evText) {
+        const sentences = evText.split(/(?<=[.!?…])\s+/).map(s => s.trim()).filter(s => s.length > 25);
+        if (sentences.length) {
+            const sorted = sentences.slice().sort((a, b) => Math.abs(a.length - 110) - Math.abs(b.length - 110));
+            evQuote = sorted[0].length > 140 ? sorted[0].slice(0, 140) + '…' : sorted[0];
+        }
+    }
 
     let psalmRefrain = '';
     if (aPsaume && aPsaume.contenu) {
@@ -1774,7 +1774,7 @@ function genererHomelieLocale(lecture1, psaume, lecture2, evangile, theme) {
         }
     }
 
-    const data = { evRef, l1Ref, l2Ref, psRef, evQuote, l1Quote, psalmRefrain, theme };
+    const data = { evRef, l1Ref, l2Ref, psRef, evQuote, l1Quote: '', psalmRefrain, theme };
     let html = isSunday ? buildHomelieDominicaleLocally(data) : buildHomelieFerieLocally(data);
 
     const maxLimit = isSunday ? 300 : 100;
@@ -1791,18 +1791,9 @@ function genererHomelieLocale(lecture1, psaume, lecture2, evangile, theme) {
 /* ============================================================
    UPDATE LANGUAGE
    ============================================================ */
-function setText(id, value) {
-    const el = document.getElementById(id);
-    if (el) el.textContent = value;
-}
-function setHtml(id, value) {
-    const el = document.getElementById(id);
-    if (el) el.innerHTML = value;
-}
-function setPlaceholder(id, value) {
-    const el = document.getElementById(id);
-    if (el) el.placeholder = value;
-}
+function setText(id, value) { const el = document.getElementById(id); if (el) el.textContent = value; }
+function setHtml(id, value) { const el = document.getElementById(id); if (el) el.innerHTML = value; }
+function setPlaceholder(id, value) { const el = document.getElementById(id); if (el) el.placeholder = value; }
 
 function updateLanguage(lang) {
     if (!translations[lang]) lang = 'fr';
@@ -1946,10 +1937,9 @@ function updateLanguage(lang) {
 }
 
 /* ============================================================
-   INITIALISATION (au DOMContentLoaded)
+   ÉVÉNEMENTS
    ============================================================ */
 function bindStaticEvents() {
-    // Language selector
     document.querySelectorAll('.lang-btn').forEach(btn => {
         btn.addEventListener('click', function() {
             document.querySelectorAll('.lang-btn').forEach(b => {
@@ -1965,7 +1955,6 @@ function bindStaticEvents() {
         });
     });
 
-    // Mode selector
     document.querySelectorAll('.mode-btn').forEach(btn => {
         btn.addEventListener('click', function() {
             document.querySelectorAll('.mode-btn').forEach(b => {
@@ -1978,11 +1967,9 @@ function bindStaticEvents() {
         });
     });
 
-    // Submit
     const submitBtn = document.getElementById('submitBtn');
     if (submitBtn) submitBtn.addEventListener('click', handleSubmit);
 
-    // Carnet
     const saveCarnetBtn = document.getElementById('save-carnet');
     if (saveCarnetBtn) saveCarnetBtn.addEventListener('click', saveCarnet);
     const clearCarnetBtn = document.getElementById('clear-carnet');
@@ -2007,7 +1994,6 @@ function bindStaticEvents() {
         }
     });
 
-    // Continuer
     const continueBtn = document.getElementById('btn-continuer-discernement');
     if (continueBtn) continueBtn.addEventListener('click', () => {
         updateRessources(currentSituationKey);
@@ -2018,7 +2004,6 @@ function bindStaticEvents() {
         }
     });
 
-    // Save link ressources
     const saveLinkBtn = document.getElementById('save-link-ressources');
     if (saveLinkBtn) saveLinkBtn.addEventListener('click', (e) => {
         e.preventDefault();
@@ -2026,7 +2011,6 @@ function bindStaticEvents() {
         navigator.clipboard.writeText(link).then(() => showToast('Lien copié !', 'info')).catch(() => showToast('Impossible de copier le lien.', 'warn'));
     });
 
-    // Toggle urgence
     const toggleUrg = document.getElementById('toggle-urgence');
     if (toggleUrg) toggleUrg.addEventListener('click', (e) => {
         e.preventDefault();
@@ -2037,7 +2021,6 @@ function bindStaticEvents() {
         }
     });
 
-    // Témoignages
     const envoyerBtn = document.getElementById('envoyerTemoignage');
     if (envoyerBtn) envoyerBtn.addEventListener('click', () => {
         const input = document.getElementById('temoignage');
@@ -2055,14 +2038,12 @@ function bindStaticEvents() {
     const clearTemBtn = document.getElementById('clear-temoignages');
     if (clearTemBtn) clearTemBtn.addEventListener('click', clearTemoignages);
 
-    // Examen navigation (délégation)
     document.addEventListener('click', (e) => {
         if (!e.target) return;
         if (e.target.id === 'examen-prev') { examenIdx = Math.max(0, examenIdx - 1); renderPages(); }
         if (e.target.id === 'examen-next') { examenIdx = examenIdx + 1; renderPages(); }
     });
 
-    // Back to top
     const backBtn = document.getElementById('back-to-top');
     if (backBtn) {
         window.addEventListener('scroll', () => {
@@ -2071,10 +2052,8 @@ function bindStaticEvents() {
         backBtn.addEventListener('click', FoyerUI.scrollToTop);
     }
 
-    // Hash router
     window.addEventListener('hashchange', showPage);
 
-    // Pré-remplir exemple homélie
     const prefillBtn = document.getElementById('btn-prefill-example');
     if (prefillBtn) prefillBtn.addEventListener('click', () => {
         document.getElementById('lecture1').value = "Ézéchiel 18, 25-28";
@@ -2084,22 +2063,22 @@ function bindStaticEvents() {
         document.getElementById('theme').value = "La cohérence entre nos paroles et nos actes";
     });
 
-    // Fermer lectures AELF
     const fermerBtn = document.getElementById('btn-fermer-lectures');
     if (fermerBtn) fermerBtn.addEventListener('click', () => {
         const el = document.getElementById('aelf-lectures-display');
         if (el) el.style.display = 'none';
     });
 
-    // Charger AELF
     const aelfBtn = document.getElementById('btn-charger-aelf');
     if (aelfBtn) aelfBtn.addEventListener('click', handleChargeAelf);
 
-    // Générer homélie
+    // Bouton « Homélie du jour » (AELF + génération auto)
+    const homelieJourBtn = document.getElementById('btn-homelie-du-jour');
+    if (homelieJourBtn) homelieJourBtn.addEventListener('click', genererHomelieDuJour);
+
     const genererBtn = document.getElementById('genererHomelie');
     if (genererBtn) genererBtn.addEventListener('click', handleGenererHomelie);
 
-    // Enter sur les champs homélie
     ['lecture1', 'psaume', 'lecture2', 'evangile', 'theme'].forEach(id => {
         const el = document.getElementById(id);
         if (el) el.addEventListener('keypress', (e) => {
@@ -2132,7 +2111,7 @@ async function handleChargeAelf() {
         if (!messes.length || !messes[0].lectures) throw new Error('Aucune lecture disponible pour cette date.');
 
         const messe = messes[0];
-        if (jourNomEl) jourNomEl.textContent = '🕊️ Liturgie : ' + (messe.nom || (data.informations && data.informations.jour) || 'Office dominical');
+        if (jourNomEl) jourNomEl.textContent = '🕊️ Liturgie : ' + (messe.nom || (data.informations && data.informations.jour) || 'Office du jour');
 
         let lect1 = '', ps = '', lect2 = '', ev = '';
         let bodyHtml = '';
@@ -2171,6 +2150,41 @@ async function handleChargeAelf() {
     }
 }
 
+/* ============================================================
+   HOMÉLIE DU JOUR (AELF + génération auto)
+   ============================================================ */
+async function genererHomelieDuJour() {
+    const dateInput = document.getElementById('date-aelf');
+    if (!dateInput || !dateInput.value) {
+        showToast("Veuillez d'abord choisir une date.", 'warn');
+        return;
+    }
+
+    const btn = document.getElementById('btn-homelie-du-jour');
+    const originalText = btn ? btn.textContent : '';
+    if (btn) { btn.disabled = true; btn.textContent = '⏳ Chargement AELF...'; }
+
+    try {
+        await handleChargeAelf();
+
+        const evangileEl = document.getElementById('evangile');
+        if (!evangileEl || !evangileEl.value.trim()) {
+            showToast("Aucune lecture trouvée pour cette date.", 'warn');
+            return;
+        }
+
+        if (btn) btn.textContent = '🕊️ Génération en cours...';
+        document.getElementById('genererHomelie').click();
+    } catch (err) {
+        console.error('Erreur homélie du jour:', err);
+        showToast("Impossible de générer l'homélie du jour.", 'error');
+    } finally {
+        setTimeout(() => {
+            if (btn) { btn.disabled = false; btn.textContent = originalText || '🕊️ Générer l\'homélie du jour'; }
+        }, 1500);
+    }
+}
+
 async function handleGenererHomelie() {
     const lecture1 = document.getElementById('lecture1').value.trim();
     const psaume = document.getElementById('psaume').value.trim();
@@ -2202,27 +2216,33 @@ async function handleGenererHomelie() {
         }
     }
 
-    let message = isSunday
-        ? "Prépare une homélie dominicale narrative et pastorale (maximum strict 300 mots), inspirée de Mgr Joseph Pellegrino et du P. Tony Kadavil, avec les lectures suivantes :\n"
-        : "Prépare une brève méditation de férie (maximum strict 100 mots), concise et actionnable, avec les lectures suivantes :\n";
-    if (lecture1) message += '- Première lecture : ' + lecture1 + '\n';
-    if (psaume) message += '- Psaume : ' + psaume + '\n';
-    if (lecture2) message += '- Deuxième lecture : ' + lecture2 + '\n';
-    if (evangile) message += '- Évangile : ' + evangile + '\n';
-    if (theme) message += '- Thème suggéré : ' + theme + '\n';
-    message += "\nDémarche impérative :\n";
-    message += "1. Dégager d'abord le message de la Parole.\n";
-    message += "2. Choisir l'histoire en fonction du message.\n";
-    message += "3. Style direct et oral sans titre.\n";
-    message += isSunday
-        ? "- Longueur : MAXIMUM 300 MOTS en 4 PARAGRAPHES continus.\n"
-        : "- Longueur : MAXIMUM 100 MOTS.\n";
-    message += "- Respecter le Directoire sur l'homélie et Dei Verbum 12.\n";
+    // Extraire le texte de l'Évangile depuis l'AELF si disponible
+    let evangileTexte = '';
+    try {
+        const parsed = parseAelfLectures(aelfLectures);
+        if (parsed.evangile && parsed.evangile.contenu) {
+            evangileTexte = stripHtml(parsed.evangile.contenu);
+        }
+    } catch (e) {}
 
     let homelieHtml = '';
     let modeGeneration = '';
 
-    const apiResult = await callDiscernAPI({ situation: message, role: 'prêtre', lang, mode: 'lecture' });
+    const apiResult = await callDiscernAPI({
+        situation: 'Préparation d\'homélie demandée',
+        role: 'prêtre',
+        lang,
+        mode: 'homelie',
+        isSunday,
+        lectures: {
+            lecture1,
+            psaume,
+            lecture2,
+            evangile,
+            theme,
+            evangileTexte
+        }
+    });
 
     if (apiResult.ok && apiResult.data && apiResult.data.response) {
         const safeAiText = escapeHtml(apiResult.data.response);
@@ -2232,7 +2252,7 @@ async function handleGenererHomelie() {
             .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
             .replace(/\*(.*?)\*/g, '<em>$1</em>');
         homelieHtml = '<p>' + homelieHtml + '</p>';
-        modeGeneration = 'IA Netlify';
+        modeGeneration = 'IA en ligne';
     } else if (apiResult.error) {
         console.log('Netlify indisponible (' + apiResult.error + '), repli local activé.');
         showToast('IA indisponible : génération locale activée', 'info', 3500);
@@ -2290,23 +2310,18 @@ async function handleGenererHomelie() {
 }
 
 /* ============================================================
-   INIT GLOBAL
+   INIT
    ============================================================ */
 function init() {
-    // URL params (carnet)
     const urlParams = new URLSearchParams(window.location.search);
     if (urlParams.get('carnet')) {
         try { localStorage.setItem(STORAGE_KEYS.CARNET_ID, urlParams.get('carnet')); } catch (e) {}
     }
     loadCarnet();
 
-    // Init date AELF
     initAelfDate();
-
-    // Binder les événements
     bindStaticEvents();
 
-    // Langue : storage > navigateur > fr
     let lang = '';
     try { lang = localStorage.getItem(STORAGE_KEYS.LANG) || ''; } catch (e) {}
     if (LANGS.indexOf(lang) === -1) {
@@ -2320,7 +2335,6 @@ function init() {
     });
     updateLanguage(lang);
 
-    // Router
     showPage();
 }
 
