@@ -3,7 +3,16 @@
 // Compatible OpenAI (gpt-4o-mini / gpt-4o)
 
 const OPENAI_URL = 'https://api.openai.com/v1/chat/completions';
-const MODEL = 'gpt-4o-mini'; // rapide et économique ; passer à 'gpt-4o' pour + de qualité
+const MODEL = 'gpt-4o-mini';
+
+const LANG_NAMES = {
+    fr: 'français',
+    en: 'English',
+    zh: '中文',
+    hi: 'हिन्दी',
+    es: 'español',
+    ar: 'العربية'
+};
 
 exports.handler = async (event) => {
     const headers = {
@@ -13,22 +22,16 @@ exports.handler = async (event) => {
         'Access-Control-Allow-Methods': 'POST, OPTIONS'
     };
 
-    // Préflight CORS
     if (event.httpMethod === 'OPTIONS') {
         return { statusCode: 204, headers, body: '' };
     }
-
     if (event.httpMethod !== 'POST') {
         return { statusCode: 405, headers, body: JSON.stringify({ error: 'Méthode non autorisée' }) };
     }
 
     const apiKey = process.env.OPENAI_API_KEY;
     if (!apiKey) {
-        return {
-            statusCode: 500,
-            headers,
-            body: JSON.stringify({ error: 'Service en cours de configuration. Réessayez plus tard.' })
-        };
+        return { statusCode: 500, headers, body: JSON.stringify({ error: 'Service en cours de configuration.' }) };
     }
 
     let payload;
@@ -44,13 +47,12 @@ exports.handler = async (event) => {
     const mode      = (payload.mode      || 'discernement').toString();
     const verses    = Array.isArray(payload.verses) ? payload.verses.slice(0, 2) : null;
     const lectures  = payload.lectures && typeof payload.lectures === 'object' ? payload.lectures : null;
-    const isSunday  = payload.isSunday !== false; // true par défaut
+    const isSunday  = payload.isSunday !== false;
 
     if (!situation || situation.length > 6000) {
         return { statusCode: 400, headers, body: JSON.stringify({ error: 'Situation invalide ou trop longue.' }) };
     }
 
-    // Construction des messages
     const system = buildSystemPrompt(mode, lang, isSunday);
     const user   = buildUserPrompt({ situation, role, mode, lectures, verses, lang });
 
@@ -58,6 +60,9 @@ exports.handler = async (event) => {
         { role: 'system', content: system },
         { role: 'user',   content: user   }
     ];
+
+    // Température plus basse pour l'homélie → obéissance au prompt
+    const temperature = mode === 'homelie' ? 0.4 : 0.7;
 
     try {
         const controller = new AbortController();
@@ -72,7 +77,7 @@ exports.handler = async (event) => {
             body: JSON.stringify({
                 model: MODEL,
                 messages,
-                temperature: mode === 'homelie' ? 0.6 : 0.7,
+                temperature,
                 max_tokens: mode === 'homelie' ? 900 : 800,
                 presence_penalty: 0.2,
                 frequency_penalty: 0.3
@@ -105,7 +110,7 @@ exports.handler = async (event) => {
 };
 
 /* ============================================================
-   PROMPTS SYSTÈME
+   PROMPT SYSTÈME
    ============================================================ */
 function buildSystemPrompt(mode, lang, isSunday) {
     const common = {
@@ -198,42 +203,59 @@ MÉTHODE (inspirée du Père Tony Kadavil) :
 3. Propose UN acte concret à poser aujourd'hui.
 4. Termine par une prière d'une phrase.
 
-STRUCTURE : un seul paragraphe continu + une prière finale.
-LONGUEUR : 100 mots MAXIMUM, strict.
-Pas de titre, pas de puces, pas de numéros.`,
+STRUCTURE : un seul paragraphe continu + une prière finale. Pas de titre, pas de puces, pas de numéros.
+LONGUEUR : 200 mots MAXIMUM, strict.`,
             en: isSunday
                 ? `MODE: SUNDAY HOMILY PREPARATION.
 
-Method (inspired by Msgr Joseph A. Pellegrino and Fr Tony Kadavil):
-1. FIRST EXTRACT THE MESSAGE of the Word.
-2. CHOOSE THE STORY ACCORDING TO THE MESSAGE.
-3. DIRECT ORAL STYLE, NO TITLE.
-4. EXACTLY 4 CONTINUOUS PARAGRAPHS.
-5. MAXIMUM 300 WORDS.
+You prepare a homily for a priest, based on the liturgical readings provided.
+
+REQUIRED METHOD (inspired by Msgr Joseph A. Pellegrino and Fr Tony Kadavil):
+1. FIRST EXTRACT THE MESSAGE OF THE WORD: analyze the Gospel and readings to identify their unified theological core.
+2. CHOOSE THE STORY ACCORDING TO THE MESSAGE: forge a daily-life story whose situation and lesson embody EXACTLY the biblical message.
+3. DIRECT ORAL STYLE, NO TITLE: begin directly with the story. No subtitles, no bullets.
+4. STRUCTURE IN EXACTLY 4 CONTINUOUS PARAGRAPHS:
+   - P1: concrete story/parable from daily life
+   - P2: natural transition + first reading + Gospel
+   - P3: second reading and Psalm
+   - P4: pastoral application + short final prayer ("Amen.")
+5. LENGTH: 300 WORDS MAXIMUM, strict.
 6. Faithful to the Homily Directory and Dei Verbum 12.
-7. COPYRIGHT: synthesize the method, never reproduce full passages.`
+7. COPYRIGHT: synthesize, never reproduce full passages.`
                 : `MODE: WEEKDAY MEDITATION.
 
-Method (inspired by Fr Tony Kadavil):
-1. One-sentence message of the day's Gospel.
-2. Flash story from daily life.
-3. ONE concrete act for today.
-4. One-sentence prayer.
+You prepare a short weekday meditation based on the liturgical readings provided.
 
-STRUCTURE: one continuous paragraph + final prayer.
-MAXIMUM 100 WORDS. No title, no bullets, no numbers.`
+METHOD (inspired by Fr Tony Kadavil):
+1. State in one sentence the central message of the day's Gospel.
+2. Illustrate it with a daily-life image or flash story.
+3. Suggest ONE concrete act for today.
+4. End with a one-sentence prayer.
+
+STRUCTURE: one continuous paragraph + final prayer. No title, no bullets, no numbers.
+LENGTH: 200 WORDS MAXIMUM, strict.`
         }
     };
 
     const modeBlock = (modePrompts[mode] && (modePrompts[mode][lang] || modePrompts[mode].fr)) || '';
 
-    return `${base}\n\n${modeBlock}`;
+    // ⚡ RENFORCEMENT DE LA LANGUE
+    const langName = LANG_NAMES[lang] || 'français';
+    let langLine;
+    if (lang === 'fr') {
+        langLine = `\n\n🌍 LANGUE DE RÉPONSE OBLIGATOIRE : FRANÇAIS. Tu dois rédiger TOUT ton texte en français, sans exception.`;
+    } else {
+        langLine = `\n\n🌍 MANDATORY RESPONSE LANGUAGE: ${langName.toUpperCase()}. You MUST write your ENTIRE answer in ${langName}. Every sentence, every word, every biblical book name must be in ${langName}. NEVER use French, even if the instructions above are written in French.`;
+    }
+
+    return `${base}\n\n${modeBlock}${langLine}`;
 }
 
 /* ============================================================
    PROMPT UTILISATEUR
    ============================================================ */
 function buildUserPrompt({ situation, role, mode, lectures, verses, lang }) {
+    const langName = LANG_NAMES[lang] || 'français';
     let prompt = '';
 
     if (mode === 'homelie' && lectures) {
@@ -247,7 +269,11 @@ function buildUserPrompt({ situation, role, mode, lectures, verses, lang }) {
         if (lectures.evangileTexte) {
             prompt += `Texte de l'Évangile (extrait) :\n"""${lectures.evangileTexte.slice(0, 1500)}"""\n\n`;
         }
-        prompt += `Rédige maintenant l'homélie selon la méthode indiquée. Réponds en ${lang}.`;
+        prompt += `⚠️ Rédige maintenant l'homélie ENTIÈREMENT en ${langName.toUpperCase()}. `;
+        prompt += `Chaque phrase, chaque mot doit être en ${langName}. `;
+        prompt += `Les noms des livres bibliques doivent aussi être dans cette langue `;
+        prompt += `(par exemple, "Matthieu" en français devient "Matthew" en anglais). `;
+        prompt += `Ne réponds pas en français sauf si la langue demandée est le français.`;
         return prompt;
     }
 
@@ -257,6 +283,7 @@ function buildUserPrompt({ situation, role, mode, lectures, verses, lang }) {
         prompt += `\nPassages bibliques suggérés :\n`;
         verses.forEach(v => { prompt += `- ${v.ref || ''} : ${v.texte || ''}\n`; });
     }
-    prompt += `\nRéponds en langue « ${lang} » avec un ton pastoral, structuré et concret.`;
+    prompt += `\n⚠️ Réponds OBLIGATOIREMENT en ${langName.toUpperCase()}, avec un ton pastoral, structuré et concret. `;
+    prompt += `Ne réponds pas en français sauf si le français est demandé.`;
     return prompt;
 }
