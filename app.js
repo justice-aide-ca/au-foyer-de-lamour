@@ -51,7 +51,7 @@ const FR = {
     carnetPrompt: "✨<br><br>« Et toi, quelle petite lumière pourrais-tu noter aujourd'hui ? »",
     carnetPlaceholder: "Ma petite lumière...", saveBtn: "💾 Sauvegarder", copyBtn: "🔗 Copier mon lien", shareBtn: "📤 Partager",
     carnetInfo: "Tu pourras revenir plus tard avec ton lien.",
-    modes: { discernement: "🤲 Discernement", consolation: "🙏 Consolation", lecture: "📖 Lecture biblique", priere: "❤️ Prière" },
+    modes: { discernement: "🤲 Discernement", consolation: "🙏 Consolation", lecture: "📖 Lecture biblique", priere: "❤️ Prière" }, 
     homelieTitle: "Préparation d'homélie",
     homelieDescription: "Entrez les lectures ou chargez-les depuis l'AELF.",
     labelLecture1: "Première lecture :", labelPsaume: "Psaume :",
