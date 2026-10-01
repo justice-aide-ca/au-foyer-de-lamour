@@ -12,7 +12,7 @@ let currentLang = 'fr';
 let currentMode = 'discernement';
 let currentSituationKey = null;
 let examenIdx = 0;
-let aelfLectures = []; 
+let aelfLectures = [];
 
 /* ============================================================
    TRADUCTIONS
@@ -51,7 +51,7 @@ const FR = {
     carnetPrompt: "✨<br><br>« Et toi, quelle petite lumière pourrais-tu noter aujourd'hui ? »",
     carnetPlaceholder: "Ma petite lumière...", saveBtn: "💾 Sauvegarder", copyBtn: "🔗 Copier mon lien", shareBtn: "📤 Partager",
     carnetInfo: "Tu pourras revenir plus tard avec ton lien.",
-    modes: { discernement: "🤲 Discernement", consolation: "🙏 Consolation", lecture: "📖 Lecture biblique", priere: "❤️ Prière" }, 
+    modes: { discernement: "🤲 Discernement", consolation: "🙏 Consolation", lecture: "📖 Lecture biblique", priere: "❤️ Prière" },
     homelieTitle: "Préparation d'homélie",
     homelieDescription: "Entrez les lectures ou chargez-les depuis l'AELF.",
     labelLecture1: "Première lecture :", labelPsaume: "Psaume :",
@@ -672,7 +672,7 @@ function updateLanguage(lang) {
     document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
     const t = translations[lang];
 
-    // Synchronisation des boutons de langue (fix du double-actif)
+    // Synchronisation des boutons de langue
     document.querySelectorAll('.lang-btn').forEach(b => {
         const active = b.dataset.lang === lang;
         b.classList.toggle('active', active);
