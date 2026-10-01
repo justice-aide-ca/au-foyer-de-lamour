@@ -5,7 +5,7 @@ const STORAGE_KEYS = { LANG: 'foyer_lang', CARNET_ID: 'foyer_carnet_id', CARNET_
 const SITUATION_KEYS = ["SOUFFRANCE","SENS_VIE","COUPLE","DEUIL","SOLITUDE","COLERE_DIEU","DOUTE_FOI","DECISION","MALADIE","PEUR_AVENIR","EPUISEMENT","CONFLIT_FAMILIAL","ACCOMPAGNEMENT","RECHERCHE_SENS","AUTRE"];
 const LANGS = ['fr', 'en', 'zh', 'hi', 'es', 'ar'];
 const TOAST_ICONS = { info: "✅", warn: "⚠️", error: "🚫" };
-const ROUTES = { '': 'accueil', '/': 'accueil', '/sagesse': 'sagesse', '/a-propos': 'apropos', '/examen': 'examen', '/sources': 'sources', '/contact': 'contact', '/confidentialite': 'confidentialite' };
+const ROUTES = { '': 'accueil', '/': 'accueil', '/sagesse': 'sagesse', '/a-propos': 'apropos', '/examen': 'examen', '/sources': 'sources', '/contact': 'contact', '/confidentialite': 'confidentialite', '/comment-ca-marche': 'comment-ca-marche' };
 const WORD_LIMITS = { sunday: 300, weekday: 200 };
 
 let currentLang = 'fr';
@@ -20,7 +20,7 @@ let aelfLectures = [];
 const FR = {
     title: "🕯️ Au Foyer de l'Amour", subtitle: "Discernement et la petite lumière",
     placeholder: "Décrivez votre situation...", role: "Qui êtes-vous ? (optionnel)",
-    submit: "Recevoir une aide au discernement →", loading: "Discernement en cours...",
+    submit: "🌿 Réfléchir avec le compagnon →", loading: "Discernement en cours...",
     alertSituation: "Veuillez décrire votre situation ou choisir une option.",
     situationsTitle: "Ou choisissez ce qui correspond le mieux à ce que vous vivez :",
     precisionPlaceholder: "Tu peux préciser ce que tu vis, si tu le souhaites...",
@@ -39,7 +39,7 @@ const FR = {
     footerNothing: "🔒 Rien n'est enregistré · 🕊️ Un compagnon silencieux",
     footerHome: "🏠 Accueil", footerSagesse: "📖 Sagesse", footerAbout: "📖 À propos",
     footerSources: "📚 Sources", footerPrivacy: "🔒 Confidentialité", footerContact: "✉️ Contact",
-    navHome: "🏠 Accueil", navSagesse: "📖 Sagesse", navAbout: "📖 À propos",
+    navHome: "🏠 Accueil", navSagesse: "📖 Sagesse", navComment: "💡 Comment ça marche", navAbout: "📖 À propos",
     navExamen: "🕯️ Examen", navSources: "📚 Sources", navContact: "✉️ Contact", navPrivacy: "🔒 Confidentialité",
     aiWarning: "Je suis une intelligence artificielle. Je ne remplace pas un accompagnement humain, un prêtre, un psychologue ou un médecin.",
     toggleUrgence: "Voir les numéros d'urgence",
@@ -75,7 +75,7 @@ const FR = {
 const EN = JSON.parse(JSON.stringify(FR));
 EN.title = "🕯️ Home of Love"; EN.subtitle = "Discernment and the little light";
 EN.placeholder = "Describe your situation..."; EN.role = "Who are you? (optional)";
-EN.submit = "Receive discernment help →"; EN.loading = "Discernment in progress...";
+EN.submit = "🌿 Think with the companion →"; EN.loading = "Discernment in progress...";
 EN.alertSituation = "Please describe your situation or choose an option.";
 EN.situationsTitle = "Or choose what best matches what you are experiencing:";
 EN.precisionPlaceholder = "You can specify what you are experiencing...";
@@ -92,7 +92,7 @@ EN.projetsCredit = "Tools for justice, peace and discernment.";
 EN.footerNothing = "🔒 Nothing is recorded · 🕊️ A silent companion";
 EN.footerHome = "🏠 Home"; EN.footerSagesse = "📖 Wisdom"; EN.footerAbout = "📖 About";
 EN.footerSources = "📚 Sources"; EN.footerPrivacy = "🔒 Privacy"; EN.footerContact = "✉️ Contact";
-EN.navHome = "🏠 Home"; EN.navSagesse = "📖 Wisdom"; EN.navAbout = "📖 About";
+EN.navHome = "🏠 Home"; EN.navSagesse = "📖 Wisdom"; EN.navComment = "💡 How it works"; EN.navAbout = "📖 About";
 EN.navExamen = "🕯️ Examination"; EN.navSources = "📚 Sources"; EN.navContact = "✉️ Contact"; EN.navPrivacy = "🔒 Privacy";
 EN.aiWarning = "I am an artificial intelligence. I do not replace human support.";
 EN.toggleUrgence = "See emergency numbers";
@@ -121,7 +121,7 @@ EN.pageExamen = { title: "🕯️ Guided Examen", intro: "Five steps, at your ow
 const ZH = JSON.parse(JSON.stringify(EN));
 ZH.title = "🕯️ 爱之家"; ZH.subtitle = "辨别与小光";
 ZH.placeholder = "描述你的情况..."; ZH.role = "你是谁？（可选）";
-ZH.submit = "获得辨别帮助 →"; ZH.loading = "辨别进行中...";
+ZH.submit = "🌿 与同伴一起反思 →"; ZH.loading = "辨别进行中...";
 ZH.alertSituation = "请描述您的情况或选择一个选项。";
 ZH.situationsTitle = "或选择最符合你经历的情况：";
 ZH.precisionPlaceholder = "如果你想，你可以详细说明...";
@@ -138,7 +138,7 @@ ZH.projetsCredit = "为正义、和平与辨别的工具。";
 ZH.footerNothing = "🔒 无记录 · 🕊️ 一位沉默的伴侣";
 ZH.footerHome = "🏠 首页"; ZH.footerSagesse = "📖 智慧"; ZH.footerAbout = "📖 关于";
 ZH.footerSources = "📚 来源"; ZH.footerPrivacy = "🔒 隐私"; ZH.footerContact = "✉️ 联系";
-ZH.navHome = "🏠 首页"; ZH.navSagesse = "📖 智慧"; ZH.navAbout = "📖 关于";
+ZH.navHome = "🏠 首页"; ZH.navSagesse = "📖 智慧"; ZH.navComment = "💡 使用说明"; ZH.navAbout = "📖 关于";
 ZH.navExamen = "🕯️ 省察"; ZH.navSources = "📚 来源"; ZH.navContact = "✉️ 联系"; ZH.navPrivacy = "🔒 隐私";
 ZH.aiWarning = "我是一个人工智能。我不能替代人际支持、神父、心理学家或医生。";
 ZH.toggleUrgence = "查看紧急号码";
@@ -167,7 +167,7 @@ ZH.pageExamen = { title: "🕯️ 引导式省察", intro: "五个步骤，按�
 const HI = JSON.parse(JSON.stringify(EN));
 HI.title = "🕯️ प्रेम का घर"; HI.subtitle = "विवेक और छोटी रोशनी";
 HI.placeholder = "अपनी स्थिति का वर्णन करें..."; HI.role = "आप कौन हैं? (वैकल्पिक)";
-HI.submit = "विवेक सहायता प्राप्त करें →"; HI.loading = "विवेक जारी है...";
+HI.submit = "🌿 साथी के साथ चिंतन करें →"; HI.loading = "विवेक जारी है...";
 HI.alertSituation = "कृपया अपनी स्थिति बताएं या एक विकल्प चुनें।";
 HI.situationsTitle = "या जो आप अनुभव कर रहे हैं उसके अनुसार चुनें:";
 HI.precisionPlaceholder = "आप जो अनुभव कर रहे हैं, उसे विस्तार से बता सकते हैं...";
@@ -184,7 +184,7 @@ HI.projetsCredit = "न्याय, शांति और विवेक क�
 HI.footerNothing = "🔒 कुछ रिकॉर्ड नहीं किया गया · 🕊️ एक मूक साथी";
 HI.footerHome = "🏠 होम"; HI.footerSagesse = "📖 ज्ञान"; HI.footerAbout = "📖 बारे में";
 HI.footerSources = "📚 स्रोत"; HI.footerPrivacy = "🔒 गोपनीयता"; HI.footerContact = "✉️ संपर्क";
-HI.navHome = "🏠 होम"; HI.navSagesse = "📖 ज्ञान"; HI.navAbout = "📖 बारे में";
+HI.navHome = "🏠 होम"; HI.navSagesse = "📖 ज्ञान"; HI.navComment = "💡 कैसे काम करता है"; HI.navAbout = "📖 बारे में";
 HI.navExamen = "🕯️ परीक्षा"; HI.navSources = "📚 स्रोत"; HI.navContact = "✉️ संपर्क"; HI.navPrivacy = "🔒 गोपनीयता";
 HI.aiWarning = "मैं एक कृत्रिम बुद्धिमत्ता हूँ। मैं मानवीय समर्थन का स्थान नहीं लेता।";
 HI.toggleUrgence = "आपातकालीन नंबर देखें";
@@ -213,7 +213,7 @@ HI.pageExamen = { title: "🕯️ निर्देशित परीक्ष
 const ES = JSON.parse(JSON.stringify(EN));
 ES.title = "🕯️ Hogar del Amor"; ES.subtitle = "Discernimiento y la pequeña luz";
 ES.placeholder = "Describe tu situación..."; ES.role = "¿Quién eres? (opcional)";
-ES.submit = "Recibir ayuda para el discernimiento →"; ES.loading = "Discernimiento en curso...";
+ES.submit = "🌿 Reflexionar con el compañero →"; ES.loading = "Discernimiento en curso...";
 ES.alertSituation = "Por favor describa su situación o elija una opción.";
 ES.situationsTitle = "O elige lo que mejor se adapte a lo que estás viviendo:";
 ES.precisionPlaceholder = "Puedes precisar lo que vives, si lo deseas...";
@@ -230,7 +230,7 @@ ES.projetsCredit = "Herramientas para la justicia, la paz y el discernimiento.";
 ES.footerNothing = "🔒 Nada se guarda · 🕊️ Un compañero silencioso";
 ES.footerHome = "🏠 Inicio"; ES.footerSagesse = "📖 Sabiduría"; ES.footerAbout = "📖 Acerca de";
 ES.footerSources = "📚 Fuentes"; ES.footerPrivacy = "🔒 Privacidad"; ES.footerContact = "✉️ Contacto";
-ES.navHome = "🏠 Inicio"; ES.navSagesse = "📖 Sabiduría"; ES.navAbout = "📖 Acerca de";
+ES.navHome = "🏠 Inicio"; ES.navSagesse = "📖 Sabiduría"; ES.navComment = "💡 Cómo funciona"; ES.navAbout = "📖 Acerca de";
 ES.navExamen = "🕯️ Examen"; ES.navSources = "📚 Fuentes"; ES.navContact = "✉️ Contacto"; ES.navPrivacy = "🔒 Privacidad";
 ES.aiWarning = "Soy una inteligencia artificial. No reemplazo el apoyo humano.";
 ES.toggleUrgence = "Ver números de emergencia";
@@ -259,7 +259,7 @@ ES.pageExamen = { title: "🕯️ Examen guiado", intro: "Cinco pasos, a tu ritm
 const AR = JSON.parse(JSON.stringify(EN));
 AR.title = "🕯️ بيت المحبة"; AR.subtitle = "التمييز والنور الصغير";
 AR.placeholder = "صف حالتك..."; AR.role = "من أنت؟ (اختياري)";
-AR.submit = "احصل على مساعدة في التمييز →"; AR.loading = "التمييز جارٍ...";
+AR.submit = "🌿 تفكّر مع الرفيق →"; AR.loading = "التمييز جارٍ...";
 AR.alertSituation = "يرجى وصف حالتك أو اختيار خيار.";
 AR.situationsTitle = "أو اختر ما يناسب ما تعيشه:";
 AR.precisionPlaceholder = "يمكنك تحديد ما تعيشه، إذا رغبت...";
@@ -276,7 +276,7 @@ AR.projetsCredit = "أدوات من أجل العدل والسلام والتم�
 AR.footerNothing = "🔒 لا شيء مسجل · 🕊️ رفيق صامت";
 AR.footerHome = "🏠 الرئيسية"; AR.footerSagesse = "📖 حكمة"; AR.footerAbout = "📖 عن";
 AR.footerSources = "📚 المصادر"; AR.footerPrivacy = "🔒 الخصوصية"; AR.footerContact = "✉️ اتصال";
-AR.navHome = "🏠 الرئيسية"; AR.navSagesse = "📖 حكمة"; AR.navAbout = "📖 عن";
+AR.navHome = "🏠 الرئيسية"; AR.navSagesse = "📖 حكمة"; AR.navComment = "💡 كيف يعمل"; AR.navAbout = "📖 عن";
 AR.navExamen = "🕯️ فحص"; AR.navSources = "📚 المصادر"; AR.navContact = "✉️ اتصال"; AR.navPrivacy = "🔒 الخصوصية";
 AR.aiWarning = "أنا ذكاء اصطناعي. أنا لا أحل محل الدعم البشري.";
 AR.toggleUrgence = "عرض أرقام الطوارئ";
@@ -310,20 +310,270 @@ const CARLO_FR = `<div class="bloc" style="background:#fff8f0;border:1px solid #
 
 const CARLO_EN = `<div class="bloc" style="background:#fff8f0;border:1px solid #e8d5b7;border-left:4px solid #c49a6c;"><h3 style="color:#8b5e3c;">🔥 Saint Carlo Acutis (1991–2006) — The developer saint</h3><p style="font-style:italic;">« Everyone is born as an original, but many die as photocopies. »</p><p>Canonized in 2025, Carlo Acutis is the first saint of the digital age. He used the web to create an <a href="https://www.miracolieucaristici.org/" target="_blank" rel="noopener">international exhibition on Eucharistic miracles</a>. He said: <em>« The Eucharist is my highway to Heaven. »</em></p><blockquote style="border-left:3px solid #c49a6c;padding-left:1rem;color:#5a4f42;line-height:1.7;"><p>« Our goal must be the infinite, not the finite. »</p><p>« To always be united with Jesus — that is the goal of my life. »</p><p>« Sadness is looking at yourself; happiness is looking at God. »</p></blockquote><p style="font-size:0.85rem;color:#8b7355;">📖 To go further: <em>Carlo Acutis, une âme de feu</em> — Marie & Jean-Baptiste Maillard, Artège, 2025.</p></div>`;
 
+const COMMENT_FR = `
+<h2>💡 Comment fonctionne le compagnon ?</h2>
+<p class="page-intro">Un outil d'aide au discernement, transparent sur ses forces et ses limites.</p>
+
+<div class="bloc" style="background:#eef6fa;border-left:4px solid #1f4b66;">
+<h3>🎯 Notre mission</h3>
+<p>« Au Foyer de l'Amour » est un <strong>compagnon numérique d'aide au discernement chrétien</strong>. Il vous aide à <strong>écouter, discerner et prier</strong>, puis à rejoindre une personne humaine si nécessaire. Il ne remplace ni un prêtre, ni un accompagnateur spirituel, ni un psychologue, ni un médecin.</p>
+</div>
+
+<div class="bloc">
+<h3>✨ Ce que le compagnon fait</h3>
+<ul style="line-height:1.8;">
+<li>Vous aide à <strong>mettre des mots</strong> sur ce que vous vivez</li>
+<li>Vous propose des <strong>pistes de discernement ignatien</strong> (consolation / désolation)</li>
+<li>Vous cite un <strong>passage biblique</strong> adapté à votre situation</li>
+<li>Vous offre une <strong>courte prière</strong> ou un pas concret</li>
+<li>Vous oriente vers les <strong>lectures liturgiques officielles</strong> (AELF)</li>
+<li>Vous propose des <strong>ressources humaines</strong> (prêtres, services d'écoute)</li>
+</ul>
+</div>
+
+<div class="bloc" style="background:#fdecea;border-left:4px solid #c0392b;">
+<h3>⚠️ Ce que le compagnon ne fait pas</h3>
+<ul style="line-height:1.8;">
+<li>Il ne <strong>remplace pas</strong> un prêtre, un directeur spirituel, un psychologue ou un médecin</li>
+<li>Il ne donne <strong>pas de diagnostic médical ou psychologique</strong></li>
+<li>Il ne <strong>décide pas à votre place</strong></li>
+<li>Il ne propose <strong>pas de réponse magique ou définitive</strong></li>
+<li>Il n'a <strong>pas de mémoire</strong> entre deux visites (sauf ce qui reste sur votre appareil)</li>
+</ul>
+</div>
+
+<div class="bloc">
+<h3>🧭 D'où viennent les réponses ?</h3>
+<p>Les réponses sont générées par une <strong>intelligence artificielle</strong> (OpenAI) à partir :</p>
+<ul style="line-height:1.8;">
+<li>de ce que vous écrivez</li>
+<li>d'instructions pastorales précises (tradition ignatienne, enseignement de l'Église catholique)</li>
+<li>de passages bibliques issus de la Bible liturgique (AELF)</li>
+<li>des lectures du jour quand vous utilisez la préparation d'homélie</li>
+</ul>
+<p><strong>Elles peuvent contenir des erreurs ou des approximations.</strong> Vérifiez toujours auprès d'un prêtre ou d'une personne de confiance.</p>
+</div>
+
+<div class="bloc">
+<h3>🤝 Parler à une personne — la vraie priorité</h3>
+<p>Le compagnon est un <strong>point de départ</strong>, jamais un point d'arrivée. En cas de détresse grave :</p>
+<ul style="line-height:1.8;">
+<li>Contactez un <strong>prêtre</strong> de votre paroisse</li>
+<li>Appelez un <strong>service d'écoute</strong> (voir la page d'accueil)</li>
+<li>Composez le <strong>numéro d'urgence</strong> de votre pays</li>
+</ul>
+</div>
+
+<div class="bloc" style="background:#f6f3ef;">
+<h3>🔒 Confidentialité — notre engagement</h3>
+<p><strong>Rien n'est stocké sur nos serveurs.</strong> Ce qui reste sur votre appareil :</p>
+<ul style="line-height:1.8;">
+<li>Votre carnet (« petites lumières »)</li>
+<li>Vos témoignages anonymes</li>
+<li>Votre langue choisie</li>
+</ul>
+<p>Ce qui est <strong>transmis ponctuellement</strong> pour générer une réponse :</p>
+<ul style="line-height:1.8;">
+<li>Le texte que vous écrivez dans le formulaire (envoyé à OpenAI, uniquement pour générer la réponse, non conservé)</li>
+</ul>
+<p><a href="#/confidentialite" style="color:#4a6f5e;font-weight:600;">→ Lire la politique de confidentialité complète</a></p>
+</div>
+
+<div class="bloc">
+<h3>📖 Pour aller plus loin</h3>
+<p>Consultez la page <a href="#/sources">Sources</a> pour connaître les références théologiques et pastorales utilisées.</p>
+</div>`;
+
+const COMMENT_EN = `
+<h2>💡 How does the companion work?</h2>
+<p class="page-intro">A discernment tool, transparent about its strengths and limitations.</p>
+
+<div class="bloc" style="background:#eef6fa;border-left:4px solid #1f4b66;">
+<h3>🎯 Our mission</h3>
+<p>« Home of Love » is a <strong>digital companion for Christian discernment</strong>. It helps you <strong>listen, discern and pray</strong>, then reach out to a human person if needed. It does not replace a priest, a spiritual director, a psychologist or a doctor.</p>
+</div>
+
+<div class="bloc">
+<h3>✨ What the companion does</h3>
+<ul style="line-height:1.8;">
+<li>Helps you <strong>put words on what you experience</strong></li>
+<li>Suggests <strong>Ignatian discernment paths</strong> (consolation / desolation)</li>
+<li>Quotes a <strong>Bible passage</strong> adapted to your situation</li>
+<li>Offers a <strong>short prayer</strong> or a concrete step</li>
+<li>Points you to the <strong>official liturgical readings</strong> (AELF)</li>
+<li>Suggests <strong>human resources</strong> (priests, listening services)</li>
+</ul>
+</div>
+
+<div class="bloc" style="background:#fdecea;border-left:4px solid #c0392b;">
+<h3>⚠️ What the companion does not do</h3>
+<ul style="line-height:1.8;">
+<li>It does <strong>not replace</strong> a priest, a spiritual director, a psychologist or a doctor</li>
+<li>It gives <strong>no medical or psychological diagnosis</strong></li>
+<li>It does <strong>not decide for you</strong></li>
+<li>It offers <strong>no magical or definitive answer</strong></li>
+<li>It has <strong>no memory</strong> between visits (except what stays on your device)</li>
+</ul>
+</div>
+
+<div class="bloc">
+<h3>🧭 Where do the answers come from?</h3>
+<p>Answers are generated by an <strong>artificial intelligence</strong> (OpenAI) based on:</p>
+<ul style="line-height:1.8;">
+<li>what you write</li>
+<li>precise pastoral instructions (Ignatian tradition, teaching of the Catholic Church)</li>
+<li>Bible passages from the liturgical Bible (AELF)</li>
+<li>the readings of the day when you use the homily preparation</li>
+</ul>
+<p><strong>They may contain errors or approximations.</strong> Always verify with a priest or trusted person.</p>
+</div>
+
+<div class="bloc">
+<h3>🤝 Talking to a person — the true priority</h3>
+<p>The companion is a <strong>starting point</strong>, never an end point. In case of serious distress:</p>
+<ul style="line-height:1.8;">
+<li>Contact a <strong>priest</strong> in your parish</li>
+<li>Call a <strong>listening service</strong> (see the home page)</li>
+<li>Dial your country's <strong>emergency number</strong></li>
+</ul>
+</div>
+
+<div class="bloc" style="background:#f6f3ef;">
+<h3>🔒 Privacy — our commitment</h3>
+<p><strong>Nothing is stored on our servers.</strong> What stays on your device:</p>
+<ul style="line-height:1.8;">
+<li>Your journal ("little lights")</li>
+<li>Your anonymous testimonies</li>
+<li>Your chosen language</li>
+</ul>
+<p>What is <strong>transmitted once</strong> to generate a response:</p>
+<ul style="line-height:1.8;">
+<li>The text you write in the form (sent to OpenAI, only to generate the response, not stored)</li>
+</ul>
+<p><a href="#/confidentialite" style="color:#4a6f5e;font-weight:600;">→ Read the full privacy policy</a></p>
+</div>`;
+
 const pageContent = {
     fr: {
         sagesse: `<h2>📖 Sagesse</h2><p class="page-intro">Quelques textes pour nourrir la méditation et la prière.</p><div class="bloc"><h3>Paroles de Jésus</h3><p>« Venez à moi, vous tous qui peinez. » — Mt 11,28</p><p>« Je vous laisse la paix, je vous donne ma paix. » — Jn 14,27</p></div><div class="bloc"><h3>Psaumes</h3><p>« Le Seigneur est mon berger : je ne manque de rien. » — Ps 23,1</p></div>${CARLO_FR}<div class="bloc"><h3>Aller plus loin</h3><p>Pour une écoute personnalisée, revenez à <a href="#/">l'accueil</a> ou faites l'<a href="#/examen">examen guidé</a>.</p></div>`,
+        commentCaMarche: COMMENT_FR,
         apropos: `<h2>📖 À propos</h2><div class="bloc"><h3>Qu'est-ce qu'Au Foyer de l'Amour ?</h3><p>Un espace de paix, d'écoute et de prière. Une première écoute et une aide au discernement, enracinée dans la tradition chrétienne et la spiritualité ignatienne.</p></div><div class="bloc"><h3>Ce que ce site n'est pas</h3><p>Il ne remplace ni un accompagnement humain, ni un prêtre, ni un psychologue, ni un médecin.</p></div>`,
         sources: `<h2>📚 Sources</h2><div class="bloc"><h3>Un projet porté par un prêtre catholique</h3><p>Le discernement proposé demeure toujours aligné sur l'enseignement officiel de l'Église catholique.</p></div><div class="bloc"><h3>Textes bibliques</h3><p><a href="https://www.aelf.org" target="_blank" rel="noopener">AELF</a> et <a href="https://www.biblegateway.com" target="_blank" rel="noopener">BibleGateway</a>.</p></div><div class="bloc"><h3>Saint Carlo Acutis</h3><p>Ouvrage de référence : <em>Carlo Acutis, une âme de feu</em> de Marie et Jean-Baptiste Maillard (Artège, 2025).</p></div>`,
         contact: `<h2>✉️ Contact</h2><div class="bloc"><h3>Partager votre expérience</h3><p>Laissez un témoignage anonyme depuis <a href="#/">la page d'accueil</a>.</p></div>`,
-        confidentialite: `<h2>🔒 Confidentialité</h2><div class="bloc"><h3>En bref</h3><p>Pas de compte. Pas de cookies de suivi. Pas de publicité. Le carnet et les témoignages restent sur votre appareil.</p></div>`
+        confidentialite: `<h2>🔒 Confidentialité</h2>
+<p class="page-intro">Notre engagement transparent sur la protection de vos données.</p>
+
+<div class="bloc" style="background:#e8efe9;border-left:4px solid #2e6b47;">
+<h3>✅ En bref</h3>
+<p><strong>Aucun compte.</strong> <strong>Aucun cookie de suivi.</strong> <strong>Aucune publicité.</strong> <strong>Aucune revente de données.</strong></p>
+<p>Nous ne stockons <strong>rien sur nos serveurs</strong> vous concernant.</p>
+</div>
+
+<div class="bloc">
+<h3>📱 Ce qui reste UNIQUEMENT sur votre appareil</h3>
+<p>Ces données sont stockées dans le <code>localStorage</code> de votre navigateur. Elles ne quittent <strong>jamais</strong> votre appareil :</p>
+<ul style="line-height:1.9;">
+<li>✅ <strong>Votre carnet</strong> (« petites lumières »)</li>
+<li>✅ <strong>Vos témoignages anonymes</strong> (enregistrés localement)</li>
+<li>✅ <strong>Votre langue choisie</strong></li>
+<li>✅ <strong>Votre identifiant de carnet</strong> (une suite aléatoire, sans lien avec votre identité)</li>
+</ul>
+<p><strong>Pour tout effacer</strong> : boutons « 🗑️ Effacer » dans les sections carnet et témoignages, ou videz les données de votre navigateur.</p>
+</div>
+
+<div class="bloc" style="background:#fff8f0;border-left:4px solid #c49a6c;">
+<h3>📤 Ce qui est transmis pour générer une réponse</h3>
+<p>Quand vous cliquez sur <strong>« Réfléchir avec le compagnon »</strong> :</p>
+<ul style="line-height:1.9;">
+<li>Le <strong>texte que vous écrivez</strong> (situation, précisions, rôle éventuel)</li>
+<li>Le <strong>mode choisi</strong> (discernement, consolation, prière, lecture)</li>
+<li>La <strong>langue</strong> active</li>
+</ul>
+<p>Ces données sont envoyées à :</p>
+<ul style="line-height:1.9;">
+<li><strong>Netlify Functions</strong> (relais sécurisé, sans stockage)</li>
+<li><strong>OpenAI</strong> (génération de la réponse, sans conservation à long terme)</li>
+</ul>
+<p><strong>⚠️ N'écrivez jamais</strong> de données très sensibles : noms de tiers, adresses précises, numéros de sécurité sociale, données bancaires, informations médicales détaillées.</p>
+</div>
+
+<div class="bloc">
+<h3>📚 Préparation d'homélie et AELF</h3>
+<p>Quand vous utilisez la préparation d'homélie :</p>
+<ul style="line-height:1.9;">
+<li>Une requête est envoyée à l'<strong>API AELF</strong> pour récupérer les lectures liturgiques du jour</li>
+<li>Ces lectures sont ensuite transmises à OpenAI pour générer l'homélie</li>
+</ul>
+<p>AELF est un service indépendant, soumis à sa <a href="https://www.aelf.org/page/politique-de-confidentialite" target="_blank" rel="noopener">propre politique de confidentialité</a>.</p>
+</div>
+
+<div class="bloc">
+<h3>🔗 Liens externes</h3>
+<p>Les liens vers les sites externes (AELF, BibleGateway, Prions en Église, etc.) relèvent de <strong>leurs propres politiques</strong> de confidentialité.</p>
+</div>
+
+<div class="bloc">
+<h3>⚖️ Conformité RGPD</h3>
+<p>Ce site ne collecte <strong>aucune donnée personnelle identifiable</strong>. Aucun cookie de suivi n'est déposé.</p>
+</div>
+
+<div class="bloc" style="background:#eef6fa;border-left:4px solid #1f4b66;">
+<h3>🛡️ Vos droits</h3>
+<p>Puisque nous ne stockons rien sur nos serveurs, il n'y a aucune donnée à consulter, modifier ou supprimer côté serveur. Vous gardez le <strong>contrôle total</strong> de ce qui reste sur votre appareil.</p>
+</div>`
     },
     en: {
         sagesse: `<h2>📖 Wisdom</h2><p class="page-intro">Texts to nourish meditation and prayer.</p><div class="bloc"><h3>Words of Jesus</h3><p>« Come to me, all you who are weary. » — Mt 11:28</p></div>${CARLO_EN}<div class="bloc"><h3>Go further</h3><p>Return to the <a href="#/">home page</a> or take the <a href="#/examen">guided examen</a>.</p></div>`,
+        commentCaMarche: COMMENT_EN,
         apropos: `<h2>📖 About</h2><div class="bloc"><h3>What is Home of Love?</h3><p>A space of peace, listening and prayer, rooted in the Christian tradition and Ignatian spirituality.</p></div>`,
         sources: `<h2>📚 Sources</h2><div class="bloc"><h3>A project led by a Catholic priest</h3></div>`,
         contact: `<h2>✉️ Contact</h2><div class="bloc"><h3>Share your experience</h3><p>Leave an anonymous testimony from the <a href="#/">home page</a>.</p></div>`,
-        confidentialite: `<h2>🔒 Privacy</h2><div class="bloc"><h3>In short</h3><p>No account. No tracking cookies. No advertising.</p></div>`
+        confidentialite: `<h2>🔒 Privacy</h2>
+<p class="page-intro">Our transparent commitment to protecting your data.</p>
+
+<div class="bloc" style="background:#e8efe9;border-left:4px solid #2e6b47;">
+<h3>✅ In short</h3>
+<p><strong>No account.</strong> <strong>No tracking cookies.</strong> <strong>No advertising.</strong> <strong>No data resale.</strong></p>
+<p>We store <strong>nothing on our servers</strong> about you.</p>
+</div>
+
+<div class="bloc">
+<h3>📱 What stays ONLY on your device</h3>
+<p>This data is stored in your browser's <code>localStorage</code>. It <strong>never</strong> leaves your device:</p>
+<ul style="line-height:1.9;">
+<li>✅ <strong>Your journal</strong> ("little lights")</li>
+<li>✅ <strong>Your anonymous testimonies</strong> (stored locally)</li>
+<li>✅ <strong>Your chosen language</strong></li>
+<li>✅ <strong>Your journal ID</strong> (a random string, no link to your identity)</li>
+</ul>
+<p><strong>To erase everything</strong>: "🗑️ Delete" buttons in journal and testimonies sections, or clear your browser data.</p>
+</div>
+
+<div class="bloc" style="background:#fff8f0;border-left:4px solid #c49a6c;">
+<h3>📤 What is transmitted to generate an answer</h3>
+<p>When you click <strong>"Think with the companion"</strong>:</p>
+<ul style="line-height:1.9;">
+<li>The <strong>text you write</strong> (situation, clarifications, optional role)</li>
+<li>The <strong>chosen mode</strong> (discernment, consolation, prayer, reading)</li>
+<li>The <strong>active language</strong></li>
+</ul>
+<p>This data is sent to:</p>
+<ul style="line-height:1.9;">
+<li><strong>Netlify Functions</strong> (secure relay, no storage)</li>
+<li><strong>OpenAI</strong> (answer generation, no long-term retention)</li>
+</ul>
+<p><strong>⚠️ Never write</strong> highly sensitive data: third-party names, precise addresses, social security numbers, banking data, detailed medical information.</p>
+</div>
+
+<div class="bloc">
+<h3>🔗 External links</h3>
+<p>Links to external sites (AELF, BibleGateway, etc.) are governed by <strong>their own privacy policies</strong>.</p>
+</div>
+
+<div class="bloc">
+<h3>⚖️ GDPR compliance</h3>
+<p>This site collects <strong>no personally identifiable data</strong>. No tracking cookie is deposited.</p>
+</div>`
     }
 };
 ['zh','hi','es','ar'].forEach(l => { pageContent[l] = pageContent.fr; });
@@ -474,6 +724,8 @@ function renderPages() {
         const el = document.getElementById('page-' + id);
         if (el && pc[id]) el.innerHTML = retourLink() + pc[id];
     });
+    const ccEl = document.getElementById('page-comment-ca-marche');
+    if (ccEl && pc.commentCaMarche) ccEl.innerHTML = retourLink() + pc.commentCaMarche;
     const t = translations[currentLang] || FR;
     renderExamen(t.pageExamen || FR.pageExamen);
 }
@@ -672,7 +924,6 @@ function updateLanguage(lang) {
     document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
     const t = translations[lang];
 
-    // Synchronisation des boutons de langue
     document.querySelectorAll('.lang-btn').forEach(b => {
         const active = b.dataset.lang === lang;
         b.classList.toggle('active', active);
@@ -749,6 +1000,7 @@ function updateLanguage(lang) {
     setHtml('clause-text', t.clauseText);
     setText('navHome', t.navHome);
     setText('navSagesse', t.navSagesse);
+    if (t.navComment) setText('navComment', t.navComment);
     setText('navAbout', t.navAbout);
     setText('navExamen', t.navExamen);
     setText('navContact', t.navContact);
@@ -869,6 +1121,25 @@ function bindEvents() {
     const ab = document.getElementById('btn-charger-aelf'); if (ab) ab.addEventListener('click', handleChargeAelf);
     const hjb = document.getElementById('btn-homelie-du-jour'); if (hjb) hjb.addEventListener('click', genererHomelieDuJour);
     const gb = document.getElementById('genererHomelie'); if (gb) gb.addEventListener('click', handleGenererHomelie);
+
+    // Bouton "Parler à une personne" → scroll vers les contacts humains
+    const bph = document.getElementById('btn-parler-humain');
+    if (bph) bph.addEventListener('click', () => {
+        const rc = document.getElementById('ressources-container');
+        if (rc) {
+            rc.style.display = 'block';
+            rc.scrollIntoView({ behavior: 'smooth' });
+        }
+        showToast("Voici les contacts humains et services d'écoute en bas de page.", 'info', 5000);
+    });
+
+    // Aide méthodologique : apparaît quand l'utilisateur commence à écrire
+    const sitEl = document.getElementById('situation');
+    const aideEl = document.getElementById('aide-methodo');
+    if (sitEl && aideEl) {
+        sitEl.addEventListener('focus', () => { aideEl.style.display = 'block'; }, { once: true });
+    }
+
     ['lecture1','psaume','lecture2','evangile','theme'].forEach(id => {
         const el = document.getElementById(id);
         if (el) el.addEventListener('keypress', (e) => { if (e.key === 'Enter') { const b = document.getElementById('genererHomelie'); if (b) b.click(); } });
