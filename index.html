@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -40,14 +39,101 @@
       "description": "Outil d'aide au discernement enraciné dans la foi chrétienne, en six langues.",
       "inLanguage": ["fr", "en", "zh", "hi", "es", "ar"]
     }
-    </script>
+    
+    /* === SPRINT 4 : GESTION DES INTERACTIONS ACCESSIBILITÉ & UX === */
+    // 1. Mise à jour dynamique de aria-pressed pour les boutons de langue
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.lang-btn').forEach(b => b.setAttribute('aria-pressed', 'false'));
+            btn.setAttribute('aria-pressed', 'true');
+        });
+    });
+
+    // 2. Mise à jour dynamique de aria-pressed pour les boutons de mode
+    document.querySelectorAll('.mode-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.mode-btn').forEach(b => b.setAttribute('aria-pressed', 'false'));
+            btn.setAttribute('aria-pressed', 'true');
+        });
+    });
+
+    // 3. Bouton Retour en haut de page (> 600px de scroll)
+    const backToTopBtn = document.getElementById('back-to-top');
+    if (backToTopBtn) {
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 600) {
+                backToTopBtn.style.display = 'flex';
+            } else {
+                backToTopBtn.style.display = 'none';
+            }
+        }, { passive: true });
+
+        backToTopBtn.addEventListener('click', () => {
+            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            window.scrollTo({ top: 0, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
+        });
+    }
+
+    // 4. Bouton Effacer mon carnet avec confirmation
+    const clearCarnetBtn = document.getElementById('clear-carnet');
+    if (clearCarnetBtn) {
+        clearCarnetBtn.addEventListener('click', () => {
+            const confirmed = window.confirm("Êtes-vous certain de vouloir effacer toutes les notes de votre carnet ? Cette action est irréversible.");
+            if (confirmed) {
+                localStorage.removeItem('carnet_lumiere');
+                const carnetInput = document.getElementById('carnet-entry');
+                if (carnetInput) carnetInput.value = '';
+                if (typeof showToast === 'function') {
+                    showToast("Votre carnet a été réinitialisé.", "info");
+                }
+            }
+        });
+    }
+
+    // 5. Bouton Effacer mes témoignages avec confirmation
+    const clearTemoignagesBtn = document.getElementById('clear-temoignages');
+    if (clearTemoignagesBtn) {
+        clearTemoignagesBtn.addEventListener('click', () => {
+            const confirmed = window.confirm("Souhaitez-vous effacer l'historique de vos témoignages enregistrés sur cet appareil ?");
+            if (confirmed) {
+                localStorage.removeItem('temoignages');
+                if (typeof afficherTemoignages === 'function') {
+                    afficherTemoignages();
+                } else {
+                    const liste = document.getElementById('temoignagesListe');
+                    if (liste) liste.innerHTML = '';
+                }
+                if (typeof showToast === 'function') {
+                    showToast("Vos témoignages locaux ont été effacés.", "info");
+                }
+            }
+        });
+    }
+
+    // 6. Sécurisation et désactivation de #genererHomelie pendant la génération
+    const homelieBtn = document.getElementById('genererHomelie');
+    if (homelieBtn) {
+        homelieBtn.addEventListener('click', () => {
+            // Désactiver temporairement le bouton
+            homelieBtn.disabled = true;
+            homelieBtn.style.opacity = '0.6';
+            homelieBtn.style.cursor = 'not-allowed';
+            setTimeout(() => {
+                homelieBtn.disabled = false;
+                homelieBtn.style.opacity = '1';
+                homelieBtn.style.cursor = 'pointer';
+            }, 3000);
+        });
+    }
+
+</script>
 
     <style>
-        body { font-family: Georgia, serif; background: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200') no-repeat center center fixed; background-size: cover; padding: 20px; }
+        body { font-family: Georgia, serif; background: linear-gradient(135deg, #f6f3ef, #e0d8cc), url('/assets/background.webp') no-repeat center center fixed; background-size: cover; padding: 20px; }
         .container { max-width: 800px; margin: auto; background: rgba(255, 255, 255, 0.92); padding: 2rem; border-radius: 16px; }
         h1, h2, h3 { color: #4a3b2c; }
         h1 { text-align: center; margin-bottom: 0; }
-        .sous-titre { text-align: center; color: #7a6b5a; font-style: italic; margin-top: 0.2rem; margin-bottom: 1.5rem; }
+        .sous-titre { text-align: center; color: #5a4f42; font-style: italic; margin-top: 0.2rem; margin-bottom: 1.5rem; }
 
         .nav-menu { display: flex; justify-content: center; flex-wrap: wrap; gap: 0.8rem; margin: 1rem 0 1.5rem; padding: 0.5rem 0; border-top: 1px solid #e6e4e0; border-bottom: 1px solid #e6e4e0; }
         .nav-menu a { color: #4a3b2c; text-decoration: none; font-size: 0.9rem; padding: 0.3rem 0.6rem; border-radius: 30px; transition: background 0.2s; }
@@ -65,7 +151,7 @@
 
         textarea, input[type="text"] { width: 100%; padding: 8px; margin: 10px 0; border: 1px solid #ddd; border-radius: 8px; font-family: inherit; box-sizing: border-box; }
         button { background: #4a6f5e; color: white; padding: 10px 20px; border: none; border-radius: 40px; cursor: pointer; font-size: 1rem; }
-        .reponse-card { background: #fefaf5; padding: 15px; border-left: 4px solid #4a6f5e; margin-top: 20px; line-height: 1.5; }
+        .reponse-card { background: #fefaf5; padding: 15px; border-left: 4px solid #4a6f5e; margin-top: 20px; line-height: 1.5; white-space: pre-line; }
         .loading { text-align: center; color: #4a6f5e; margin-top: 20px; }
         .error { color: #c0392b; background: #fdecea; padding: 10px; border-radius: 8px; margin-top: 20px; }
 
@@ -88,7 +174,7 @@
         .btn-carnet { background: #4a6f5e; color: white; border: none; padding: 0.5rem 1rem; border-radius: 40px; cursor: pointer; font-size: 0.9rem; }
         .btn-carnet.outline { background: transparent; color: #4a6f5e; border: 1px solid #4a6f5e; }
         .btn-carnet:hover { opacity: 0.9; }
-        .carnet-info { font-size: 0.8rem; color: #7a6b5a; margin-top: 0.8rem; }
+        .carnet-info { font-size: 0.8rem; color: #5a4f42; margin-top: 0.8rem; }
 
         /* Ressources */
         #ressources-container { display: none; margin-top: 2rem; }
@@ -107,7 +193,7 @@
         .emergency-numbers.visible { display: block; }
 
         footer { text-align: center; margin-top: 2rem; font-size: 0.8rem; color: #aaa39a; line-height: 2; }
-        footer a { color: #7a6b5a; text-decoration: none; margin: 0 0.4rem; }
+        footer a { color: #5a4f42; text-decoration: none; margin: 0 0.4rem; }
         footer a:hover { text-decoration: underline; }
         .footer-credit { font-size: 0.7rem; color: #aaa39a; display: block; margin-top: 0.2rem; }
         .footer-sep { color: #ddd; }
@@ -141,7 +227,7 @@
         .page { display: none; }
         .page.active { display: block; }
         .page h2 { text-align: center; margin: 0.5rem 0 0.8rem; }
-        .page-intro { text-align: center; color: #7a6b5a; font-style: italic; margin: 0 0 1rem; }
+        .page-intro { text-align: center; color: #5a4f42; font-style: italic; margin: 0 0 1rem; }
         .retour { display: inline-block; margin: 0.3rem 0 0.8rem; color: #4a6f5e; text-decoration: none; font-size: 0.9rem; }
         .retour:hover { text-decoration: underline; }
         .page .bloc { background: #f6f3ef; padding: 1.2rem; border-radius: 12px; margin: 1rem 0; }
@@ -152,9 +238,180 @@
         .examen-nav { text-align: center; margin-top: 1rem; }
         .examen-nav .btn-examen:disabled { opacity: 0.4; cursor: default; }
         [dir="rtl"] .page .bloc p, [dir="rtl"] .page .bloc li { text-align: right; }
+    
+        /* Toasts non-bloquants (Sprint 2) */
+        .toast-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 10000;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            max-width: 380px;
+            pointer-events: none;
+        }
+        .toast {
+            padding: 12px 18px;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 0.92rem;
+            font-weight: 500;
+            line-height: 1.4;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+            opacity: 0;
+            transform: translateY(-12px);
+            transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            pointer-events: auto;
+            word-break: break-word;
+        }
+        .toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .toast-info {
+            background-color: #2e7d32;
+            border-left: 5px solid #1b5e20;
+        }
+        .toast-warn {
+            background-color: #f57c00;
+            border-left: 5px solid #e65100;
+        }
+        .toast-error {
+            background-color: #d32f2f;
+            border-left: 5px solid #b71c1c;
+        }
+
+    
+        /* Sprint 4 : Accessibilité & Ergonomie WCAG AA */
+        :focus-visible { outline: 2px solid #4a6f5e; outline-offset: 2px; }
+        
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        /* Skeleton Loader animé pour l'IA */
+        .skeleton-card {
+            background: #f6f3ef;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        .skeleton-line {
+            height: 14px;
+            margin-bottom: 12px;
+            border-radius: 6px;
+            background: linear-gradient(90deg, #e5dfd5 25%, #f2eee8 50%, #e5dfd5 75%);
+            background-size: 200% 100%;
+            animation: skeleton-shimmer 1.5s infinite ease-in-out;
+        }
+        .skeleton-line.title { height: 22px; width: 55%; margin-bottom: 18px; }
+        .skeleton-line.short { width: 40%; }
+        .skeleton-line.medium { width: 75%; }
+        .skeleton-line.full { width: 100%; }
+
+        @keyframes skeleton-shimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        /* Bouton Haut de Page flottant */
+        #back-to-top {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background: #4a6f5e;
+            color: #ffffff;
+            border: none;
+            border-radius: 50%;
+            width: 48px;
+            height: 48px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            transition: opacity 0.3s, transform 0.2s;
+        }
+        #back-to-top:hover {
+            background: #39574a;
+            transform: translateY(-2px);
+        }
+        #back-to-top:active {
+            transform: translateY(0);
+        }
+
+        
+        /* Prise en charge de prefers-reduced-motion */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+            .skeleton-line {
+                animation: none !important;
+                background: #e5dfd5 !important;
+            }
+            #back-to-top {
+                transition: none !important;
+            }
+            #back-to-top:hover {
+                transform: none !important;
+            }
+        }
+
+        /* Cibles tactiles WCAG (minimum 44x44px) & ajustements mobiles */
+        button, .lang-btn, .mode-btn, .btn-carnet {
+            min-height: 44px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            box-sizing: border-box;
+        }
+        .lang-btn {
+            min-width: 44px;
+            padding: 0.4rem 0.8rem;
+        }
+        .situations-container {
+            border: 1px solid #e2dad0;
+            margin: 1.5rem 0;
+            padding: 1.2rem;
+            background: #f6f3ef;
+            border-radius: 12px;
+        }
+        .situations-container legend {
+            font-weight: bold;
+            color: #4a3b2c;
+            padding: 0 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        @media (max-width: 600px) {
+            .section-card {
+                padding: 0.9rem !important;
+            }
+            .situations-container {
+                padding: 0.9rem !important;
+            }
+        }
+
     </style>
 </head>
 <body>
+    <div id="toast-container" class="toast-container" aria-live="polite" aria-atomic="true"></div>
 <div class="container">
     <h1 id="mainTitle">🕯️ Au Foyer de l'Amour</h1>
     <div class="sous-titre" id="mainSubtitle">Discernement et la petite lumière</div>
@@ -169,54 +426,70 @@
         <a href='#/confidentialite' id='navPrivacy' data-page='confidentialite'>🔒 Confidentialité</a>
     </div>
 
-    <div class="language-selector">
-        <button class="lang-btn active" data-lang="fr">🇫🇷 Français</button>
-        <button class="lang-btn" data-lang="en">🇬🇧 English</button>
-        <button class="lang-btn" data-lang="zh">🇨🇳 中文</button>
-        <button class="lang-btn" data-lang="hi">🇮🇳 हिन्दी</button>
-        <button class="lang-btn" data-lang="es">🇪🇸 Español</button>
-        <button class="lang-btn" data-lang="ar">🇸🇦 العربية</button>
+    <div class="language-selector" role="group" aria-label="Sélection de la langue">
+        <button class="lang-btn active" data-lang="fr" aria-label="Français" aria-pressed="true">🇫🇷 Français</button>
+        <button class="lang-btn" data-lang="en" aria-label="English" aria-pressed="false">🇬🇧 English</button>
+        <button class="lang-btn" data-lang="zh" aria-label="中文" aria-pressed="false">🇨🇳 中文</button>
+        <button class="lang-btn" data-lang="hi" aria-label="हिन्दी" aria-pressed="false">🇮🇳 हिन्दी</button>
+        <button class="lang-btn" data-lang="es" aria-label="Español" aria-pressed="false">🇪🇸 Español</button>
+        <button class="lang-btn" data-lang="ar" aria-label="العربية" aria-pressed="false">🇸🇦 العربية</button>
     </div>
 
     <div id="page-accueil" class="page active">
-    <div class="mode-selector">
-        <button class="mode-btn active" data-mode="discernement" id="mode-discernement">🤲 Discernement</button>
-        <button class="mode-btn" data-mode="consolation" id="mode-consolation">🙏 Consolation</button>
-        <button class="mode-btn" data-mode="lecture" id="mode-lecture">📖 Lecture biblique</button>
-        <button class="mode-btn" data-mode="priere" id="mode-priere">❤️ Prière</button>
+    <div class="mode-selector" role="group" aria-label="Mode d'accompagnement spirituel">
+        <button class="mode-btn active" data-mode="discernement" id="mode-discernement" aria-label="Mode Discernement" aria-pressed="true">🤲 Discernement</button>
+        <button class="mode-btn" data-mode="consolation" id="mode-consolation" aria-label="Mode Consolation" aria-pressed="false">🙏 Consolation</button>
+        <button class="mode-btn" data-mode="lecture" id="mode-lecture" aria-label="Mode Lecture biblique" aria-pressed="false">📖 Lecture biblique</button>
+        <button class="mode-btn" data-mode="priere" id="mode-priere" aria-label="Mode Prière" aria-pressed="false">❤️ Prière</button>
     </div>
 
+    <label for="situation" class="sr-only">Votre situation personnelle</label>
     <textarea id="situation" rows="6" placeholder="Décrivez votre situation..."></textarea>
+    <label for="role" class="sr-only">Votre rôle ou vocation</label>
     <input type="text" id="role" placeholder="Qui êtes-vous ? (optionnel)">
 
-    <div class="situations-container">
-        <p id="situations-title">Ou choisissez ce qui correspond le mieux à ce que vous vivez :</p>
+    <fieldset class="situations-container">
+        <legend id="situations-title">Ou choisissez ce qui correspond le mieux à ce que vous vivez :</legend>
         <div class="situations-grid" id="situations-list">
             <!-- Généré dynamiquement -->
         </div>
+        <label for="precision-situation" class="sr-only">Précisions supplémentaires sur votre situation</label>
         <textarea id="precision-situation" rows="2" placeholder="Tu peux préciser ce que tu vis, si tu le souhaites..."></textarea>
-    </div>
+    </fieldset>
 
-    <button id="submitBtn">Recevoir une aide au discernement →</button>
+    <button id="submitBtn" aria-label="Recevoir une aide au discernement">Recevoir une aide au discernement →</button>
 
-    <div id="response-container">
+    <div id="response-container" aria-live="polite">
         <div id="response-lecture">
             <div id="reponse" class="reponse-card"></div>
         </div>
     </div>
 
-    <div id="loading" class="loading" style="display:none;">🕯️ Un instant...</div>
+    <div id="loading" class="loading" style="display:none;" aria-live="polite">
+        <div class="skeleton-card">
+            <div style="display:flex; align-items:center; gap:8px; margin-bottom:14px; font-weight:bold; color:#4a6f5e;">
+                <span>🕯️</span> <span>Discernement en cours...</span>
+            </div>
+            <div class="skeleton-line title"></div>
+            <div class="skeleton-line full"></div>
+            <div class="skeleton-line medium"></div>
+            <div class="skeleton-line full"></div>
+            <div class="skeleton-line short"></div>
+        </div>
+    </div>
     <div id="error" class="error" style="display:none;"></div>
 
     <!-- Carnet de petites lumières -->
     <div id="carnet-container">
         <div class="silence-message" id="carnet-prompt">✨<br><br>« Et toi, quelle petite lumière pourrais-tu noter aujourd'hui ? »</div>
         <div class="carnet-box">
+            <label for="carnet-entry" class="sr-only">Votre note de carnet</label>
             <textarea id="carnet-entry" placeholder="Ma petite lumière..."></textarea>
             <div class="carnet-actions">
-                <button class="btn-carnet" id="save-carnet">💾 Sauvegarder</button>
-                <button class="btn-carnet outline" id="copy-carnet-link">🔗 Copier mon lien</button>
-                <button class="btn-carnet outline" id="share-carnet">📤 Partager</button>
+                <button class="btn-carnet" id="save-carnet" aria-label="Sauvegarder dans mon carnet">💾 Sauvegarder</button>
+                <button class="btn-carnet outline" id="copy-carnet-link" aria-label="Copier mon lien de carnet">🔗 Copier mon lien</button>
+                <button class="btn-carnet outline" id="share-carnet" aria-label="Partager mon carnet">📤 Partager</button>
+                <button class="btn-carnet outline" id="clear-carnet" aria-label="Effacer mon carnet" style="color:#b33927; border-color:#d49b91;">🗑️ Effacer mon carnet</button>
             </div>
             <div id="carnet-feedback" class="carnet-info"></div>
             <div class="carnet-info" id="carnet-info-text">Tu pourras revenir plus tard avec ton lien. Rien n'est lié à un compte.</div>
@@ -232,14 +505,14 @@
             <h3 style="margin:0; font-size:1.4rem; color:#2c221e;">📖 <span id="homelie-title">Préparation d'homélie</span></h3>
             <span style="font-size:0.75rem; background:#4a6f5e; color:white; padding:3px 14px; border-radius:30px; font-weight:500;">ÉCOUTE DE LA PAROLE</span>
         </div>
-        <p id="homelie-description" style="color:#7a6b5a; font-size:0.95rem; margin-bottom:1.5rem;">
+        <p id="homelie-description" style="color:#5a4f42; font-size:0.95rem; margin-bottom:1.5rem;">
             Entrez les lectures ou chargez-les directement depuis l'AELF pour recevoir une homélie pastorale continue, avec accroche imagée, message des textes et mise en pratique quotidienne.
         </p>
 
         <!-- CHARGEMENT EN DIRECT VIA L'API LITURGIQUE AELF -->
         <div style="background:#f4f0e8; border:1px solid #dfd7ca; border-radius:10px; padding:1.2rem; margin-bottom:1.5rem;">
             <div style="font-weight:bold; color:#4a6f5e; margin-bottom:0.6rem; display:flex; align-items:center; gap:0.5rem; font-size:0.95rem;">
-                <span>📅 Charger les lectures liturgiques officielles du dimanche via l'AELF</span>
+                <label for="date-aelf" style="cursor:pointer;">📅 Charger les lectures liturgiques officielles du dimanche via l'AELF</label>
             </div>
             <div style="display:flex; gap:0.8rem; align-items:center; flex-wrap:wrap;">
                 <input type="date" id="date-aelf" style="padding:8px 12px; border:1px solid #c2b5a3; border-radius:6px; font-size:0.92rem; background:#fff; color:#3b322a;">
@@ -262,30 +535,30 @@
 
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-top:1rem;">
             <div>
-                <label id="label-lecture1" style="font-weight:bold; display:block; margin-bottom:0.3rem;">Première lecture :</label>
+                <label for="lecture1" id="label-lecture1" style="font-weight:bold; display:block; margin-bottom:0.3rem;">Première lecture :</label>
                 <input type="text" id="lecture1" placeholder="Ex: Isaïe 22,19-23 ou Ézéchiel 18,25-28" style="width:100%; padding:10px; border:1px solid #ddd; border-radius:8px; box-sizing:border-box;">
             </div>
             <div>
-                <label id="label-psaume" style="font-weight:bold; display:block; margin-bottom:0.3rem;">Psaume :</label>
+                <label for="psaume" id="label-psaume" style="font-weight:bold; display:block; margin-bottom:0.3rem;">Psaume :</label>
                 <input type="text" id="psaume" placeholder="Ex: Psaume 24 (25) ou Psaume 138" style="width:100%; padding:10px; border:1px solid #ddd; border-radius:8px; box-sizing:border-box;">
             </div>
             <div>
-                <label id="label-lecture2" style="font-weight:bold; display:block; margin-bottom:0.3rem;">Deuxième lecture :</label>
+                <label for="lecture2" id="label-lecture2" style="font-weight:bold; display:block; margin-bottom:0.3rem;">Deuxième lecture :</label>
                 <input type="text" id="lecture2" placeholder="Ex: Philippiens 2,1-11 ou Romains 11,33-36" style="width:100%; padding:10px; border:1px solid #ddd; border-radius:8px; box-sizing:border-box;">
             </div>
             <div>
-                <label id="label-evangile" style="font-weight:bold; display:block; margin-bottom:0.3rem;">Évangile : <span style="color:#c0392b;">*</span></label>
+                <label for="evangile" id="label-evangile" style="font-weight:bold; display:block; margin-bottom:0.3rem;"><span id="label-evangile-text">Évangile :</span> <span style="color:#c0392b;">*</span></label>
                 <input type="text" id="evangile" placeholder="Ex: Matthieu 21,28-32 ou Matthieu 16,13-20" style="width:100%; padding:10px; border:1px solid #ddd; border-radius:8px; box-sizing:border-box;">
             </div>
         </div>
 
         <div style="margin-top:1rem;">
-            <label id="label-theme" style="font-weight:bold; display:block; margin-bottom:0.3rem;">Message retenu ou intention pastorale (optionnel) :</label>
+            <label for="theme" id="label-theme" style="font-weight:bold; display:block; margin-bottom:0.3rem;">Message retenu ou intention pastorale (optionnel) :</label>
             <input type="text" id="theme" placeholder="Ex: Dire oui par ses actes, la fidélité, l'accueil du pécheur..." style="width:100%; padding:10px; border:1px solid #ddd; border-radius:8px; box-sizing:border-box;">
         </div>
 
         <div style="display:flex; align-items:center; gap:1rem; flex-wrap:wrap; margin-top:1.2rem;">
-            <button id="genererHomelie" style="background:#4a6f5e; color:white; padding:12px 30px; border:none; border-radius:40px; cursor:pointer; font-size:1rem; font-weight:600; box-shadow:0 2px 8px rgba(74,111,94,0.3);">
+            <button id="genererHomelie" aria-label="Générer une proposition d'homélie" style="background:#4a6f5e; color:white; padding:12px 30px; border:none; border-radius:40px; cursor:pointer; font-size:1rem; font-weight:600; box-shadow:0 2px 8px rgba(74,111,94,0.3);">
                 🕊️ <span id="homelie-button-text">Générer une proposition d'homélie</span>
             </button>
             <button type="button" id="btn-prefill-example" style="background:transparent; border:1px solid #a89f91; color:#5b4636; padding:8px 16px; border-radius:20px; cursor:pointer; font-size:0.85rem;">
@@ -313,7 +586,7 @@
             Pour approfondir votre prière quotidienne et retrouver l'intégralité des lectures bibliques du jour ainsi que les méditations de la liturgie catholique, consultez le site officiel de <strong>Prions en Église</strong>, publié par les éditions Novalis.
         </p>
         <div style="display:flex; align-items:center; gap:1rem; flex-wrap:wrap;">
-            <a href="https://fr.novalis.ca/" target="_blank" rel="noopener noreferrer" style="background:#1f4b66; color:#ffffff; padding:0.65rem 1.25rem; border-radius:6px; text-decoration:none; display:inline-flex; align-items:center; gap:0.5rem; font-weight:bold;">
+            <a href="https://fr.novalis.ca/" target='_blank' rel='noopener noreferrer' style="background:#1f4b66; color:#ffffff; padding:0.65rem 1.25rem; border-radius:6px; text-decoration:none; display:inline-flex; align-items:center; gap:0.5rem; font-weight:bold;">
                 <span>Ouvrir Prions en Église (Novalis)</span>
                 <span aria-hidden="true">↗</span>
             </a>
@@ -334,8 +607,8 @@
         <div class="ressources-section">
             <h3 id="ressources-contacts-title">👤 Contacts humains</h3>
             <ul>
-                <li><a id="ressources-contact-pretre-link" target="_blank"><span id="ressources-contact-pretre-text"></span></a></li>
-                <li><a id="ressources-contact-communaute-link" target="_blank"><span id="ressources-contact-communaute-text"></span></a></li>
+                <li><a id="ressources-contact-pretre-link" target='_blank'><span id="ressources-contact-pretre-text"></span></a></li>
+                <li><a id="ressources-contact-communaute-link" target='_blank'><span id="ressources-contact-communaute-text"></span></a></li>
             </ul>
         </div>
         <div class="ressources-section">
@@ -367,11 +640,15 @@
     <div class="section-card">
         <h3 id="temoignages-title">💬 Vous avez utilisé Au Foyer de l'Amour ?</h3>
         <p id="temoignages-intro">Partagez votre expérience (anonyme) :</p>
+        <label for="temoignage" class="sr-only">Votre témoignage anonyme</label>
         <textarea id="temoignage" rows="3" placeholder="Votre témoignage..."></textarea>
-        <button id="envoyerTemoignage">Envoyer</button>
+        <button id="envoyerTemoignage" aria-label="Envoyer mon témoignage anonyme">Envoyer</button>
         <div id="merciTemoignage" style="display:none; color:#4a6f5e;">🙏 Merci !</div>
-        <div style="margin-top:1rem;">
-            <h4 id="temoignages-recus-title">💬 Témoignages reçus</h4>
+        <div style="margin-top:1.5rem;">
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem; margin-bottom:0.6rem;">
+                <h4 id="temoignages-recus-title" style="margin:0;">💬 Vos témoignages (sur cet appareil)</h4>
+                <button id="clear-temoignages" aria-label="Effacer mes témoignages enregistrés sur cet appareil" style="background:transparent; border:1px solid #d49b91; color:#b33927; padding:0.25rem 0.6rem; border-radius:20px; font-size:0.8rem; cursor:pointer; min-height:36px;">🗑️ Effacer mes témoignages</button>
+            </div>
             <div id="temoignagesListe">
                 <!-- Rempli dynamiquement -->
             </div>
@@ -380,9 +657,9 @@
 
     <div class="encart-projets">
         <p id="projets-psaume">🌱 « La justice et la paix s'embrassent. » — Psaume 85,11</p>
-        <a href="https://justice-ai-anonyme-2.onrender.com" target="_blank">⚖️ Justice AI</a> |
-        <a href="https://bridge-your-project.lovable.app" target="_blank">🌍 ONBRIDGE AI</a> |
-        <a href="https://cartepastorale-v5.onrender.com/" target="_blank">📜 Carta Pastorale</a>
+        <a href="https://justice-ai-anonyme-2.onrender.com" target='_blank'>⚖️ Justice AI</a> |
+        <a href="https://bridge-your-project.lovable.app" target='_blank'>🌍 ONBRIDGE AI</a> |
+        <a href="https://cartepastorale-v5.onrender.com/" target='_blank'>📜 Carta Pastorale</a>
         <p class="encart-credit" id="projets-credit">Des outils pour la justice, la paix et le discernement.</p>
     </div>
     </div><!-- /page-accueil -->
@@ -416,6 +693,8 @@
 </div>
 
 <script>
+    const TOAST_ICONS = { info: "✅", warn: "⚠️", error: "🚫" };
+
 // ============================================================
 // TRADUCTIONS COMPLÈTES 6 LANGUES
 // ============================================================
@@ -436,7 +715,7 @@ const translations = {
         temoignagesTitle: "💬 Vous avez utilisé Au Foyer de l'Amour ?",
         temoignagesIntro: "Partagez votre expérience (anonyme) :",
         temoignagesPlaceholder: "Votre témoignage...", envoyer: "Envoyer", merci: "🙏 Merci ! Votre témoignage reste sur votre appareil.",
-        temoignagesRecus: "💬 Témoignages reçus",
+        temoignagesRecus: "💬 Vos témoignages (sur cet appareil)",
         projetsPsaume: "🌱 « La justice et la paix s'embrassent. » — Psaume 85,11",
         projetsCredit: "Des outils pour la justice, la paix et le discernement.",
         footerNothing: "🔒 Rien n'est enregistré · 🕊️ Un compagnon silencieux",
@@ -454,77 +733,77 @@ const translations = {
         prieres: ["Seigneur, apprends-moi à écouter le silence.", "Donne-moi la force d'accueillir ce que je ne comprends pas.", "Que Ta paix habite mon cœur."],
         defaultTestimonials: ["« Une paix profonde. »", "« Un espace de silence précieux. »"],
         textesParSituation: {
-            "Je traverse une grande souffrance": [
+            SOUFFRANCE: [
                 { ref: "Psaume 22", texte: "Mon Dieu, mon Dieu, pourquoi m'as-tu abandonné ?", lien: "https://www.aelf.org/bible/Ps/22" },
                 { ref: "Isaïe 53", texte: "C'étaient nos souffrances qu'il portait", lien: "https://www.aelf.org/bible/Is/53" },
                 { ref: "Matthieu 5,4", texte: "Heureux ceux qui pleurent, ils seront consolés", lien: "https://www.aelf.org/bible/Mt/5" }
             ],
-            "Je ne vois plus de sens à ma vie": [
+            SENS_VIE: [
                 { ref: "Qohélet 3,1-8", texte: "Il y a un temps pour tout", lien: "https://www.aelf.org/bible/Qo/3" },
                 { ref: "Jérémie 29,11", texte: "Je connais les projets que j'ai formés sur vous", lien: "https://www.aelf.org/bible/Jr/29" },
                 { ref: "Jean 10,10", texte: "Je suis venu pour qu'ils aient la vie en abondance", lien: "https://www.aelf.org/bible/Jn/10" }
             ],
-            "Mon couple va mal": [
+            COUPLE: [
                 { ref: "1 Corinthiens 13", texte: "L'amour est patient, l'amour est bon", lien: "https://www.aelf.org/bible/1Co/13" },
                 { ref: "Éphésiens 5,25-33", texte: "Maris, aimez vos femmes comme le Christ a aimé l'Église", lien: "https://www.aelf.org/bible/Ep/5" },
                 { ref: "Colossiens 3,12-14", texte: "Revêtez-vous de l'amour, lien de la perfection", lien: "https://www.aelf.org/bible/Col/3" }
             ],
-            "J'ai perdu un être cher": [
+            DEUIL: [
                 { ref: "Psaume 23", texte: "Le Seigneur est mon berger, je ne manque de rien", lien: "https://www.aelf.org/bible/Ps/23" },
                 { ref: "Jean 11,25-26", texte: "Je suis la résurrection et la vie", lien: "https://www.aelf.org/bible/Jn/11" },
                 { ref: "Apocalypse 21,4", texte: "Il essuiera toute larme de leurs yeux", lien: "https://www.aelf.org/bible/Ap/21" }
             ],
-            "Je me sens seul(e)": [
+            SOLITUDE: [
                 { ref: "Psaume 27", texte: "Le Seigneur est ma lumière et mon salut", lien: "https://www.aelf.org/bible/Ps/27" },
                 { ref: "Isaïe 41,10", texte: "Ne crains rien, je suis avec toi", lien: "https://www.aelf.org/bible/Is/41" },
                 { ref: "Matthieu 28,20", texte: "Je suis avec vous tous les jours", lien: "https://www.aelf.org/bible/Mt/28" }
             ],
-            "Je suis en colère contre Dieu": [
+            COLERE_DIEU: [
                 { ref: "Psaume 13", texte: "Jusqu'à quand, Seigneur, m'oublieras-tu ?", lien: "https://www.aelf.org/bible/Ps/13" },
                 { ref: "Job 7", texte: "Job crie sa souffrance", lien: "https://www.aelf.org/bible/Jb/7" },
                 { ref: "Matthieu 27,46", texte: "Mon Dieu, pourquoi m'as-tu abandonné ?", lien: "https://www.aelf.org/bible/Mt/27" }
             ],
-            "Je ne sais plus quoi croire": [
+            DOUTE_FOI: [
                 { ref: "Marc 9,24", texte: "Je crois, viens au secours de mon incrédulité", lien: "https://www.aelf.org/bible/Mc/9" },
                 { ref: "Jean 20,24-29", texte: "Thomas et le doute", lien: "https://www.aelf.org/bible/Jn/20" },
                 { ref: "1 Corinthiens 13,12", texte: "Nous voyons comme dans un miroir, de façon confuse", lien: "https://www.aelf.org/bible/1Co/13" }
             ],
-            "Je dois prendre une décision difficile": [
+            DECISION: [
                 { ref: "Proverbes 3,5-6", texte: "Confie-toi en Dieu de tout ton cœur", lien: "https://www.aelf.org/bible/Pr/3" },
                 { ref: "Matthieu 7,7-8", texte: "Demandez, on vous donnera", lien: "https://www.aelf.org/bible/Mt/7" },
                 { ref: "Jacques 1,5", texte: "Si l'un de vous manque de sagesse, qu'il la demande à Dieu", lien: "https://www.aelf.org/bible/Jc/1" }
             ],
-            "Je vis une maladie ou un handicap": [
+            MALADIE: [
                 { ref: "Psaume 41", texte: "Heureux celui qui pense au pauvre et au malade", lien: "https://www.aelf.org/bible/Ps/41" },
                 { ref: "2 Corinthiens 12,9", texte: "Ma grâce te suffit, ma puissance s'accomplit dans la faiblesse", lien: "https://www.aelf.org/bible/2Co/12" },
                 { ref: "Matthieu 11,28-30", texte: "Venez à moi, vous qui peinez", lien: "https://www.aelf.org/bible/Mt/11" }
             ],
-            "J'ai peur de l'avenir": [
+            PEUR_AVENIR: [
                 { ref: "Jérémie 29,11", texte: "Je connais les projets que j'ai formés sur vous", lien: "https://www.aelf.org/bible/Jr/29" },
                 { ref: "Matthieu 6,25-34", texte: "Ne vous inquiétez pas pour demain", lien: "https://www.aelf.org/bible/Mt/6" },
                 { ref: "Philippiens 4,6-7", texte: "La paix de Dieu gardera vos cœurs", lien: "https://www.aelf.org/bible/Ph/4" }
             ],
-            "Je suis épuisé(e)": [
+            EPUISEMENT: [
                 { ref: "Psaume 62", texte: "En Dieu seul mon repos", lien: "https://www.aelf.org/bible/Ps/62" },
                 { ref: "Isaïe 40,28-31", texte: "Ceux qui espèrent en Dieu reprennent des forces", lien: "https://www.aelf.org/bible/Is/40" },
                 { ref: "Matthieu 11,28-30", texte: "Venez à moi, vous qui peinez, et je vous donnerai le repos", lien: "https://www.aelf.org/bible/Mt/11" }
             ],
-            "Je vis un conflit familial": [
+            CONFLIT_FAMILIAL: [
                 { ref: "Éphésiens 4,31-32", texte: "Soyez bons les uns envers les autres, pardonnez-vous", lien: "https://www.aelf.org/bible/Ep/4" },
                 { ref: "Colossiens 3,12-14", texte: "Revêtez-vous de patience et d'amour", lien: "https://www.aelf.org/bible/Col/3" },
                 { ref: "Matthieu 18,21-22", texte: "Je ne te dis pas jusqu'à sept fois, mais jusqu'à soixante-dix fois sept fois", lien: "https://www.aelf.org/bible/Mt/18" }
             ],
-            "J'accompagne une personne en souffrance": [
+            ACCOMPAGNEMENT: [
                 { ref: "Galates 6,2", texte: "Portez les fardeaux les uns des autres", lien: "https://www.aelf.org/bible/Ga/6" },
                 { ref: "Luc 10,25-37", texte: "La parabole du Bon Samaritain", lien: "https://www.aelf.org/bible/Lc/10" },
                 { ref: "Matthieu 25,40", texte: "Ce que vous avez fait au plus petit, c'est à moi que vous l'avez fait", lien: "https://www.aelf.org/bible/Mt/25" }
             ],
-            "Je cherche un sens à ma vie": [
+            RECHERCHE_SENS: [
                 { ref: "Qohélet 3,11", texte: "Dieu a fait toute chose belle en son temps", lien: "https://www.aelf.org/bible/Qo/3" },
                 { ref: "Jean 14,6", texte: "Je suis le chemin, la vérité, la vie", lien: "https://www.aelf.org/bible/Jn/14" },
                 { ref: "Éphésiens 2,10", texte: "Nous sommes l'ouvrage de Dieu, créés pour des œuvres bonnes", lien: "https://www.aelf.org/bible/Ep/2" }
             ],
-            "Autre chose": [
+            AUTRE: [
                 { ref: "Psaume 62", texte: "En Dieu seul mon repos", lien: "https://www.aelf.org/bible/Ps/62" },
                 { ref: "Isaïe 41,10", texte: "Ne crains rien, je suis avec toi", lien: "https://www.aelf.org/bible/Is/41" },
                 { ref: "Matthieu 11,28", texte: "Venez à moi, vous qui peinez", lien: "https://www.aelf.org/bible/Mt/11" }
@@ -578,7 +857,7 @@ const translations = {
         temoignagesTitle: "💬 Have you used Home of Love?",
         temoignagesIntro: "Share your experience (anonymous):",
         temoignagesPlaceholder: "Your testimony...", envoyer: "Send", merci: "🙏 Thank you! Your testimony stays on your device.",
-        temoignagesRecus: "💬 Testimonials received",
+        temoignagesRecus: "💬 Your testimonials (on this device)",
         projetsPsaume: "🌱 « Justice and peace embrace. » — Psalm 85:11",
         projetsCredit: "Tools for justice, peace and discernment.",
         footerNothing: "🔒 Nothing is recorded · 🕊️ A silent companion",
@@ -596,77 +875,77 @@ const translations = {
         prieres: ["Lord, teach me to listen to silence.", "Give me strength to embrace what I do not understand.", "Let Your peace dwell in my heart."],
         defaultTestimonials: ["« A deep peace. »", "« A precious space of silence. »"],
         textesParSituation: {
-            "I am going through great suffering": [
+            SOUFFRANCE: [
                 { ref: "Psalm 22", texte: "My God, my God, why have you forsaken me?", lien: "https://www.biblegateway.com/passage/?search=Psalm+22" },
                 { ref: "Isaiah 53", texte: "He bore our sufferings", lien: "https://www.biblegateway.com/passage/?search=Isaiah+53" },
                 { ref: "Matthew 5:4", texte: "Blessed are those who mourn, for they shall be comforted", lien: "https://www.biblegateway.com/passage/?search=Matthew+5" }
             ],
-            "I no longer see meaning in my life": [
+            SENS_VIE: [
                 { ref: "Ecclesiastes 3:1-8", texte: "There is a time for everything", lien: "https://www.biblegateway.com/passage/?search=Ecclesiastes+3" },
                 { ref: "Jeremiah 29:11", texte: "I know the plans I have for you", lien: "https://www.biblegateway.com/passage/?search=Jeremiah+29" },
                 { ref: "John 10:10", texte: "I have come that they may have life in abundance", lien: "https://www.biblegateway.com/passage/?search=John+10" }
             ],
-            "My relationship is in trouble": [
+            COUPLE: [
                 { ref: "1 Corinthians 13", texte: "Love is patient, love is kind", lien: "https://www.biblegateway.com/passage/?search=1+Corinthians+13" },
                 { ref: "Ephesians 5:25-33", texte: "Husbands, love your wives as Christ loved the Church", lien: "https://www.biblegateway.com/passage/?search=Ephesians+5" },
                 { ref: "Colossians 3:12-14", texte: "Put on love, which binds everything together", lien: "https://www.biblegateway.com/passage/?search=Colossians+3" }
             ],
-            "I have lost a loved one": [
+            DEUIL: [
                 { ref: "Psalm 23", texte: "The Lord is my shepherd", lien: "https://www.biblegateway.com/passage/?search=Psalm+23" },
                 { ref: "John 11:25-26", texte: "I am the resurrection and the life", lien: "https://www.biblegateway.com/passage/?search=John+11" },
                 { ref: "Revelation 21:4", texte: "He will wipe every tear from their eyes", lien: "https://www.biblegateway.com/passage/?search=Revelation+21" }
             ],
-            "I feel alone": [
+            SOLITUDE: [
                 { ref: "Psalm 27", texte: "The Lord is my light and my salvation", lien: "https://www.biblegateway.com/passage/?search=Psalm+27" },
                 { ref: "Isaiah 41:10", texte: "Fear not, I am with you", lien: "https://www.biblegateway.com/passage/?search=Isaiah+41" },
                 { ref: "Matthew 28:20", texte: "I am with you always", lien: "https://www.biblegateway.com/passage/?search=Matthew+28" }
             ],
-            "I am angry with God": [
+            COLERE_DIEU: [
                 { ref: "Psalm 13", texte: "How long, Lord? Will you forget me forever?", lien: "https://www.biblegateway.com/passage/?search=Psalm+13" },
                 { ref: "Job 7", texte: "Job cries out in suffering", lien: "https://www.biblegateway.com/passage/?search=Job+7" },
                 { ref: "Matthew 27:46", texte: "My God, why have you forsaken me?", lien: "https://www.biblegateway.com/passage/?search=Matthew+27" }
             ],
-            "I don't know what to believe anymore": [
+            DOUTE_FOI: [
                 { ref: "Mark 9:24", texte: "I believe; help my unbelief", lien: "https://www.biblegateway.com/passage/?search=Mark+9" },
                 { ref: "John 20:24-29", texte: "Thomas and doubt", lien: "https://www.biblegateway.com/passage/?search=John+20" },
                 { ref: "1 Corinthians 13:12", texte: "Now we see only a reflection as in a mirror", lien: "https://www.biblegateway.com/passage/?search=1+Corinthians+13" }
             ],
-            "I have a difficult decision to make": [
+            DECISION: [
                 { ref: "Proverbs 3:5-6", texte: "Trust in the Lord with all your heart", lien: "https://www.biblegateway.com/passage/?search=Proverbs+3" },
                 { ref: "Matthew 7:7-8", texte: "Ask and it will be given to you", lien: "https://www.biblegateway.com/passage/?search=Matthew+7" },
                 { ref: "James 1:5", texte: "If any of you lacks wisdom, you should ask God", lien: "https://www.biblegateway.com/passage/?search=James+1" }
             ],
-            "I am living with illness or disability": [
+            MALADIE: [
                 { ref: "Psalm 41", texte: "Blessed are those who have regard for the weak", lien: "https://www.biblegateway.com/passage/?search=Psalm+41" },
                 { ref: "2 Corinthians 12:9", texte: "My grace is sufficient for you", lien: "https://www.biblegateway.com/passage/?search=2+Corinthians+12" },
                 { ref: "Matthew 11:28-30", texte: "Come to me, all you who are weary and burdened", lien: "https://www.biblegateway.com/passage/?search=Matthew+11" }
             ],
-            "I am afraid of the future": [
+            PEUR_AVENIR: [
                 { ref: "Jeremiah 29:11", texte: "I know the plans I have for you", lien: "https://www.biblegateway.com/passage/?search=Jeremiah+29" },
                 { ref: "Matthew 6:25-34", texte: "Do not worry about tomorrow", lien: "https://www.biblegateway.com/passage/?search=Matthew+6" },
                 { ref: "Philippians 4:6-7", texte: "The peace of God will guard your hearts", lien: "https://www.biblegateway.com/passage/?search=Philippians+4" }
             ],
-            "I am exhausted": [
+            EPUISEMENT: [
                 { ref: "Psalm 62", texte: "Truly my soul finds rest in God", lien: "https://www.biblegateway.com/passage/?search=Psalm+62" },
                 { ref: "Isaiah 40:28-31", texte: "Those who hope in the Lord will renew their strength", lien: "https://www.biblegateway.com/passage/?search=Isaiah+40" },
                 { ref: "Matthew 11:28-30", texte: "Come to me, and I will give you rest", lien: "https://www.biblegateway.com/passage/?search=Matthew+11" }
             ],
-            "I am experiencing family conflict": [
+            CONFLIT_FAMILIAL: [
                 { ref: "Ephesians 4:31-32", texte: "Be kind to one another, forgiving each other", lien: "https://www.biblegateway.com/passage/?search=Ephesians+4" },
                 { ref: "Colossians 3:12-14", texte: "Clothe yourselves with patience and love", lien: "https://www.biblegateway.com/passage/?search=Colossians+3" },
                 { ref: "Matthew 18:21-22", texte: "I tell you, not seven times, but seventy-seven times", lien: "https://www.biblegateway.com/passage/?search=Matthew+18" }
             ],
-            "I am accompanying someone in suffering": [
+            ACCOMPAGNEMENT: [
                 { ref: "Galatians 6:2", texte: "Carry each other's burdens", lien: "https://www.biblegateway.com/passage/?search=Galatians+6" },
                 { ref: "Luke 10:25-37", texte: "The parable of the Good Samaritan", lien: "https://www.biblegateway.com/passage/?search=Luke+10" },
                 { ref: "Matthew 25:40", texte: "Whatever you did for one of the least of these, you did for me", lien: "https://www.biblegateway.com/passage/?search=Matthew+25" }
             ],
-            "I am searching for meaning in my life": [
+            RECHERCHE_SENS: [
                 { ref: "Ecclesiastes 3:11", texte: "He has made everything beautiful in its time", lien: "https://www.biblegateway.com/passage/?search=Ecclesiastes+3" },
                 { ref: "John 14:6", texte: "I am the way, the truth, the life", lien: "https://www.biblegateway.com/passage/?search=John+14" },
                 { ref: "Ephesians 2:10", texte: "We are God's handiwork, created for good works", lien: "https://www.biblegateway.com/passage/?search=Ephesians+2" }
             ],
-            "Something else": [
+            AUTRE: [
                 { ref: "Psalm 62", texte: "Truly my soul finds rest in God", lien: "https://www.biblegateway.com/passage/?search=Psalm+62" },
                 { ref: "Isaiah 41:10", texte: "Fear not, I am with you", lien: "https://www.biblegateway.com/passage/?search=Isaiah+41" },
                 { ref: "Matthew 11:28", texte: "Come to me, all you who are weary", lien: "https://www.biblegateway.com/passage/?search=Matthew+11" }
@@ -720,7 +999,7 @@ const translations = {
         temoignagesTitle: "💬 你使用过爱之家吗？",
         temoignagesIntro: "分享你的经历（匿名）：",
         temoignagesPlaceholder: "你的见证...", envoyer: "发送", merci: "🙏 谢谢！您的见证仅保存在您的设备上。",
-        temoignagesRecus: "💬 收到的见证",
+        temoignagesRecus: "💬 您的见证（在此设备上）",
         projetsPsaume: "🌱 « 正义与和平相亲。 » — 诗篇 85:11",
         projetsCredit: "为正义、和平与辨别的工具。",
         footerNothing: "🔒 无记录 · 🕊️ 一位沉默的伴侣",
@@ -785,7 +1064,7 @@ const translations = {
         temoignagesTitle: "💬 क्या आपने प्रेम का घर का उपयोग किया?",
         temoignagesIntro: "अपना अनुभव साझा करें (गुमनाम):",
         temoignagesPlaceholder: "आपकी गवाही...", envoyer: "भेजें", merci: "🙏 धन्यवाद! आपकी गवाही आपके डिवाइस पर ही रहती है।",
-        temoignagesRecus: "💬 प्राप्त गवाहियाँ",
+        temoignagesRecus: "💬 आपकी गवाहियाँ (इस डिवाइस पर)",
         projetsPsaume: "🌱 « न्याय और शांति एक दूसरे को गले लगाते हैं। » — भजन 85:11",
         projetsCredit: "न्याय, शांति और विवेक के लिए उपकरण।",
         footerNothing: "🔒 कुछ रिकॉर्ड नहीं किया गया · 🕊️ एक मूक साथी",
@@ -850,7 +1129,7 @@ const translations = {
         temoignagesTitle: "💬 ¿Has utilizado Hogar del Amor?",
         temoignagesIntro: "Comparte tu experiencia (anónimo):",
         temoignagesPlaceholder: "Tu testimonio...", envoyer: "Enviar", merci: "🙏 ¡Gracias! Tu testimonio permanece en tu dispositivo.",
-        temoignagesRecus: "💬 Testimonios recibidos",
+        temoignagesRecus: "💬 Tus testimonios (en este dispositivo)",
         projetsPsaume: "🌱 « La justicia y la paz se abrazan. » — Salmo 85:11",
         projetsCredit: "Herramientas para la justicia, la paz y el discernimiento.",
         footerNothing: "🔒 Nada se guarda · 🕊️ Un compañero silencioso",
@@ -915,7 +1194,7 @@ const translations = {
         temoignagesTitle: "💬 هل استخدمت بيت المحبة؟",
         temoignagesIntro: "شارك تجربتك (مجهول):",
         temoignagesPlaceholder: "شهادتك...", envoyer: "إرسال", merci: "🙏 شكراً! تبقى شهادتك على جهازك.",
-        temoignagesRecus: "💬 الشهادات الواردة",
+        temoignagesRecus: "💬 شهاداتك (على هذا الجهاز)",
         projetsPsaume: "🌱 « العدل والسلام يتعانقان. » — مزمور 85:11",
         projetsCredit: "أدوات من أجل العدل والسلام والتمييز.",
         footerNothing: "🔒 لا شيء مسجل · 🕊️ رفيق صامت",
@@ -966,10 +1245,9 @@ const translations = {
     }
 };
 
-// Fusion des parties manquantes depuis le français
+// Fusion des parties manquantes depuis le français (textesParSituation gérés de manière autonome)
 ['zh','hi','es','ar'].forEach(lang => {
     const t = translations[lang];
-    if (!t.textesParSituation || Object.keys(t.textesParSituation).length === 0) t.textesParSituation = translations.fr.textesParSituation;
     if (!t.prieresParSituation || !t.prieresParSituation.defaut || t.prieresParSituation.defaut.length === 0) t.prieresParSituation = translations.fr.prieresParSituation;
     if (!t.exercicesIgnatiens || t.exercicesIgnatiens.length === 0) t.exercicesIgnatiens = translations.fr.exercicesIgnatiens;
     if (!t.prieres || t.prieres.length === 0) t.prieres = translations.fr.prieres;
@@ -1002,11 +1280,11 @@ fr: {
 <p>« Oui, mon âme se repose en Dieu, de lui vient mon salut. » — Ps 62,2</p>
 <p>« Sonde-moi, ô Dieu, et connais mon cœur ; vois si je suis sur un chemin de mensonge, et conduis-moi sur le chemin d'éternité. » — Ps 139,23-24</p></div>
 <div class="bloc"><h3>🎵 Psaumes chantés et prière audio (gratuits)</h3>
-<p>Le site Sérénité Chantée propose les 150 psaumes en version chantée, pour prier en écoutant.<br><a href="https://serenitechantee.com/150-psaumes-chantes-yt" target="_blank" rel="noopener">🎵 Écouter les 150 psaumes chantés</a></p>
+<p>Le site Sérénité Chantée propose les 150 psaumes en version chantée, pour prier en écoutant.<br><a href="https://serenitechantee.com/150-psaumes-chantes-yt" target='_blank' rel="noopener">🎵 Écouter les 150 psaumes chantés</a></p>
 <p>D'autres ressources gratuites :</p>
-<p><a href="https://emcitv.com/bible/audio/psaumes.html" target="_blank" rel="noopener">🎧 Les 150 psaumes en audio (Bible audio EMCI)</a><br>
-<a href="https://neumz.com/fr/francais/" target="_blank" rel="noopener">🎵 Chant grégorien en direct — Neumz (radio gratuite)</a><br>
-<a href="https://www.taize.fr/" target="_blank" rel="noopener">🕊️ Chants de la communauté de Taizé</a></p></div>
+<p><a href="https://emcitv.com/bible/audio/psaumes.html" target='_blank' rel="noopener">🎧 Les 150 psaumes en audio (Bible audio EMCI)</a><br>
+<a href="https://neumz.com/fr/francais/" target='_blank' rel="noopener">🎵 Chant grégorien en direct — Neumz (radio gratuite)</a><br>
+<a href="https://www.taize.fr/" target='_blank' rel="noopener">🕊️ Chants de la communauté de Taizé</a></p></div>
 <div class="bloc"><h3>Sagesse chrétienne</h3>
 <p>« Tu nous as faits pour Toi, Seigneur, et notre cœur est sans repos tant qu'il ne repose en Toi. » — saint Augustin</p>
 <p>« Apprends-nous à tout donner et à tout recevoir selon Ta volonté. » — d'après saint Ignace de Loyola</p></div>
@@ -1024,23 +1302,23 @@ fr: {
 <div class="bloc"><h3>Un projet porté par un prêtre catholique</h3>
 <p>Ce site est conçu et porté par un prêtre catholique, à titre personnel. L'intelligence artificielle qu'il utilise veut se mettre au service de l'Église catholique et de ses sources — la Bible, le Magistère et la Tradition, la théologie, la philosophie de l'action — pour proposer un meilleur discernement ignatien dans les situations concrètes. Le discernement proposé demeure toujours aligné sur l'enseignement officiel de l'Église catholique.</p></div>
 <div class="bloc"><h3>Textes bibliques</h3>
-<p>Les citations et liens bibliques renvoient vers la Bible liturgique francophone <a href="https://www.aelf.org" target="_blank" rel="noopener">AELF</a> (français) et <a href="https://www.biblegateway.com" target="_blank" rel="noopener">BibleGateway</a> (anglais et autres langues).</p></div>
+<p>Les citations et liens bibliques renvoient vers la Bible liturgique francophone <a href="https://www.aelf.org" target='_blank' rel="noopener">AELF</a> (français) et <a href="https://www.biblegateway.com" target='_blank' rel="noopener">BibleGateway</a> (anglais et autres langues).</p></div>
 <div class="bloc"><h3>Magistère et Tradition</h3>
-<p><a href="https://www.vatican.va/archive/FRA0013/_INDEX.HTM" target="_blank" rel="noopener">Catéchisme de l'Église catholique</a> · <a href="https://www.vatican.va/content/vatican/fr.html" target="_blank" rel="noopener">Documents officiels du Saint-Siège</a><br>
-<a href="https://www.vatican.va/content/leo-xiv/fr/encyclicals/documents/20260515-magnifica-humanitas.html" target="_blank" rel="noopener"><em>Magnifica Humanitas</em> — lettre encyclique du pape Léon XIV sur la protection de la personne humaine à l'ère de l'intelligence artificielle (15 mai 2026)</a> : l'IA de ce site veut être conforme à son orientation — la technologie au service de la dignité de la personne humaine, jamais à sa place.</p></div>
+<p><a href="https://www.vatican.va/archive/FRA0013/_INDEX.HTM" target='_blank' rel="noopener">Catéchisme de l'Église catholique</a> · <a href="https://www.vatican.va/content/vatican/fr.html" target='_blank' rel="noopener">Documents officiels du Saint-Siège</a><br>
+<a href="https://www.vatican.va/content/leo-xiv/fr/encyclicals/documents/20260515-magnifica-humanitas.html" target='_blank' rel="noopener"><em>Magnifica Humanitas</em> — lettre encyclique du pape Léon XIV sur la protection de la personne humaine à l'ère de l'intelligence artificielle (15 mai 2026)</a> : l'IA de ce site veut être conforme à son orientation — la technologie au service de la dignité de la personne humaine, jamais à sa place.</p></div>
 <div class="bloc"><h3>Spiritualité ignatienne</h3>
 <p>Les exercices proposés s'inspirent des <em>Exercices spirituels</em> de saint Ignace de Loyola (XVIᵉ siècle, domaine public) et de la tradition du discernement ignatien (consolation et désolation).</p></div>
 <div class="bloc"><h3>Accueil de soi et écoute intérieure</h3>
-<p>La dimension psychologique et spirituelle de l'accueil s'inspire également de <a href="https://fr.wikipedia.org/wiki/Jean_Monbourquette" target="_blank" rel="noopener">Jean Monbourquette</a> (psychologie de l'accueil de soi) et de <a href="https://fr.wikipedia.org/wiki/Maurice_Zundel" target="_blank" rel="noopener">Maurice Zundel</a> (spiritualité de l'écoute intérieure).</p></div>
+<p>La dimension psychologique et spirituelle de l'accueil s'inspire également de <a href="https://fr.wikipedia.org/wiki/Jean_Monbourquette" target='_blank' rel="noopener">Jean Monbourquette</a> (psychologie de l'accueil de soi) et de <a href="https://fr.wikipedia.org/wiki/Maurice_Zundel" target='_blank' rel="noopener">Maurice Zundel</a> (spiritualité de l'écoute intérieure).</p></div>
 <div class="bloc"><h3>Philosophie de l'action</h3>
-<p>La réflexion sur l'agir humain qui sous-tend le discernement s'inspire notamment de <a href="https://fr.wikipedia.org/wiki/Hannah_Arendt" target="_blank" rel="noopener">Hannah Arendt</a>, <a href="https://fr.wikipedia.org/wiki/Jean_Ladrière" target="_blank" rel="noopener">Jean Ladrière</a> et <a href="https://fr.wikipedia.org/wiki/Jean-Marc_Ferry" target="_blank" rel="noopener">Jean-Marc Ferry</a>.</p></div>
+<p>La réflexion sur l'agir humain qui sous-tend le discernement s'inspire notamment de <a href="https://fr.wikipedia.org/wiki/Hannah_Arendt" target='_blank' rel="noopener">Hannah Arendt</a>, <a href="https://fr.wikipedia.org/wiki/Jean_Ladrière" target='_blank' rel="noopener">Jean Ladrière</a> et <a href="https://fr.wikipedia.org/wiki/Jean-Marc_Ferry" target='_blank' rel="noopener">Jean-Marc Ferry</a>.</p></div>
 <div class="bloc"><h3>Réponses générées par IA</h3>
 <p>Les réponses de discernement sont générées par une intelligence artificielle à partir de ce que vous écrivez. Elles peuvent contenir des erreurs ou des approximations : elles ne se substituent ni au Magistère, ni à la parole d'un prêtre ou d'une personne de confiance — vérifiez toujours auprès d'eux.</p></div>`,
     contact: `<h2>✉️ Contact</h2>
 <div class="bloc"><h3>Partager votre expérience</h3>
 <p>Le plus simple : laissez un témoignage anonyme depuis <a href="#/">la page d'accueil</a>. Il reste sur votre appareil et encourage votre propre chemin.</p></div>
 <div class="bloc"><h3>Projets amis</h3>
-<p><a href="https://justice-ai-anonyme-2.onrender.com" target="_blank">⚖️ Justice AI</a> · <a href="https://bridge-your-project.lovable.app" target="_blank">🌍 ONBRIDGE AI</a> · <a href="https://cartepastorale-v5.onrender.com/" target="_blank">📜 Carta Pastorale</a></p></div>
+<p><a href="https://justice-ai-anonyme-2.onrender.com" target='_blank'>⚖️ Justice AI</a> · <a href="https://bridge-your-project.lovable.app" target='_blank'>🌍 ONBRIDGE AI</a> · <a href="https://cartepastorale-v5.onrender.com/" target='_blank'>📜 Carta Pastorale</a></p></div>
 <div class="bloc"><h3>Une urgence ?</h3>
 <p>Ce site n'offre pas de réponse en temps réel. En cas de détresse, contactez les services d'écoute listés en bas de page ou les urgences de votre pays.</p></div>`,
     confidentialite: `<h2>🔒 Confidentialité</h2>
@@ -1078,11 +1356,11 @@ en: {
 <p>« Truly my soul finds rest in God; my salvation comes from him. » — Ps 62:1</p>
 <p>« Search me, O God, and know my heart; see if there is any offensive way in me, and lead me in the way everlasting. » — Ps 139:23-24</p></div>
 <div class="bloc"><h3>🎵 Sung psalms and audio prayer (free)</h3>
-<p>The site Sérénité Chantée offers all 150 psalms sung, to pray while listening (in French).<br><a href="https://serenitechantee.com/150-psaumes-chantes-yt" target="_blank" rel="noopener">🎵 Listen to the 150 sung psalms</a></p>
+<p>The site Sérénité Chantée offers all 150 psalms sung, to pray while listening (in French).<br><a href="https://serenitechantee.com/150-psaumes-chantes-yt" target='_blank' rel="noopener">🎵 Listen to the 150 sung psalms</a></p>
 <p>Other free resources:</p>
-<p><a href="https://emcitv.com/bible/audio/psaumes.html" target="_blank" rel="noopener">🎧 The 150 psalms in audio (EMCI audio Bible, in French)</a><br>
-<a href="https://neumz.com/fr/francais/" target="_blank" rel="noopener">🎵 Live Gregorian chant — Neumz (free radio)</a><br>
-<a href="https://www.taize.fr/" target="_blank" rel="noopener">🕊️ Songs of the Taizé community</a></p></div>
+<p><a href="https://emcitv.com/bible/audio/psaumes.html" target='_blank' rel="noopener">🎧 The 150 psalms in audio (EMCI audio Bible, in French)</a><br>
+<a href="https://neumz.com/fr/francais/" target='_blank' rel="noopener">🎵 Live Gregorian chant — Neumz (free radio)</a><br>
+<a href="https://www.taize.fr/" target='_blank' rel="noopener">🕊️ Songs of the Taizé community</a></p></div>
 <div class="bloc"><h3>Christian wisdom</h3>
 <p>« You have made us for yourself, O Lord, and our heart is restless until it rests in you. » — St Augustine</p>
 <p>« Teach us to give and to receive everything according to Your will. » — after St Ignatius of Loyola</p></div>
@@ -1100,23 +1378,23 @@ en: {
 <div class="bloc"><h3>A project led by a Catholic priest</h3>
 <p>This site is created and maintained by a Catholic priest, in a personal capacity. The artificial intelligence it uses seeks to serve the Catholic Church and her sources — the Bible, the Magisterium and Tradition, theology, and the philosophy of action — to offer better Ignatian discernment in concrete situations. The discernment offered remains always aligned with the official teaching of the Catholic Church.</p></div>
 <div class="bloc"><h3>Biblical texts</h3>
-<p>Quotations and Bible links point to the French liturgical Bible <a href="https://www.aelf.org" target="_blank" rel="noopener">AELF</a> and to <a href="https://www.biblegateway.com" target="_blank" rel="noopener">BibleGateway</a> (English and other languages).</p></div>
+<p>Quotations and Bible links point to the French liturgical Bible <a href="https://www.aelf.org" target='_blank' rel="noopener">AELF</a> and to <a href="https://www.biblegateway.com" target='_blank' rel="noopener">BibleGateway</a> (English and other languages).</p></div>
 <div class="bloc"><h3>Magisterium and Tradition</h3>
-<p><a href="https://www.vatican.va/archive/ENG0015/_INDEX.HTM" target="_blank" rel="noopener">Catechism of the Catholic Church</a> · <a href="https://www.vatican.va/content/vatican/en.html" target="_blank" rel="noopener">Official documents of the Holy See</a><br>
-<a href="https://www.vatican.va/content/leo-xiv/en/encyclicals/documents/20260515-magnifica-humanitas.html" target="_blank" rel="noopener"><em>Magnifica Humanitas</em> — encyclical of Pope Leo XIV on the protection of the human person in the age of artificial intelligence (May 15, 2026)</a>: this site's AI seeks to follow its direction — technology at the service of the dignity of the human person, never in its place.</p></div>
+<p><a href="https://www.vatican.va/archive/ENG0015/_INDEX.HTM" target='_blank' rel="noopener">Catechism of the Catholic Church</a> · <a href="https://www.vatican.va/content/vatican/en.html" target='_blank' rel="noopener">Official documents of the Holy See</a><br>
+<a href="https://www.vatican.va/content/leo-xiv/en/encyclicals/documents/20260515-magnifica-humanitas.html" target='_blank' rel="noopener"><em>Magnifica Humanitas</em> — encyclical of Pope Leo XIV on the protection of the human person in the age of artificial intelligence (May 15, 2026)</a>: this site's AI seeks to follow its direction — technology at the service of the dignity of the human person, never in its place.</p></div>
 <div class="bloc"><h3>Ignatian spirituality</h3>
 <p>The proposed exercises are inspired by the <em>Spiritual Exercises</em> of St Ignatius of Loyola (16th century, public domain) and the Ignatian tradition of discernment (consolation and desolation).</p></div>
 <div class="bloc"><h3>Self-acceptance and inner listening</h3>
-<p>The psychological and spiritual dimension of welcome is also inspired by <a href="https://fr.wikipedia.org/wiki/Jean_Monbourquette" target="_blank" rel="noopener">Jean Monbourquette</a> (psychology of self-acceptance, in French) and <a href="https://fr.wikipedia.org/wiki/Maurice_Zundel" target="_blank" rel="noopener">Maurice Zundel</a> (spirituality of inner listening, in French).</p></div>
+<p>The psychological and spiritual dimension of welcome is also inspired by <a href="https://fr.wikipedia.org/wiki/Jean_Monbourquette" target='_blank' rel="noopener">Jean Monbourquette</a> (psychology of self-acceptance, in French) and <a href="https://fr.wikipedia.org/wiki/Maurice_Zundel" target='_blank' rel="noopener">Maurice Zundel</a> (spirituality of inner listening, in French).</p></div>
 <div class="bloc"><h3>Philosophy of action</h3>
-<p>The reflection on human action underlying the discernment is inspired in particular by <a href="https://en.wikipedia.org/wiki/Hannah_Arendt" target="_blank" rel="noopener">Hannah Arendt</a>, <a href="https://fr.wikipedia.org/wiki/Jean_Ladrière" target="_blank" rel="noopener">Jean Ladrière</a> (in French) and <a href="https://fr.wikipedia.org/wiki/Jean-Marc_Ferry" target="_blank" rel="noopener">Jean-Marc Ferry</a> (in French).</p></div>
+<p>The reflection on human action underlying the discernment is inspired in particular by <a href="https://en.wikipedia.org/wiki/Hannah_Arendt" target='_blank' rel="noopener">Hannah Arendt</a>, <a href="https://fr.wikipedia.org/wiki/Jean_Ladrière" target='_blank' rel="noopener">Jean Ladrière</a> (in French) and <a href="https://fr.wikipedia.org/wiki/Jean-Marc_Ferry" target='_blank' rel="noopener">Jean-Marc Ferry</a> (in French).</p></div>
 <div class="bloc"><h3>AI-generated answers</h3>
 <p>Discernment answers are generated by an artificial intelligence from what you write. They may contain errors or approximations: they replace neither the Magisterium nor the word of a priest or a trusted person — always check with them.</p></div>`,
     contact: `<h2>✉️ Contact</h2>
 <div class="bloc"><h3>Share your experience</h3>
 <p>The simplest way: leave an anonymous testimony from the <a href="#/">home page</a>. It stays on your device and encourages your own journey.</p></div>
 <div class="bloc"><h3>Friend projects</h3>
-<p><a href="https://justice-ai-anonyme-2.onrender.com" target="_blank">⚖️ Justice AI</a> · <a href="https://bridge-your-project.lovable.app" target="_blank">🌍 ONBRIDGE AI</a> · <a href="https://cartepastorale-v5.onrender.com/" target="_blank">📜 Carta Pastorale</a></p></div>
+<p><a href="https://justice-ai-anonyme-2.onrender.com" target='_blank'>⚖️ Justice AI</a> · <a href="https://bridge-your-project.lovable.app" target='_blank'>🌍 ONBRIDGE AI</a> · <a href="https://cartepastorale-v5.onrender.com/" target='_blank'>📜 Carta Pastorale</a></p></div>
 <div class="bloc"><h3>An emergency?</h3>
 <p>This site offers no real-time response. In case of distress, contact the listening services listed at the bottom of the page or your country's emergency services.</p></div>`,
     confidentialite: `<h2>🔒 Privacy</h2>
@@ -1154,11 +1432,11 @@ zh: {
 <p>« 我的灵魂只在天主内获得安息，我的救援来自他。 » — 咏 62:2</p>
 <p>« 天主，求你洞察我，认识我的心；察看我有否走上歧途，引领我走上永生的道路。 » — 咏 139:23-24</p></div>
 <div class="bloc"><h3>🎵 咏唱圣咏与音频祈祷（免费）</h3>
-<p>「宁静咏唱」网站提供150篇咏唱圣咏（法语），可在聆听中祈祷。<br><a href="https://serenitechantee.com/150-psaumes-chantes-yt" target="_blank" rel="noopener">🎵 聆听150篇咏唱圣咏</a></p>
+<p>「宁静咏唱」网站提供150篇咏唱圣咏（法语），可在聆听中祈祷。<br><a href="https://serenitechantee.com/150-psaumes-chantes-yt" target='_blank' rel="noopener">🎵 聆听150篇咏唱圣咏</a></p>
 <p>其他免费资源：</p>
-<p><a href="https://emcitv.com/bible/audio/psaumes.html" target="_blank" rel="noopener">🎧 150篇圣咏音频（EMCI圣经音频，法语）</a><br>
-<a href="https://neumz.com/fr/francais/" target="_blank" rel="noopener">🎵 额我略圣咏直播 — Neumz（免费电台）</a><br>
-<a href="https://www.taize.fr/" target="_blank" rel="noopener">🕊️ 泰泽团体歌咏</a></p></div>
+<p><a href="https://emcitv.com/bible/audio/psaumes.html" target='_blank' rel="noopener">🎧 150篇圣咏音频（EMCI圣经音频，法语）</a><br>
+<a href="https://neumz.com/fr/francais/" target='_blank' rel="noopener">🎵 额我略圣咏直播 — Neumz（免费电台）</a><br>
+<a href="https://www.taize.fr/" target='_blank' rel="noopener">🕊️ 泰泽团体歌咏</a></p></div>
 <div class="bloc"><h3>基督徒的智慧</h3>
 <p>« 你为自己创造了我们，主啊，我们的心如不安息于你，便永不安宁。 » — 圣奥斯定</p>
 <p>« 求你教我们按照你的旨意，全然给予，全然接受。 » — 依圣依纳爵·罗耀拉</p></div>
@@ -1176,16 +1454,16 @@ zh: {
 <div class="bloc"><h3>一个由天主教神父推动的项目</h3>
 <p>本网站由一位天主教神父以个人身份设计并维护。本站的人工智能愿服务于天主教会及其源泉——圣经、训导与传统、神学以及行动哲学——以便在具体处境中提供更佳的依纳爵式辨别。所提供的辨别始终与天主教会的官方训导保持一致。</p></div>
 <div class="bloc"><h3>圣经文本</h3>
-<p>经文引用和链接指向法语礼仪圣经 <a href="https://www.aelf.org" target="_blank" rel="noopener">AELF</a>（法语）以及 <a href="https://www.biblegateway.com" target="_blank" rel="noopener">BibleGateway</a>（英语及其他语言）。</p></div>
+<p>经文引用和链接指向法语礼仪圣经 <a href="https://www.aelf.org" target='_blank' rel="noopener">AELF</a>（法语）以及 <a href="https://www.biblegateway.com" target='_blank' rel="noopener">BibleGateway</a>（英语及其他语言）。</p></div>
 <div class="bloc"><h3>训导与传统</h3>
-<p><a href="https://www.vatican.va/archive/FRA0013/_INDEX.HTM" target="_blank" rel="noopener">天主教教理</a>（法语） · <a href="https://www.vatican.va/content/vatican/fr.html" target="_blank" rel="noopener">圣座官方文件</a><br>
-<a href="https://www.vatican.va/content/leo-xiv/en/encyclicals/documents/20260515-magnifica-humanitas.html" target="_blank" rel="noopener">《Magnifica Humanitas》——教宗良十四世关于人工智能时代保护人类人格的通谕（2026年5月15日）</a>：本站的人工智能力求遵循其方向——技术服务于人的尊严，而非取而代之。</p></div>
+<p><a href="https://www.vatican.va/archive/FRA0013/_INDEX.HTM" target='_blank' rel="noopener">天主教教理</a>（法语） · <a href="https://www.vatican.va/content/vatican/fr.html" target='_blank' rel="noopener">圣座官方文件</a><br>
+<a href="https://www.vatican.va/content/leo-xiv/en/encyclicals/documents/20260515-magnifica-humanitas.html" target='_blank' rel="noopener">《Magnifica Humanitas》——教宗良十四世关于人工智能时代保护人类人格的通谕（2026年5月15日）</a>：本站的人工智能力求遵循其方向——技术服务于人的尊严，而非取而代之。</p></div>
 <div class="bloc"><h3>依纳爵灵修</h3>
 <p>所提供的练习灵感来自圣依纳爵·罗耀拉的《神操》（十六世纪，公有领域）以及依纳爵辨别传统（神慰与神枯）。</p></div>
 <div class="bloc"><h3>自我接纳与内在聆听</h3>
-<p>接纳的心理与灵修层面还受到 <a href="https://fr.wikipedia.org/wiki/Jean_Monbourquette" target="_blank" rel="noopener">让·蒙布尔凯特</a>（自我接纳心理学）和 <a href="https://fr.wikipedia.org/wiki/Maurice_Zundel" target="_blank" rel="noopener">莫里斯·尊德尔</a>（内在聆听灵修）的启发（法语页面）。</p></div>
+<p>接纳的心理与灵修层面还受到 <a href="https://fr.wikipedia.org/wiki/Jean_Monbourquette" target='_blank' rel="noopener">让·蒙布尔凯特</a>（自我接纳心理学）和 <a href="https://fr.wikipedia.org/wiki/Maurice_Zundel" target='_blank' rel="noopener">莫里斯·尊德尔</a>（内在聆听灵修）的启发（法语页面）。</p></div>
 <div class="bloc"><h3>行动哲学</h3>
-<p>辨别背后关于人类行动的思考，特别受到 <a href="https://fr.wikipedia.org/wiki/Hannah_Arendt" target="_blank" rel="noopener">汉娜·阿伦特</a>、<a href="https://fr.wikipedia.org/wiki/Jean_Ladrière" target="_blank" rel="noopener">让·拉德里耶尔</a>和 <a href="https://fr.wikipedia.org/wiki/Jean-Marc_Ferry" target="_blank" rel="noopener">让-马克·费里</a>的启发（法语页面）。</p></div>
+<p>辨别背后关于人类行动的思考，特别受到 <a href="https://fr.wikipedia.org/wiki/Hannah_Arendt" target='_blank' rel="noopener">汉娜·阿伦特</a>、<a href="https://fr.wikipedia.org/wiki/Jean_Ladrière" target='_blank' rel="noopener">让·拉德里耶尔</a>和 <a href="https://fr.wikipedia.org/wiki/Jean-Marc_Ferry" target='_blank' rel="noopener">让-马克·费里</a>的启发（法语页面）。</p></div>
 <div class="bloc"><h3>人工智能生成的回答</h3>
 <p>辨别回答由人工智能根据你所写的内容生成，可能包含错误或不准确之处：它们不能取代教会训导，也不能取代神父或可信赖之人的话——请务必与他们核实。</p></div>`,
     contact: `<h2>✉️ 联系</h2>
@@ -1228,11 +1506,11 @@ hi: {
 <p>« मेरी आत्मा का विश्राम ईश्वर ही में है; मेरा उद्धार उसी से है। » — भजन 62:1</p>
 <p>« हे ईश्वर, मुझे जाँच और मेरे हृदय को जान; देख कि मैं कहीं कुमार्ग पर तो नहीं, और मुझे अनन्त मार्ग पर चला। » — भजन 139:23-24</p></div>
 <div class="bloc"><h3>🎵 गाए हुए भजन और ऑडियो प्रार्थना (निःशुल्क)</h3>
-<p>Sérénité Chantée साइट 150 भजन गाए हुए रूप में प्रस्तुत करती है — सुनते हुए प्रार्थना करें (फ़्रांसीसी में)।<br><a href="https://serenitechantee.com/150-psaumes-chantes-yt" target="_blank" rel="noopener">🎵 150 गाए हुए भजन सुनें</a></p>
+<p>Sérénité Chantée साइट 150 भजन गाए हुए रूप में प्रस्तुत करती है — सुनते हुए प्रार्थना करें (फ़्रांसीसी में)।<br><a href="https://serenitechantee.com/150-psaumes-chantes-yt" target='_blank' rel="noopener">🎵 150 गाए हुए भजन सुनें</a></p>
 <p>अन्य निःशुल्क संसाधन :</p>
-<p><a href="https://emcitv.com/bible/audio/psaumes.html" target="_blank" rel="noopener">🎧 150 भजन ऑडियो में (EMCI ऑडियो बाइबल, फ़्रांसीसी में)</a><br>
-<a href="https://neumz.com/fr/francais/" target="_blank" rel="noopener">🎵 सजीव ग्रेगोरियन कीर्तन — Neumz (निःशुल्क रेडियो)</a><br>
-<a href="https://www.taize.fr/" target="_blank" rel="noopener">🕊️ तेज़े समुदाय के गीत</a></p></div>
+<p><a href="https://emcitv.com/bible/audio/psaumes.html" target='_blank' rel="noopener">🎧 150 भजन ऑडियो में (EMCI ऑडियो बाइबल, फ़्रांसीसी में)</a><br>
+<a href="https://neumz.com/fr/francais/" target='_blank' rel="noopener">🎵 सजीव ग्रेगोरियन कीर्तन — Neumz (निःशुल्क रेडियो)</a><br>
+<a href="https://www.taize.fr/" target='_blank' rel="noopener">🕊️ तेज़े समुदाय के गीत</a></p></div>
 <div class="bloc"><h3>ईसाई ज्ञान</h3>
 <p>« आपने हमें अपने लिए बनाया है, हे प्रभु, और हमारा हृदय तब तक बेचैन है जब तक आप में विश्राम न पाए। » — संत अगस्टीन</p>
 <p>« हमें सिखा कि तेरी इच्छा के अनुसार सब कुछ दें और सब कुछ ग्रहण करें। » — संत इग्नातियस लोयोला के अनुसार</p></div>
@@ -1250,23 +1528,23 @@ hi: {
 <div class="bloc"><h3>एक कैथोलिक पुजारी द्वारा चलाया गया प्रोजेक्ट</h3>
 <p>यह साइट एक कैथोलिक पुजारी द्वारा व्यक्तिगत रूप से बनाई और संचालित की गई है। इसमें उपयोग की जाने वाली कृत्रिम बुद्धिमत्ता कैथोलिक चर्च और उसके स्रोतों — बाइबल, मैजिस्टेरियम व परंपरा, धर्मशास्त्र और क्रिया के दर्शन — की सेवा करना चाहती है, ताकि ठोस परिस्थितियों में बेहतर इग्नेशिय विवेक प्रस्तुत हो सके। प्रस्तावित विवेक कैथोलिक चर्च की आधिकारिक शिक्षा के अनुरूप सदैव बना रहता है।</p></div>
 <div class="bloc"><h3>बाइबल के पाठ</h3>
-<p>उद्धरण और बाइबल लिंक फ़्रांसीसी आराध्य बाइबल <a href="https://www.aelf.org" target="_blank" rel="noopener">AELF</a> (फ़्रांसीसी) और <a href="https://www.biblegateway.com" target="_blank" rel="noopener">BibleGateway</a> (अंग्रेज़ी व अन्य भाषाएँ) की ओर ले जाते हैं।</p></div>
+<p>उद्धरण और बाइबल लिंक फ़्रांसीसी आराध्य बाइबल <a href="https://www.aelf.org" target='_blank' rel="noopener">AELF</a> (फ़्रांसीसी) और <a href="https://www.biblegateway.com" target='_blank' rel="noopener">BibleGateway</a> (अंग्रेज़ी व अन्य भाषाएँ) की ओर ले जाते हैं।</p></div>
 <div class="bloc"><h3>मैजिस्टेरियम और परंपरा</h3>
-<p><a href="https://www.vatican.va/archive/FRA0013/_INDEX.HTM" target="_blank" rel="noopener">कैथोलिक चर्च का कैटेकिज़्म</a> (फ़्रांसीसी) · <a href="https://www.vatican.va/content/vatican/fr.html" target="_blank" rel="noopener">पवित्र सिंहासन के आधिकारिक दस्तावेज़</a><br>
-<a href="https://www.vatican.va/content/leo-xiv/en/encyclicals/documents/20260515-magnifica-humanitas.html" target="_blank" rel="noopener"><em>Magnifica Humanitas</em> — पोप लियो XIV का परिपत्र, कृत्रिम बुद्धिमत्ता के युग में मानव व्यक्ति की रक्षा पर (15 मई 2026)</a>: इस साइट की एआई उसी दिशा का पालन करना चाहती है — तकनीक मानव गरिमा की सेवा में, कभी उसके स्थान पर नहीं।</p></div>
+<p><a href="https://www.vatican.va/archive/FRA0013/_INDEX.HTM" target='_blank' rel="noopener">कैथोलिक चर्च का कैटेकिज़्म</a> (फ़्रांसीसी) · <a href="https://www.vatican.va/content/vatican/fr.html" target='_blank' rel="noopener">पवित्र सिंहासन के आधिकारिक दस्तावेज़</a><br>
+<a href="https://www.vatican.va/content/leo-xiv/en/encyclicals/documents/20260515-magnifica-humanitas.html" target='_blank' rel="noopener"><em>Magnifica Humanitas</em> — पोप लियो XIV का परिपत्र, कृत्रिम बुद्धिमत्ता के युग में मानव व्यक्ति की रक्षा पर (15 मई 2026)</a>: इस साइट की एआई उसी दिशा का पालन करना चाहती है — तकनीक मानव गरिमा की सेवा में, कभी उसके स्थान पर नहीं।</p></div>
 <div class="bloc"><h3>इग्नेशिय आध्यात्मिकता</h3>
 <p>प्रस्तावित अभ्यास संत इग्नातियस लोयोला के <em>आध्यात्मिक अभ्यासों</em> (16वीं सदी, सार्वजनिक अधिकार) और विवेक की इग्नेशिय परंपरा (सांत्वना और उजाड़) से प्रेरित हैं।</p></div>
 <div class="bloc"><h3>आत्म-स्वीकृति और आंतरिक श्रवण</h3>
-<p>स्वागत का मनोवैज्ञानिक और आध्यात्मिक आयाम <a href="https://fr.wikipedia.org/wiki/Jean_Monbourquette" target="_blank" rel="noopener">जां मोंबूर्केत</a> (आत्म-स्वीकृति का मनोविज्ञान) और <a href="https://fr.wikipedia.org/wiki/Maurice_Zundel" target="_blank" rel="noopener">मोरिस ज़ुंदेल</a> (आंतरिक श्रवण की आध्यात्मिकता) से भी प्रेरित है (फ़्रांसीसी पृष्ठ)।</p></div>
+<p>स्वागत का मनोवैज्ञानिक और आध्यात्मिक आयाम <a href="https://fr.wikipedia.org/wiki/Jean_Monbourquette" target='_blank' rel="noopener">जां मोंबूर्केत</a> (आत्म-स्वीकृति का मनोविज्ञान) और <a href="https://fr.wikipedia.org/wiki/Maurice_Zundel" target='_blank' rel="noopener">मोरिस ज़ुंदेल</a> (आंतरिक श्रवण की आध्यात्मिकता) से भी प्रेरित है (फ़्रांसीसी पृष्ठ)।</p></div>
 <div class="bloc"><h3>क्रिया का दर्शन</h3>
-<p>विवेक के पीछे मानव क्रिया पर चिंतन विशेष रूप से <a href="https://fr.wikipedia.org/wiki/Hannah_Arendt" target="_blank" rel="noopener">हन्ना आरेंट</a>, <a href="https://fr.wikipedia.org/wiki/Jean_Ladrière" target="_blank" rel="noopener">जां लाद्रिएर</a> और <a href="https://fr.wikipedia.org/wiki/Jean-Marc_Ferry" target="_blank" rel="noopener">जां-मार्क फ़ेरी</a> से प्रेरित है (फ़्रांसीसी पृष्ठ)।</p></div>
+<p>विवेक के पीछे मानव क्रिया पर चिंतन विशेष रूप से <a href="https://fr.wikipedia.org/wiki/Hannah_Arendt" target='_blank' rel="noopener">हन्ना आरेंट</a>, <a href="https://fr.wikipedia.org/wiki/Jean_Ladrière" target='_blank' rel="noopener">जां लाद्रिएर</a> और <a href="https://fr.wikipedia.org/wiki/Jean-Marc_Ferry" target='_blank' rel="noopener">जां-मार्क फ़ेरी</a> से प्रेरित है (फ़्रांसीसी पृष्ठ)।</p></div>
 <div class="bloc"><h3>एआई द्वारा उत्पन्न उत्तर</h3>
 <p>विवेक उत्तर आपके लिखे से एक कृत्रिम बुद्धिमत्ता द्वारा बनाए जाते हैं। इनमें त्रुटियाँ हो सकती हैं: ये न तो मैजिस्टेरियम की जगह लेते हैं, न किसी पुजारी या विश्वसनीय व्यक्ति के शब्द की — हमेशा उनसे जाँचें।</p></div>`,
     contact: `<h2>✉️ संपर्क</h2>
 <div class="bloc"><h3>अपना अनुभव साझा करें</h3>
 <p>सबसे आसान तरीका: <a href="#/">मुखपृष्ठ</a> से एक गुमनाम गवाही छोड़ें। यह आपके डिवाइस पर रहती है और आपकी अपनी यात्रा को प्रोत्साहित करती है।</p></div>
 <div class="bloc"><h3>मित्र परियोजनाएँ</h3>
-<p><a href="https://justice-ai-anonyme-2.onrender.com" target="_blank">⚖️ Justice AI</a> · <a href="https://bridge-your-project.lovable.app" target="_blank">🌍 ONBRIDGE AI</a> · <a href="https://cartepastorale-v5.onrender.com/" target="_blank">📜 Carta Pastorale</a></p></div>
+<p><a href="https://justice-ai-anonyme-2.onrender.com" target='_blank'>⚖️ Justice AI</a> · <a href="https://bridge-your-project.lovable.app" target='_blank'>🌍 ONBRIDGE AI</a> · <a href="https://cartepastorale-v5.onrender.com/" target='_blank'>📜 Carta Pastorale</a></p></div>
 <div class="bloc"><h3>आपातकाल?</h3>
 <p>यह साइट वास्तविक समय में उत्तर नहीं देती। संकट की स्थिति में, पृष्ठ के नीचे सूचीबद्ध सुनने की सेवाओं या अपने देश की आपातकालीन सेवाओं से संपर्क करें।</p></div>`,
     confidentialite: `<h2>🔒 गोपनीयता</h2>
@@ -1304,11 +1582,11 @@ es: {
 <p>« Sólo en Dios descansa mi alma; de él viene mi salvación. » — Sal 62,2</p>
 <p>« Sondéame, oh Dios, y conoce mi corazón; mira si voy por camino de mentira y llévame por el camino eterno. » — Sal 139,23-24</p></div>
 <div class="bloc"><h3>🎵 Salmos cantados y oración en audio (gratis)</h3>
-<p>El sitio Sérénité Chantée ofrece los 150 salmos cantados, para orar escuchando (en francés).<br><a href="https://serenitechantee.com/150-psaumes-chantes-yt" target="_blank" rel="noopener">🎵 Escuchar los 150 salmos cantados</a></p>
+<p>El sitio Sérénité Chantée ofrece los 150 salmos cantados, para orar escuchando (en francés).<br><a href="https://serenitechantee.com/150-psaumes-chantes-yt" target='_blank' rel="noopener">🎵 Escuchar los 150 salmos cantados</a></p>
 <p>Otros recursos gratuitos :</p>
-<p><a href="https://emcitv.com/bible/audio/psaumes.html" target="_blank" rel="noopener">🎧 Los 150 salmos en audio (Biblia audio EMCI, en francés)</a><br>
-<a href="https://neumz.com/fr/francais/" target="_blank" rel="noopener">🎵 Canto gregoriano en directo — Neumz (radio gratuita)</a><br>
-<a href="https://www.taize.fr/" target="_blank" rel="noopener">🕊️ Cantos de la comunidad de Taizé</a></p></div>
+<p><a href="https://emcitv.com/bible/audio/psaumes.html" target='_blank' rel="noopener">🎧 Los 150 salmos en audio (Biblia audio EMCI, en francés)</a><br>
+<a href="https://neumz.com/fr/francais/" target='_blank' rel="noopener">🎵 Canto gregoriano en directo — Neumz (radio gratuita)</a><br>
+<a href="https://www.taize.fr/" target='_blank' rel="noopener">🕊️ Cantos de la comunidad de Taizé</a></p></div>
 <div class="bloc"><h3>Sabiduría cristiana</h3>
 <p>« Nos has hecho para Ti, Señor, y nuestro corazón está inquieto hasta que descansa en Ti. » — san Agustín</p>
 <p>« Enséñanos a darlo todo y a recibirlo todo según Tu voluntad. » — según san Ignacio de Loyola</p></div>
@@ -1326,23 +1604,23 @@ es: {
 <div class="bloc"><h3>Un proyecto llevado por un sacerdote católico</h3>
 <p>Este sitio es creado y mantenido por un sacerdote católico, a título personal. La inteligencia artificial que utiliza quiere ponerse al servicio de la Iglesia católica y de sus fuentes — la Biblia, el Magisterio y la Tradición, la teología y la filosofía de la acción — para proponer un mejor discernimiento ignaciano en las situaciones concretas. El discernimiento propuesto permanece siempre alineado con la enseñanza oficial de la Iglesia católica.</p></div>
 <div class="bloc"><h3>Textos bíblicos</h3>
-<p>Las citas y enlaces bíblicos remiten a la Biblia litúrgica francófona <a href="https://www.aelf.org" target="_blank" rel="noopener">AELF</a> (francés) y a <a href="https://www.biblegateway.com" target="_blank" rel="noopener">BibleGateway</a> (inglés y otros idiomas).</p></div>
+<p>Las citas y enlaces bíblicos remiten a la Biblia litúrgica francófona <a href="https://www.aelf.org" target='_blank' rel="noopener">AELF</a> (francés) y a <a href="https://www.biblegateway.com" target='_blank' rel="noopener">BibleGateway</a> (inglés y otros idiomas).</p></div>
 <div class="bloc"><h3>Magisterio y Tradición</h3>
-<p><a href="https://www.vatican.va/archive/FRA0013/_INDEX.HTM" target="_blank" rel="noopener">Catecismo de la Iglesia católica</a> (en francés) · <a href="https://www.vatican.va/content/vatican/fr.html" target="_blank" rel="noopener">Documentos oficiales de la Santa Sede</a><br>
-<a href="https://www.vatican.va/content/leo-xiv/en/encyclicals/documents/20260515-magnifica-humanitas.html" target="_blank" rel="noopener"><em>Magnifica Humanitas</em> — carta encíclica del papa León XIV sobre la protección de la persona humana en la era de la inteligencia artificial (15 de mayo de 2026)</a>: la IA de este sitio quiere ser fiel a su orientación — la tecnología al servicio de la dignidad de la persona, nunca en su lugar.</p></div>
+<p><a href="https://www.vatican.va/archive/FRA0013/_INDEX.HTM" target='_blank' rel="noopener">Catecismo de la Iglesia católica</a> (en francés) · <a href="https://www.vatican.va/content/vatican/fr.html" target='_blank' rel="noopener">Documentos oficiales de la Santa Sede</a><br>
+<a href="https://www.vatican.va/content/leo-xiv/en/encyclicals/documents/20260515-magnifica-humanitas.html" target='_blank' rel="noopener"><em>Magnifica Humanitas</em> — carta encíclica del papa León XIV sobre la protección de la persona humana en la era de la inteligencia artificial (15 de mayo de 2026)</a>: la IA de este sitio quiere ser fiel a su orientación — la tecnología al servicio de la dignidad de la persona, nunca en su lugar.</p></div>
 <div class="bloc"><h3>Espiritualidad ignaciana</h3>
 <p>Los ejercicios propuestos se inspiran en los <em>Ejercicios espirituales</em> de san Ignacio de Loyola (siglo XVI, dominio público) y en la tradición ignaciana del discernimiento (consolación y desolación).</p></div>
 <div class="bloc"><h3>Acogida de sí y escucha interior</h3>
-<p>La dimensión psicológica y espiritual de la acogida se inspira también en <a href="https://fr.wikipedia.org/wiki/Jean_Monbourquette" target="_blank" rel="noopener">Jean Monbourquette</a> (psicología de la acogida de sí) y <a href="https://fr.wikipedia.org/wiki/Maurice_Zundel" target="_blank" rel="noopener">Maurice Zundel</a> (espiritualidad de la escucha interior) (páginas en francés).</p></div>
+<p>La dimensión psicológica y espiritual de la acogida se inspira también en <a href="https://fr.wikipedia.org/wiki/Jean_Monbourquette" target='_blank' rel="noopener">Jean Monbourquette</a> (psicología de la acogida de sí) y <a href="https://fr.wikipedia.org/wiki/Maurice_Zundel" target='_blank' rel="noopener">Maurice Zundel</a> (espiritualidad de la escucha interior) (páginas en francés).</p></div>
 <div class="bloc"><h3>Filosofía de la acción</h3>
-<p>La reflexión sobre la acción humana que subyace al discernimiento se inspira especialmente en <a href="https://fr.wikipedia.org/wiki/Hannah_Arendt" target="_blank" rel="noopener">Hannah Arendt</a>, <a href="https://fr.wikipedia.org/wiki/Jean_Ladrière" target="_blank" rel="noopener">Jean Ladrière</a> y <a href="https://fr.wikipedia.org/wiki/Jean-Marc_Ferry" target="_blank" rel="noopener">Jean-Marc Ferry</a> (páginas en francés).</p></div>
+<p>La reflexión sobre la acción humana que subyace al discernimiento se inspira especialmente en <a href="https://fr.wikipedia.org/wiki/Hannah_Arendt" target='_blank' rel="noopener">Hannah Arendt</a>, <a href="https://fr.wikipedia.org/wiki/Jean_Ladrière" target='_blank' rel="noopener">Jean Ladrière</a> y <a href="https://fr.wikipedia.org/wiki/Jean-Marc_Ferry" target='_blank' rel="noopener">Jean-Marc Ferry</a> (páginas en francés).</p></div>
 <div class="bloc"><h3>Respuestas generadas por IA</h3>
 <p>Las respuestas de discernimiento son generadas por una inteligencia artificial a partir de lo que escribes. Pueden contener errores o aproximaciones: no sustituyen ni al Magisterio ni a la palabra de un sacerdote o de una persona de confianza — verifica siempre con ellos.</p></div>`,
     contact: `<h2>✉️ Contacto</h2>
 <div class="bloc"><h3>Comparte tu experiencia</h3>
 <p>Lo más sencillo: deja un testimonio anónimo desde el <a href="#/">inicio</a>. Permanece en tu dispositivo y alienta tu propio camino.</p></div>
 <div class="bloc"><h3>Proyectos amigos</h3>
-<p><a href="https://justice-ai-anonyme-2.onrender.com" target="_blank">⚖️ Justice AI</a> · <a href="https://bridge-your-project.lovable.app" target="_blank">🌍 ONBRIDGE AI</a> · <a href="https://cartepastorale-v5.onrender.com/" target="_blank">📜 Carta Pastorale</a></p></div>
+<p><a href="https://justice-ai-anonyme-2.onrender.com" target='_blank'>⚖️ Justice AI</a> · <a href="https://bridge-your-project.lovable.app" target='_blank'>🌍 ONBRIDGE AI</a> · <a href="https://cartepastorale-v5.onrender.com/" target='_blank'>📜 Carta Pastorale</a></p></div>
 <div class="bloc"><h3>¿Una urgencia?</h3>
 <p>Este sitio no ofrece respuesta en tiempo real. En caso de angustia, contacta con los servicios de escucha que figuran al pie de página o con las urgencias de tu país.</p></div>`,
     confidentialite: `<h2>🔒 Privacidad</h2>
@@ -1380,11 +1658,11 @@ ar: {
 <p>« إنما في الله تستريح نفسي، ومنه خلاصي. » — مزمور 62: 2</p>
 <p>« يا الله، اختبرني واعرف قلبي؛ انظر إن كنت في طريق الضلال، واهدني في الطريق الأبدي. » — مزمور 139: 23-24</p></div>
 <div class="bloc"><h3>🎵 المزامير المرتّلة والصلاة الصوتية (مجاناً)</h3>
-<p>يقدم موقع «Sérénité Chantée» المزامير الـ150 مرتّلة، للصلاة أثناء الاستماع (بالفرنسية).<br><a href="https://serenitechantee.com/150-psaumes-chantes-yt" target="_blank" rel="noopener">🎵 استمع إلى المزامير الـ150 المرتّلة</a></p>
+<p>يقدم موقع «Sérénité Chantée» المزامير الـ150 مرتّلة، للصلاة أثناء الاستماع (بالفرنسية).<br><a href="https://serenitechantee.com/150-psaumes-chantes-yt" target='_blank' rel="noopener">🎵 استمع إلى المزامير الـ150 المرتّلة</a></p>
 <p>موارد مجانية أخرى :</p>
-<p><a href="https://emcitv.com/bible/audio/psaumes.html" target="_blank" rel="noopener">🎧 المزامير الـ150 صوتياً (الكتاب المقدس الصوتي EMCI، بالفرنسية)</a><br>
-<a href="https://neumz.com/fr/francais/" target="_blank" rel="noopener">🎵 الترتيل الغريغوري المباشر — Neumz (إذاعة مجانية)</a><br>
-<a href="https://www.taize.fr/" target="_blank" rel="noopener">🕊️ تراتيل جماعة تيزيه</a></p></div>
+<p><a href="https://emcitv.com/bible/audio/psaumes.html" target='_blank' rel="noopener">🎧 المزامير الـ150 صوتياً (الكتاب المقدس الصوتي EMCI، بالفرنسية)</a><br>
+<a href="https://neumz.com/fr/francais/" target='_blank' rel="noopener">🎵 الترتيل الغريغوري المباشر — Neumz (إذاعة مجانية)</a><br>
+<a href="https://www.taize.fr/" target='_blank' rel="noopener">🕊️ تراتيل جماعة تيزيه</a></p></div>
 <div class="bloc"><h3>حكمة مسيحية</h3>
 <p>« لقد خلقتنا لك يا رب، وقلوبنا قلقة حتى تستقر فيك. » — القديس أوغسطينوس</p>
 <p>« علّمنا أن نعطي كل شيء ونقبل كل شيء بحسب مشيئتك. » — عن القديس إغناطيوس دي لويولا</p></div>
@@ -1402,23 +1680,23 @@ ar: {
 <div class="bloc"><h3>مشروع يحمله كاهن كاثوليكي</h3>
 <p>هذا الموقع من تصميم كاهن كاثوليكي وبرعايته، بصفة شخصية. والذكاء الاصطناعي الذي يستخدمه يريد أن يضع نفسه في خدمة الكنيسة الكاثوليكية ومصادرها — الكتاب المقدس، والماجستيريوم والتقليد، وعلم اللاهوت، وفلسفة الفعل — ليقدّم تمييزاً إغناطياً أفضل في المواقف الملموسة. ويبقى التمييز المقترح دائماً منسجماً مع تعليم الكنيسة الكاثوليكية الرسمي.</p></div>
 <div class="bloc"><h3>النصوص الكتابية</h3>
-<p>تشير الاقتباسات والروابط الكتابية إلى الكتاب المقدس الليتورجي الفرنكوفوني <a href="https://www.aelf.org" target="_blank" rel="noopener">AELF</a> (بالفرنسية) وإلى <a href="https://www.biblegateway.com" target="_blank" rel="noopener">BibleGateway</a> (بالإنجليزية ولغات أخرى).</p></div>
+<p>تشير الاقتباسات والروابط الكتابية إلى الكتاب المقدس الليتورجي الفرنكوفوني <a href="https://www.aelf.org" target='_blank' rel="noopener">AELF</a> (بالفرنسية) وإلى <a href="https://www.biblegateway.com" target='_blank' rel="noopener">BibleGateway</a> (بالإنجليزية ولغات أخرى).</p></div>
 <div class="bloc"><h3>الماجستيريوم والتقليد</h3>
-<p><a href="https://www.vatican.va/archive/FRA0013/_INDEX.HTM" target="_blank" rel="noopener">التعليم المسيحي للكنيسة الكاثوليكية</a> (بالفرنسية) · <a href="https://www.vatican.va/content/vatican/fr.html" target="_blank" rel="noopener">وثائق الكرسي الرسولي الرسمية</a><br>
-<a href="https://www.vatican.va/content/leo-xiv/en/encyclicals/documents/20260515-magnifica-humanitas.html" target="_blank" rel="noopener"><em>Magnifica Humanitas</em> — رسالة عامة للبابا لاوون الرابع عشر عن حماية الشخص البشري في عصر الذكاء الاصطناعي (15 مايو 2026)</a>: ذكاء هذا الموقع الاصطناعي يريد أن يكون وفيّاً لتوجيهها — التكنولوجيا في خدمة كرامة الإنسان، لا مكانه أبداً.</p></div>
+<p><a href="https://www.vatican.va/archive/FRA0013/_INDEX.HTM" target='_blank' rel="noopener">التعليم المسيحي للكنيسة الكاثوليكية</a> (بالفرنسية) · <a href="https://www.vatican.va/content/vatican/fr.html" target='_blank' rel="noopener">وثائق الكرسي الرسولي الرسمية</a><br>
+<a href="https://www.vatican.va/content/leo-xiv/en/encyclicals/documents/20260515-magnifica-humanitas.html" target='_blank' rel="noopener"><em>Magnifica Humanitas</em> — رسالة عامة للبابا لاوون الرابع عشر عن حماية الشخص البشري في عصر الذكاء الاصطناعي (15 مايو 2026)</a>: ذكاء هذا الموقع الاصطناعي يريد أن يكون وفيّاً لتوجيهها — التكنولوجيا في خدمة كرامة الإنسان، لا مكانه أبداً.</p></div>
 <div class="bloc"><h3>الروحانية الإغناطية</h3>
 <p>التمارين المقترحة مستوحاة من <em>التمارين الروحية</em> للقديس إغناطيوس دي لويولا (القرن السادس عشر، ملكية عامة) ومن تقليد التمييز الإغناطي (العزاء والخراب).</p></div>
 <div class="bloc"><h3>قبول الذات والإصغاء الداخلي</h3>
-<p>البعد النفسي والروحي للقبول مستوحى أيضاً من <a href="https://fr.wikipedia.org/wiki/Jean_Monbourquette" target="_blank" rel="noopener">جان مونبوركيت</a> (علم نفس قبول الذات) و<a href="https://fr.wikipedia.org/wiki/Maurice_Zundel" target="_blank" rel="noopener">موريس زوندل</a> (روحانية الإصغاء الداخلي) (صفحات بالفرنسية).</p></div>
+<p>البعد النفسي والروحي للقبول مستوحى أيضاً من <a href="https://fr.wikipedia.org/wiki/Jean_Monbourquette" target='_blank' rel="noopener">جان مونبوركيت</a> (علم نفس قبول الذات) و<a href="https://fr.wikipedia.org/wiki/Maurice_Zundel" target='_blank' rel="noopener">موريس زوندل</a> (روحانية الإصغاء الداخلي) (صفحات بالفرنسية).</p></div>
 <div class="bloc"><h3>فلسفة الفعل</h3>
-<p>التأمل في الفعل البشري الكامن وراء التمييز مستوحى خصوصاً من <a href="https://fr.wikipedia.org/wiki/Hannah_Arendt" target="_blank" rel="noopener">حنة آرندت</a> و<a href="https://fr.wikipedia.org/wiki/Jean_Ladrière" target="_blank" rel="noopener">جان لادريير</a> و<a href="https://fr.wikipedia.org/wiki/Jean-Marc_Ferry" target="_blank" rel="noopener">جان-مارك فيري</a> (صفحات بالفرنسية).</p></div>
+<p>التأمل في الفعل البشري الكامن وراء التمييز مستوحى خصوصاً من <a href="https://fr.wikipedia.org/wiki/Hannah_Arendt" target='_blank' rel="noopener">حنة آرندت</a> و<a href="https://fr.wikipedia.org/wiki/Jean_Ladrière" target='_blank' rel="noopener">جان لادريير</a> و<a href="https://fr.wikipedia.org/wiki/Jean-Marc_Ferry" target='_blank' rel="noopener">جان-مارك فيري</a> (صفحات بالفرنسية).</p></div>
 <div class="bloc"><h3>إجابات مولّدة بالذكاء الاصطناعي</h3>
 <p>إجابات التمييز يولدها ذكاء اصطناعي انطلاقاً مما تكتبه. قد تحتوي على أخطاء: إنها لا تحل محل الماجستيريوم ولا محل كلمة كاهن أو شخص موثوق — تحقق دائماً لديهم.</p></div>`,
     contact: `<h2>✉️ اتصال</h2>
 <div class="bloc"><h3>شارك تجربتك</h3>
 <p>أبسط طريقة: اترك شهادة مجهولة من <a href="#/">الصفحة الرئيسية</a>. تبقى على جهازك وتشجع مسيرتك الخاصة.</p></div>
 <div class="bloc"><h3>مشاريع صديقة</h3>
-<p><a href="https://justice-ai-anonyme-2.onrender.com" target="_blank">⚖️ Justice AI</a> · <a href="https://bridge-your-project.lovable.app" target="_blank">🌍 ONBRIDGE AI</a> · <a href="https://cartepastorale-v5.onrender.com/" target="_blank">📜 Carta Pastorale</a></p></div>
+<p><a href="https://justice-ai-anonyme-2.onrender.com" target='_blank'>⚖️ Justice AI</a> · <a href="https://bridge-your-project.lovable.app" target='_blank'>🌍 ONBRIDGE AI</a> · <a href="https://cartepastorale-v5.onrender.com/" target='_blank'>📜 Carta Pastorale</a></p></div>
 <div class="bloc"><h3>حالة طارئة؟</h3>
 <p>هذا الموقع لا يقدم رداً فورياً. في حالة الضيق، اتصل بخدمات الإصغاء المذكورة أسفل الصفحة أو بخدمات الطوارئ في بلدك.</p></div>`,
     confidentialite: `<h2>🔒 الخصوصية</h2>
@@ -1495,7 +1773,115 @@ function showPage() {
 window.addEventListener('hashchange', showPage);
 
 // État global
+window.currentAelfLectures = [];
+const SITUATION_KEYS = [
+    "SOUFFRANCE", "SENS_VIE", "COUPLE", "DEUIL", "SOLITUDE",
+    "COLERE_DIEU", "DOUTE_FOI", "DECISION", "MALADIE", "PEUR_AVENIR",
+    "EPUISEMENT", "CONFLIT_FAMILIAL", "ACCOMPAGNEMENT", "RECHERCHE_SENS", "AUTRE"
+];
 let currentLang = 'fr', currentMode = 'discernement', currentResponseText = '', currentSituationKey = null;
+function escapeHtml(text) {
+    if (text === null || text === undefined) return '';
+    return String(text)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+}
+
+function sanitize(text) {
+    if (text === null || text === undefined) return '';
+    return String(text).replace(/[<>]/g, '');
+}
+
+function fetchWithTimeout(url, options = {}, timeoutMs = 20000) {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), timeoutMs);
+    return fetch(url, { ...options, signal: controller.signal }).finally(() => clearTimeout(timer));
+}
+
+async function callDiscernAPI(payload) {
+    try {
+        const res = await fetchWithTimeout('/.netlify/functions/discern', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        }, 20000);
+        const contentType = res.headers.get('content-type') || '';
+        if (!contentType.includes('application/json')) {
+            return { ok: false, data: null, error: 'Réponse non JSON' };
+        }
+        const data = await res.json();
+        if (res.ok && data && data.response) {
+            return { ok: true, data: data, error: null };
+        }
+        return { ok: false, data: null, error: data?.error || 'Erreur API' };
+    } catch (err) {
+        return { ok: false, data: null, error: err?.message || 'Erreur réseau ou timeout' };
+    }
+}
+
+
+
+// ============================================================
+// MODULE UI & GESTION PROGRESSIVE DES ÉTATS (SPRINT 3)
+// ============================================================
+const FoyerUI = {
+    loadingTimer5s: null,
+    loadingTimer10s: null,
+
+    startLoadingFeedback(elementId = 'loading', defaultText = '🕯️ Un instant...') {
+        const el = document.getElementById(elementId);
+        if (!el) return;
+        el.style.display = 'block';
+        el.textContent = defaultText;
+
+        if (this.loadingTimer5s) clearTimeout(this.loadingTimer5s);
+        if (this.loadingTimer10s) clearTimeout(this.loadingTimer10s);
+
+        this.loadingTimer5s = setTimeout(() => {
+            if (el.style.display !== 'none') {
+                el.textContent = '🕯️ Un instant... connexion en cours';
+            }
+        }, 5000);
+
+        this.loadingTimer10s = setTimeout(() => {
+            if (el.style.display !== 'none') {
+                el.textContent = '🕯️ La méditation demande parfois un peu de temps...';
+            }
+        }, 10000);
+    },
+
+    stopLoadingFeedback(elementId = 'loading') {
+        const el = document.getElementById(elementId);
+        if (el) el.style.display = 'none';
+        if (this.loadingTimer5s) { clearTimeout(this.loadingTimer5s); this.loadingTimer5s = null; }
+        if (this.loadingTimer10s) { clearTimeout(this.loadingTimer10s); this.loadingTimer10s = null; }
+    },
+
+    scrollToTop() {
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            window.scrollTo({ top: 0, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
+    }
+};
+
+function showToast(message, type = 'info', duration = 4000) {
+    const container = document.getElementById('toast-container');
+    if (!container) return;
+    const toast = document.createElement('div');
+    toast.className = 'toast toast-' + type;
+    toast.textContent = ((TOAST_ICONS[type] || '') + ' ' + message).trim();
+    container.appendChild(toast);
+    (window.requestAnimationFrame || (cb => setTimeout(cb, 16)))(() => toast.classList.add('show'));
+    setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => toast.remove(), 300);
+    }, duration);
+}
+
+// ===================== TOASTS =====================
+
 
 function updateLanguage(lang) {
     currentLang = lang;
@@ -1513,9 +1899,12 @@ function updateLanguage(lang) {
     const grid = document.querySelector('.situations-grid');
     if (grid) {
         grid.innerHTML = '';
-        t.situations.forEach(s => {
+        const sitArray = t.situations || [];
+        SITUATION_KEYS.forEach((key, idx) => {
+            const labelText = sitArray[idx] || key;
             const label = document.createElement('label');
-            label.innerHTML = `<input type="radio" name="situation-choisie" value="${s}"> ${s}`;
+            label.setAttribute('data-key', key);
+            label.innerHTML = `<input type="radio" name="situation-choisie" value="${key}"> ${labelText}`;
             grid.appendChild(label);
         });
     }
@@ -1567,7 +1956,11 @@ function updateLanguage(lang) {
         t.defaultTestimonials.forEach(msg => {
             const div = document.createElement('div');
             div.className = 'temoignage-affiche';
-            div.innerHTML = `${msg} <div class="source">— Anonyme</div>`;
+            div.textContent = msg + ' ';
+            const srcDiv = document.createElement('div');
+            srcDiv.className = 'source';
+            srcDiv.textContent = '— Anonyme';
+            div.appendChild(srcDiv);
             temoignagesListe.appendChild(div);
         });
         renderTemoignagesLocaux(temoignagesListe);
@@ -1633,8 +2026,13 @@ function updateLanguage(lang) {
     const labelLecture2El = document.getElementById('label-lecture2');
     if (labelLecture2El) labelLecture2El.textContent = t.labelLecture2 || "Deuxième lecture :";
 
-    const labelEvangileEl = document.getElementById('label-evangile');
-    if (labelEvangileEl) labelEvangileEl.textContent = t.labelEvangile || "Évangile :";
+    const labelEvangileText = document.getElementById('label-evangile-text');
+    if (labelEvangileText) {
+        labelEvangileText.textContent = t.labelEvangile || "Évangile :";
+    } else {
+        const labelEvangileEl = document.getElementById('label-evangile');
+        if (labelEvangileEl) labelEvangileEl.textContent = t.labelEvangile || "Évangile :";
+    }
 
     const labelThemeEl = document.getElementById('label-theme');
     if (labelThemeEl) labelThemeEl.textContent = t.labelTheme || "Thème ou idée (optionnel) :";
@@ -1654,13 +2052,13 @@ function updateLanguage(lang) {
 function updateRessources(situationKey) {
     const langData = translations[currentLang] || translations.fr;
 
-    const textes = langData.textesParSituation?.[situationKey] || langData.textesParSituation?.["Autre chose"] || [];
+    const textes = langData.textesParSituation?.[situationKey] || langData.textesParSituation?.AUTRE || langData.textesParSituation?.["Autre chose"] || [];
     const textesList = document.getElementById('ressources-textes-list');
     if (textesList) {
         textesList.innerHTML = '';
         textes.forEach(item => {
             const li = document.createElement('li');
-            li.innerHTML = `<strong>${item.ref}</strong> – « ${item.texte} » <a href="${item.lien}" target="_blank" style="font-size:0.85rem; color:#4a6f5e; text-decoration:underline;">(lire le texte complet)</a>`;
+            li.innerHTML = `<strong>${item.ref}</strong> – « ${item.texte} » <a href="${item.lien}" target='_blank' style="font-size:0.85rem; color:#4a6f5e; text-decoration:underline;">(lire le texte complet)</a>`;
             textesList.appendChild(li);
         });
     }
@@ -1714,8 +2112,8 @@ function showResponseOptions() {
     responseLecture.style.display = 'block';
     carnetContainer.style.display = 'block';
     ressourcesContainer.style.display = 'none';
-    document.getElementById('loading').style.display = 'none';
-    document.getElementById('reponse').innerHTML = currentResponseText.replace(/\n/g, '<br><br>');
+    FoyerUI.stopLoadingFeedback('loading');
+    document.getElementById('reponse').textContent = currentResponseText;
 }
 
 // Carnet
@@ -1732,13 +2130,17 @@ function loadCarnet() {
 document.getElementById('save-carnet').addEventListener('click', () => {
     localStorage.setItem('foyer_carnet_' + getOrCreateCarnetId(), carnetEntry.value.trim());
     document.getElementById('carnet-feedback').textContent = '✨ Sauvegardé.';
+    showToast('Carnet sauvegardé avec succès.', 'info');
     setTimeout(() => document.getElementById('carnet-feedback').textContent = '', 3000);
 });
 document.getElementById('copy-carnet-link').addEventListener('click', () => {
     const link = window.location.origin + window.location.pathname + '?carnet=' + getOrCreateCarnetId();
     navigator.clipboard.writeText(link).then(() => {
         document.getElementById('carnet-feedback').textContent = '🔗 Lien copié !';
+        showToast('Lien du carnet copié dans le presse-papier !', 'info');
         setTimeout(() => document.getElementById('carnet-feedback').textContent = '', 4000);
+    }).catch(() => {
+        showToast('Impossible de copier automatiquement le lien.', 'warn');
     });
 });
 document.getElementById('share-carnet').addEventListener('click', () => {
@@ -1758,7 +2160,7 @@ document.getElementById('btn-continuer-discernement').addEventListener('click', 
 document.getElementById('save-link-ressources').addEventListener('click', (e) => {
     e.preventDefault();
     const link = window.location.origin + window.location.pathname + '?carnet=' + getOrCreateCarnetId();
-    navigator.clipboard.writeText(link).then(() => alert('Lien copié !'));
+    navigator.clipboard.writeText(link).then(() => showToast('Lien copié !', 'info')).catch(() => showToast('Impossible de copier le lien.', 'warn'));
 });
 
 document.getElementById('toggle-urgence').addEventListener('click', (e) => {
@@ -1783,7 +2185,11 @@ function renderTemoignagesLocaux(liste) {
     getTemoignagesLocaux().forEach(msg => {
         const div = document.createElement('div');
         div.className = 'temoignage-affiche';
-        div.innerHTML = '« ' + escHtml(msg) + ' » <div class="source">' + (LABEL_MOI[currentLang] || LABEL_MOI.fr) + '</div>';
+        div.textContent = '« ' + msg + ' » ';
+        const srcDiv = document.createElement('div');
+        srcDiv.className = 'source';
+        srcDiv.textContent = LABEL_MOI[currentLang] || LABEL_MOI.fr;
+        div.appendChild(srcDiv);
         liste.appendChild(div);
     });
 }
@@ -1794,6 +2200,8 @@ document.querySelectorAll('.lang-btn').forEach(btn => {
         this.classList.add('active');
         try { localStorage.setItem('foyer_lang', this.dataset.lang); } catch(e) {}
         updateLanguage(this.dataset.lang);
+        const langNames = { fr: 'Français', en: 'English', zh: '中文', hi: 'हिन्दी', es: 'Español', ar: 'العربية' };
+        showToast('Langue changée : ' + (langNames[this.dataset.lang] || this.dataset.lang.toUpperCase()), 'info', 2500);
     });
 });
 
@@ -1807,46 +2215,61 @@ document.getElementById('envoyerTemoignage').addEventListener('click', () => {
     document.getElementById('temoignage').value = '';
     const div = document.createElement('div');
     div.className = 'temoignage-affiche';
-    div.innerHTML = '« ' + escHtml(msg) + ' » <div class="source">' + (LABEL_MOI[currentLang] || LABEL_MOI.fr) + '</div>';
+    div.textContent = '« ' + msg + ' » ';
+    const srcDiv = document.createElement('div');
+    srcDiv.className = 'source';
+    srcDiv.textContent = LABEL_MOI[currentLang] || LABEL_MOI.fr;
+    div.appendChild(srcDiv);
     document.getElementById('temoignagesListe').appendChild(div);
+    showToast('Témoignage enregistré sur votre appareil.', 'info');
 });
 
-document.getElementById('submitBtn').onclick = async function() {
-    const situation = document.getElementById('situation').value.trim();
+document.getElementById('submitBtn').addEventListener('click', async function() {
+    const radioChecked = document.querySelector('input[name="situation-choisie"]:checked');
+    const radioKey = radioChecked ? radioChecked.value : null;
+    currentSituationKey = radioKey || "AUTRE";
+
+    const situationInput = document.getElementById('situation');
+    const precisionInput = document.getElementById('precision-situation');
+    const situationVal = situationInput ? situationInput.value.trim() : '';
+    const precisionVal = precisionInput ? precisionInput.value.trim() : '';
+
+    let situation = '';
+    const radioText = radioChecked ? (radioChecked.parentElement?.textContent?.trim() || radioKey) : '';
+
+    if (radioChecked && !situationVal) {
+        situation = radioText;
+    } else if (radioChecked && situationVal) {
+        situation = `Situation choisie : ${radioText}. Précisions : ${situationVal}`;
+    } else {
+        situation = situationVal;
+    }
+
+    if (precisionVal) {
+        situation = situation ? `${situation}. Précisions : ${precisionVal}` : precisionVal;
+    }
+
     const role = document.getElementById('role').value.trim();
     if (!situation) {
-        alert(translations[currentLang]?.alertSituation || 'Veuillez décrire votre situation.');
+        showToast(translations[currentLang]?.alertSituation || 'Veuillez décrire votre situation.', 'warn');
         return;
     }
     const responseContainer = document.getElementById('response-container');
     responseContainer.style.display = 'none';
     document.getElementById('error').style.display = 'none';
     document.getElementById('submitBtn').disabled = true;
-    document.getElementById('loading').style.display = 'block';
+    FoyerUI.startLoadingFeedback('loading', translations[currentLang]?.loading || '🕯️ Un instant...');
 
     let reponseObtenue = "";
 
-    try {
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 6000);
-
-        const res = await fetch('/.netlify/functions/discern', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ situation, role, lang: currentLang, mode: currentMode }),
-            signal: controller.signal
-        });
-        clearTimeout(timeoutId);
-
-        const contentType = res.headers.get('content-type') || '';
-        if (contentType.includes('application/json')) {
-            const data = await res.json();
-            if (res.ok && data.response) {
-                reponseObtenue = data.response;
-            }
+    const apiResult = await callDiscernAPI({ situation, role, lang: currentLang, mode: currentMode });
+    if (apiResult.ok && apiResult.data && apiResult.data.response) {
+        reponseObtenue = apiResult.data.response;
+    } else {
+        if (apiResult.error) {
+            console.log("Netlify discern indisponible (" + apiResult.error + "), repli pastoral local activé.");
+            showToast("Mode autonome : réflexion pastorale locale activée", "info", 3500);
         }
-    } catch (err) {
-        console.log("Netlify discern indisponible (GitHub Pages ou suspendu), repli pastoral local activé :", err);
     }
 
     if (!reponseObtenue) {
@@ -1867,10 +2290,13 @@ document.getElementById('submitBtn').onclick = async function() {
 
     currentResponseText = reponseObtenue;
     showResponseOptions();
+    if (typeof updateRessources === 'function') {
+        updateRessources(currentSituationKey);
+    }
 
-    document.getElementById('loading').style.display = 'none';
+    FoyerUI.stopLoadingFeedback('loading');
     document.getElementById('submitBtn').disabled = false;
-};
+});
 
 
 // ============================================================
@@ -1891,22 +2317,222 @@ function initAelfDate() {
     inputDate.value = `${yyyy}-${mm}-${dd}`;
 }
 
-function genererHomelieLocale(lecture1, psaume, lecture2, evangile, theme, lang) {
-    // 1. Récupération des données AELF ou manuelles
-    const aelf = (typeof window !== 'undefined' && Array.isArray(window.currentAelfLectures)) ? window.currentAelfLectures : [];
 
+// ============================================================
+// MODULE HOMÉLIE & DÉCOMPOSITION (SPRINT 3)
+// ============================================================
+function parseAelfLectures(aelf) {
+    const lectures = Array.isArray(aelf) ? aelf : [];
     const getAelf = (kinds) => {
         for (const kind of kinds) {
-            const found = aelf.find(l => (l.type || '').includes(kind));
+            const found = lectures.find(l => (l.type || '').includes(kind));
             if (found) return found;
         }
         return null;
     };
+    return {
+        lect1: getAelf(['lecture_1', 'premiere']),
+        psaume: getAelf(['psaume', 'cantique']),
+        lect2: getAelf(['lecture_2', 'deuxieme']),
+        evangile: getAelf(['evangile'])
+    };
+}
 
-    const aLect1 = getAelf(['lecture_1', 'premiere']);
-    const aPsaume = getAelf(['psaume', 'cantique']);
-    const aLect2 = getAelf(['lecture_2', 'deuxieme']);
-    const aEvangile = getAelf(['evangile']);
+function detectAuthorContext(refStr, textStr) {
+    const full = ((refStr || '') + ' ' + (textStr || '')).toLowerCase();
+    if (/matthieu|matthew|mateo|\bmt\b/.test(full)) {
+        return {
+            nom: 'saint Matthieu',
+            auteur: 'l’évangéliste saint Matthieu',
+            repere: 'La tradition exégétique souligne que Matthieu écrit pour des croyants insérés dans le monde juif, en montrant l’accomplissement des prophéties dans le Christ, nouveau Moïse qui exige des fruits effectifs de sainteté.',
+            sourceCatechisme: 'CEC 577-582 (Jésus et la Loi)',
+            lienAelf: 'https://www.aelf.org/bible/Mt'
+        };
+    }
+    if (/marc|mark|marcos|\bmc\b/.test(full)) {
+        return {
+            nom: 'saint Marc',
+            auteur: 'l’évangéliste saint Marc',
+            repere: 'Les commentateurs rappellent que saint Marc met en avant le mystère du Serviteur souffrant, invitant les disciples à ne pas s’arrêter aux triomphes humains mais à suivre le Christ jusqu’à la Croix.',
+            sourceCatechisme: 'CEC 606-618 (Le Christ Serviteur)',
+            lienAelf: 'https://www.aelf.org/bible/Mc'
+        };
+    }
+    if (/luc|luke|lucas|\blc\b/.test(full)) {
+        return {
+            nom: 'saint Luc',
+            auteur: 'l’évangéliste saint Luc',
+            repere: 'La lecture spirituelle de saint Luc met en lumière la sollicitude de Jésus pour les petits, les pécheurs et les marginaux, ainsi que la joie du salut apporté par l’Esprit Saint.',
+            sourceCatechisme: 'CEC 543-546 (L’accueil des pécheurs)',
+            lienAelf: 'https://www.aelf.org/bible/Lc'
+        };
+    }
+    if (/jean|john|juan|\bjn\b/.test(full)) {
+        return {
+            nom: 'saint Jean',
+            auteur: 'le disciple bien-aimé',
+            repere: 'La théologie johannique invite à contempler le Verbe fait chair, la Lumière venue dans le monde et le don suprême de la vie éternelle à travers la foi vive et la charité.',
+            sourceCatechisme: 'CEC 456-460 (Le Verbe incarné)',
+            lienAelf: 'https://www.aelf.org/bible/Jn'
+        };
+    }
+    if (/ézéchiel|ezechiel|\bez\b/.test(full)) {
+        return {
+            nom: 'Ézéchiel',
+            auteur: 'le prophète Ézéchiel',
+            repere: 'Auprès des exilés à Babylone, Ézéchiel met en avant la responsabilité personnelle et la conversion : le Seigneur affirme qu’Il ne prend aucun plaisir à la mort du pécheur, mais désire qu’il vive.',
+            sourceCatechisme: 'CEC 1430-1439 (La conversion du cœur)',
+            lienAelf: 'https://www.aelf.org/bible/Ez'
+        };
+    }
+    if (/isaïe|isaie|\bis\b/.test(full)) {
+        return {
+            nom: 'Isaïe',
+            auteur: 'le prophète Isaïe',
+            repere: 'La voix d’Isaïe console le peuple en annonçant l’Alliance de paix et la figure du Serviteur fidèle qui portera la rédemption des multitudes.',
+            sourceCatechisme: 'CEC 711-716 (L’attente du Messie et de son Esprit)',
+            lienAelf: 'https://www.aelf.org/bible/Is'
+        };
+    }
+    if (/philippiens|\bph\b/.test(full)) {
+        return {
+            nom: 'l’apôtre Paul',
+            auteur: 'saint Paul aux Philippiens',
+            repere: 'Saint Paul propose à la communauté chrétienne l’exemple indépassable de l’abaissement (la kénose) et de l’obéissance du Christ comme fondement de la concorde fraternelle.',
+            sourceCatechisme: 'CEC 2634-2636 (La communion dans le Christ)',
+            lienAelf: 'https://www.aelf.org/bible/Ph'
+        };
+    }
+    return {
+        nom: 'l’Écriture inspirée',
+        auteur: 'l’auteur sacré',
+        repere: 'L’Église enseigne de toujours lire l’Écriture dans le même Esprit que celui où elle a été écrite, en tenant compte du milieu historique et du genre littéraire d’origine.',
+        sourceCatechisme: 'CEC 109-114 (L’Esprit Saint, interprète de l’Écriture)',
+        lienAelf: 'https://www.aelf.org/bible'
+    };
+}
+
+// =========================================================================
+// MOTEUR D'HOMÉLIE : DOMINICALE (<= 300 mots) & SEMAINE (<= 100 mots)
+// Respect des droits d'auteur & citations méthodologiques :
+// - Dimanche : Démarche inspirée de Mgr Joseph Pellegrino (frjoeshomilies.net)
+// - Semaine  : Démarche inspirée du Père Tony Kadavil (frtonyshomilies.com)
+// =========================================================================
+
+
+// =========================================================================
+// GESTION DU COMPTEUR DE MOTS ET TRONCATURE AUTOMATIQUE STRICTE
+// Limites : Dimanche <= 300 mots | Semaine / Férie <= 100 mots
+// =========================================================================
+
+function countWordsInHtml(html) {
+    if (!html) return 0;
+    // Supprimer les balises HTML et les entités
+    const text = html.replace(/<[^>]*>/g, ' ').replace(/&[a-z#0-9]+;/gi, ' ');
+    const words = text.trim().split(/\s+/).filter(w => w.length > 0);
+    return words.length;
+}
+
+function truncateHtmlToMaxWords(html, maxWords) {
+    if (!html) return { html: '', count: 0, wasTruncated: false };
+    
+    // Découper en paragraphes pour respecter la structure si possible
+    const tempDiv = typeof document !== 'undefined' ? document.createElement('div') : null;
+    let plainText = html.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
+    let words = plainText.split(' ').filter(w => w.length > 0);
+    const initialCount = words.length;
+
+    if (initialCount <= maxWords) {
+        return { html: html, count: initialCount, wasTruncated: false };
+    }
+
+    // Tronquer strictement au nombre de mots autorisés
+    const truncatedWords = words.slice(0, maxWords);
+    const truncatedText = truncatedWords.join(' ') + '…';
+    
+    const formattedHtml = '<p>' + truncatedText + '</p>' + 
+        "<p style='font-size:0.82rem; color:#8c6b32; font-style:italic; margin-top:0.5rem;'>⚠️ Texte calibré automatiquement à la limite stricte de " + maxWords + " mots.</p>";
+
+    return {
+        html: formattedHtml,
+        count: maxWords,
+        wasTruncated: true
+    };
+}
+
+const LEGAL_NOTICE_HOMILIE = "<div class='notice-inspiration-reproduction' style='margin-top:1.5rem; padding:1rem; background:#f5f3ef; border:1px solid #dcd5c9; border-left:4px solid #4a6f5e; border-radius:6px; font-size:0.84rem; color:#443b34; line-height:1.55;'>" +
+    "<div style='font-weight:700; color:#2d463b; margin-bottom:0.4rem; display:flex; align-items:center; gap:0.4rem;'>" +
+        "<span>⚖️ Distinction légale : Inspiration vs Reproduction</span>" +
+    "</div>" +
+    "Cette homélie est une <strong>création originale inspirée</strong> de la démarche pastorale, narrative et pédagogique de <strong>Mgr Joseph A. Pellegrino</strong> (<a href='https://frjoeshomilies.net/' target='_blank' rel='noopener noreferrer' style='color:#2a503e; text-decoration:underline; font-weight:600;'>frjoeshomilies.net</a>) et du <strong>Père Tony Kadavil</strong> (<a href='https://frtonyshomilies.com/' target='_blank' rel='noopener noreferrer' style='color:#2a503e; text-decoration:underline; font-weight:600;'>frtonyshomilies.com</a> et <a href='https://frtonyshomilies.com/2026/01/31/feb-2-7-weekday-homilies/' target='_blank' rel='noopener noreferrer' style='color:#2a503e; text-decoration:underline;'>recueil de semaine</a>). " +
+    "Elle <strong>ne constitue en aucun cas une reproduction intégrale ni une traduction littérale</strong> de leurs écrits protégés, mais une appropriation spirituelle autonome et légitime dans le respect scrupuleux du droit d'auteur, du <em>Directoire sur l'homélie</em> et des textes de l'AELF." +
+"</div>";
+
+// 1. FORMAT DOMINICAL : NARRATIF & EXISTENTIEL (Inspiré de Mgr Joseph Pellegrino - max 300 mots)
+function buildHomelieDominicalePellegrino(contexts, quotes, refs, titles, theme, psalmRefrain) {
+    let h = "";
+    const { ctxEv, ctxL1, ctxL2 } = contexts;
+    const { evQuote, l1Quote, l2Quote } = quotes;
+    const { evRef, l1Ref, l2Ref, psRef } = refs;
+
+    // Entrée directe sans titre selon la consigne d'homélie
+    h += "<p>Un homme avait planté un petit potager derrière sa maison. Il avait préparé la terre, semé avec soin, arrosé chaque jour et attendu patiemment. Un jour, son voisin lui demanda : <em>« Comment va ton potager ? »</em> L'homme répondit : <em>« Les feuilles poussent à merveille. Il n'y a qu'un problème : je ne vois encore aucun légume ! »</em> Le voisin sourit : <em>« Mais un jardin est fait pour produire quelque chose ! »</em></p>";
+
+    // Paragraphe 2 : Lien organique, Première lecture & Évangile
+    h += "<p>C'est exactement le message de nos lectures d'aujourd'hui : Dieu a planté pour nous une vigne, et Il attend qu'elle produise de bons fruits. Dans la première lecture" + (l1Ref ? " (" + escapeHtml(l1Ref) + ")" : "") + ", Isaïe décrit cette vigne plantée avec amour par Dieu, qui attendait des fruits de justice. L'Évangile" + (evRef ? " (" + escapeHtml(evRef) + ")" : "") + " prolonge cet appel : le Maître confie sa vigne à des vignerons avant d'envoyer son propre Fils. Cette parabole nous interpelle : quels fruits portons-nous aujourd'hui ? La bienveillance, le pardon et la patience, ou l'amertume et l'indifférence ?</p>";
+
+    // Deuxième lecture
+    h += "<p>Saint Paul nous éclaire dans la deuxième lecture" + (l2Ref ? " (" + escapeHtml(l2Ref) + ")" : "") + " : ne nous laissons pas dominer par l'inquiétude, mais tournons nos cœurs vers ce qui est vrai, juste et digne d'éloge.</p>";
+
+    // Actualisation et prière
+    h += "<p>Dieu nous a confié une vigne : notre vie, nos familles, notre communauté. Nous n'en sommes pas les propriétaires, mais les intendants. Il n'attend pas des fruits parfaits, mais de vrais fruits : un appel à un isolé, un pardon accordé, une parole encourageante. Quand le Seigneur viendra regarder notre vie, puisse-t-Il y trouver de bons fruits.<br><br><em>Amen.</em></p>";
+
+    h += LEGAL_NOTICE_HOMILIE;
+
+    return h;
+}
+
+function buildHomelieFerieTony(contexts, quotes, refs, titles, theme, psalmRefrain) {
+    let h = "";
+    const { ctxEv } = contexts;
+    const { evQuote } = quotes;
+    const { evRef } = refs;
+
+    const displayTitle = theme ? theme : "Fidélité au cœur du quotidien";
+    h += "<h3 style='color:#3a584a; margin-top:0; font-family:Georgia,serif; font-size:1.15rem;'>" + escapeHtml(displayTitle) + "</h3>";
+
+    h += "<p>Dans le travail ordinaire de notre journée" + (evRef ? " (" + escapeHtml(evRef) + ")" : "") + ", le Christ nous attend. " + (evQuote ? "Il nous redit : <em>« " + escapeHtml(evQuote) + " »</em>. " : "Il appelle à une fidélité simple. ") + "Vivons nos devoirs d'aujourd'hui comme une prière silencieuse et posons un geste concret de patience ou d'écoute fraternelle.</p>";
+
+    h += "<p><em>Prière : Seigneur, conduis nos pas dans ta paix aujourd'hui. Amen.</em></p>";
+
+    h += LEGAL_NOTICE_HOMILIE;
+
+    return h;
+}
+
+function buildSourcesBlock(ctxEv) {
+    return "<div style='margin-top:2rem; background:#f4f1eb; border:1px solid #d9d2c5; border-left:4px solid #7c6f5d; border-radius:8px; padding:1.2rem; font-size:0.88rem; color:#4a4036; line-height:1.6;'>" +
+        "<div style='display:flex; align-items:center; justify-content:space-between; margin-bottom:0.6rem; flex-wrap:wrap; gap:0.5rem;'>" +
+            "<strong style='color:#2c221e; font-size:0.95rem;'>📚 Sources officielles & respect de la propriété intellectuelle</strong>" +
+            "<span style='font-size:0.75rem; color:#7c6f5d; font-style:italic;'>Magistère, Liturgie & Prédicateurs cités</span>" +
+        "</div>" +
+        "<p style='margin:0 0 0.8rem 0; font-size:0.85rem; color:#5c5044;'><em>Rappel :</em> Cette proposition homilétique s'appuie sur la liturgie catholique officielle et cite ses sources méthodologiques dans le respect des droits moraux et de propriété intellectuelle :</p>" +
+        "<ul style='margin:0; padding-left:1.3rem; list-style-type:square; font-size:0.85rem;'>" +
+            "<li style='margin-bottom:0.4rem;'><strong>Textes liturgiques officiels :</strong> <a href='" + ctxEv.lienAelf + "' target='_blank' rel='noopener noreferrer' style='color:#325c48; text-decoration:underline;'>Association Épiscopale Liturgique Francophone (AELF)</a>.</li>" +
+            "<li style='margin-bottom:0.4rem;'><strong>Prédication dominicale (max 300 mots) :</strong> Inspirée de Mgr Joseph A. Pellegrino (<a href='https://frjoeshomilies.net/' target='_blank' rel='noopener noreferrer' style='color:#325c48; text-decoration:underline;'>frjoeshomilies.net</a> — Diocèse de St. Petersburg, FL) et du P. Tony Kadavil (<a href='https://frtonyshomilies.com/' target='_blank' rel='noopener noreferrer' style='color:#325c48; text-decoration:underline;'>frtonyshomilies.com</a>).</li>" +
+            "<li style='margin-bottom:0.4rem;'><strong>Méditation de semaine (max 100 mots) :</strong> Inspirée des homélies quotidiennes du P. Tony Kadavil (<a href='https://frtonyshomilies.com/' target='_blank' rel='noopener noreferrer' style='color:#325c48; text-decoration:underline;'>frtonyshomilies.com</a> et recueil d'homélies de semaine <a href='https://frtonyshomilies.com/2026/01/31/feb-2-7-weekday-homilies/' target='_blank' rel='noopener noreferrer' style='color:#325c48; text-decoration:underline;'>feb-2-7-weekday-homilies</a>).</li>" +
+            "<li style='margin-bottom:0.4rem;'><strong>Herméneutique conciliaire :</strong> Concile Vatican II, <a href='https://www.vatican.va/archive/hist_councils/ii_vatican_council/documents/vat-ii_const_19651118_dei-verbum_fr.html' target='_blank' rel='noopener noreferrer' style='color:#325c48; text-decoration:underline;'><em>Dei Verbum</em>, n. 12</a>.</li>" +
+            "<li><strong>Normes de l'Église :</strong> Congrégation pour le Culte Divin, <a href='https://www.vatican.va/roman_curia/congregations/ccdds/documents/rc_con_ccdds_doc_20140629_direttorio-omiletico_fr.html' target='_blank' rel='noopener noreferrer' style='color:#325c48; text-decoration:underline;'><em>Directoire sur l'homélie</em> (2014)</a>.</li>" +
+        "</ul>" +
+    "</div>";
+}
+
+function genererHomelieLocale(lecture1, psaume, lecture2, evangile, theme, lang) {
+    const parsed = parseAelfLectures(typeof window !== 'undefined' && window.currentAelfLectures ? window.currentAelfLectures : []);
+    const aLect1 = parsed.lect1;
+    const aPsaume = parsed.psaume;
+    const aLect2 = parsed.lect2;
+    const aEvangile = parsed.evangile;
 
     const stripHtml = (h) => {
         const div = document.createElement('div');
@@ -1923,7 +2549,7 @@ function genererHomelieLocale(lecture1, psaume, lecture2, evangile, theme, lang)
         const src = aObj && aObj.contenu ? stripHtml(aObj.contenu) : (fallbackText || '');
         const sents = getSentences(src);
         if (!sents.length) return '';
-        const sorted = sents.slice().sort((a, b) => Math.abs(a.length - 130) - Math.abs(b.length - 130));
+        const sorted = sents.slice().sort((a, b) => Math.abs(a.length - 110) - Math.abs(b.length - 110));
         const chosen = sorted[0];
         return chosen.length > maxLen ? chosen.slice(0, maxLen) + '…' : chosen;
     };
@@ -1941,89 +2567,13 @@ function genererHomelieLocale(lecture1, psaume, lecture2, evangile, theme, lang)
     const l1Text = aLect1 && aLect1.contenu ? stripHtml(aLect1.contenu) : '';
     const l2Text = aLect2 && aLect2.contenu ? stripHtml(aLect2.contenu) : '';
 
-    // Détection respectueuse des repères d'auteurs (suggérés pour vérification à la source)
-    const detectContext = (refStr, textStr) => {
-        const full = ((refStr || '') + ' ' + (textStr || '')).toLowerCase();
-        
-        if (/matthieu|matthew|mateo|\bmt\b/.test(full)) {
-            return {
-                nom: 'saint Matthieu',
-                auteur: 'l’évangéliste saint Matthieu',
-                repere: 'La tradition exégétique souligne que Matthieu écrit pour des croyants insérés dans le monde juif, en montrant l’accomplissement des prophéties dans le Christ, nouveau Moïse qui exige des fruits effectifs de sainteté.',
-                sourceCatechisme: 'CEC 577-582 (Jésus et la Loi)',
-                lienAelf: 'https://www.aelf.org/bible/Mt'
-            };
-        }
-        if (/marc|mark|marcos|\bmc\b/.test(full)) {
-            return {
-                nom: 'saint Marc',
-                auteur: 'l’évangéliste saint Marc',
-                repere: 'Les commentateurs rappellent que saint Marc met en avant le mystère du Serviteur souffrant, invitant les disciples à ne pas s’arrêter aux triomphes humains mais à suivre le Christ jusqu’à la Croix.',
-                sourceCatechisme: 'CEC 606-618 (Le Christ Serviteur)',
-                lienAelf: 'https://www.aelf.org/bible/Mc'
-            };
-        }
-        if (/luc|luke|lucas|\blc\b/.test(full)) {
-            return {
-                nom: 'saint Luc',
-                auteur: 'l’évangéliste saint Luc',
-                repere: 'La lecture spirituelle de saint Luc met en lumière la sollicitude de Jésus pour les petits, les pécheurs et les marginaux, ainsi que la joie du salut apporté par l’Esprit Saint.',
-                sourceCatechisme: 'CEC 543-546 (L’accueil des pécheurs)',
-                lienAelf: 'https://www.aelf.org/bible/Lc'
-            };
-        }
-        if (/jean|john|juan|\bjn\b/.test(full)) {
-            return {
-                nom: 'saint Jean',
-                auteur: 'le disciple bien-aimé',
-                repere: 'La théologie johannique invite à contempler le Verbe fait chair, la Lumière venue dans le monde et le don suprême de la vie éternelle à travers la foi vive et la charité.',
-                sourceCatechisme: 'CEC 456-460 (Le Verbe incarné)',
-                lienAelf: 'https://www.aelf.org/bible/Jn'
-            };
-        }
-        if (/ézéchiel|ezechiel|\bez\b/.test(full)) {
-            return {
-                nom: 'Ézéchiel',
-                auteur: 'le prophète Ézéchiel',
-                repere: 'Auprès des exilés à Babylone, Ézéchiel met en avant la responsabilité personnelle et la conversion : le Seigneur affirme qu’Il ne prend aucun plaisir à la mort du pécheur, mais désire qu’il vive.',
-                sourceCatechisme: 'CEC 1430-1439 (La conversion du cœur)',
-                lienAelf: 'https://www.aelf.org/bible/Ez'
-            };
-        }
-        if (/isaïe|isaie|\bis\b/.test(full)) {
-            return {
-                nom: 'Isaïe',
-                auteur: 'le prophète Isaïe',
-                repere: 'La voix d’Isaïe console le peuple en annonçant l’Alliance de paix et la figure du Serviteur fidèle qui portera la rédemption des multitudes.',
-                sourceCatechisme: 'CEC 711-716 (L’attente du Messie et de son Esprit)',
-                lienAelf: 'https://www.aelf.org/bible/Is'
-            };
-        }
-        if (/philippiens|\bph\b/.test(full)) {
-            return {
-                nom: 'l’apôtre Paul',
-                auteur: 'saint Paul aux Philippiens',
-                repere: 'Saint Paul propose à la communauté chrétienne l’exemple indépassable de l’abaissement (la kénose) et de l’obéissance du Christ comme fondement de la concorde fraternelle.',
-                sourceCatechisme: 'CEC 2634-2636 (La communion dans le Christ)',
-                lienAelf: 'https://www.aelf.org/bible/Ph'
-            };
-        }
-        return {
-            nom: 'l’Écriture inspirée',
-            auteur: 'l’auteur sacré',
-            repere: 'L’Église enseigne de toujours lire l’Écriture dans le même Esprit que celui où elle a été écrite, en tenant compte du milieu historique et du genre littéraire d’origine.',
-            sourceCatechisme: 'CEC 109-114 (L’Esprit Saint, interprète de l’Écriture)',
-            lienAelf: 'https://www.aelf.org/bible'
-        };
-    };
+    const ctxEv = detectAuthorContext(evRef, evText);
+    const ctxL1 = detectAuthorContext(l1Ref, l1Text);
+    const ctxL2 = detectAuthorContext(l2Ref, l2Text);
 
-    const ctxEv = detectContext(evRef, evText);
-    const ctxL1 = detectContext(l1Ref, l1Text);
-    const ctxL2 = detectContext(l2Ref, l2Text);
-
-    const evQuote = quoteFrom(aEvangile, '', 220);
-    const l1Quote = quoteFrom(aLect1, '', 200);
-    const l2Quote = quoteFrom(aLect2, '', 200);
+    const evQuote = quoteFrom(aEvangile, '', 140);
+    const l1Quote = quoteFrom(aLect1, '', 120);
+    const l2Quote = quoteFrom(aLect2, '', 120);
 
     let psalmRefrain = '';
     if (aPsaume && aPsaume.contenu) {
@@ -2033,93 +2583,59 @@ function genererHomelieLocale(lecture1, psaume, lecture2, evangile, theme, lang)
     }
     if (!psalmRefrain && psRef) psalmRefrain = psRef;
 
-    // Accroche narrative issue du sens spirituel profond
-    const corpus = (evRef + ' ' + l1Ref + ' ' + evText + ' ' + l1Text + ' ' + (theme || '')).toLowerCase();
-    let accrocheSpirituelle = "";
+    // Détection Dimanche vs Férie
+    let isSunday = true;
+    const dateInput = document.getElementById('date-aelf');
+    if (dateInput && dateInput.value) {
+        const parts = dateInput.value.split('-');
+        if (parts.length === 3) {
+            const d = new Date(parseInt(parts[0], 10), parseInt(parts[1], 10) - 1, parseInt(parts[2], 10));
+            isSunday = (d.getDay() === 0);
+        }
+    }
 
-    if (/vigne|ouvrier|fils|parole|actes|deux fils|oui|non/.test(corpus) || /matthieu 21|mt 21/.test(corpus)) {
-        accrocheSpirituelle = "Un père demandait un jour à ses enfants : « Qui viendra m’aider aujourd’hui à travailler le champ familial ? » Le premier, pris par ses occupations, répondit d’un ton sec : « Non, je n’irai pas. » Mais en chemin, touché au cœur par le regard de son père, il eut honte de sa dureté, fit demi-tour et prit la bêche pour labourer jusqu’au soir. Le second, poli et empressé, s’inclina aussitôt : « Oui, bien sûr, père, compte sur moi ! » — pourtant, une fois le père éloigné, il n’y posa jamais les pieds. Cette expérience si humaine touche le secret le plus profond de nos existences : la vérité d’un engagement ne se mesure pas à la beauté des serments que nous prononçons, mais aux pas réels que nous posons sur la terre.";
-    } else if (/miséricorde|pardon|brebis|perdu|prodigue|fils cadet|pêcheur/.test(corpus) || /luc 15|lc 15/.test(corpus)) {
-        accrocheSpirituelle = "Dans une maison ancienne, une lampe demeure allumée près de la fenêtre tout au long de la nuit d’hiver. Un passant demande un jour au maître des lieux : « Pourquoi gaspiller cette huile alors que la nuit est si noire et la route déserte ? » Et le maître de répondre : « Pour que le voyageur qui s’est égaré dans le froid sache, de très loin, qu’il existe encore un foyer ouvert où nul ne lui demandera de justifier ses égarements. » Cette veille patiente reflète le mystère même du cœur de Dieu tel que l’Écriture nous le fait entendre aujourd’hui.";
-    } else if (/aveugle|lumière|vue|silence|ténèbres|bartimée/.test(corpus)) {
-        accrocheSpirituelle = "On raconte qu’un homme marchait dans la pénombre d’une vallée encaissée, se plaignant sans cesse de ne rien voir du paysage. Arrivé au sommet après une rude montée, il s’aperçut que le soleil brillait depuis l’aube : ce n’était pas le soleil qui manquait, c’était lui qui s’était tenu trop longtemps dans le creux de la gorge. L’Écriture de ce jour vient nous réveiller de cette même torpeur pour ouvrir nos yeux à la clarté de Dieu.";
-    } else if (/amour|charité|frère|serviteur|humilité|laver les pieds/.test(corpus) || /philippiens 2|ph 2|1 corinthiens 13/.test(corpus)) {
-        accrocheSpirituelle = "On demandait à un ancien quel était le signe le plus sûr de la présence de Dieu dans une communauté. Il ne parla ni des grands discours, ni des édifices imposants, mais il répondit simplement : « Observez la manière dont ils s'abaissent pour porter les fardeaux les uns des autres dans la discrétion. » C’est ce même esprit de service et de dépouillement que l’Esprit Saint fait résonner dans nos cœurs à travers la liturgie de ce dimanche.";
+    let html = '';
+    if (isSunday) {
+        html += buildHomelieDominicalePellegrino(
+            { ctxEv, ctxL1, ctxL2 },
+            { evQuote, l1Quote, l2Quote },
+            { evRef, l1Ref, l2Ref, psRef },
+            { evTitre, l1Titre, l2Titre },
+            theme,
+            psalmRefrain
+        );
     } else {
-        accrocheSpirituelle = "Il arrive souvent que nous cherchions la voix de Dieu comme un éclat extraordinaire dans les bruits du monde, alors qu'elle nous attend, selon l'admirable intuition biblique, dans le murmure d'une brise légère et dans la fidélité de nos engagements ordinaires. C’est à cette écoute exigeante et consolante que la Parole de Dieu nous éveille en ce jour saint.";
+        html += buildHomelieFerieTony(
+            { ctxEv, ctxL1, ctxL2 },
+            { evQuote, l1Quote, l2Quote },
+            { evRef, l1Ref, l2Ref, psRef },
+            { evTitre, l1Titre, l2Titre },
+            theme,
+            psalmRefrain
+        );
     }
 
-    // TRAME RÉDIGÉE AVEC HUMILITÉ PASTORALE (On propose sans imposer, on suggère de vérifier à la source)
-    let h = "";
-
-    // 1. Accroche narrative
-    h += `<p>${accrocheSpirituelle}</p>`;
-
-    // 2. Écoute selon Dei Verbum 12 et contexte d'origine
-    h += `<p>Face aux textes sacrés proclamés aujourd'hui, l'Église nous rappelle avec sagesse (notamment dans la constitution conciliaire <em>Dei Verbum</em>, n. 12) que nul prédicateur ne s'institue propriétaire du sens : notre démarche consiste d'abord à nous mettre humblement à l'écoute de ce que l'auteur inspiré a véritablement voulu exprimer pour son temps. ${ctxEv.repere} ${evRef ? 'En abordant ce passage de <strong>' + evRef + '</strong>' : 'Dans l’Évangile de ce jour'}, nous sommes invités à vérifier comment ${ctxEv.auteur} interpelle la liberté de ses auditeurs : non pour imposer une doctrine abstraite, mais pour éveiller le désir d'une conversion sincère. ${evTitre ? 'Le lectionnaire liturgique en retient cette tonalité : <em>« ' + evTitre + ' »</em>.' : ''}</p>`;
-
-    if (evQuote) {
-        h += `<p>Laissons retentir la Parole elle-même : <em>« ${evQuote} »</em>. En lisant attentivement ce texte à sa source, nous découvrons combien le Christ met en garde contre l'illusion des dévotions purement verbales. Le Seigneur ne regarde pas seulement nos déclarations d'intention ; Il scrute la fidélité de nos pas quotidiens.</p>`;
+    // Calibrage et contrôle strict de longueur (300 mots dimanche, 100 mots semaine)
+    const maxLimit = isSunday ? 300 : 100;
+    const bodyWords = countWordsInHtml(html);
+    
+    // Si dépassement, application de la troncature
+    let finalBodyHtml = html;
+    let wordCountFinal = bodyWords;
+    if (bodyWords > maxLimit) {
+        const trunc = truncateHtmlToMaxWords(html, maxLimit);
+        finalBodyHtml = trunc.html;
+        wordCountFinal = trunc.count;
     }
 
-    // 3. Typologie et résonance de la Première Lecture
-    if (l1Ref || aLect1) {
-        h += `<p>Pour mieux saisir la portée de cet Évangile, la liturgie de l'Église nous suggère de remonter à la source de la <strong>première lecture ${l1Ref ? '(' + l1Ref + ')' : ''}</strong>. Dans la tradition catholique, l'Ancien Testament préfigure et prépare ce que le Christ accomplit. ${ctxL1.repere} ${l1Titre ? 'Le lectionnaire officiel indique : <em>« ' + l1Titre + ' »</em>. ' : ''}${l1Quote ? 'L’Écriture proclame : <em>« ' + l1Quote + ' »</em>. ' : ''}Les exégètes nous encouragent à constater ici la miséricorde constante de Dieu : Il ne scelle jamais le destin d'un être humain dans ses erreurs passées, mais laisse toujours grand ouvert le chemin du retour à la vie.</p>`;
-    }
-
-    // 4. La réponse priante du Psaume
-    if (psRef || aPsaume) {
-        h += `<p>En écho à cette écoute, l'assemblée a fait monter sa prière par le <strong>Psaume ${psRef ? psRef : ''}</strong> : <em>« ${psalmRefrain} »</em>. Comme le souligne le <em>Directoire sur l'homélie</em>, le psaume responsorial est la voix même du peuple croyant qui s'approprie la Parole entendue. Nous n'y venons pas en justes pleins d'assurance, mais en disciples mendiants de la grâce, nous confiant à la tendresse séculaire du Père.</p>`;
-    }
-
-    // 5. La deuxième lecture apostolique
-    if (l2Ref || aLect2) {
-        h += `<p>La <strong>deuxième lecture ${l2Ref ? '(' + l2Ref + ')' : ''}</strong> vient compléter cet éclairage pour notre vie en communauté. ${ctxL2.repere} ${l2Titre ? 'Elle nous exhorte : <em>« ' + l2Titre + ' »</em>. ' : ''}${l2Quote ? 'Nous y lisons : <em>« ' + l2Quote + ' »</em>. ' : ''}L'Apôtre nous invite à éprouver notre foi dans la communion fraternelle, en nous laissant habiter par la même humilité que celle du Christ Jésus.</p>`;
-    }
-
-    // 6. Actualisation pastorale loyale
-    h += `<p>Que pouvons-nous puiser dans ces saintes Écritures pour nourrir notre marche cette semaine ? Il ne s'agit pas de juger autrui, mais d'interroger en vérité notre propre conscience : <em>y a-t-il un lieu de ma vie où j'ai dit « oui » avec les lèvres, mais où j'hésite encore à m'engager par des actes d'amour, de pardon ou d'écoute ?</em> L'Évangile nous réconforte en nous montrant qu'il n'est jamais trop tard pour se raviser et choisir le chemin de la fidélité. ${theme ? 'C’est aussi ce que suggère cette intuition : <em>' + theme + '</em>.' : ''}</p>`;
-
-    // 7. Conclusion liturgique vers l'Eucharistie
-    h += `<p>Conformément à la règle de la liturgie catholique, la proclamation de la Parole trouve son sommet à la table du sacrifice. Ce que le Christ nous a enseigné par les Écritures, Il nous le donne à vivre sacramentellement sur cet autel : son corps livré et son sang versé pour la multitude. Approchons-nous du mystère eucharistique avec un cœur purifié, pour recevoir la force d'incarner dans nos actes ce que nous professons de notre bouche.</p>`;
-
-    // 8. Prière finale
-    h += `<p><em>Prions :</em> Dieu éternel et tout-puissant, Tu as fait retentir ta Parole au milieu de nous ${evRef ? 'dans l’Évangile (' + evRef + ')' : ''}${l1Ref ? ' et dans la voix de tes témoins (' + l1Ref + ')' : ''}. Donne-nous l'humilité de ne jamais nous croire arrivés, mais d'aller sans cesse puiser à la source vive de ta grâce. Que cette sainte liturgie transforme nos cœurs et nos mains pour que notre vie entière rende témoignage à ton amour. Par Jésus le Christ, notre Seigneur.</p>`;
-    h += `<p style="font-weight:700; text-align:center; margin-top:1rem; color:#4a6f5e; font-size:1.1rem;">Amen.</p>`;
-
-    // 9. BLOC DE VÉRIFICATION OFFICIELLE À LA SOURCE (Exigence de crédibilité et d'humilité pastorale)
-    h += `
-        <div style="margin-top:2rem; background:#f4f1eb; border:1px solid #d9d2c5; border-left:4px solid #7c6f5d; border-radius:8px; padding:1.2rem; font-size:0.88rem; color:#4a4036; line-height:1.6;">
-            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:0.6rem; flex-wrap:wrap; gap:0.5rem;">
-                <strong style="color:#2c221e; font-size:0.95rem;">📚 Repères et sources officielles pour vérification</strong>
-                <span style="font-size:0.75rem; color:#7c6f5d; font-style:italic;">Aller à la source — Magistère et liturgie catholique</span>
-            </div>
-            <p style="margin:0 0 0.8rem 0; font-size:0.85rem; color:#5c5044;">
-                <em>Rappel pastoral :</em> Cette proposition d'homélie n'a aucune autorité doctrinale propre. Elle propose une trame homilétique et suggère au prédicateur et aux fidèles de vérifier et d'approfondir le sens directement auprès des sources officielles de l'Église :
-            </p>
-            <ul style="margin:0; padding-left:1.3rem; list-style-type:square; font-size:0.85rem;">
-                <li style="margin-bottom:0.4rem;">
-                    <strong>Textes liturgiques intégraux :</strong> <a href="${ctxEv.lienAelf}" target="_blank" rel="noopener noreferrer" style="color:#325c48; text-decoration:underline;">Association Épiscopale Liturgique Francophone (AELF)</a>.
-                </li>
-                <li style="margin-bottom:0.4rem;">
-                    <strong>Herméneutique et intention de l'auteur inspiré :</strong> Concile Vatican II, Constitution dogmatique <a href="https://www.vatican.va/archive/hist_councils/ii_vatican_council/documents/vat-ii_const_19651118_dei-verbum_fr.html" target="_blank" rel="noopener noreferrer" style="color:#325c48; text-decoration:underline;"><em>Dei Verbum</em>, n. 12</a>.
-                </li>
-                <li style="margin-bottom:0.4rem;">
-                    <strong>Normes et art de l'homélie :</strong> Congrégation pour le Culte Divin et la Discipline des Sacrements, <a href="https://www.vatican.va/roman_curia/congregations/ccdds/documents/rc_con_ccdds_doc_20140629_direttorio-omiletico_fr.html" target="_blank" rel="noopener noreferrer" style="color:#325c48; text-decoration:underline;"><em>Directoire sur l'homélie</em> (2014)</a>.
-                </li>
-                <li style="margin-bottom:0.4rem;">
-                    <strong>Catéchisme de l'Église Catholique (CEC) :</strong> ${ctxEv.sourceCatechisme} — repères doctrinaux et moraux.
-                </li>
-                <li>
-                    <strong>Lectures et méditations quotidiennes :</strong> <a href="https://fr.novalis.ca/" target="_blank" rel="noopener noreferrer" style="color:#325c48; text-decoration:underline;">Prions en Église (Éditions Novalis)</a>.
-                </li>
-            </ul>
-        </div>
-    `;
-
-    return h;
+    finalBodyHtml += buildSourcesBlock(ctxEv);
+    return {
+        html: finalBodyHtml,
+        wordCount: wordCountFinal,
+        maxLimit: maxLimit,
+        isSunday: isSunday
+    };
 }
-
 document.addEventListener('DOMContentLoaded', function() {
     initAelfDate();
 
@@ -2153,15 +2669,21 @@ document.addEventListener('DOMContentLoaded', function() {
 
             const dateVal = inputDate && inputDate.value ? inputDate.value : "";
             if (!dateVal) {
-                alert("Veuillez choisir une date.");
+                showToast("Veuillez choisir une date.", "warn");
                 return;
             }
 
             if (statusEl) statusEl.textContent = "⏳ Chargement des lectures AELF...";
             btnAelf.disabled = true;
+            window.currentAelfLectures = [];
+const SITUATION_KEYS = [
+    "SOUFFRANCE", "SENS_VIE", "COUPLE", "DEUIL", "SOLITUDE",
+    "COLERE_DIEU", "DOUTE_FOI", "DECISION", "MALADIE", "PEUR_AVENIR",
+    "EPUISEMENT", "CONFLIT_FAMILIAL", "ACCOMPAGNEMENT", "RECHERCHE_SENS", "AUTRE"
+];
 
             try {
-                const res = await fetch(`https://api.aelf.org/v1/messes/${dateVal}/france`);
+                const res = await fetchWithTimeout(`https://api.aelf.org/v1/messes/${dateVal}/france`, {}, 20000);
                 if (!res.ok) throw new Error(`Code HTTP ${res.status}`);
                 const data = await res.json();
                 
@@ -2212,6 +2734,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             } catch (err) {
                 if (statusEl) statusEl.textContent = "⚠️ Impossible de charger l'AELF (" + err.message + "). Saisie manuelle possible.";
+                showToast("Erreur AELF : " + err.message, "error", 4000);
             } finally {
                 btnAelf.disabled = false;
             }
@@ -2228,90 +2751,116 @@ document.addEventListener('DOMContentLoaded', function() {
             const theme = document.getElementById('theme').value.trim();
 
             if (!evangile && !lecture1) {
-                alert("Veuillez entrer au moins l'Évangile ou une lecture.");
+                showToast("Veuillez entrer au moins l'Évangile ou une lecture.", "warn");
                 return;
             }
 
             const homelieDiv = document.getElementById('homelieResponse');
             const loadingDiv = document.getElementById('homelieLoading');
 
-            loadingDiv.style.display = 'block';
+            FoyerUI.startLoadingFeedback('homelieLoading', '🕯️ Préparation de l\'homélie en cours...');
             homelieDiv.style.display = 'none';
             this.disabled = true;
 
             const activeLangBtn = document.querySelector('.lang-btn.active');
             const lang = activeLangBtn ? activeLangBtn.dataset.lang : 'fr';
 
-            let message = `Prépare une homélie complète pour le dimanche avec les lectures suivantes :\n`;
+            let isSundayForPrompt = true;
+            const inputDateVal = document.getElementById('date-aelf')?.value;
+            if (inputDateVal) {
+                const dp = inputDateVal.split('-');
+                if (dp.length === 3) {
+                    const dt = new Date(parseInt(dp[0], 10), parseInt(dp[1], 10) - 1, parseInt(dp[2], 10));
+                    isSundayForPrompt = (dt.getDay() === 0);
+                }
+            }
+
+            let message = isSundayForPrompt
+                ? `Prépare une homélie dominicale narrative et pastorale (maximum strict 300 mots), inspirée de Mgr Joseph Pellegrino (https://frjoeshomilies.net/) et du P. Tony Kadavil (https://frtonyshomilies.com/), avec les lectures suivantes :\n`
+                : `Prépare une brève méditation de férie pour la semaine (maximum strict 100 mots), concise, pédagogique et actionnable, inspirée du P. Tony Kadavil (https://frtonyshomilies.com/ et https://frtonyshomilies.com/2026/01/31/feb-2-7-weekday-homilies/), avec les lectures suivantes :\n`;
+
             if (lecture1) message += `- Première lecture : ${lecture1}\n`;
             if (psaume) message += `- Psaume : ${psaume}\n`;
             if (lecture2) message += `- Deuxième lecture : ${lecture2}\n`;
             if (evangile) message += `- Évangile : ${evangile}\n`;
             if (theme) message += `- Thème suggéré : ${theme}\n`;
 
-            message += `
-L'homélie doit respecter fidèlement l'herméneutique liturgique catholique (Directoire sur l'homélie et Dei Verbum 12) :
-`;
-            message += `- 1. Une accroche narrative ou spirituelle qui émane directement du sens spirituel des textes proclamés.
-`;
-            message += `- 2. L'écoute dans le contexte d'origine et l'intention de l'auteur inspiré (Dei Verbum 12) pour la première lecture et l'Évangile.
-`;
-            message += `- 3. L'harmonie typologique du lectionnaire (comment l'Ancien Testament préfigure et s'accomplit dans le Christ), la résonance du psaume et l'épître.
-`;
-            message += `- 4. L'actualisation pastorale sans moralisme étroit : appel à la conversion et à la vérité des actes.
-`;
-            message += `- 5. L'orientation eucharistique indispensable : transition vers la liturgie de l'autel et l'Eucharistie, suivie d'une prière finale fervente.
-`;
-            message += `- En texte continu, sans intertitres artificiels ni titres proclamés.
-`;
+            message += `\nDémarche homilétique impérative (méthode Mgr Joseph Pellegrino & P. Tony Kadavil) :\n`;
+            message += `1. DÉGAGER D'ABORD LE MESSAGE DE LA PAROLE : Analyse d'abord l'Évangile et les lectures du jour pour identifier leur cœur théologique et spirituel unifié (ce que Dieu dit et demande aujourd'hui).\n`;
+            message += `2. CHOISIR L'HISTOIRE EN FONCTION DU MESSAGE : Ne raconte pas une anecdote générique ; choisis ou forge une histoire du quotidien dont la situation et la leçon incarnent EXACTEMENT le message biblique dégagé à l'étape 1.\n`;
+            message += `3. STYLE DIRECT ET ORAL SANS TITRE : Entre DIRECTEMENT dans le vif du sujet par cette histoire. Pas d'intertitre, pas de mention 'Introduction' ou '1.', pas de puces. Enchaîne immédiatement après l'histoire par la transition naturelle : 'Et c'est précisément ce que nous dit la Parole de Dieu aujourd'hui...' pour parcourir ensuite l'Évangile, la 1ère lecture, la 2ème lecture et le Psaume.\n`;
+            if (isSundayForPrompt) {
+                message += `- Longueur : MAXIMUM STRICT 300 MOTS.\n`;
+                message += `- FORME OBLIGATOIRE : Rédiger le texte en EXACTEMENT 4 PARAGRAPHES continus (séparés par un saut de ligne, AUCUN titre ni numéro) :\n`;
+                message += `  * Paragraphe 1 : L'histoire/parabole concrète du quotidien.\n`;
+                message += `  * Paragraphe 2 : La transition vers la Parole ('C'est exactement ce que nous dit...') unifiant la 1ère lecture et l'Évangile.\n`;
+                message += `  * Paragraphe 3 : L'éclairage de la 2ème lecture et du Psaume.\n`;
+                message += `  * Paragraphe 4 : L'actualisation pastorale concrète pour la semaine et la courte prière finale (Amen).\n`;
+            } else {
+                message += `- Longueur : MAXIMUM STRICT 100 MOTS.\n`;
+                message += `- Méditation de férie concise, vivante et actionnable (lien immédiat entre l'histoire-éclair, l'Évangile du jour, l'acte concret et une prière d'une phrase).\n`;
+            }
+            message += `- Respecter le Directoire sur l'homélie et Dei Verbum 12.\n`;
 
             let homelieHtml = "";
             let modeGeneration = "";
 
-            try {
-                const controller = new AbortController();
-                const timeoutId = setTimeout(() => controller.abort(), 6000);
+            const apiResult = await callDiscernAPI({
+                situation: message,
+                role: 'prêtre',
+                lang: lang,
+                mode: 'lecture'
+            });
 
-                const response = await fetch('/.netlify/functions/discern', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        situation: message,
-                        role: 'prêtre',
-                        lang: lang,
-                        mode: 'lecture'
-                    }),
-                    signal: controller.signal
-                });
-
-                clearTimeout(timeoutId);
-
-                if (response.ok) {
-                    const data = await response.json();
-                    if (data && data.response) {
-                        homelieHtml = data.response
-                            .replace(/\n\n/g, '</p><p>')
-                            .replace(/\n/g, '<br>')
-                            .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-                            .replace(/\*(.*?)\*/g, '<em>$1</em>');
-                        homelieHtml = '<p>' + homelieHtml + '</p>';
-                        modeGeneration = "IA Netlify";
-                    }
+            if (apiResult.ok && apiResult.data && apiResult.data.response) {
+                const safeAiText = escapeHtml(apiResult.data.response);
+                homelieHtml = safeAiText
+                    .replace(/\n\n/g, '</p><p>')
+                    .replace(/\n/g, '<br>')
+                    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                    .replace(/\*(.*?)\*/g, '<em>$1</em>');
+                homelieHtml = '<p>' + homelieHtml + '</p>';
+                modeGeneration = "IA Netlify";
+            } else {
+                if (apiResult.error) {
+                    console.log("Netlify indisponible (" + apiResult.error + "), repli local activé.");
+                    showToast("IA indisponible : génération locale activée", "info", 3500);
                 }
-            } catch (netErr) {
-                console.log("Netlify indisponible (GitHub Pages ou suspendu), repli local activé :", netErr);
             }
 
-            if (!homelieHtml) {
-                homelieHtml = genererHomelieLocale(lecture1, psaume, lecture2, evangile, theme, lang);
+            let currentWordCount = 0;
+            let currentLimit = isSundayForPrompt ? 300 : 100;
+
+            if (homelieHtml) {
+                // Si l'IA Netlify a répondu, tronquer strictement si dépassement
+                const aiWords = countWordsInHtml(homelieHtml);
+                if (aiWords > currentLimit) {
+                    const trunc = truncateHtmlToMaxWords(homelieHtml, currentLimit);
+                    homelieHtml = trunc.html;
+                    currentWordCount = trunc.count;
+                } else {
+                    currentWordCount = aiWords;
+                }
+                homelieHtml += LEGAL_NOTICE_HOMILIE;
+            } else {
+                const localRes = genererHomelieLocale(lecture1, psaume, lecture2, evangile, theme, lang);
+                homelieHtml = localRes.html;
+                currentWordCount = localRes.wordCount;
+                currentLimit = localRes.maxLimit;
                 modeGeneration = "Génération locale autonome";
             }
 
+            const badgeColor = currentWordCount <= currentLimit ? '#2e6b47' : '#c0392b';
+            const badgeBg = currentWordCount <= currentLimit ? '#e8efe9' : '#fbeae8';
+
             const finalHtml = `
                 <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #dfd7ca; padding-bottom:0.75rem; margin-bottom:1rem; flex-wrap:wrap; gap:0.5rem;">
-                    <div>
+                    <div style="display:flex; align-items:center; gap:0.6rem; flex-wrap:wrap;">
                         <strong style="color:#4a6f5e; font-size:1.1rem;">🕊️ Proposition d'homélie</strong>
-                        <span style="font-size:0.75rem; background:#eae5dc; color:#6b5d52; padding:2px 8px; border-radius:10px; margin-left:0.5rem;">${modeGeneration}</span>
+                        <span style="font-size:0.75rem; background:#eae5dc; color:#6b5d52; padding:2px 8px; border-radius:10px;">${modeGeneration}</span>
+                        <span id="homelie-word-counter" style="font-size:0.8rem; background:${badgeBg}; color:${badgeColor}; border:1px solid ${badgeColor}33; padding:2px 10px; border-radius:12px; font-weight:bold;">
+                            📊 ${currentWordCount} / ${currentLimit} mots max
+                        </span>
                     </div>
                     <button type="button" id="btn-copier-homelie" style="background:#4a6f5e; color:#fff; border:none; padding:6px 14px; border-radius:6px; cursor:pointer; font-size:0.85rem; font-weight:600;">
                         📋 Copier l'homélie
@@ -2324,7 +2873,7 @@ L'homélie doit respecter fidèlement l'herméneutique liturgique catholique (Di
 
             homelieDiv.innerHTML = finalHtml;
             homelieDiv.style.display = 'block';
-            loadingDiv.style.display = 'none';
+            FoyerUI.stopLoadingFeedback('homelieLoading');
             genererBtn.disabled = false;
 
             const copyBtn = document.getElementById('btn-copier-homelie');
@@ -2333,9 +2882,10 @@ L'homélie doit respecter fidèlement l'herméneutique liturgique catholique (Di
                     const textToCopy = document.getElementById('homelie-texte-contenu').innerText;
                     navigator.clipboard.writeText(textToCopy).then(() => {
                         copyBtn.textContent = '✅ Copiée !';
+                        showToast("Homélie copiée dans le presse-papier !", "info");
                         setTimeout(() => { copyBtn.textContent = '📋 Copier l\'homélie'; }, 2500);
                     }).catch(() => {
-                        alert("Le texte peut être sélectionné et copié manuellement.");
+                        showToast("Le texte peut être sélectionné et copié manuellement.", "warn");
                     });
                 });
             }
@@ -2367,6 +2917,102 @@ L'homélie doit respecter fidèlement l'herméneutique liturgique catholique (Di
     updateLanguage(lang);
 })();
 showPage();
+
+    /* === SPRINT 4 : GESTION DES INTERACTIONS ACCESSIBILITÉ & UX === */
+    // 1. Mise à jour dynamique de aria-pressed pour les boutons de langue
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.lang-btn').forEach(b => b.setAttribute('aria-pressed', 'false'));
+            btn.setAttribute('aria-pressed', 'true');
+        });
+    });
+
+    // 2. Mise à jour dynamique de aria-pressed pour les boutons de mode
+    document.querySelectorAll('.mode-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.mode-btn').forEach(b => b.setAttribute('aria-pressed', 'false'));
+            btn.setAttribute('aria-pressed', 'true');
+        });
+    });
+
+    // 3. Bouton Retour en haut de page (> 600px de scroll)
+    const backToTopBtn = document.getElementById('back-to-top');
+    if (backToTopBtn) {
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 600) {
+                backToTopBtn.style.display = 'flex';
+            } else {
+                backToTopBtn.style.display = 'none';
+            }
+        }, { passive: true });
+
+        backToTopBtn.addEventListener('click', () => {
+            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            window.scrollTo({ top: 0, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
+        });
+    }
+
+    // 4. Bouton Effacer mon carnet avec confirmation
+    const clearCarnetBtn = document.getElementById('clear-carnet');
+    if (clearCarnetBtn) {
+        clearCarnetBtn.addEventListener('click', () => {
+            const confirmed = window.confirm("Êtes-vous certain de vouloir effacer toutes les notes de votre carnet ? Cette action est irréversible.");
+            if (confirmed) {
+                localStorage.removeItem('carnet_lumiere');
+                const carnetInput = document.getElementById('carnet-entry');
+                if (carnetInput) carnetInput.value = '';
+                if (typeof showToast === 'function') {
+                    showToast("Votre carnet a été réinitialisé.", "info");
+                }
+            }
+        });
+    }
+
+    // 5. Bouton Effacer mes témoignages avec confirmation
+    const clearTemoignagesBtn = document.getElementById('clear-temoignages');
+    if (clearTemoignagesBtn) {
+        clearTemoignagesBtn.addEventListener('click', () => {
+            const confirmed = window.confirm("Souhaitez-vous effacer l'historique de vos témoignages enregistrés sur cet appareil ?");
+            if (confirmed) {
+                localStorage.removeItem('temoignages');
+                if (typeof afficherTemoignages === 'function') {
+                    afficherTemoignages();
+                } else {
+                    const liste = document.getElementById('temoignagesListe');
+                    if (liste) liste.innerHTML = '';
+                }
+                if (typeof showToast === 'function') {
+                    showToast("Vos témoignages locaux ont été effacés.", "info");
+                }
+            }
+        });
+    }
+
+    // 6. Sécurisation et désactivation de #genererHomelie pendant la génération
+    const homelieBtn = document.getElementById('genererHomelie');
+    if (homelieBtn) {
+        homelieBtn.addEventListener('click', () => {
+            // Désactiver temporairement le bouton
+            homelieBtn.disabled = true;
+            homelieBtn.style.opacity = '0.6';
+            homelieBtn.style.cursor = 'not-allowed';
+            setTimeout(() => {
+                homelieBtn.disabled = false;
+                homelieBtn.style.opacity = '1';
+                homelieBtn.style.cursor = 'pointer';
+            }, 3000);
+        });
+    }
+
+
+    // Initialisation des textes par défaut pour les langues secondaires
+    ['zh', 'hi', 'es', 'ar'].forEach(l => {
+        if (translations[l] && (!translations[l].textesParSituation || Object.keys(translations[l].textesParSituation).length === 0)) {
+            translations[l].textesParSituation = Object.assign({}, translations.fr.textesParSituation);
+        }
+    });
 </script>
+    <!-- Bouton Retour en haut de page -->
+    <button id="back-to-top" aria-label="Retour en haut de page" title="Haut de page">↑</button>
 </body>
 </html>
