@@ -35,6 +35,7 @@
     <nav class="nav-menu" aria-label="Navigation principale">
         <a href="#/" id="navHome" data-page="accueil">🏠 Accueil</a>
         <a href="#/sagesse" id="navSagesse" data-page="sagesse">📖 Sagesse</a>
+        <a href="#/comment-ca-marche" id="navComment" data-page="comment-ca-marche">💡 Comment ça marche</a>
         <a href="#/a-propos" id="navAbout" data-page="apropos">📖 À propos</a>
         <a href="#/examen" id="navExamen" data-page="examen">🕯️ Examen</a>
         <a href="#/sources" id="navSources" data-page="sources">📚 Sources</a>
@@ -71,7 +72,19 @@
             <textarea id="precision-situation" rows="2" placeholder="Tu peux préciser ce que tu vis, si tu le souhaites..."></textarea>
         </fieldset>
 
-        <button type="button" id="submitBtn">Recevoir une aide au discernement →</button>
+        <div style="display:flex;gap:0.8rem;flex-wrap:wrap;align-items:center;margin-top:0.5rem;">
+            <button type="button" id="submitBtn">🌿 Réfléchir avec le compagnon →</button>
+            <button type="button" id="btn-parler-humain" style="background:transparent;color:#8b5e3c;border:2px solid #c49a6c;font-weight:600;">🤝 Parler à une personne</button>
+        </div>
+
+        <div id="aide-methodo" style="display:none;background:#fff8f0;border-left:4px solid #c49a6c;border-radius:8px;padding:1rem;margin-top:1rem;font-size:0.9rem;line-height:1.6;color:#5a4f42;">
+            <strong>💡 Discernement en 4 étapes</strong><br>
+            1️⃣ <strong>Ce que je vis</strong> (situation concrète)<br>
+            2️⃣ <strong>Ce que je ressens</strong> (émotions, mouvements intérieurs)<br>
+            3️⃣ <strong>Ce qui me donne paix / ce qui me trouble</strong> (consolation / désolation)<br>
+            4️⃣ <strong>Quel petit pas puis-je poser ?</strong><br>
+            <em>Le compagnon vous aide à traverser ces étapes, mais ne décide pas à votre place.</em>
+        </div>
 
         <div id="response-container" aria-live="polite">
             <div id="response-lecture"><div id="reponse" class="reponse-card"></div></div>
@@ -201,6 +214,7 @@
     </div>
 
     <div id="page-sagesse" class="page"></div>
+    <div id="page-comment-ca-marche" class="page"></div>
     <div id="page-apropos" class="page"></div>
     <div id="page-examen" class="page"></div>
     <div id="page-sources" class="page"></div>
@@ -220,7 +234,11 @@
             <a id="toggle-urgence" href="#" role="button" aria-expanded="false">Voir les numéros d'urgence</a>
             <div id="urgence-list" class="emergency-numbers"></div>
         </div>
-        <div class="clause"><p id="clause-text"></p></div>
+        <div class="clause">
+            <p><strong>🎯 Notre mission</strong> : Au Foyer de l'Amour est un compagnon numérique d'aide au discernement chrétien. Il vous aide à <strong>écouter, discerner et prier</strong>, puis à rejoindre une personne humaine si nécessaire.</p>
+            <p id="clause-text" style="margin-top:0.8rem;"></p>
+            <p style="margin-top:0.8rem;"><a href="#/comment-ca-marche" style="color:#4a6f5e;font-weight:600;">💡 En savoir plus sur le fonctionnement du compagnon</a></p>
+        </div>
     </footer>
 </div>
 
