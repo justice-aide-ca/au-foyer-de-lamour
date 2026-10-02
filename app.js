@@ -22,6 +22,10 @@ const FR = {
     placeholder: "Décrivez votre situation...", role: "Qui êtes-vous ? (optionnel)",
     submit: "🌿 Réfléchir avec le compagnon →", loading: "Discernement en cours...",
     alertSituation: "Veuillez décrire votre situation ou choisir une option.",
+    // 🕯️ Charte de confiance
+    charteTitre: "Un compagnon, pas un décideur",
+    charteTexte: "Cet outil vous aide à mettre des mots sur ce que vous vivez, à prier et à discerner. <strong>Il ne décide jamais à votre place</strong> et ne remplace pas une relation humaine.",
+    charteDetail: "Ce compagnon propose des pistes de réflexion spirituelle. Il ne remplace ni un accompagnateur spirituel, ni un prêtre, ni un professionnel de santé ou de l'aide psychosociale.",
     situationsTitle: "Ou choisissez ce qui correspond le mieux à ce que vous vivez :",
     precisionPlaceholder: "Tu peux préciser ce que tu vis, si tu le souhaites...",
     btnContinuer: "🌿 Continuer le discernement", ressourcesTitle: "Pour continuer...",
@@ -95,6 +99,9 @@ EN.title = "🕯️ Home of Love"; EN.subtitle = "Discernment and the little lig
 EN.placeholder = "Describe your situation..."; EN.role = "Who are you? (optional)";
 EN.submit = "🌿 Think with the companion →"; EN.loading = "Discernment in progress...";
 EN.alertSituation = "Please describe your situation or choose an option.";
+EN.charteTitre = "A companion, not a decider";
+EN.charteTexte = "This tool helps you put words on what you live, to pray and to discern. <strong>It never decides for you</strong> and does not replace a human relationship.";
+EN.charteDetail = "This companion offers spiritual reflection paths. It replaces neither a spiritual director, nor a priest, nor a health professional or psychosocial support.";
 EN.situationsTitle = "Or choose what best matches what you are experiencing:";
 EN.precisionPlaceholder = "You can specify what you are experiencing...";
 EN.btnContinuer = "🌿 Continue discernment"; EN.ressourcesTitle = "To continue...";
@@ -159,6 +166,9 @@ ZH.title = "🕯️ 爱之家"; ZH.subtitle = "辨别与小光";
 ZH.placeholder = "描述你的情况..."; ZH.role = "你是谁？（可选）";
 ZH.submit = "🌿 与同伴一起反思 →"; ZH.loading = "辨别进行中...";
 ZH.alertSituation = "请描述您的情况或选择一个选项。";
+ZH.charteTitre = "一位同伴，而非决定者";
+ZH.charteTexte = "此工具帮助您表达所经历的，祈祷并辨别。<strong>它绝不替您做决定</strong>，也不替代人际关系。";
+ZH.charteDetail = "此同伴提供灵修反思的建议。它不替代灵修导师、神父、医疗专业人员或社会心理支持。";
 ZH.situationsTitle = "或选择最符合你经历的情况：";
 ZH.precisionPlaceholder = "如果你想，你可以详细说明...";
 ZH.btnContinuer = "🌿 继续辨别"; ZH.ressourcesTitle = "继续...";
@@ -223,6 +233,9 @@ HI.title = "🕯️ प्रेम का घर"; HI.subtitle = "विवे�
 HI.placeholder = "अपनी स्थिति का वर्णन करें..."; HI.role = "आप कौन हैं? (वैकल्पिक)";
 HI.submit = "🌿 साथी के साथ चिंतन करें →"; HI.loading = "विवेक जारी है...";
 HI.alertSituation = "कृपया अपनी स्थिति बताएं या एक विकल्प चुनें।";
+HI.charteTitre = "एक साथी, निर्णयकर्ता नहीं";
+HI.charteTexte = "यह उपकरण आपको जो आप अनुभव करते हैं उसे शब्दों में व्यक्त करने, प्रार्थना करने और विवेक करने में मदद करता है। <strong>यह कभी आपके स्थान पर निर्णय नहीं लेता</strong>।";
+HI.charteDetail = "यह साथी आध्यात्मिक चिंतन के सुझाव प्रदान करता है। यह आध्यात्मिक मार्गदर्शक, पादरी, स्वास्थ्य पेशेवर या मनोसामाजिक सहायता का स्थान नहीं लेता।";
 HI.situationsTitle = "या जो आप अनुभव कर रहे हैं उसके अनुसार चुनें:";
 HI.precisionPlaceholder = "आप जो अनुभव कर रहे हैं, उसे विस्तार से बता सकते हैं...";
 HI.btnContinuer = "🌿 विवेक जारी रखें"; HI.ressourcesTitle = "जारी रखने के लिए...";
@@ -269,6 +282,9 @@ ES.title = "🕯️ Hogar del Amor"; ES.subtitle = "Discernimiento y la pequeña
 ES.placeholder = "Describe tu situación..."; ES.role = "¿Quién eres? (opcional)";
 ES.submit = "🌿 Reflexionar con el compañero →"; ES.loading = "Discernimiento en curso...";
 ES.alertSituation = "Por favor describa su situación o elija una opción.";
+ES.charteTitre = "Un compañero, no un decidor";
+ES.charteTexte = "Esta herramienta le ayuda a poner palabras en lo que vive, a orar y a discernir. <strong>Nunca decide por usted</strong> y no reemplaza una relación humana.";
+ES.charteDetail = "Este compañero ofrece pistas de reflexión espiritual. No reemplaza ni a un acompañante espiritual, ni a un sacerdote, ni a un profesional de salud o apoyo psicosocial.";
 ES.situationsTitle = "O elige lo que mejor se adapte a lo que estás viviendo:";
 ES.precisionPlaceholder = "Puedes precisar lo que vives, si lo deseas...";
 ES.btnContinuer = "🌿 Continuar el discernimiento"; ES.ressourcesTitle = "Para continuar...";
@@ -315,6 +331,9 @@ AR.title = "🕯️ بيت المحبة"; AR.subtitle = "التمييز والن
 AR.placeholder = "صف حالتك..."; AR.role = "من أنت؟ (اختياري)";
 AR.submit = "🌿 تفكّر مع الرفيق →"; AR.loading = "التمييز جارٍ...";
 AR.alertSituation = "يرجى وصف حالتك أو اختيار خيار.";
+AR.charteTitre = "رفيق، لا متخذ قرار";
+AR.charteTexte = "تساعدك هذه الأداة على وضع كلمات لما تعيشه، والصلاة، والتمييز. <strong>لا تقرر أبداً بدلاً عنك</strong> ولا تحل محل علاقة إنسانية.";
+AR.charteDetail = "يقدم هذا الرفيق مسارات تأمل روحي. لا يحل محل المرافق الروحي، ولا الكاهن، ولا المهني الصحي أو الدعم النفسي الاجتماعي.";
 AR.situationsTitle = "أو اختر ما يناسب ما تعيشه:";
 AR.precisionPlaceholder = "يمكنك تحديد ما تعيشه، إذا رغبت...";
 AR.btnContinuer = "🌿 متابعة التمييز"; AR.ressourcesTitle = "للمتابعة...";
@@ -358,7 +377,7 @@ AR.pageExamen = { title: "🕯️ الفحص الموجه", intro: "خمس خط�
 const translations = { fr: FR, en: EN, zh: ZH, hi: HI, es: ES, ar: AR };
 
 /* ============================================================
-   BASE DE CONNAISSANCE EXÉGÉTIQUE (fallback local)
+   BASE DE CONNAISSANCE EXÉGÉTIQUE
    ============================================================ */
 const EXEGESIS_HINTS = {
     isaie: { nom: "Isaïe", contexte: "Le prophète Isaïe exerce son ministère à Jérusalem au VIIIe siècle av. J.-C. Le « cantique de la vigne » (Is 5, 1-7) est un chant d'amour blessé : Dieu y apparaît comme l'époux déçu de son peuple.", enseignement: "Dieu a tout préparé avec soin pour Israël, mais la vigne a produit du raisin mauvais. Ce n'est pas un jugement extérieur, mais le cri d'un amour déçu qui attend des fruits de justice." },
@@ -561,11 +580,9 @@ const pageContent = {
 <tr><td style="padding:8px;border:1px solid #d4d4d4;"><strong>Votre situation écrite</strong></td><td style="padding:8px;border:1px solid #d4d4d4;">Envoyée à OpenAI via Netlify</td><td style="padding:8px;border:1px solid #d4d4d4;">Transitoire (non conservée)</td><td style="padding:8px;border:1px solid #d4d4d4;">Personne (usage unique)</td></tr>
 <tr><td style="padding:8px;border:1px solid #d4d4d4;"><strong>Votre carnet</strong></td><td style="padding:8px;border:1px solid #d4d4d4;">Navigateur (localStorage)</td><td style="padding:8px;border:1px solid #d4d4d4;">Jusqu'à effacement</td><td style="padding:8px;border:1px solid #d4d4d4;">Vous uniquement</td></tr>
 <tr><td style="padding:8px;border:1px solid #d4d4d4;"><strong>Vos témoignages</strong></td><td style="padding:8px;border:1px solid #d4d4d4;">Navigateur (localStorage)</td><td style="padding:8px;border:1px solid #d4d4d4;">Jusqu'à effacement</td><td style="padding:8px;border:1px solid #d4d4d4;">Vous uniquement</td></tr>
-<tr><td style="padding:8px;border:1px solid #d4d4d4;"><strong>Votre langue</strong></td><td style="padding:8px;border:1px solid #d4d4d4;">Navigateur (localStorage)</td><td style="padding:8px;border:1px solid #d4d4d4;">Jusqu'à effacement</td><td style="padding:8px;border:1px solid #d4d4d4;">Vous uniquement</td></tr>
 <tr><td style="padding:8px;border:1px solid #d4d4d4;"><strong>Statistiques anonymes</strong></td><td style="padding:8px;border:1px solid #d4d4d4;">GoatCounter (sans cookies)</td><td style="padding:8px;border:1px solid #d4d4d4;">30 jours</td><td style="padding:8px;border:1px solid #d4d4d4;">Nous (anonymisées)</td></tr>
 </tbody>
 </table>
-<p style="margin-top:1rem;font-size:0.85rem;color:#5a4f42;"><em>⚠️ Les données envoyées à OpenAI peuvent être conservées jusqu'à 30 jours selon leur <a href="https://openai.com/policies/row-privacy-policy/" target="_blank" rel="noopener" style="color:#4a6f5e;text-decoration:underline;">politique de confidentialité</a>.</em></p>
 </div>
 <div class="bloc" style="background:#e8efe9;border-left:4px solid #2e6b47;"><h3>✅ En bref</h3><p><strong>Aucun compte.</strong> <strong>Aucun cookie de suivi.</strong> <strong>Aucune publicité.</strong> <strong>Aucune revente de données.</strong></p></div>
 <div class="bloc" style="background:#fdecea;border-left:4px solid #c0392b;"><h3>🚨 En cas d'urgence</h3><p>Ce site n'est <strong>pas un service d'urgence</strong>. Si vous êtes en danger immédiat, appelez les <strong>services d'urgence</strong> de votre pays (911, 112, 15, 17, 18…).</p></div>`
@@ -1001,6 +1018,11 @@ function updateLanguage(lang) {
     setPlaceholder('role', t.role);
     setPlaceholder('precision-situation', t.precisionPlaceholder);
     setText('submitBtn', t.submit);
+
+    // 🕯️ Charte de confiance
+    setText('charte-titre', t.charteTitre || '');
+    setHtml('charte-texte', t.charteTexte || '');
+    setText('charte-detail', t.charteDetail || '');
 
     const grid = document.querySelector('.situations-grid');
     if (grid) {
