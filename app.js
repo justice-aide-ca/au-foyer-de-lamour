@@ -1274,15 +1274,6 @@ function init() {
     initAelfDate();
     bindEvents();
 
-    // Enregistrer le Service Worker (PWA) — si présent
-    if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-            navigator.serviceWorker.register('/sw.js')
-                .then(() => console.log('✅ Service Worker enregistré'))
-                .catch(err => console.warn('⚠️ Service Worker non enregistré :', err));
-        });
-    }
-
     let lang = '';
     try { lang = localStorage.getItem(STORAGE_KEYS.LANG) || ''; } catch (e) {}
     if (LANGS.indexOf(lang) === -1) { const n = (navigator.language || '').slice(0, 2).toLowerCase(); lang = LANGS.indexOf(n) !== -1 ? n : 'fr'; }
