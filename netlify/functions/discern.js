@@ -9,7 +9,7 @@ const SENSITIVE_PATTERNS = [
     /viol|abus|agress|frapp|batt|violence|abuse|assault/i,
     /drogue|overdose|alcool|addiction|toxic/i,
     /harcèlement|harceler|menac|terroris|harassment|threat/i,
-    /dépression\s+sévère|névrose|psychose|schizophr|psychiatric/i
+    /dépression\s+sévère|névrose|psychose|schizophr|psychiatric/i 
 ];
 
 function isSensitiveSituation(text) {
