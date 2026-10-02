@@ -10,7 +10,7 @@ const WORD_LIMITS = { sunday: 300, weekday: 200 };
 
 let currentLang = 'fr';
 let currentMode = 'discernement';
-let currentSituationKey = null;
+let currentSituationKey = null; 
 let examenIdx = 0;
 let aelfLectures = [];
 
