@@ -1,3 +1,4 @@
+// netlify/functions/discern.js
 const OPENAI_URL = 'https://api.openai.com/v1/chat/completions';
 const MODEL = 'gpt-4o-mini';
 const LANG_NAMES = { fr: 'français', en: 'English', zh: '中文', hi: 'हिन्दी', es: 'español', ar: 'العربية' };
@@ -20,6 +21,7 @@ exports.handler = async (event) => {
     catch (e) { return { statusCode: 400, headers, body: JSON.stringify({ error: 'Requête invalide' }) }; }
 
     const situation = (payload.situation || '').toString().trim();
+    const lecturesJour = payload.lecturesJour && typeof payload.lecturesJour === 'object' ? payload.lecturesJour : null;
     const role      = (payload.role      || '').toString().trim().slice(0, 200);
     const lang      = (payload.lang      || 'fr').toString().slice(0, 5);
     const mode      = (payload.mode      || 'discernement').toString();
@@ -32,7 +34,7 @@ exports.handler = async (event) => {
     }
 
     const system = buildSystemPrompt(mode, lang, isSunday);
-    const user   = buildUserPrompt({ situation, role, mode, lectures, verses, lang });
+    const user   = buildUserPrompt({ situation, role, mode, lectures, verses, lang, lecturesJour });
     const messages = [
         { role: 'system', content: system },
         { role: 'user',   content: user   }
@@ -152,7 +154,7 @@ LENGTH: 200 WORDS MAXIMUM.`
     return `${base}\n\n${modeBlock}${langLine}`;
 }
 
-function buildUserPrompt({ situation, role, mode, lectures, verses, lang }) {
+function buildUserPrompt({ situation, role, mode, lectures, verses, lang, lecturesJour }) {
     const langName = LANG_NAMES[lang] || 'français';
     let prompt = '';
 
@@ -172,6 +174,19 @@ function buildUserPrompt({ situation, role, mode, lectures, verses, lang }) {
     }
 
     prompt += `Situation de la personne :\n"""${situation}"""\n`;
+
+    // Enrichir avec les lectures du jour si disponibles
+    if (lecturesJour && (lecturesJour.evangile || lecturesJour.lecture1)) {
+        prompt += `\n📖 Lectures liturgiques du jour (à utiliser pour enrichir ta réponse, en citant UNE seule référence) :\n`;
+        if (lecturesJour.evangile) {
+            prompt += `- Évangile (${lecturesJour.evangile.ref}) : « ${lecturesJour.evangile.texte} »\n`;
+        }
+        if (lecturesJour.lecture1) {
+            prompt += `- Première lecture (${lecturesJour.lecture1.ref}) : « ${lecturesJour.lecture1.texte} »\n`;
+        }
+        prompt += `\n⚠️ Cite l'Évangile du jour en priorité pour ancrer ta réponse dans la liturgie de ce jour.\n`;
+    }
+
     if (role) prompt += `\nRôle / vocation : ${role}\n`;
     if (verses && verses.length) {
         prompt += `\nPassages bibliques :\n`;
