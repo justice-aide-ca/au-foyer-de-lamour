@@ -778,9 +778,21 @@ async function handleSubmit() {
         situation, role, lang: currentLang, mode: currentMode,
         lecturesJour
     });
-    if (r.ok && r.data && r.data.response) reponse = r.data.response;
-    else if (r.error) { console.log('Fallback:', r.error); showToast('Mode autonome activé.', 'info', 3500); }
-    if (!reponse) reponse = buildFallback(situation, t);
+   if (r.ok && r.data && r.data.response) {
+    reponse = r.data.response;
+    // Si l'IA a détecté une situation sensible, afficher un avertissement renforcé
+    if (r.data.sensitive) {
+        const urgences = (translations[currentLang] || FR).ecouteList || [];
+        const urgentBlock = "\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n" +
+                            "🆘 RESSOURCES D'AIDE IMMÉDIATE\n" +
+                            "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n" +
+                            urgences.map(u => "• " + u).join("\n");
+        reponse += urgentBlock;
+        showToast('🆘 Situation grave détectée — Ressources d\'urgence ajoutées', 'warn', 7000);
+    }
+}
+else if (r.error) { console.log('Fallback:', r.error); showToast('Mode autonome activé.', 'info', 3500); }
+if (!reponse) reponse = buildFallback(situation, t);
 
     showResponse(reponse);
     updateRessources(currentSituationKey);
