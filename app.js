@@ -12,7 +12,7 @@ let currentLang = 'fr';
 let currentMode = 'discernement';
 let currentSituationKey = null;
 let examenIdx = 0;
-let aelfLectures = []; 
+let aelfLectures = [];
 
 /* ============================================================
    TRADUCTIONS
@@ -201,7 +201,7 @@ ZH.homelieCopied = "✅ 已复制！";
 ZH.homelieToast = "讲道已复制！";
 ZH.homelieSelectManual = "请手动选择并复制。";
 ZH.homelieLegalTitle = "⚖️ 法律区分：灵感 vs 复制";
-ZH.homelieLegalText = "此讲道是基于 <strong>Mgr Joseph A. Pellegrino</strong> 和 <strong>Père Tony Kadavil</strong> 牧灵方法的<strong>原创作品</strong>，并非对其受保护作品的完整复制，而是尊重版权、<em>讲道指南</em>和 AELF 文本的自主精神运用。";
+ZH.homelieLegalText = "此讲道是基于 <strong>Mgr Joseph A. Pellegrino</strong> 和 <strong>Père Tony Kadavil</strong> 牧灵方法的<strong>原创作品</strong>，并非对其受保护作品的完整复制。";
 ZH.homelieSourcesTitle = "📚 官方来源与知识产权";
 ZH.homelieSourcesTextes = "礼仪文本：";
 ZH.homelieSourcesPredication = "主日讲道：";
@@ -763,8 +763,21 @@ async function handleSubmit() {
     const t = translations[currentLang] || FR;
     FoyerUI.start('loading', 'loading-text', t.loading);
 
+    // ✅ IA enrichie : Récupérer les lectures du jour si chargées
+    let lecturesJour = null;
+    if (aelfLectures && aelfLectures.length) {
+        const parsed = parseAelfLectures(aelfLectures);
+        lecturesJour = {
+            evangile: parsed.evangile ? { ref: parsed.evangile.ref, texte: stripHtml(parsed.evangile.contenu).slice(0, 500) } : null,
+            lecture1: parsed.lect1 ? { ref: parsed.lect1.ref, texte: stripHtml(parsed.lect1.contenu).slice(0, 400) } : null
+        };
+    }
+
     let reponse = '';
-    const r = await callDiscernAPI({ situation, role, lang: currentLang, mode: currentMode });
+    const r = await callDiscernAPI({
+        situation, role, lang: currentLang, mode: currentMode,
+        lecturesJour
+    });
     if (r.ok && r.data && r.data.response) reponse = r.data.response;
     else if (r.error) { console.log('Fallback:', r.error); showToast('Mode autonome activé.', 'info', 3500); }
     if (!reponse) reponse = buildFallback(situation, t);
@@ -801,7 +814,6 @@ function truncateHtml(html, max) {
     return { html: '<p>' + tr + '</p><p style="font-size:0.82rem;color:#8c6b32;font-style:italic;">⚠️ Texte calibré à ' + max + ' mots.</p>', count: max };
 }
 
-/* ---------- Bloc légal traduisible ---------- */
 function buildLegalNotice() {
     const t = translations[currentLang] || FR;
     return "<div style='margin-top:1.5rem;padding:1rem;background:#f5f3ef;border:1px solid #dcd5c9;border-left:4px solid #4a6f5e;border-radius:6px;font-size:0.84rem;color:#443b34;line-height:1.55;'>" +
@@ -809,7 +821,6 @@ function buildLegalNotice() {
         (t.homelieLegalText || '') + "</div>";
 }
 
-/* ---------- Bloc sources traduisible ---------- */
 function buildSourcesBlock(ctx) {
     const t = translations[currentLang] || FR;
     return "<div style='margin-top:2rem;background:#f4f1eb;border:1px solid #d9d2c5;border-left:4px solid #7c6f5d;border-radius:8px;padding:1.2rem;font-size:0.88rem;color:#4a4036;line-height:1.6;'>" +
