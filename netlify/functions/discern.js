@@ -3,6 +3,20 @@ const OPENAI_URL = 'https://api.openai.com/v1/chat/completions';
 const MODEL = 'gpt-4o-mini';
 const LANG_NAMES = { fr: 'français', en: 'English', zh: '中文', hi: 'हिन्दी', es: 'español', ar: 'العربية' };
 
+// Détection des situations sensibles (mots-clés multilingues)
+const SENSITIVE_PATTERNS = [
+    /suicid|me\s+tuer|mourir|en\s+finir|plus\s+vivre|veux\s+mourir|me\s+suicider|kill\s+myself|suicide|end\s+my\s+life|want\s+to\s+die/i,
+    /viol|abus|agress|frapp|batt|violence|abuse|assault/i,
+    /drogue|overdose|alcool|addiction|toxic/i,
+    /harcèlement|harceler|menac|terroris|harassment|threat/i,
+    /dépression\s+sévère|névrose|psychose|schizophr|psychiatric/i
+];
+
+function isSensitiveSituation(text) {
+    if (!text) return false;
+    return SENSITIVE_PATTERNS.some(pattern => pattern.test(text));
+}
+
 exports.handler = async (event) => {
     const headers = {
         'Content-Type': 'application/json; charset=utf-8',
@@ -33,7 +47,10 @@ exports.handler = async (event) => {
         return { statusCode: 400, headers, body: JSON.stringify({ error: 'Situation invalide ou trop longue.' }) };
     }
 
-    const system = buildSystemPrompt(mode, lang, isSunday);
+    // Détection automatique de situation sensible
+    const sensitive = isSensitiveSituation(situation);
+
+    const system = buildSystemPrompt(mode, lang, isSunday, sensitive);
     const user   = buildUserPrompt({ situation, role, mode, lectures, verses, lang, lecturesJour });
     const messages = [
         { role: 'system', content: system },
@@ -69,7 +86,13 @@ exports.handler = async (event) => {
         const data = await res.json();
         const text = (data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content || '').trim();
         if (!text) return { statusCode: 502, headers, body: JSON.stringify({ error: 'Réponse vide.' }) };
-        return { statusCode: 200, headers, body: JSON.stringify({ response: text }) };
+
+        // Signaler au front si la situation est sensible
+        return {
+            statusCode: 200,
+            headers,
+            body: JSON.stringify({ response: text, sensitive })
+        };
     } catch (err) {
         console.error('Function error:', err);
         const msg = err && err.name === 'AbortError' ? 'Délai dépassé.' : 'Erreur serveur.';
@@ -77,18 +100,92 @@ exports.handler = async (event) => {
     }
 };
 
-function buildSystemPrompt(mode, lang, isSunday) {
+function buildSystemPrompt(mode, lang, isSunday, sensitive) {
+    // ⚠️ PROTOCOLE DE SÉCURITÉ EN PRIORITÉ ABSOLUE
+    if (sensitive && mode !== 'homelie') {
+        const sensitivePrompts = {
+            fr: `⚠️ PROTOCOLE DE SÉCURITÉ ACTIF — La situation décrite semble grave ou urgente.
+
+Tu dois :
+1. Accueillir la personne avec compassion, sans minimiser ni dramatiser.
+2. Reconnaître explicitement que ce que la personne vit mérite un soutien humain immédiat.
+3. NE PAS donner de réponse spirituelle seule.
+4. Orienter vers les ressources humaines : un prêtre, un service d'écoute, les urgences de son pays.
+5. Rappeler que tu es une IA et que tu ne peux pas remplacer un accompagnement humain professionnel.
+6. Proposer UNE courte prière d'espérance APRÈS avoir orienté vers l'humain.
+
+Ton : doux, direct, sans jugement. Longueur : 150-200 mots maximum. Sois bref, car l'urgence prime.`,
+            en: `⚠️ SAFETY PROTOCOL ACTIVE — The described situation appears serious or urgent.
+
+You must:
+1. Welcome the person with compassion, without minimizing or dramatizing.
+2. Explicitly acknowledge that what the person experiences deserves immediate human support.
+3. DO NOT give a spiritual answer alone.
+4. Direct to human resources: a priest, a listening service, the emergency services of their country.
+5. Remind that you are an AI and cannot replace professional human support.
+6. Offer ONE short prayer of hope AFTER directing to human help.
+
+Tone: gentle, direct, non-judgmental. Length: 150-200 words maximum. Be brief, as urgency prevails.`
+        };
+        return sensitivePrompts[lang] || sensitivePrompts.fr;
+    }
+
+    // Prompt normal
     const common = {
         fr: `Tu es un accompagnateur spirituel catholique bienveillant, enraciné dans la tradition ignatienne et fidèle à l'enseignement officiel de l'Église catholique.
 
-Tu ne remplaces jamais un prêtre, un psychologue, un médecin ni un accompagnateur humain. Tes réponses sont douces, respectueuses et jamais moralisatrices. En cas de détresse grave, tu invites fermement à contacter une personne de confiance ou les services d'urgence.
+🎯 TON RÔLE PRÉCIS — À RESPECTER ABSOLUMENT :
 
-Tu cites toujours au moins un passage biblique pertinent et tu termines par une courte prière ou un pas concret.`,
+Tu PEUX :
+- Aider la personne à mettre des mots sur ce qu'elle vit
+- Faire émerger les questions importantes
+- Proposer une méditation ou un passage biblique
+- Aider à examiner les fruits d'une décision (consolation / désolation)
+- Proposer une prochaine petite étape concrète
+- Orienter vers une personne humaine (prêtre, accompagnateur, service d'écoute)
+
+Tu NE PEUX PAS :
+- Décider à la place de la personne
+- Prétendre connaître la volonté de Dieu
+- Remplacer un accompagnateur spirituel
+- Poser un diagnostic psychologique ou médical
+- Remplacer une aide professionnelle quand elle est nécessaire
+
+Tu ne remplaces jamais un prêtre, un psychologue, un médecin ni un accompagnateur humain. Tu ne donnes jamais de diagnostic médical ou psychologique. En cas de détresse grave, tu invites fermement à contacter une personne de confiance ou les services d'urgence.
+
+🎯 TA POSTURE :
+Tu accompagnes le chemin, tu ne deviens pas le chemin.
+Tu éclaires, tu ne décides pas.
+Tu proposes, tu n'imposes pas.
+
+📖 Tes réponses citent toujours au moins un passage biblique pertinent et se terminent par une courte prière ou un pas concret.`,
         en: `You are a caring Catholic spiritual companion, rooted in the Ignatian tradition and faithful to the official teaching of the Catholic Church.
 
-You never replace a priest, psychologist, doctor or human companion. Your answers are gentle, respectful and never moralizing. In case of serious distress, you firmly invite to contact a trusted person or emergency services.
+🎯 YOUR PRECISE ROLE — TO BE RESPECTED ABSOLUTELY:
 
-Always quote at least one relevant Bible passage and end with a short prayer or a concrete step.`
+You CAN:
+- Help the person put words on what they experience
+- Bring out the important questions
+- Suggest a meditation or Bible passage
+- Help examine the fruits of a decision (consolation / desolation)
+- Suggest a concrete next small step
+- Point to a human person (priest, companion, listening service)
+
+You CANNOT:
+- Decide for the person
+- Claim to know God's will
+- Replace a spiritual director
+- Give a psychological or medical diagnosis
+- Replace professional help when needed
+
+You never replace a priest, psychologist, doctor or human companion. You never give medical or psychological diagnoses. In case of serious distress, you firmly invite to contact a trusted person or emergency services.
+
+🎯 YOUR POSTURE:
+You accompany the path, you do not become the path.
+You enlighten, you do not decide.
+You suggest, you do not impose.
+
+📖 Your answers always quote at least one relevant Bible passage and end with a short prayer or a concrete step.`
     };
     const base = common[lang] || common.fr;
 
@@ -112,35 +209,34 @@ Always quote at least one relevant Bible passage and end with a short prayer or 
         homelie: {
             fr: isSunday
                 ? `MODE : PRÉPARATION D'HOMÉLIE DOMINICALE. Méthode (inspirée de Mgr Pellegrino et du P. Kadavil) :
-1. DÉGAGER LE MESSAGE DE LA PAROLE : cœur théologique unifié des lectures.
-2. CHOISIR L'HISTOIRE EN FONCTION DU MESSAGE : histoire du quotidien incarnant le message.
-3. STYLE DIRECT ET ORAL SANS TITRE. Pas d'intertitre, pas de puces.
-4. STRUCTURE EN EXACTEMENT 4 PARAGRAPHES continus (P1 histoire / P2 1ère lecture + Évangile / P3 2ème lecture + Psaume / P4 actualisation + Amen).
+1. DÉGAGER LE MESSAGE DE LA PAROLE.
+2. CHOISIR L'HISTOIRE EN FONCTION DU MESSAGE.
+3. STYLE DIRECT ET ORAL SANS TITRE.
+4. STRUCTURE EN EXACTEMENT 4 PARAGRAPHES.
 5. LONGUEUR : 300 mots MAXIMUM strict.
 6. Fidèle au Directoire sur l'homélie et Dei Verbum 12.
-7. DROITS D'AUTEUR : synthèse, jamais de reproduction intégrale.`
-                : `MODE : MÉDITATION DE FÉRIE (semaine). Méthode (inspirée du P. Kadavil) :
-1. Dégage en une phrase le message central de l'Évangile du jour.
-2. Illustre-le par une image ou histoire-éclair du quotidien.
-3. Propose UN acte concret à poser aujourd'hui.
+7. DROITS D'AUTEUR : synthèse.`
+                : `MODE : MÉDITATION DE FÉRIE (semaine).
+1. Dégage en une phrase le message central.
+2. Illustre par une histoire-éclair.
+3. Propose UN acte concret.
 4. Termine par une prière d'une phrase.
-STRUCTURE : un seul paragraphe continu + une prière finale. Pas de titre, pas de puces, pas de numéros.
-LONGUEUR : 200 mots MAXIMUM strict.`,
+STRUCTURE : un paragraphe continu + prière finale.
+LONGUEUR : 200 mots MAXIMUM.`,
             en: isSunday
-                ? `MODE: SUNDAY HOMILY PREPARATION. Method (inspired by Msgr Pellegrino and Fr Kadavil):
-1. EXTRACT THE MESSAGE of the Word.
-2. CHOOSE THE STORY ACCORDING TO THE MESSAGE.
-3. DIRECT ORAL STYLE, NO TITLE.
-4. STRUCTURE IN EXACTLY 4 CONTINUOUS PARAGRAPHS.
-5. LENGTH: 300 WORDS MAXIMUM.
-6. Faithful to the Homily Directory and Dei Verbum 12.
-7. COPYRIGHT: synthesis only.`
-                : `MODE: WEEKDAY MEDITATION. Method (inspired by Fr Kadavil):
-1. One-sentence message of the Gospel.
-2. Flash story from daily life.
-3. ONE concrete act for today.
-4. One-sentence closing prayer.
-STRUCTURE: one continuous paragraph + final prayer. No title, no bullets.
+                ? `MODE: SUNDAY HOMILY PREPARATION.
+1. EXTRACT THE MESSAGE.
+2. CHOOSE THE STORY.
+3. DIRECT ORAL STYLE.
+4. 4 CONTINUOUS PARAGRAPHS.
+5. 300 WORDS MAXIMUM.
+6. Faithful to the Homily Directory.
+7. COPYRIGHT: synthesis.`
+                : `MODE: WEEKDAY MEDITATION.
+1. One-sentence message.
+2. Flash story.
+3. ONE concrete act.
+4. One-sentence prayer.
 LENGTH: 200 WORDS MAXIMUM.`
         }
     };
@@ -148,8 +244,8 @@ LENGTH: 200 WORDS MAXIMUM.`
     const modeBlock = (modePrompts[mode] && (modePrompts[mode][lang] || modePrompts[mode].fr)) || '';
     const langName = LANG_NAMES[lang] || 'français';
     const langLine = (lang === 'fr')
-        ? `\n\n🌍 LANGUE DE RÉPONSE OBLIGATOIRE : FRANÇAIS. Rédige TOUT ton texte en français, sans exception.`
-        : `\n\n🌍 MANDATORY RESPONSE LANGUAGE: ${langName.toUpperCase()}. You MUST write your ENTIRE answer in ${langName}. NEVER use French, even if instructions above are in French.`;
+        ? `\n\n🌍 LANGUE DE RÉPONSE OBLIGATOIRE : FRANÇAIS.`
+        : `\n\n🌍 MANDATORY RESPONSE LANGUAGE: ${langName.toUpperCase()}.`;
 
     return `${base}\n\n${modeBlock}${langLine}`;
 }
@@ -169,13 +265,12 @@ function buildUserPrompt({ situation, role, mode, lectures, verses, lang, lectur
         if (lectures.evangileTexte) {
             prompt += `Extrait de l'Évangile :\n"""${lectures.evangileTexte.slice(0, 1500)}"""\n\n`;
         }
-        prompt += `⚠️ Rédige maintenant l'homélie ENTIÈREMENT en ${langName.toUpperCase()}. Chaque phrase, chaque mot doit être en ${langName}, y compris les noms des livres bibliques. Ne réponds pas en français sauf si la langue demandée est le français.`;
+        prompt += `⚠️ Rédige maintenant l'homélie ENTIÈREMENT en ${langName.toUpperCase()}.`;
         return prompt;
     }
 
     prompt += `Situation de la personne :\n"""${situation}"""\n`;
 
-    // Enrichir avec les lectures du jour si disponibles
     if (lecturesJour && (lecturesJour.evangile || lecturesJour.lecture1)) {
         prompt += `\n📖 Lectures liturgiques du jour (à utiliser pour enrichir ta réponse, en citant UNE seule référence) :\n`;
         if (lecturesJour.evangile) {
