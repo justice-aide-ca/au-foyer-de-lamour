@@ -8,7 +8,7 @@ const TOAST_ICONS = { info: "✅", warn: "⚠️", error: "🚫" };
 const ROUTES = { '': 'accueil', '/': 'accueil', '/sagesse': 'sagesse', '/a-propos': 'apropos', '/examen': 'examen', '/sources': 'sources', '/contact': 'contact', '/confidentialite': 'confidentialite', '/comment-ca-marche': 'comment-ca-marche' };
 
 // ⚙️ Dimanche : 450 mots | Semaine : 200 mots
-const WORD_LIMITS = { sunday: 450, weekday: 200 };
+const WORD_LIMITS = { sunday: 450, weekday: 200 }; 
 
 let currentLang = 'fr';
 let currentMode = 'discernement';
