@@ -6,9 +6,7 @@ const SITUATION_KEYS = ["SOUFFRANCE","SENS_VIE","COUPLE","DEUIL","SOLITUDE","COL
 const LANGS = ['fr', 'en', 'zh', 'hi', 'es', 'ar'];
 const TOAST_ICONS = { info: "✅", warn: "⚠️", error: "🚫" };
 const ROUTES = { '': 'accueil', '/': 'accueil', '/sagesse': 'sagesse', '/a-propos': 'apropos', '/examen': 'examen', '/sources': 'sources', '/contact': 'contact', '/confidentialite': 'confidentialite', '/comment-ca-marche': 'comment-ca-marche' };
-
-// ⚙️ Dimanche : 450 mots | Semaine : 200 mots
-const WORD_LIMITS = { sunday: 450, weekday: 200 }; 
+const WORD_LIMITS = { sunday: 450, weekday: 200 };
 
 let currentLang = 'fr';
 let currentMode = 'discernement';
@@ -72,10 +70,10 @@ const FR = {
     homelieLegalText: "Cette homélie est une <strong>création originale inspirée</strong> de la démarche de <strong>Mgr Joseph A. Pellegrino</strong> (<a href='https://frjoeshomilies.net/' target='_blank' rel='noopener noreferrer' style='color:#2a503e;'>frjoeshomilies.net</a>) et du <strong>Père Tony Kadavil</strong> (<a href='https://frtonyshomilies.com/' target='_blank' rel='noopener noreferrer' style='color:#2a503e;'>frtonyshomilies.com</a>). Elle ne constitue en aucun cas une reproduction intégrale de leurs écrits protégés, mais une appropriation spirituelle autonome dans le respect du droit d'auteur, du <em>Directoire sur l'homélie</em> et des textes de l'AELF.",
     homelieSourcesTitle: "📚 Sources officielles & respect de la propriété intellectuelle",
     homelieSourcesTextes: "Textes liturgiques :",
-    homelieSourcesPredication: "Prédication dominicale :",
-    homelieSourcesPredicationText: "Inspirée de Mgr Pellegrino et du P. Tony Kadavil.",
+    homelieSourcesPredication: "Prédication dominicale (schéma en 4 mouvements + exégèse) :",
+    homelieSourcesPredicationText: "démarche inspirée de <a href='https://frjoeshomilies.net/' target='_blank' rel='noopener noreferrer' style='color:#325c48;text-decoration:underline;'>Mgr Joseph A. Pellegrino</a> et du <a href='https://frtonyshomilies.com/' target='_blank' rel='noopener noreferrer' style='color:#325c48;text-decoration:underline;'>Père Tony Kadavil</a>.",
     homelieSourcesMeditation: "Méditation de semaine :",
-    homelieSourcesMeditationText: "Inspirée du P. Tony Kadavil.",
+    homelieSourcesMeditationText: "démarche inspirée des <a href='https://frtonyshomilies.com/' target='_blank' rel='noopener noreferrer' style='color:#325c48;text-decoration:underline;'>homélies quotidiennes du Père Tony Kadavil</a>.",
     homelieSourcesHermeneutique: "Herméneutique :",
     homelieSourcesNormes: "Normes :",
     ecouteList: ["Urgence : numéro d'urgence de votre pays","Centres d'écoute : befrienders.org","En détresse : parlez-en à une personne de confiance"],
@@ -142,10 +140,10 @@ EN.homelieLegalTitle = "⚖️ Legal distinction: Inspiration vs Reproduction";
 EN.homelieLegalText = "This homily is an <strong>original creation inspired</strong> by the approach of <strong>Msgr Joseph A. Pellegrino</strong> (<a href='https://frjoeshomilies.net/' target='_blank' rel='noopener noreferrer' style='color:#2a503e;'>frjoeshomilies.net</a>) and <strong>Fr Tony Kadavil</strong> (<a href='https://frtonyshomilies.com/' target='_blank' rel='noopener noreferrer' style='color:#2a503e;'>frtonyshomilies.com</a>). It is in no way a full reproduction of their protected writings, but an autonomous spiritual appropriation in respect of copyright, the <em>Homily Directory</em> and the AELF texts.";
 EN.homelieSourcesTitle = "📚 Official sources & intellectual property";
 EN.homelieSourcesTextes = "Liturgical texts:";
-EN.homelieSourcesPredication = "Sunday preaching:";
-EN.homelieSourcesPredicationText = "Inspired by Msgr Pellegrino and Fr Tony Kadavil.";
+EN.homelieSourcesPredication = "Sunday preaching (4-movement structure + exegesis):";
+EN.homelieSourcesPredicationText = "inspired by <a href='https://frjoeshomilies.net/' target='_blank' rel='noopener noreferrer' style='color:#325c48;text-decoration:underline;'>Msgr Joseph A. Pellegrino</a> and <a href='https://frtonyshomilies.com/' target='_blank' rel='noopener noreferrer' style='color:#325c48;text-decoration:underline;'>Fr Tony Kadavil</a>.";
 EN.homelieSourcesMeditation = "Weekday meditation:";
-EN.homelieSourcesMeditationText = "Inspired by Fr Tony Kadavil.";
+EN.homelieSourcesMeditationText = "inspired by <a href='https://frtonyshomilies.com/' target='_blank' rel='noopener noreferrer' style='color:#325c48;text-decoration:underline;'>Fr Tony Kadavil's daily homilies</a>.";
 EN.homelieSourcesHermeneutique = "Hermeneutics:";
 EN.homelieSourcesNormes = "Standards:";
 EN.ecouteList = ["Emergency: dial your country's emergency number","Listening centres: befrienders.org","In distress: reach out to someone you trust"];
@@ -206,10 +204,10 @@ ZH.homelieLegalTitle = "⚖️ 法律区分：灵感 vs 复制";
 ZH.homelieLegalText = "此讲道是基于 <strong>Mgr Joseph A. Pellegrino</strong> 和 <strong>Père Tony Kadavil</strong> 牧灵方法的<strong>原创作品</strong>，并非对其受保护作品的完整复制。";
 ZH.homelieSourcesTitle = "📚 官方来源与知识产权";
 ZH.homelieSourcesTextes = "礼仪文本：";
-ZH.homelieSourcesPredication = "主日讲道：";
-ZH.homelieSourcesPredicationText = "受 Mgr Pellegrino 和 P. Tony Kadavil 启发。";
+ZH.homelieSourcesPredication = "主日讲道（四段结构 + 释义）：";
+ZH.homelieSourcesPredicationText = "受 <a href='https://frjoeshomilies.net/' target='_blank' rel='noopener noreferrer' style='color:#325c48;text-decoration:underline;'>Mgr Joseph A. Pellegrino</a> 和 <a href='https://frtonyshomilies.com/' target='_blank' rel='noopener noreferrer' style='color:#325c48;text-decoration:underline;'>Père Tony Kadavil</a> 启发。";
 ZH.homelieSourcesMeditation = "平日默想：";
-ZH.homelieSourcesMeditationText = "受 P. Tony Kadavil 启发。";
+ZH.homelieSourcesMeditationText = "受 <a href='https://frtonyshomilies.com/' target='_blank' rel='noopener noreferrer' style='color:#325c48;text-decoration:underline;'>P. Tony Kadavil 每日讲道</a> 启发。";
 ZH.homelieSourcesHermeneutique = "诠释学：";
 ZH.homelieSourcesNormes = "规范：";
 ZH.ecouteList = ["紧急情况：请拨打您所在国家的紧急电话","全球聆听中心：befrienders.org","处于痛苦中时：请立即向信任的人倾诉"];
@@ -363,35 +361,16 @@ const translations = { fr: FR, en: EN, zh: ZH, hi: HI, es: ES, ar: AR };
    BASE DE CONNAISSANCE EXÉGÉTIQUE (fallback local)
    ============================================================ */
 const EXEGESIS_HINTS = {
-    isaie: {
-        nom: "Isaïe",
-        contexte: "Le prophète Isaïe exerce son ministère à Jérusalem au VIIIe siècle av. J.-C. Le « cantique de la vigne » (Is 5, 1-7) est un chant d'amour blessé : Dieu y apparaît comme l'époux déçu de son peuple.",
-        enseignement: "Dieu a tout préparé avec soin pour Israël, mais la vigne a produit du raisin mauvais. Ce n'est pas un jugement extérieur, mais le cri d'un amour déçu qui attend des fruits de justice."
-    },
+    isaie: { nom: "Isaïe", contexte: "Le prophète Isaïe exerce son ministère à Jérusalem au VIIIe siècle av. J.-C. Le « cantique de la vigne » (Is 5, 1-7) est un chant d'amour blessé : Dieu y apparaît comme l'époux déçu de son peuple.", enseignement: "Dieu a tout préparé avec soin pour Israël, mais la vigne a produit du raisin mauvais. Ce n'est pas un jugement extérieur, mais le cri d'un amour déçu qui attend des fruits de justice." },
     jeremie: { nom: "Jérémie", contexte: "Le prophète Jérémie (VIIe-VIe s. av. J.-C.) annonce l'Alliance nouvelle au cœur même de l'exil.", enseignement: "Dieu veut écrire sa loi dans les cœurs, non sur des pierres." },
     ezechiel: { nom: "Ézéchiel", contexte: "Ézéchiel, prophète de l'exil à Babylone, redonne espérance aux déportés.", enseignement: "Dieu veut un cœur nouveau et un esprit nouveau." },
-    matthieu: {
-        nom: "Matthieu",
-        contexte: "L'évangéliste Matthieu écrit pour des communautés judéo-chrétiennes. Il présente Jésus comme le nouveau Moïse qui accomplit les Écritures.",
-        enseignement: "La parabole des vignerons homicides (Mt 21, 33-43) est un avertissement solennel : la vigne appartient à Dieu, et l'autorité est un service, non une possession."
-    },
+    matthieu: { nom: "Matthieu", contexte: "L'évangéliste Matthieu écrit pour des communautés judéo-chrétiennes. Il présente Jésus comme le nouveau Moïse qui accomplit les Écritures.", enseignement: "La parabole des vignerons homicides (Mt 21, 33-43) est un avertissement solennel : la vigne appartient à Dieu, et l'autorité est un service, non une possession." },
     marc: { nom: "Marc", contexte: "Marc est le plus ancien des évangiles. Il présente Jésus comme le Serviteur souffrant.", enseignement: "Suivre le Christ, c'est accepter la Croix comme chemin de vie." },
     luc: { nom: "Luc", contexte: "Luc, médecin et compagnon de Paul, met en avant la miséricorde et la joie du salut.", enseignement: "Jésus accueille les petits, les pécheurs et les exclus." },
     jean: { nom: "Jean", contexte: "Jean, le disciple bien-aimé, écrit pour faire croire que Jésus est le Fils de Dieu.", enseignement: "Le Verbe s'est fait chair, et nous avons vu sa gloire." },
-    philippiens: {
-        nom: "Philippiens",
-        contexte: "Saint Paul écrit aux Philippiens depuis sa prison, vers 60 ap. J.-C. C'est une lettre de joie au milieu de l'épreuve.",
-        enseignement: "Ne vous inquiétez de rien, mais en toute circonstance, par la prière et l'action de grâce, présentez vos demandes à Dieu. Alors la paix de Dieu gardera vos cœurs."
-    },
-    psaume: {
-        contexte: "Le psaume est la prière du peuple d'Israël, portée par la liturgie du Temple puis par l'Église.",
-        enseignement: "Chanter les psaumes, c'est faire nôtre la prière millénaire du Peuple de Dieu."
-    },
-    defaut: {
-        nom: "les Écritures",
-        contexte: "Le texte s'inscrit dans la longue tradition biblique qui traverse l'Ancien et le Nouveau Testament.",
-        enseignement: "Dieu parle à travers les Écritures pour éclairer notre route."
-    }
+    philippiens: { nom: "Philippiens", contexte: "Saint Paul écrit aux Philippiens depuis sa prison, vers 60 ap. J.-C. C'est une lettre de joie au milieu de l'épreuve.", enseignement: "Ne vous inquiétez de rien, mais en toute circonstance, par la prière et l'action de grâce, présentez vos demandes à Dieu. Alors la paix de Dieu gardera vos cœurs." },
+    psaume: { contexte: "Le psaume est la prière du peuple d'Israël, portée par la liturgie du Temple puis par l'Église.", enseignement: "Chanter les psaumes, c'est faire nôtre la prière millénaire du Peuple de Dieu." },
+    defaut: { nom: "les Écritures", contexte: "Le texte s'inscrit dans la longue tradition biblique qui traverse l'Ancien et le Nouveau Testament.", enseignement: "Dieu parle à travers les Écritures pour éclairer notre route." }
 };
 
 function getExegesisFor(ref) {
@@ -411,9 +390,9 @@ function getExegesisFor(ref) {
 /* ============================================================
    PAGES INTERNES
    ============================================================ */
-const CARLO_FR = `<div class="bloc" style="background:#fff8f0;border:1px solid #e8d5b7;border-left:4px solid #c49a6c;"><h3 style="color:#8b5e3c;">🔥 Saint Carlo Acutis (1991–2006) — Le saint des développeurs</h3><p style="font-style:italic;color:#6b4c2a;font-size:1.05rem;">« Tous naissent comme des originaux, mais beaucoup meurent comme des photocopies. »<br><span style="font-size:0.8rem;color:#8b7355;">— Phrase que Carlo aimait à répéter</span></p><p>Canonisé en 2025, Carlo Acutis est le premier saint de l'ère numérique. Passionné d'informatique, il a utilisé le web pour créer une <a href="https://www.miracolieucaristici.org/" target="_blank" rel="noopener">exposition internationale sur les miracles eucharistiques</a>. Il disait : <em>« L'Eucharistie est mon autoroute vers le Ciel. »</em></p><blockquote style="border-left:3px solid #c49a6c;margin:1rem 0;padding-left:1rem;color:#5a4f42;line-height:1.7;"><p>« Notre objectif doit être l'infini, non pas le fini. L'Infini est notre patrie. »</p><p>« Être toujours uni à Jésus, tel est le but de ma vie. »</p><p>« Quand on s'expose au soleil, on bronze ; quand on se met devant Jésus Eucharistie, on devient saint ! »</p><p>« Le bonheur, c'est d'avoir le regard tourné vers Dieu. La tristesse, c'est de l'avoir tourné vers soi-même. »</p><p>« Ne perds pas ton temps à ne rien faire. Consacre-le à Dieu. »</p></blockquote><p style="font-size:0.85rem;color:#8b7355;margin-top:1rem;padding-top:0.8rem;border-top:1px dashed #d4c5b3;">📖 Pour aller plus loin : <em>Carlo Acutis, une âme de feu</em> — Marie et Jean-Baptiste Maillard, éd. Artège, 2025.</p><p style="font-size:0.8rem;color:#8b7355;font-style:italic;">🕯️ Prière : Saint Carlo Acutis, toi qui as fait de ton ordinateur un instrument d'évangélisation, apprends-nous à mettre nos talents numériques au service du Bien et de la Vérité. Amen.</p></div>`;
+const CARLO_FR = `<div class="bloc" style="background:#fff8f0;border:1px solid #e8d5b7;border-left:4px solid #c49a6c;"><h3 style="color:#8b5e3c;">🔥 Saint Carlo Acutis (1991–2006) — Le saint des développeurs</h3><p style="font-style:italic;color:#6b4c2a;font-size:1.05rem;">« Tous naissent comme des originaux, mais beaucoup meurent comme des photocopies. »<br><span style="font-size:0.8rem;color:#8b7355;">— Phrase que Carlo aimait à répéter</span></p><p>Canonisé en 2025, Carlo Acutis est le premier saint de l'ère numérique. Passionné d'informatique, il a utilisé le web pour créer une <a href="https://www.miracolieucaristici.org/" target="_blank" rel="noopener" style="color:#4a6f5e;text-decoration:underline;">exposition internationale sur les miracles eucharistiques</a>. Il disait : <em>« L'Eucharistie est mon autoroute vers le Ciel. »</em></p><blockquote style="border-left:3px solid #c49a6c;margin:1rem 0;padding-left:1rem;color:#5a4f42;line-height:1.7;"><p>« Notre objectif doit être l'infini, non pas le fini. L'Infini est notre patrie. »</p><p>« Être toujours uni à Jésus, tel est le but de ma vie. »</p><p>« Quand on s'expose au soleil, on bronze ; quand on se met devant Jésus Eucharistie, on devient saint ! »</p><p>« Le bonheur, c'est d'avoir le regard tourné vers Dieu. La tristesse, c'est de l'avoir tourné vers soi-même. »</p><p>« Ne perds pas ton temps à ne rien faire. Consacre-le à Dieu. »</p></blockquote><div style="font-size:0.85rem;color:#8b7355;margin-top:1rem;padding-top:0.8rem;border-top:1px dashed #d4c5b3;"><p style="margin:0.5rem 0;">📖 <strong>Pour aller plus loin :</strong></p><ul style="margin:0.5rem 0;padding-left:1.5rem;line-height:1.9;"><li>Livre de référence : <em>Carlo Acutis, une âme de feu</em> — Marie et Jean-Baptiste Maillard, éd. Artège, 2025 — <a href="https://www.artege.fr/" target="_blank" rel="noopener" style="color:#4a6f5e;text-decoration:underline;">voir l'éditeur</a></li><li>Biographie officielle sur <a href="https://www.vaticannews.va/fr/pape/news/2025-09/carlo-acutis-saint-jeune-internet-eucharistie.html" target="_blank" rel="noopener" style="color:#4a6f5e;text-decoration:underline;">Vatican News</a></li><li>Exposition des miracles eucharistiques : <a href="https://www.miracolieucaristici.org/" target="_blank" rel="noopener" style="color:#4a6f5e;text-decoration:underline;">miracolieucaristici.org</a></li><li>Site officiel du sanctuaire : <a href="https://www.carloacutis.com/" target="_blank" rel="noopener" style="color:#4a6f5e;text-decoration:underline;">carloacutis.com</a></li></ul></div><p style="font-size:0.8rem;color:#8b7355;font-style:italic;">🕯️ Prière : Saint Carlo Acutis, toi qui as fait de ton ordinateur un instrument d'évangélisation, apprends-nous à mettre nos talents numériques au service du Bien et de la Vérité. Amen.</p></div>`;
 
-const CARLO_EN = `<div class="bloc" style="background:#fff8f0;border:1px solid #e8d5b7;border-left:4px solid #c49a6c;"><h3 style="color:#8b5e3c;">🔥 Saint Carlo Acutis (1991–2006) — The developer saint</h3><p style="font-style:italic;">« Everyone is born as an original, but many die as photocopies. »</p><p>Canonized in 2025, Carlo Acutis is the first saint of the digital age. He used the web to create an <a href="https://www.miracolieucaristici.org/" target="_blank" rel="noopener">international exhibition on Eucharistic miracles</a>. He said: <em>« The Eucharist is my highway to Heaven. »</em></p><blockquote style="border-left:3px solid #c49a6c;padding-left:1rem;color:#5a4f42;line-height:1.7;"><p>« Our goal must be the infinite, not the finite. »</p><p>« To always be united with Jesus — that is the goal of my life. »</p><p>« Sadness is looking at yourself; happiness is looking at God. »</p></blockquote><p style="font-size:0.85rem;color:#8b7355;">📖 To go further: <em>Carlo Acutis, une âme de feu</em> — Marie & Jean-Baptiste Maillard, Artège, 2025.</p></div>`;
+const CARLO_EN = `<div class="bloc" style="background:#fff8f0;border:1px solid #e8d5b7;border-left:4px solid #c49a6c;"><h3 style="color:#8b5e3c;">🔥 Saint Carlo Acutis (1991–2006) — The developer saint</h3><p style="font-style:italic;">« Everyone is born as an original, but many die as photocopies. »</p><p>Canonized in 2025, Carlo Acutis is the first saint of the digital age. He used the web to create an <a href="https://www.miracolieucaristici.org/" target="_blank" rel="noopener" style="color:#4a6f5e;text-decoration:underline;">international exhibition on Eucharistic miracles</a>. He said: <em>« The Eucharist is my highway to Heaven. »</em></p><blockquote style="border-left:3px solid #c49a6c;padding-left:1rem;color:#5a4f42;line-height:1.7;"><p>« Our goal must be the infinite, not the finite. »</p><p>« To always be united with Jesus — that is the goal of my life. »</p><p>« Sadness is looking at yourself; happiness is looking at God. »</p></blockquote><div style="font-size:0.85rem;color:#8b7355;padding-top:0.8rem;border-top:1px dashed #d4c5b3;"><p style="margin:0.5rem 0;">📖 <strong>To go further:</strong></p><ul style="margin:0.5rem 0;padding-left:1.5rem;line-height:1.9;"><li>Book: <em>Carlo Acutis, une âme de feu</em> — Marie & Jean-Baptiste Maillard, Artège, 2025 — <a href="https://www.artege.fr/" target="_blank" rel="noopener" style="color:#4a6f5e;text-decoration:underline;">publisher</a></li><li>Official biography on <a href="https://www.vaticannews.va/en/pope/news/2025-09/carlo-acutis-saint-young-internet-eucharist.html" target="_blank" rel="noopener" style="color:#4a6f5e;text-decoration:underline;">Vatican News</a></li><li>Eucharistic miracles exhibition: <a href="https://www.miracolieucaristici.org/" target="_blank" rel="noopener" style="color:#4a6f5e;text-decoration:underline;">miracolieucaristici.org</a></li><li>Official shrine site: <a href="https://www.carloacutis.com/" target="_blank" rel="noopener" style="color:#4a6f5e;text-decoration:underline;">carloacutis.com</a></li></ul></div></div>`;
 
 const COMMENT_FR = `
 <h2>💡 Comment fonctionne le compagnon ?</h2>
@@ -565,11 +544,12 @@ const pageContent = {
         apropos: `<h2>📖 À propos</h2><div class="bloc"><h3>Qu'est-ce qu'Au Foyer de l'Amour ?</h3><p>Un espace de paix, d'écoute et de prière. Une première écoute et une aide au discernement, enracinée dans la tradition chrétienne et la spiritualité ignatienne.</p></div><div class="bloc"><h3>Ce que ce site n'est pas</h3><p>Il ne remplace ni un accompagnement humain, ni un prêtre, ni un psychologue, ni un médecin.</p></div>`,
         sources: `<h2>📚 Sources</h2>
 <p class="page-intro">Hiérarchie claire et traçable de nos références.</p>
-<div class="bloc" style="background:#e8efe9;border-left:4px solid #2e6b47;"><h3>📖 Niveau 1 — Sources primaires</h3><ul style="line-height:1.9;"><li><strong>Bible liturgique francophone</strong> : <a href="https://www.aelf.org" target="_blank" rel="noopener">AELF</a></li><li><strong>Bible en anglais et autres langues</strong> : <a href="https://www.biblegateway.com" target="_blank" rel="noopener">BibleGateway</a></li><li><strong>Documents officiels de l'Église</strong> : <a href="https://www.vatican.va" target="_blank" rel="noopener">vatican.va</a></li></ul></div>
-<div class="bloc"><h3>⛪ Niveau 2 — Sources ecclésiales</h3><ul style="line-height:1.9;"><li>Conférences épiscopales</li><li>Diocèses et paroisses</li><li>Organismes catholiques reconnus</li></ul></div>
-<div class="bloc"><h3>✝️ Niveau 3 — Auteurs spirituels reconnus</h3><ul style="line-height:1.9;"><li><strong>Saint Ignace de Loyola</strong> — <em>Exercices spirituels</em></li><li><strong>Mgr Joseph A. Pellegrino</strong> — méthode homilétique</li><li><strong>Père Tony Kadavil</strong> — méthode homilétique</li><li><strong>Saint Carlo Acutis</strong></li></ul></div>
-<div class="bloc" style="background:#f6f3ef;"><h3>🔍 Niveau 4 — Ressources complémentaires</h3><ul style="line-height:1.9;"><li><a href="https://fr.novalis.ca/" target="_blank" rel="noopener">Prions en Église — Novalis</a></li><li>Articles, livres et sites partenaires</li></ul></div>
-<div class="bloc" style="background:#fdecea;border-left:4px solid #c0392b;"><h3>⚠️ Limites</h3><p>Les réponses générées par l'IA peuvent contenir des <strong>approximations</strong>. Vérifiez toujours auprès d'un prêtre.</p></div>`,
+<div class="bloc" style="background:#e8efe9;border-left:4px solid #2e6b47;"><h3>📖 Niveau 1 — Sources primaires</h3><p>Sources officielles et vérifiables, référence absolue :</p><ul style="line-height:1.9;"><li><strong>Bible liturgique francophone</strong> : <a href="https://www.aelf.org" target="_blank" rel="noopener" style="color:#4a6f5e;text-decoration:underline;">AELF</a></li><li><strong>Bible en anglais et autres langues</strong> : <a href="https://www.biblegateway.com" target="_blank" rel="noopener" style="color:#4a6f5e;text-decoration:underline;">BibleGateway</a></li><li><strong>Documents officiels de l'Église</strong> : <a href="https://www.vatican.va" target="_blank" rel="noopener" style="color:#4a6f5e;text-decoration:underline;">vatican.va</a></li><li><strong>Liturgie des heures et lectures du jour</strong> : API AELF</li></ul></div>
+<div class="bloc"><h3>⛪ Niveau 2 — Sources ecclésiales</h3><ul style="line-height:1.9;"><li>Conférences épiscopales (France, Canada, Belgique...)</li><li>Diocèses et paroisses</li><li>Organismes catholiques reconnus</li></ul></div>
+<div class="bloc"><h3>✝️ Niveau 3 — Auteurs spirituels reconnus</h3><ul style="line-height:1.9;"><li><strong>Saint Ignace de Loyola</strong> (1491-1556) — <em>Exercices spirituels</em></li><li><strong>Mgr Joseph A. Pellegrino</strong> — méthode homilétique (<a href="https://frjoeshomilies.net/" target="_blank" rel="noopener" style="color:#4a6f5e;text-decoration:underline;">frjoeshomilies.net</a>)</li><li><strong>Père Tony Kadavil</strong> — méthode homilétique (<a href="https://frtonyshomilies.com/" target="_blank" rel="noopener" style="color:#4a6f5e;text-decoration:underline;">frtonyshomilies.com</a>)</li><li><strong>Saint Carlo Acutis</strong> (1991-2006) — témoignage numérique (<a href="https://www.carloacutis.com/" target="_blank" rel="noopener" style="color:#4a6f5e;text-decoration:underline;">carloacutis.com</a>)</li></ul></div>
+<div class="bloc" style="background:#f6f3ef;"><h3>🔍 Niveau 4 — Ressources complémentaires</h3><ul style="line-height:1.9;"><li><a href="https://fr.novalis.ca/" target="_blank" rel="noopener" style="color:#4a6f5e;text-decoration:underline;">Prions en Église — Novalis</a></li><li><a href="https://www.miracolieucaristici.org/" target="_blank" rel="noopener" style="color:#4a6f5e;text-decoration:underline;">Exposition sur les miracles eucharistiques</a></li><li>Articles, livres et sites partenaires</li></ul><p style="margin-top:0.8rem;font-size:0.85rem;color:#8b7355;"><em>Chaque contenu significatif doit pouvoir être tracé : source · date · lien.</em></p></div>
+<div class="bloc"><h3>⚖️ Hiérarchie en cas de divergence</h3><p>En cas de divergence entre sources, la priorité est toujours donnée dans cet ordre :</p><ol style="line-height:1.9;"><li>La Parole de Dieu et l'enseignement officiel de l'Église</li><li>Les documents du Magistère</li><li>Les sources ecclésiales reconnues</li><li>Les auteurs spirituels reconnus</li><li>Les ressources complémentaires</li></ol></div>
+<div class="bloc" style="background:#fdecea;border-left:4px solid #c0392b;"><h3>⚠️ Limites de nos réponses</h3><p>Les réponses générées par l'IA peuvent contenir des <strong>approximations</strong>. Elles ne se substituent ni au Magistère, ni à la parole d'un prêtre ou d'une personne de confiance. <strong>Vérifiez toujours</strong> auprès d'un prêtre pour toute question doctrinale ou pastorale.</p></div>`,
         contact: `<h2>✉️ Contact</h2><div class="bloc"><h3>Partager votre expérience</h3><p>Laissez un témoignage anonyme depuis <a href="#/">la page d'accueil</a>.</p></div>`,
         confidentialite: `<h2>🔒 Confidentialité</h2>
 <p class="page-intro">Notre engagement transparent sur la protection de vos données.</p>
@@ -581,9 +561,11 @@ const pageContent = {
 <tr><td style="padding:8px;border:1px solid #d4d4d4;"><strong>Votre situation écrite</strong></td><td style="padding:8px;border:1px solid #d4d4d4;">Envoyée à OpenAI via Netlify</td><td style="padding:8px;border:1px solid #d4d4d4;">Transitoire (non conservée)</td><td style="padding:8px;border:1px solid #d4d4d4;">Personne (usage unique)</td></tr>
 <tr><td style="padding:8px;border:1px solid #d4d4d4;"><strong>Votre carnet</strong></td><td style="padding:8px;border:1px solid #d4d4d4;">Navigateur (localStorage)</td><td style="padding:8px;border:1px solid #d4d4d4;">Jusqu'à effacement</td><td style="padding:8px;border:1px solid #d4d4d4;">Vous uniquement</td></tr>
 <tr><td style="padding:8px;border:1px solid #d4d4d4;"><strong>Vos témoignages</strong></td><td style="padding:8px;border:1px solid #d4d4d4;">Navigateur (localStorage)</td><td style="padding:8px;border:1px solid #d4d4d4;">Jusqu'à effacement</td><td style="padding:8px;border:1px solid #d4d4d4;">Vous uniquement</td></tr>
-<tr><td style="padding:8px;border:1px solid #d4d4d4;"><strong>Statistiques anonymes</strong></td><td style="padding:8px;border:1px solid #d4d4d4;">GoatCounter</td><td style="padding:8px;border:1px solid #d4d4d4;">30 jours</td><td style="padding:8px;border:1px solid #d4d4d4;">Nous (anonymisées)</td></tr>
+<tr><td style="padding:8px;border:1px solid #d4d4d4;"><strong>Votre langue</strong></td><td style="padding:8px;border:1px solid #d4d4d4;">Navigateur (localStorage)</td><td style="padding:8px;border:1px solid #d4d4d4;">Jusqu'à effacement</td><td style="padding:8px;border:1px solid #d4d4d4;">Vous uniquement</td></tr>
+<tr><td style="padding:8px;border:1px solid #d4d4d4;"><strong>Statistiques anonymes</strong></td><td style="padding:8px;border:1px solid #d4d4d4;">GoatCounter (sans cookies)</td><td style="padding:8px;border:1px solid #d4d4d4;">30 jours</td><td style="padding:8px;border:1px solid #d4d4d4;">Nous (anonymisées)</td></tr>
 </tbody>
 </table>
+<p style="margin-top:1rem;font-size:0.85rem;color:#5a4f42;"><em>⚠️ Les données envoyées à OpenAI peuvent être conservées jusqu'à 30 jours selon leur <a href="https://openai.com/policies/row-privacy-policy/" target="_blank" rel="noopener" style="color:#4a6f5e;text-decoration:underline;">politique de confidentialité</a>.</em></p>
 </div>
 <div class="bloc" style="background:#e8efe9;border-left:4px solid #2e6b47;"><h3>✅ En bref</h3><p><strong>Aucun compte.</strong> <strong>Aucun cookie de suivi.</strong> <strong>Aucune publicité.</strong> <strong>Aucune revente de données.</strong></p></div>
 <div class="bloc" style="background:#fdecea;border-left:4px solid #c0392b;"><h3>🚨 En cas d'urgence</h3><p>Ce site n'est <strong>pas un service d'urgence</strong>. Si vous êtes en danger immédiat, appelez les <strong>services d'urgence</strong> de votre pays (911, 112, 15, 17, 18…).</p></div>`
@@ -592,7 +574,7 @@ const pageContent = {
         sagesse: `<h2>📖 Wisdom</h2><p class="page-intro">Texts to nourish meditation and prayer.</p><div class="bloc"><h3>Words of Jesus</h3><p>« Come to me, all you who are weary. » — Mt 11:28</p></div>${CARLO_EN}<div class="bloc"><h3>Go further</h3><p>Return to the <a href="#/">home page</a> or take the <a href="#/examen">guided examen</a>.</p></div>`,
         commentCaMarche: COMMENT_EN,
         apropos: `<h2>📖 About</h2><div class="bloc"><h3>What is Home of Love?</h3><p>A space of peace, listening and prayer, rooted in the Christian tradition and Ignatian spirituality.</p></div>`,
-        sources: `<h2>📚 Sources</h2><p class="page-intro">Clear and traceable hierarchy of our references.</p><div class="bloc" style="background:#e8efe9;border-left:4px solid #2e6b47;"><h3>📖 Level 1 — Primary sources</h3><ul style="line-height:1.9;"><li><strong>Francophone liturgical Bible</strong> : <a href="https://www.aelf.org" target="_blank" rel="noopener">AELF</a></li><li><strong>Bible in English</strong> : <a href="https://www.biblegateway.com" target="_blank" rel="noopener">BibleGateway</a></li><li><strong>Official documents</strong> : <a href="https://www.vatican.va" target="_blank" rel="noopener">vatican.va</a></li></ul></div><div class="bloc" style="background:#fdecea;border-left:4px solid #c0392b;"><h3>⚠️ Limits</h3><p>AI answers may contain approximations. Always verify with a priest.</p></div>`,
+        sources: `<h2>📚 Sources</h2><p class="page-intro">Clear and traceable hierarchy of our references.</p><div class="bloc" style="background:#e8efe9;border-left:4px solid #2e6b47;"><h3>📖 Level 1 — Primary sources</h3><ul style="line-height:1.9;"><li><strong>Francophone liturgical Bible</strong> : <a href="https://www.aelf.org" target="_blank" rel="noopener" style="color:#4a6f5e;text-decoration:underline;">AELF</a></li><li><strong>Bible in English</strong> : <a href="https://www.biblegateway.com" target="_blank" rel="noopener" style="color:#4a6f5e;text-decoration:underline;">BibleGateway</a></li><li><strong>Official documents</strong> : <a href="https://www.vatican.va" target="_blank" rel="noopener" style="color:#4a6f5e;text-decoration:underline;">vatican.va</a></li></ul></div><div class="bloc"><h3>✝️ Level 3 — Spiritual authors</h3><ul style="line-height:1.9;"><li><strong>St Ignatius of Loyola</strong></li><li><strong>Msgr Joseph A. Pellegrino</strong> — <a href="https://frjoeshomilies.net/" target="_blank" rel="noopener" style="color:#4a6f5e;text-decoration:underline;">frjoeshomilies.net</a></li><li><strong>Fr Tony Kadavil</strong> — <a href="https://frtonyshomilies.com/" target="_blank" rel="noopener" style="color:#4a6f5e;text-decoration:underline;">frtonyshomilies.com</a></li><li><strong>St Carlo Acutis</strong> — <a href="https://www.carloacutis.com/" target="_blank" rel="noopener" style="color:#4a6f5e;text-decoration:underline;">carloacutis.com</a></li></ul></div><div class="bloc" style="background:#fdecea;border-left:4px solid #c0392b;"><h3>⚠️ Limits</h3><p>AI answers may contain approximations. Always verify with a priest.</p></div>`,
         contact: `<h2>✉️ Contact</h2><div class="bloc"><h3>Share your experience</h3><p>Leave an anonymous testimony from the <a href="#/">home page</a>.</p></div>`,
         confidentialite: `<h2>🔒 Privacy</h2>
 <p class="page-intro">Our transparent commitment to protecting your data.</p>
@@ -827,7 +809,6 @@ async function handleSubmit() {
     const t = translations[currentLang] || FR;
     FoyerUI.start('loading', 'loading-text', t.loading);
 
-    // ✅ IA enrichie : Récupérer les lectures du jour si chargées
     let lecturesJour = null;
     if (aelfLectures && aelfLectures.length) {
         const parsed = parseAelfLectures(aelfLectures);
@@ -845,7 +826,6 @@ async function handleSubmit() {
 
     if (r.ok && r.data && r.data.response) {
         reponse = r.data.response;
-        // Si l'IA a détecté une situation sensible, afficher un avertissement renforcé
         if (r.data.sensitive) {
             const urgences = (translations[currentLang] || FR).ecouteList || [];
             const urgentBlock = "\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n" +
@@ -903,11 +883,11 @@ function buildSourcesBlock(ctx) {
     return "<div style='margin-top:2rem;background:#f4f1eb;border:1px solid #d9d2c5;border-left:4px solid #7c6f5d;border-radius:8px;padding:1.2rem;font-size:0.88rem;color:#4a4036;line-height:1.6;'>" +
         "<strong style='color:#2c221e;font-size:0.95rem;'>" + (t.homelieSourcesTitle || '') + "</strong>" +
         "<ul style='margin:0.5rem 0 0;padding-left:1.3rem;list-style-type:square;font-size:0.85rem;'>" +
-        "<li><strong>" + (t.homelieSourcesTextes || '') + "</strong> <a href='" + escapeHtml(ctx.lienAelf) + "' target='_blank' rel='noopener noreferrer' style='color:#325c48;'>AELF</a>.</li>" +
+        "<li><strong>" + (t.homelieSourcesTextes || '') + "</strong> <a href='" + escapeHtml(ctx.lienAelf) + "' target='_blank' rel='noopener noreferrer' style='color:#325c48;text-decoration:underline;'>AELF</a>.</li>" +
         "<li><strong>" + (t.homelieSourcesPredication || '') + "</strong> " + (t.homelieSourcesPredicationText || '') + "</li>" +
         "<li><strong>" + (t.homelieSourcesMeditation || '') + "</strong> " + (t.homelieSourcesMeditationText || '') + "</li>" +
-        "<li><strong>" + (t.homelieSourcesHermeneutique || '') + "</strong> Concile Vatican II, <a href='https://www.vatican.va/archive/hist_councils/ii_vatican_council/documents/vat-ii_const_19651118_dei-verbum_fr.html' target='_blank' rel='noopener noreferrer' style='color:#325c48;'>Dei Verbum, n. 12</a>.</li>" +
-        "<li><strong>" + (t.homelieSourcesNormes || '') + "</strong> <a href='https://www.vatican.va/roman_curia/congregations/ccdds/documents/rc_con_ccdds_doc_20140629_direttorio-omiletico_fr.html' target='_blank' rel='noopener noreferrer' style='color:#325c48;'>Directoire sur l'homélie (2014)</a>.</li>" +
+        "<li><strong>" + (t.homelieSourcesHermeneutique || '') + "</strong> Concile Vatican II, <a href='https://www.vatican.va/archive/hist_councils/ii_vatican_council/documents/vat-ii_const_19651118_dei-verbum_fr.html' target='_blank' rel='noopener noreferrer' style='color:#325c48;text-decoration:underline;'>Dei Verbum, n. 12</a>.</li>" +
+        "<li><strong>" + (t.homelieSourcesNormes || '') + "</strong> <a href='https://www.vatican.va/roman_curia/congregations/ccdds/documents/rc_con_ccdds_doc_20140629_direttorio-omiletico_fr.html' target='_blank' rel='noopener noreferrer' style='color:#325c48;text-decoration:underline;'>Directoire sur l'homélie (2014)</a>.</li>" +
         "</ul></div>";
 }
 
@@ -920,22 +900,16 @@ function detectAuthorContext(refStr, textStr) {
     return { lienAelf: 'https://www.aelf.org/bible' };
 }
 
-/* ============================================================
-   HOMÉLIE DOMINICALE — SCHÉMA EN 4 MOUVEMENTS (450 mots)
-   ============================================================ */
 function buildHomelieSunday(data) {
     const { evRef, l1Ref, l2Ref, evQuote, psalmRefrain } = data;
-
     const exEv = getExegesisFor(evRef);
     const exL1 = getExegesisFor(l1Ref);
     const exL2 = getExegesisFor(l2Ref);
 
     let h = "";
 
-    // ━━━ MOUVEMENT 1 : ACCROCHE NARRATIVE ━━━
     h += "<p>Un homme avait planté un petit potager derrière sa maison. Il avait préparé la terre, semé avec soin, arrosé chaque jour et attendu patiemment. Un jour, son voisin lui demanda : <em>« Comment va ton potager ? »</em> L'homme répondit : <em>« Les feuilles poussent à merveille. Il n'y a qu'un problème : je ne vois encore aucun légume ! »</em> Le voisin sourit : <em>« Mais un jardin est fait pour produire quelque chose ! »</em></p>";
 
-    // ━━━ MOUVEMENT 2 : EXÉGÈSE DES LECTURES ━━━
     h += "<p>C'est exactement le message de nos lectures d'aujourd'hui. Dans la première lecture";
     if (l1Ref) h += " (<strong>" + escapeHtml(l1Ref) + "</strong>)";
     h += ", " + exL1.contexte + " " + exL1.enseignement + ".</p>";
@@ -954,10 +928,8 @@ function buildHomelieSunday(data) {
         h += "<p>Le psaume, quant à lui, nous fait prier avec les mots du peuple d'Israël : « <em>" + escapeHtml(psalmRefrain) + "</em> » Cette prière est la nôtre : nous avons besoin que Dieu visite notre vigne, car sans lui nous ne pouvons rien faire.</p>";
     }
 
-    // ━━━ MOUVEMENT 3 : ACTUALISATION PASTORALE ━━━
     h += "<p>Dieu nous a confié une vigne : notre vie, nos familles, notre communauté, notre monde. Il attend de vrais fruits — non des feuilles qui poussent à merveille, mais des fruits de justice, de paix, de pardon. Cette semaine, osons un geste concret : un appel à un isolé, un pardon accordé, une parole d'encouragement. Et quand nous échouons, revenons à lui avec confiance, car il est le vigneron patient qui ne se lasse jamais de nous attendre.</p>";
 
-    // ━━━ MOUVEMENT 4 : PRIÈRE FINALE ━━━
     h += "<p><em>Seigneur, tu nous as plantés comme une vigne précieuse. Donne-nous la force de porter des fruits de justice et de paix. Que ta grâce nous transforme, afin que nos vies témoignent de ton amour. Amen.</em></p>";
 
     return h;
