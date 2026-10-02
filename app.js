@@ -58,6 +58,24 @@ const FR = {
     labelLecture2: "Deuxième lecture :", labelEvangile: "Évangile :",
     labelTheme: "Message retenu (optionnel) :", homelieButton: "Générer une proposition d'homélie",
     homelieLoading: "Préparation de l'homélie...",
+    homelieBadge: "🕊️ Proposition d'homélie",
+    homelieModeAI: "IA en ligne",
+    homelieModeLocal: "Génération locale autonome",
+    homelieWordsLabel: "mots max",
+    homelieCopy: "📋 Copier",
+    homelieCopied: "✅ Copiée !",
+    homelieToast: "Homélie copiée !",
+    homelieSelectManual: "Sélectionnez et copiez manuellement.",
+    homelieLegalTitle: "⚖️ Distinction légale : Inspiration vs Reproduction",
+    homelieLegalText: "Cette homélie est une <strong>création originale inspirée</strong> de la démarche de <strong>Mgr Joseph A. Pellegrino</strong> (<a href='https://frjoeshomilies.net/' target='_blank' rel='noopener noreferrer' style='color:#2a503e;'>frjoeshomilies.net</a>) et du <strong>Père Tony Kadavil</strong> (<a href='https://frtonyshomilies.com/' target='_blank' rel='noopener noreferrer' style='color:#2a503e;'>frtonyshomilies.com</a>). Elle ne constitue en aucun cas une reproduction intégrale de leurs écrits protégés, mais une appropriation spirituelle autonome dans le respect du droit d'auteur, du <em>Directoire sur l'homélie</em> et des textes de l'AELF.",
+    homelieSourcesTitle: "📚 Sources officielles & respect de la propriété intellectuelle",
+    homelieSourcesTextes: "Textes liturgiques :",
+    homelieSourcesPredication: "Prédication dominicale :",
+    homelieSourcesPredicationText: "Inspirée de Mgr Pellegrino et du P. Tony Kadavil.",
+    homelieSourcesMeditation: "Méditation de semaine :",
+    homelieSourcesMeditationText: "Inspirée du P. Tony Kadavil.",
+    homelieSourcesHermeneutique: "Herméneutique :",
+    homelieSourcesNormes: "Normes :",
     ecouteList: ["Urgence : numéro d'urgence de votre pays","Centres d'écoute : befrienders.org","En détresse : parlez-en à une personne de confiance"],
     contactPretreText: "Trouver un prêtre ou un accompagnant", contactPretreUrl: "https://www.cccb.ca/fr/dioceses/",
     contactCommunauteText: "Communauté près de chez vous", contactCommunauteUrl: "https://www.cccb.ca/fr/paroisses/",
@@ -110,6 +128,24 @@ EN.labelLecture1 = "First Reading:"; EN.labelPsaume = "Psalm:";
 EN.labelLecture2 = "Second Reading:"; EN.labelEvangile = "Gospel:";
 EN.labelTheme = "Theme (optional):"; EN.homelieButton = "Generate a homily";
 EN.homelieLoading = "Preparing the homily...";
+EN.homelieBadge = "🕊️ Homily proposal";
+EN.homelieModeAI = "AI online";
+EN.homelieModeLocal = "Local autonomous generation";
+EN.homelieWordsLabel = "words max";
+EN.homelieCopy = "📋 Copy";
+EN.homelieCopied = "✅ Copied!";
+EN.homelieToast = "Homily copied!";
+EN.homelieSelectManual = "Select and copy manually.";
+EN.homelieLegalTitle = "⚖️ Legal distinction: Inspiration vs Reproduction";
+EN.homelieLegalText = "This homily is an <strong>original creation inspired</strong> by the approach of <strong>Msgr Joseph A. Pellegrino</strong> (<a href='https://frjoeshomilies.net/' target='_blank' rel='noopener noreferrer' style='color:#2a503e;'>frjoeshomilies.net</a>) and <strong>Fr Tony Kadavil</strong> (<a href='https://frtonyshomilies.com/' target='_blank' rel='noopener noreferrer' style='color:#2a503e;'>frtonyshomilies.com</a>). It is in no way a full reproduction of their protected writings, but an autonomous spiritual appropriation in respect of copyright, the <em>Homily Directory</em> and the AELF texts.";
+EN.homelieSourcesTitle = "📚 Official sources & intellectual property";
+EN.homelieSourcesTextes = "Liturgical texts:";
+EN.homelieSourcesPredication = "Sunday preaching:";
+EN.homelieSourcesPredicationText = "Inspired by Msgr Pellegrino and Fr Tony Kadavil.";
+EN.homelieSourcesMeditation = "Weekday meditation:";
+EN.homelieSourcesMeditationText = "Inspired by Fr Tony Kadavil.";
+EN.homelieSourcesHermeneutique = "Hermeneutics:";
+EN.homelieSourcesNormes = "Standards:";
 EN.ecouteList = ["Emergency: dial your country's emergency number","Listening centres: befrienders.org","In distress: reach out to someone you trust"];
 EN.contactPretreText = "Find a priest"; EN.contactPretreUrl = "https://www.usccb.org/parish-finder";
 EN.contactCommunauteText = "Community near you"; EN.contactCommunauteUrl = "https://www.catholic.org/parishes/";
@@ -156,6 +192,24 @@ ZH.labelLecture1 = "第一读经："; ZH.labelPsaume = "圣咏：";
 ZH.labelLecture2 = "第二读经："; ZH.labelEvangile = "福音：";
 ZH.labelTheme = "主题（可选）："; ZH.homelieButton = "生成讲道";
 ZH.homelieLoading = "准备讲道...";
+ZH.homelieBadge = "🕊️ 讲道建议";
+ZH.homelieModeAI = "在线 AI";
+ZH.homelieModeLocal = "本地自主生成";
+ZH.homelieWordsLabel = "词数上限";
+ZH.homelieCopy = "📋 复制";
+ZH.homelieCopied = "✅ 已复制！";
+ZH.homelieToast = "讲道已复制！";
+ZH.homelieSelectManual = "请手动选择并复制。";
+ZH.homelieLegalTitle = "⚖️ 法律区分：灵感 vs 复制";
+ZH.homelieLegalText = "此讲道是基于 <strong>Mgr Joseph A. Pellegrino</strong> 和 <strong>Père Tony Kadavil</strong> 牧灵方法的<strong>原创作品</strong>，并非对其受保护作品的完整复制，而是尊重版权、<em>讲道指南</em>和 AELF 文本的自主精神运用。";
+ZH.homelieSourcesTitle = "📚 官方来源与知识产权";
+ZH.homelieSourcesTextes = "礼仪文本：";
+ZH.homelieSourcesPredication = "主日讲道：";
+ZH.homelieSourcesPredicationText = "受 Mgr Pellegrino 和 P. Tony Kadavil 启发。";
+ZH.homelieSourcesMeditation = "平日默想：";
+ZH.homelieSourcesMeditationText = "受 P. Tony Kadavil 启发。";
+ZH.homelieSourcesHermeneutique = "诠释学：";
+ZH.homelieSourcesNormes = "规范：";
 ZH.ecouteList = ["紧急情况：请拨打您所在国家的紧急电话","全球聆听中心：befrienders.org","处于痛苦中时：请立即向信任的人倾诉"];
 ZH.contactPretreText = "寻找一位神父"; ZH.contactPretreUrl = "https://www.catholic.org.hk/";
 ZH.contactCommunauteText = "你附近的团体"; ZH.contactCommunauteUrl = "https://www.chinacatholic.cn/";
@@ -462,65 +516,13 @@ const pageContent = {
         contact: `<h2>✉️ Contact</h2><div class="bloc"><h3>Partager votre expérience</h3><p>Laissez un témoignage anonyme depuis <a href="#/">la page d'accueil</a>.</p></div>`,
         confidentialite: `<h2>🔒 Confidentialité</h2>
 <p class="page-intro">Notre engagement transparent sur la protection de vos données.</p>
-
-<div class="bloc" style="background:#e8efe9;border-left:4px solid #2e6b47;">
-<h3>✅ En bref</h3>
-<p><strong>Aucun compte.</strong> <strong>Aucun cookie de suivi.</strong> <strong>Aucune publicité.</strong> <strong>Aucune revente de données.</strong></p>
-<p>Nous ne stockons <strong>rien sur nos serveurs</strong> vous concernant.</p>
-</div>
-
-<div class="bloc">
-<h3>📱 Ce qui reste UNIQUEMENT sur votre appareil</h3>
-<p>Ces données sont stockées dans le <code>localStorage</code> de votre navigateur. Elles ne quittent <strong>jamais</strong> votre appareil :</p>
-<ul style="line-height:1.9;">
-<li>✅ <strong>Votre carnet</strong> (« petites lumières »)</li>
-<li>✅ <strong>Vos témoignages anonymes</strong> (enregistrés localement)</li>
-<li>✅ <strong>Votre langue choisie</strong></li>
-<li>✅ <strong>Votre identifiant de carnet</strong> (une suite aléatoire, sans lien avec votre identité)</li>
-</ul>
-<p><strong>Pour tout effacer</strong> : boutons « 🗑️ Effacer » dans les sections carnet et témoignages, ou videz les données de votre navigateur.</p>
-</div>
-
-<div class="bloc" style="background:#fff8f0;border-left:4px solid #c49a6c;">
-<h3>📤 Ce qui est transmis pour générer une réponse</h3>
-<p>Quand vous cliquez sur <strong>« Réfléchir avec le compagnon »</strong> :</p>
-<ul style="line-height:1.9;">
-<li>Le <strong>texte que vous écrivez</strong> (situation, précisions, rôle éventuel)</li>
-<li>Le <strong>mode choisi</strong> (discernement, consolation, prière, lecture)</li>
-<li>La <strong>langue</strong> active</li>
-</ul>
-<p>Ces données sont envoyées à :</p>
-<ul style="line-height:1.9;">
-<li><strong>Netlify Functions</strong> (relais sécurisé, sans stockage)</li>
-<li><strong>OpenAI</strong> (génération de la réponse, sans conservation à long terme)</li>
-</ul>
-<p><strong>⚠️ N'écrivez jamais</strong> de données très sensibles : noms de tiers, adresses précises, numéros de sécurité sociale, données bancaires, informations médicales détaillées.</p>
-</div>
-
-<div class="bloc">
-<h3>📚 Préparation d'homélie et AELF</h3>
-<p>Quand vous utilisez la préparation d'homélie :</p>
-<ul style="line-height:1.9;">
-<li>Une requête est envoyée à l'<strong>API AELF</strong> pour récupérer les lectures liturgiques du jour</li>
-<li>Ces lectures sont ensuite transmises à OpenAI pour générer l'homélie</li>
-</ul>
-<p>AELF est un service indépendant, soumis à sa <a href="https://www.aelf.org/page/politique-de-confidentialite" target="_blank" rel="noopener">propre politique de confidentialité</a>.</p>
-</div>
-
-<div class="bloc">
-<h3>🔗 Liens externes</h3>
-<p>Les liens vers les sites externes (AELF, BibleGateway, Prions en Église, etc.) relèvent de <strong>leurs propres politiques</strong> de confidentialité.</p>
-</div>
-
-<div class="bloc">
-<h3>⚖️ Conformité RGPD</h3>
-<p>Ce site ne collecte <strong>aucune donnée personnelle identifiable</strong>. Aucun cookie de suivi n'est déposé.</p>
-</div>
-
-<div class="bloc" style="background:#eef6fa;border-left:4px solid #1f4b66;">
-<h3>🛡️ Vos droits</h3>
-<p>Puisque nous ne stockons rien sur nos serveurs, il n'y a aucune donnée à consulter, modifier ou supprimer côté serveur. Vous gardez le <strong>contrôle total</strong> de ce qui reste sur votre appareil.</p>
-</div>`
+<div class="bloc" style="background:#e8efe9;border-left:4px solid #2e6b47;"><h3>✅ En bref</h3><p><strong>Aucun compte.</strong> <strong>Aucun cookie de suivi.</strong> <strong>Aucune publicité.</strong> <strong>Aucune revente de données.</strong></p><p>Nous ne stockons <strong>rien sur nos serveurs</strong> vous concernant.</p></div>
+<div class="bloc"><h3>📱 Ce qui reste UNIQUEMENT sur votre appareil</h3><p>Ces données sont stockées dans le <code>localStorage</code> de votre navigateur. Elles ne quittent <strong>jamais</strong> votre appareil :</p><ul style="line-height:1.9;"><li>✅ <strong>Votre carnet</strong> (« petites lumières »)</li><li>✅ <strong>Vos témoignages anonymes</strong> (enregistrés localement)</li><li>✅ <strong>Votre langue choisie</strong></li><li>✅ <strong>Votre identifiant de carnet</strong> (une suite aléatoire, sans lien avec votre identité)</li></ul><p><strong>Pour tout effacer</strong> : boutons « 🗑️ Effacer » dans les sections carnet et témoignages, ou videz les données de votre navigateur.</p></div>
+<div class="bloc" style="background:#fff8f0;border-left:4px solid #c49a6c;"><h3>📤 Ce qui est transmis pour générer une réponse</h3><p>Quand vous cliquez sur <strong>« Réfléchir avec le compagnon »</strong> :</p><ul style="line-height:1.9;"><li>Le <strong>texte que vous écrivez</strong> (situation, précisions, rôle éventuel)</li><li>Le <strong>mode choisi</strong> (discernement, consolation, prière, lecture)</li><li>La <strong>langue</strong> active</li></ul><p>Ces données sont envoyées à :</p><ul style="line-height:1.9;"><li><strong>Netlify Functions</strong> (relais sécurisé, sans stockage)</li><li><strong>OpenAI</strong> (génération de la réponse, sans conservation à long terme)</li></ul><p><strong>⚠️ N'écrivez jamais</strong> de données très sensibles : noms de tiers, adresses précises, numéros de sécurité sociale, données bancaires, informations médicales détaillées.</p></div>
+<div class="bloc"><h3>📚 Préparation d'homélie et AELF</h3><p>Quand vous utilisez la préparation d'homélie :</p><ul style="line-height:1.9;"><li>Une requête est envoyée à l'<strong>API AELF</strong> pour récupérer les lectures liturgiques du jour</li><li>Ces lectures sont ensuite transmises à OpenAI pour générer l'homélie</li></ul><p>AELF est un service indépendant, soumis à sa <a href="https://www.aelf.org/page/politique-de-confidentialite" target="_blank" rel="noopener">propre politique de confidentialité</a>.</p></div>
+<div class="bloc"><h3>🔗 Liens externes</h3><p>Les liens vers les sites externes (AELF, BibleGateway, Prions en Église, etc.) relèvent de <strong>leurs propres politiques</strong> de confidentialité.</p></div>
+<div class="bloc"><h3>⚖️ Conformité RGPD</h3><p>Ce site ne collecte <strong>aucune donnée personnelle identifiable</strong>. Aucun cookie de suivi n'est déposé.</p></div>
+<div class="bloc" style="background:#eef6fa;border-left:4px solid #1f4b66;"><h3>🛡️ Vos droits</h3><p>Puisque nous ne stockons rien sur nos serveurs, il n'y a aucune donnée à consulter, modifier ou supprimer côté serveur. Vous gardez le <strong>contrôle total</strong> de ce qui reste sur votre appareil.</p></div>`
     },
     en: {
         sagesse: `<h2>📖 Wisdom</h2><p class="page-intro">Texts to nourish meditation and prayer.</p><div class="bloc"><h3>Words of Jesus</h3><p>« Come to me, all you who are weary. » — Mt 11:28</p></div>${CARLO_EN}<div class="bloc"><h3>Go further</h3><p>Return to the <a href="#/">home page</a> or take the <a href="#/examen">guided examen</a>.</p></div>`,
@@ -530,50 +532,10 @@ const pageContent = {
         contact: `<h2>✉️ Contact</h2><div class="bloc"><h3>Share your experience</h3><p>Leave an anonymous testimony from the <a href="#/">home page</a>.</p></div>`,
         confidentialite: `<h2>🔒 Privacy</h2>
 <p class="page-intro">Our transparent commitment to protecting your data.</p>
-
-<div class="bloc" style="background:#e8efe9;border-left:4px solid #2e6b47;">
-<h3>✅ In short</h3>
-<p><strong>No account.</strong> <strong>No tracking cookies.</strong> <strong>No advertising.</strong> <strong>No data resale.</strong></p>
-<p>We store <strong>nothing on our servers</strong> about you.</p>
-</div>
-
-<div class="bloc">
-<h3>📱 What stays ONLY on your device</h3>
-<p>This data is stored in your browser's <code>localStorage</code>. It <strong>never</strong> leaves your device:</p>
-<ul style="line-height:1.9;">
-<li>✅ <strong>Your journal</strong> ("little lights")</li>
-<li>✅ <strong>Your anonymous testimonies</strong> (stored locally)</li>
-<li>✅ <strong>Your chosen language</strong></li>
-<li>✅ <strong>Your journal ID</strong> (a random string, no link to your identity)</li>
-</ul>
-<p><strong>To erase everything</strong>: "🗑️ Delete" buttons in journal and testimonies sections, or clear your browser data.</p>
-</div>
-
-<div class="bloc" style="background:#fff8f0;border-left:4px solid #c49a6c;">
-<h3>📤 What is transmitted to generate an answer</h3>
-<p>When you click <strong>"Think with the companion"</strong>:</p>
-<ul style="line-height:1.9;">
-<li>The <strong>text you write</strong> (situation, clarifications, optional role)</li>
-<li>The <strong>chosen mode</strong> (discernment, consolation, prayer, reading)</li>
-<li>The <strong>active language</strong></li>
-</ul>
-<p>This data is sent to:</p>
-<ul style="line-height:1.9;">
-<li><strong>Netlify Functions</strong> (secure relay, no storage)</li>
-<li><strong>OpenAI</strong> (answer generation, no long-term retention)</li>
-</ul>
-<p><strong>⚠️ Never write</strong> highly sensitive data: third-party names, precise addresses, social security numbers, banking data, detailed medical information.</p>
-</div>
-
-<div class="bloc">
-<h3>🔗 External links</h3>
-<p>Links to external sites (AELF, BibleGateway, etc.) are governed by <strong>their own privacy policies</strong>.</p>
-</div>
-
-<div class="bloc">
-<h3>⚖️ GDPR compliance</h3>
-<p>This site collects <strong>no personally identifiable data</strong>. No tracking cookie is deposited.</p>
-</div>`
+<div class="bloc" style="background:#e8efe9;border-left:4px solid #2e6b47;"><h3>✅ In short</h3><p><strong>No account.</strong> <strong>No tracking cookies.</strong> <strong>No advertising.</strong> <strong>No data resale.</strong></p><p>We store <strong>nothing on our servers</strong> about you.</p></div>
+<div class="bloc"><h3>📱 What stays ONLY on your device</h3><p>This data is stored in your browser's <code>localStorage</code>. It <strong>never</strong> leaves your device:</p><ul style="line-height:1.9;"><li>✅ <strong>Your journal</strong> ("little lights")</li><li>✅ <strong>Your anonymous testimonies</strong></li><li>✅ <strong>Your chosen language</strong></li><li>✅ <strong>Your journal ID</strong></li></ul></div>
+<div class="bloc" style="background:#fff8f0;border-left:4px solid #c49a6c;"><h3>📤 What is transmitted</h3><p>When you click <strong>"Think with the companion"</strong>:</p><ul style="line-height:1.9;"><li>The <strong>text you write</strong></li><li>The <strong>chosen mode</strong></li><li>The <strong>active language</strong></li></ul><p>This data is sent to:</p><ul style="line-height:1.9;"><li><strong>Netlify Functions</strong> (secure relay, no storage)</li><li><strong>OpenAI</strong> (answer generation)</li></ul><p><strong>⚠️ Never write</strong> highly sensitive data.</p></div>
+<div class="bloc"><h3>⚖️ GDPR compliance</h3><p>This site collects <strong>no personally identifiable data</strong>.</p></div>`
     }
 };
 ['zh','hi','es','ar'].forEach(l => { pageContent[l] = pageContent.fr; });
@@ -839,7 +801,27 @@ function truncateHtml(html, max) {
     return { html: '<p>' + tr + '</p><p style="font-size:0.82rem;color:#8c6b32;font-style:italic;">⚠️ Texte calibré à ' + max + ' mots.</p>', count: max };
 }
 
-const LEGAL_NOTICE = "<div style='margin-top:1.5rem;padding:1rem;background:#f5f3ef;border:1px solid #dcd5c9;border-left:4px solid #4a6f5e;border-radius:6px;font-size:0.84rem;color:#443b34;line-height:1.55;'><div style='font-weight:700;color:#2d463b;margin-bottom:0.4rem;'>⚖️ Distinction légale : Inspiration vs Reproduction</div>Cette homélie est une <strong>création originale inspirée</strong> de la démarche de <strong>Mgr Joseph A. Pellegrino</strong> (<a href='https://frjoeshomilies.net/' target='_blank' rel='noopener noreferrer' style='color:#2a503e;'>frjoeshomilies.net</a>) et du <strong>Père Tony Kadavil</strong> (<a href='https://frtonyshomilies.com/' target='_blank' rel='noopener noreferrer' style='color:#2a503e;'>frtonyshomilies.com</a>). Elle ne constitue en aucun cas une reproduction intégrale de leurs écrits protégés, mais une appropriation spirituelle autonome dans le respect du droit d'auteur, du <em>Directoire sur l'homélie</em> et des textes de l'AELF.</div>";
+/* ---------- Bloc légal traduisible ---------- */
+function buildLegalNotice() {
+    const t = translations[currentLang] || FR;
+    return "<div style='margin-top:1.5rem;padding:1rem;background:#f5f3ef;border:1px solid #dcd5c9;border-left:4px solid #4a6f5e;border-radius:6px;font-size:0.84rem;color:#443b34;line-height:1.55;'>" +
+        "<div style='font-weight:700;color:#2d463b;margin-bottom:0.4rem;'>" + (t.homelieLegalTitle || '') + "</div>" +
+        (t.homelieLegalText || '') + "</div>";
+}
+
+/* ---------- Bloc sources traduisible ---------- */
+function buildSourcesBlock(ctx) {
+    const t = translations[currentLang] || FR;
+    return "<div style='margin-top:2rem;background:#f4f1eb;border:1px solid #d9d2c5;border-left:4px solid #7c6f5d;border-radius:8px;padding:1.2rem;font-size:0.88rem;color:#4a4036;line-height:1.6;'>" +
+        "<strong style='color:#2c221e;font-size:0.95rem;'>" + (t.homelieSourcesTitle || '') + "</strong>" +
+        "<ul style='margin:0.5rem 0 0;padding-left:1.3rem;list-style-type:square;font-size:0.85rem;'>" +
+        "<li><strong>" + (t.homelieSourcesTextes || '') + "</strong> <a href='" + escapeHtml(ctx.lienAelf) + "' target='_blank' rel='noopener noreferrer' style='color:#325c48;'>AELF</a>.</li>" +
+        "<li><strong>" + (t.homelieSourcesPredication || '') + "</strong> " + (t.homelieSourcesPredicationText || '') + "</li>" +
+        "<li><strong>" + (t.homelieSourcesMeditation || '') + "</strong> " + (t.homelieSourcesMeditationText || '') + "</li>" +
+        "<li><strong>" + (t.homelieSourcesHermeneutique || '') + "</strong> Concile Vatican II, <a href='https://www.vatican.va/archive/hist_councils/ii_vatican_council/documents/vat-ii_const_19651118_dei-verbum_fr.html' target='_blank' rel='noopener noreferrer' style='color:#325c48;'>Dei Verbum, n. 12</a>.</li>" +
+        "<li><strong>" + (t.homelieSourcesNormes || '') + "</strong> <a href='https://www.vatican.va/roman_curia/congregations/ccdds/documents/rc_con_ccdds_doc_20140629_direttorio-omiletico_fr.html' target='_blank' rel='noopener noreferrer' style='color:#325c48;'>Directoire sur l'homélie (2014)</a>.</li>" +
+        "</ul></div>";
+}
 
 function detectAuthorContext(refStr, textStr) {
     const f = ((refStr || '') + ' ' + (textStr || '')).toLowerCase();
@@ -848,9 +830,6 @@ function detectAuthorContext(refStr, textStr) {
     if (/luc|luke|lc\b/.test(f)) return { lienAelf: 'https://www.aelf.org/bible/Lc' };
     if (/jean|john|jn\b/.test(f)) return { lienAelf: 'https://www.aelf.org/bible/Jn' };
     return { lienAelf: 'https://www.aelf.org/bible' };
-}
-function buildSourcesBlock(ctx) {
-    return "<div style='margin-top:2rem;background:#f4f1eb;border:1px solid #d9d2c5;border-left:4px solid #7c6f5d;border-radius:8px;padding:1.2rem;font-size:0.88rem;color:#4a4036;line-height:1.6;'><strong style='color:#2c221e;font-size:0.95rem;'>📚 Sources officielles & respect de la propriété intellectuelle</strong><ul style='margin:0.5rem 0 0;padding-left:1.3rem;list-style-type:square;font-size:0.85rem;'><li><strong>Textes liturgiques :</strong> <a href='" + escapeHtml(ctx.lienAelf) + "' target='_blank' rel='noopener noreferrer' style='color:#325c48;'>AELF</a>.</li><li><strong>Prédication dominicale :</strong> Inspirée de Mgr Pellegrino et du P. Tony Kadavil.</li><li><strong>Méditation de semaine :</strong> Inspirée du P. Tony Kadavil.</li><li><strong>Herméneutique :</strong> Concile Vatican II, <a href='https://www.vatican.va/archive/hist_councils/ii_vatican_council/documents/vat-ii_const_19651118_dei-verbum_fr.html' target='_blank' rel='noopener noreferrer' style='color:#325c48;'>Dei Verbum, n. 12</a>.</li><li><strong>Normes :</strong> <a href='https://www.vatican.va/roman_curia/congregations/ccdds/documents/rc_con_ccdds_doc_20140629_direttorio-omiletico_fr.html' target='_blank' rel='noopener noreferrer' style='color:#325c48;'>Directoire sur l'homélie (2014)</a>.</li></ul></div>";
 }
 
 function buildHomelieSunday(data) {
@@ -1122,18 +1101,13 @@ function bindEvents() {
     const hjb = document.getElementById('btn-homelie-du-jour'); if (hjb) hjb.addEventListener('click', genererHomelieDuJour);
     const gb = document.getElementById('genererHomelie'); if (gb) gb.addEventListener('click', handleGenererHomelie);
 
-    // Bouton "Parler à une personne" → scroll vers les contacts humains
     const bph = document.getElementById('btn-parler-humain');
     if (bph) bph.addEventListener('click', () => {
         const rc = document.getElementById('ressources-container');
-        if (rc) {
-            rc.style.display = 'block';
-            rc.scrollIntoView({ behavior: 'smooth' });
-        }
+        if (rc) { rc.style.display = 'block'; rc.scrollIntoView({ behavior: 'smooth' }); }
         showToast("Voici les contacts humains et services d'écoute en bas de page.", 'info', 5000);
     });
 
-    // Aide méthodologique : apparaît quand l'utilisateur commence à écrire
     const sitEl = document.getElementById('situation');
     const aideEl = document.getElementById('aide-methodo');
     if (sitEl && aideEl) {
@@ -1217,7 +1191,8 @@ async function handleGenererHomelie() {
 
     const hd = document.getElementById('homelieResponse');
     const gb = document.getElementById('genererHomelie');
-    FoyerUI.start('homelieLoading', 'homelie-loading-text', "Préparation de l'homélie...");
+    const t = translations[currentLang] || FR;
+    FoyerUI.start('homelieLoading', 'homelie-loading-text', t.homelieLoading || "Préparation de l'homélie...");
     hd.style.display = 'none';
     if (gb) gb.disabled = true;
 
@@ -1242,7 +1217,7 @@ async function handleGenererHomelie() {
         const safe = escapeHtml(r.data.response);
         homelieHtml = safe.replace(/\n\n/g, '</p><p>').replace(/\n/g, '<br>').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\*(.*?)\*/g, '<em>$1</em>');
         homelieHtml = '<p>' + homelieHtml + '</p>';
-        modeGen = 'IA en ligne';
+        modeGen = t.homelieModeAI || 'IA en ligne';
     } else if (r.error) { console.log('Fallback local:', r.error); showToast('IA indisponible : génération locale activée', 'info', 3500); }
 
     let wc = 0;
@@ -1250,13 +1225,13 @@ async function handleGenererHomelie() {
 
     if (homelieHtml) {
         const aw = countWordsInHtml(homelieHtml);
-        if (aw > lim) { const t = truncateHtml(homelieHtml, lim); homelieHtml = t.html; wc = t.count; }
+        if (aw > lim) { const tr = truncateHtml(homelieHtml, lim); homelieHtml = tr.html; wc = tr.count; }
         else wc = aw;
-        homelieHtml += LEGAL_NOTICE;
+        homelieHtml += buildLegalNotice();
     } else {
         const lr = genererHomelieLocale(lecture1, psaume, lecture2, evangile, theme);
         homelieHtml = lr.html; wc = lr.wordCount; lim = lr.maxLimit;
-        modeGen = 'Génération locale autonome';
+        modeGen = t.homelieModeLocal || 'Génération locale autonome';
     }
 
     const bc = wc <= lim ? '#2e6b47' : '#c0392b';
@@ -1265,11 +1240,11 @@ async function handleGenererHomelie() {
     hd.innerHTML =
         '<div style="display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #dfd7ca;padding-bottom:0.75rem;margin-bottom:1rem;flex-wrap:wrap;gap:0.5rem;">' +
         '<div style="display:flex;align-items:center;gap:0.6rem;flex-wrap:wrap;">' +
-        '<strong style="color:#4a6f5e;font-size:1.1rem;">🕊️ Proposition d\'homélie</strong>' +
+        '<strong style="color:#4a6f5e;font-size:1.1rem;">' + (t.homelieBadge || '🕊️ Proposition d\'homélie') + '</strong>' +
         '<span style="font-size:0.75rem;background:#eae5dc;color:#6b5d52;padding:2px 8px;border-radius:10px;">' + escapeHtml(modeGen) + '</span>' +
-        '<span style="font-size:0.8rem;background:' + bg + ';color:' + bc + ';border:1px solid ' + bc + '33;padding:2px 10px;border-radius:12px;font-weight:bold;">📊 ' + wc + ' / ' + lim + ' mots max</span>' +
+        '<span style="font-size:0.8rem;background:' + bg + ';color:' + bc + ';border:1px solid ' + bc + '33;padding:2px 10px;border-radius:12px;font-weight:bold;">📊 ' + wc + ' / ' + lim + ' ' + (t.homelieWordsLabel || 'mots max') + '</span>' +
         '</div>' +
-        '<button type="button" id="btn-copier-homelie" style="background:#4a6f5e;color:#fff;border:none;padding:6px 14px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:600;">📋 Copier</button>' +
+        '<button type="button" id="btn-copier-homelie" style="background:#4a6f5e;color:#fff;border:none;padding:6px 14px;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:600;">' + (t.homelieCopy || '📋 Copier') + '</button>' +
         '</div>' +
         '<div id="homelie-texte-contenu" style="font-size:1rem;line-height:1.85;">' + homelieHtml + '</div>';
 
@@ -1281,10 +1256,10 @@ async function handleGenererHomelie() {
     if (cp) cp.addEventListener('click', () => {
         const txt = document.getElementById('homelie-texte-contenu').innerText;
         navigator.clipboard.writeText(txt).then(() => {
-            cp.textContent = '✅ Copiée !';
-            showToast('Homélie copiée !', 'info');
-            setTimeout(() => { cp.textContent = '📋 Copier'; }, 2500);
-        }).catch(() => showToast('Sélectionnez et copiez manuellement.', 'warn'));
+            cp.textContent = t.homelieCopied || '✅ Copiée !';
+            showToast(t.homelieToast || 'Homélie copiée !', 'info');
+            setTimeout(() => { cp.textContent = t.homelieCopy || '📋 Copier'; }, 2500);
+        }).catch(() => showToast(t.homelieSelectManual || 'Sélectionnez et copiez manuellement.', 'warn'));
     });
     hd.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
@@ -1298,6 +1273,16 @@ function init() {
     loadCarnet();
     initAelfDate();
     bindEvents();
+
+    // Enregistrer le Service Worker (PWA) — si présent
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/sw.js')
+                .then(() => console.log('✅ Service Worker enregistré'))
+                .catch(err => console.warn('⚠️ Service Worker non enregistré :', err));
+        });
+    }
+
     let lang = '';
     try { lang = localStorage.getItem(STORAGE_KEYS.LANG) || ''; } catch (e) {}
     if (LANGS.indexOf(lang) === -1) { const n = (navigator.language || '').slice(0, 2).toLowerCase(); lang = LANGS.indexOf(n) !== -1 ? n : 'fr'; }
