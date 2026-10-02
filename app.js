@@ -6,11 +6,13 @@ const SITUATION_KEYS = ["SOUFFRANCE","SENS_VIE","COUPLE","DEUIL","SOLITUDE","COL
 const LANGS = ['fr', 'en', 'zh', 'hi', 'es', 'ar'];
 const TOAST_ICONS = { info: "✅", warn: "⚠️", error: "🚫" };
 const ROUTES = { '': 'accueil', '/': 'accueil', '/sagesse': 'sagesse', '/a-propos': 'apropos', '/examen': 'examen', '/sources': 'sources', '/contact': 'contact', '/confidentialite': 'confidentialite', '/comment-ca-marche': 'comment-ca-marche' };
-const WORD_LIMITS = { sunday: 300, weekday: 200 };
+
+// ⚙️ Dimanche : 450 mots | Semaine : 200 mots
+const WORD_LIMITS = { sunday: 450, weekday: 200 };
 
 let currentLang = 'fr';
 let currentMode = 'discernement';
-let currentSituationKey = null; 
+let currentSituationKey = null;
 let examenIdx = 0;
 let aelfLectures = [];
 
@@ -358,6 +360,55 @@ AR.pageExamen = { title: "🕯️ الفحص الموجه", intro: "خمس خط�
 const translations = { fr: FR, en: EN, zh: ZH, hi: HI, es: ES, ar: AR };
 
 /* ============================================================
+   BASE DE CONNAISSANCE EXÉGÉTIQUE (fallback local)
+   ============================================================ */
+const EXEGESIS_HINTS = {
+    isaie: {
+        nom: "Isaïe",
+        contexte: "Le prophète Isaïe exerce son ministère à Jérusalem au VIIIe siècle av. J.-C. Le « cantique de la vigne » (Is 5, 1-7) est un chant d'amour blessé : Dieu y apparaît comme l'époux déçu de son peuple.",
+        enseignement: "Dieu a tout préparé avec soin pour Israël, mais la vigne a produit du raisin mauvais. Ce n'est pas un jugement extérieur, mais le cri d'un amour déçu qui attend des fruits de justice."
+    },
+    jeremie: { nom: "Jérémie", contexte: "Le prophète Jérémie (VIIe-VIe s. av. J.-C.) annonce l'Alliance nouvelle au cœur même de l'exil.", enseignement: "Dieu veut écrire sa loi dans les cœurs, non sur des pierres." },
+    ezechiel: { nom: "Ézéchiel", contexte: "Ézéchiel, prophète de l'exil à Babylone, redonne espérance aux déportés.", enseignement: "Dieu veut un cœur nouveau et un esprit nouveau." },
+    matthieu: {
+        nom: "Matthieu",
+        contexte: "L'évangéliste Matthieu écrit pour des communautés judéo-chrétiennes. Il présente Jésus comme le nouveau Moïse qui accomplit les Écritures.",
+        enseignement: "La parabole des vignerons homicides (Mt 21, 33-43) est un avertissement solennel : la vigne appartient à Dieu, et l'autorité est un service, non une possession."
+    },
+    marc: { nom: "Marc", contexte: "Marc est le plus ancien des évangiles. Il présente Jésus comme le Serviteur souffrant.", enseignement: "Suivre le Christ, c'est accepter la Croix comme chemin de vie." },
+    luc: { nom: "Luc", contexte: "Luc, médecin et compagnon de Paul, met en avant la miséricorde et la joie du salut.", enseignement: "Jésus accueille les petits, les pécheurs et les exclus." },
+    jean: { nom: "Jean", contexte: "Jean, le disciple bien-aimé, écrit pour faire croire que Jésus est le Fils de Dieu.", enseignement: "Le Verbe s'est fait chair, et nous avons vu sa gloire." },
+    philippiens: {
+        nom: "Philippiens",
+        contexte: "Saint Paul écrit aux Philippiens depuis sa prison, vers 60 ap. J.-C. C'est une lettre de joie au milieu de l'épreuve.",
+        enseignement: "Ne vous inquiétez de rien, mais en toute circonstance, par la prière et l'action de grâce, présentez vos demandes à Dieu. Alors la paix de Dieu gardera vos cœurs."
+    },
+    psaume: {
+        contexte: "Le psaume est la prière du peuple d'Israël, portée par la liturgie du Temple puis par l'Église.",
+        enseignement: "Chanter les psaumes, c'est faire nôtre la prière millénaire du Peuple de Dieu."
+    },
+    defaut: {
+        nom: "les Écritures",
+        contexte: "Le texte s'inscrit dans la longue tradition biblique qui traverse l'Ancien et le Nouveau Testament.",
+        enseignement: "Dieu parle à travers les Écritures pour éclairer notre route."
+    }
+};
+
+function getExegesisFor(ref) {
+    const f = (ref || '').toLowerCase();
+    if (/isaïe|isaie|isaiah|\bis\b/.test(f)) return EXEGESIS_HINTS.isaie;
+    if (/jérémie|jeremie|\bjr\b/.test(f)) return EXEGESIS_HINTS.jeremie;
+    if (/ézéchiel|ezechiel|\bez\b/.test(f)) return EXEGESIS_HINTS.ezechiel;
+    if (/matthieu|matthew|\bmt\b/.test(f)) return EXEGESIS_HINTS.matthieu;
+    if (/marc|mark|\bmc\b/.test(f)) return EXEGESIS_HINTS.marc;
+    if (/luc|luke|\blc\b/.test(f)) return EXEGESIS_HINTS.luc;
+    if (/jean|john|\bjn\b/.test(f)) return EXEGESIS_HINTS.jean;
+    if (/philippiens|\bph\b/.test(f)) return EXEGESIS_HINTS.philippiens;
+    if (/psaume|\bps\b/.test(f)) return EXEGESIS_HINTS.psaume;
+    return EXEGESIS_HINTS.defaut;
+}
+
+/* ============================================================
    PAGES INTERNES
    ============================================================ */
 const CARLO_FR = `<div class="bloc" style="background:#fff8f0;border:1px solid #e8d5b7;border-left:4px solid #c49a6c;"><h3 style="color:#8b5e3c;">🔥 Saint Carlo Acutis (1991–2006) — Le saint des développeurs</h3><p style="font-style:italic;color:#6b4c2a;font-size:1.05rem;">« Tous naissent comme des originaux, mais beaucoup meurent comme des photocopies. »<br><span style="font-size:0.8rem;color:#8b7355;">— Phrase que Carlo aimait à répéter</span></p><p>Canonisé en 2025, Carlo Acutis est le premier saint de l'ère numérique. Passionné d'informatique, il a utilisé le web pour créer une <a href="https://www.miracolieucaristici.org/" target="_blank" rel="noopener">exposition internationale sur les miracles eucharistiques</a>. Il disait : <em>« L'Eucharistie est mon autoroute vers le Ciel. »</em></p><blockquote style="border-left:3px solid #c49a6c;margin:1rem 0;padding-left:1rem;color:#5a4f42;line-height:1.7;"><p>« Notre objectif doit être l'infini, non pas le fini. L'Infini est notre patrie. »</p><p>« Être toujours uni à Jésus, tel est le but de ma vie. »</p><p>« Quand on s'expose au soleil, on bronze ; quand on se met devant Jésus Eucharistie, on devient saint ! »</p><p>« Le bonheur, c'est d'avoir le regard tourné vers Dieu. La tristesse, c'est de l'avoir tourné vers soi-même. »</p><p>« Ne perds pas ton temps à ne rien faire. Consacre-le à Dieu. »</p></blockquote><p style="font-size:0.85rem;color:#8b7355;margin-top:1rem;padding-top:0.8rem;border-top:1px dashed #d4c5b3;">📖 Pour aller plus loin : <em>Carlo Acutis, une âme de feu</em> — Marie et Jean-Baptiste Maillard, éd. Artège, 2025.</p><p style="font-size:0.8rem;color:#8b7355;font-style:italic;">🕯️ Prière : Saint Carlo Acutis, toi qui as fait de ton ordinateur un instrument d'évangélisation, apprends-nous à mettre nos talents numériques au service du Bien et de la Vérité. Amen.</p></div>`;
@@ -512,30 +563,43 @@ const pageContent = {
         sagesse: `<h2>📖 Sagesse</h2><p class="page-intro">Quelques textes pour nourrir la méditation et la prière.</p><div class="bloc"><h3>Paroles de Jésus</h3><p>« Venez à moi, vous tous qui peinez. » — Mt 11,28</p><p>« Je vous laisse la paix, je vous donne ma paix. » — Jn 14,27</p></div><div class="bloc"><h3>Psaumes</h3><p>« Le Seigneur est mon berger : je ne manque de rien. » — Ps 23,1</p></div>${CARLO_FR}<div class="bloc"><h3>Aller plus loin</h3><p>Pour une écoute personnalisée, revenez à <a href="#/">l'accueil</a> ou faites l'<a href="#/examen">examen guidé</a>.</p></div>`,
         commentCaMarche: COMMENT_FR,
         apropos: `<h2>📖 À propos</h2><div class="bloc"><h3>Qu'est-ce qu'Au Foyer de l'Amour ?</h3><p>Un espace de paix, d'écoute et de prière. Une première écoute et une aide au discernement, enracinée dans la tradition chrétienne et la spiritualité ignatienne.</p></div><div class="bloc"><h3>Ce que ce site n'est pas</h3><p>Il ne remplace ni un accompagnement humain, ni un prêtre, ni un psychologue, ni un médecin.</p></div>`,
-        sources: `<h2>📚 Sources</h2><div class="bloc"><h3>Un projet porté par un prêtre catholique</h3><p>Le discernement proposé demeure toujours aligné sur l'enseignement officiel de l'Église catholique.</p></div><div class="bloc"><h3>Textes bibliques</h3><p><a href="https://www.aelf.org" target="_blank" rel="noopener">AELF</a> et <a href="https://www.biblegateway.com" target="_blank" rel="noopener">BibleGateway</a>.</p></div><div class="bloc"><h3>Saint Carlo Acutis</h3><p>Ouvrage de référence : <em>Carlo Acutis, une âme de feu</em> de Marie et Jean-Baptiste Maillard (Artège, 2025).</p></div>`,
+        sources: `<h2>📚 Sources</h2>
+<p class="page-intro">Hiérarchie claire et traçable de nos références.</p>
+<div class="bloc" style="background:#e8efe9;border-left:4px solid #2e6b47;"><h3>📖 Niveau 1 — Sources primaires</h3><ul style="line-height:1.9;"><li><strong>Bible liturgique francophone</strong> : <a href="https://www.aelf.org" target="_blank" rel="noopener">AELF</a></li><li><strong>Bible en anglais et autres langues</strong> : <a href="https://www.biblegateway.com" target="_blank" rel="noopener">BibleGateway</a></li><li><strong>Documents officiels de l'Église</strong> : <a href="https://www.vatican.va" target="_blank" rel="noopener">vatican.va</a></li></ul></div>
+<div class="bloc"><h3>⛪ Niveau 2 — Sources ecclésiales</h3><ul style="line-height:1.9;"><li>Conférences épiscopales</li><li>Diocèses et paroisses</li><li>Organismes catholiques reconnus</li></ul></div>
+<div class="bloc"><h3>✝️ Niveau 3 — Auteurs spirituels reconnus</h3><ul style="line-height:1.9;"><li><strong>Saint Ignace de Loyola</strong> — <em>Exercices spirituels</em></li><li><strong>Mgr Joseph A. Pellegrino</strong> — méthode homilétique</li><li><strong>Père Tony Kadavil</strong> — méthode homilétique</li><li><strong>Saint Carlo Acutis</strong></li></ul></div>
+<div class="bloc" style="background:#f6f3ef;"><h3>🔍 Niveau 4 — Ressources complémentaires</h3><ul style="line-height:1.9;"><li><a href="https://fr.novalis.ca/" target="_blank" rel="noopener">Prions en Église — Novalis</a></li><li>Articles, livres et sites partenaires</li></ul></div>
+<div class="bloc" style="background:#fdecea;border-left:4px solid #c0392b;"><h3>⚠️ Limites</h3><p>Les réponses générées par l'IA peuvent contenir des <strong>approximations</strong>. Vérifiez toujours auprès d'un prêtre.</p></div>`,
         contact: `<h2>✉️ Contact</h2><div class="bloc"><h3>Partager votre expérience</h3><p>Laissez un témoignage anonyme depuis <a href="#/">la page d'accueil</a>.</p></div>`,
         confidentialite: `<h2>🔒 Confidentialité</h2>
 <p class="page-intro">Notre engagement transparent sur la protection de vos données.</p>
-<div class="bloc" style="background:#e8efe9;border-left:4px solid #2e6b47;"><h3>✅ En bref</h3><p><strong>Aucun compte.</strong> <strong>Aucun cookie de suivi.</strong> <strong>Aucune publicité.</strong> <strong>Aucune revente de données.</strong></p><p>Nous ne stockons <strong>rien sur nos serveurs</strong> vous concernant.</p></div>
-<div class="bloc"><h3>📱 Ce qui reste UNIQUEMENT sur votre appareil</h3><p>Ces données sont stockées dans le <code>localStorage</code> de votre navigateur. Elles ne quittent <strong>jamais</strong> votre appareil :</p><ul style="line-height:1.9;"><li>✅ <strong>Votre carnet</strong> (« petites lumières »)</li><li>✅ <strong>Vos témoignages anonymes</strong> (enregistrés localement)</li><li>✅ <strong>Votre langue choisie</strong></li><li>✅ <strong>Votre identifiant de carnet</strong> (une suite aléatoire, sans lien avec votre identité)</li></ul><p><strong>Pour tout effacer</strong> : boutons « 🗑️ Effacer » dans les sections carnet et témoignages, ou videz les données de votre navigateur.</p></div>
-<div class="bloc" style="background:#fff8f0;border-left:4px solid #c49a6c;"><h3>📤 Ce qui est transmis pour générer une réponse</h3><p>Quand vous cliquez sur <strong>« Réfléchir avec le compagnon »</strong> :</p><ul style="line-height:1.9;"><li>Le <strong>texte que vous écrivez</strong> (situation, précisions, rôle éventuel)</li><li>Le <strong>mode choisi</strong> (discernement, consolation, prière, lecture)</li><li>La <strong>langue</strong> active</li></ul><p>Ces données sont envoyées à :</p><ul style="line-height:1.9;"><li><strong>Netlify Functions</strong> (relais sécurisé, sans stockage)</li><li><strong>OpenAI</strong> (génération de la réponse, sans conservation à long terme)</li></ul><p><strong>⚠️ N'écrivez jamais</strong> de données très sensibles : noms de tiers, adresses précises, numéros de sécurité sociale, données bancaires, informations médicales détaillées.</p></div>
-<div class="bloc"><h3>📚 Préparation d'homélie et AELF</h3><p>Quand vous utilisez la préparation d'homélie :</p><ul style="line-height:1.9;"><li>Une requête est envoyée à l'<strong>API AELF</strong> pour récupérer les lectures liturgiques du jour</li><li>Ces lectures sont ensuite transmises à OpenAI pour générer l'homélie</li></ul><p>AELF est un service indépendant, soumis à sa <a href="https://www.aelf.org/page/politique-de-confidentialite" target="_blank" rel="noopener">propre politique de confidentialité</a>.</p></div>
-<div class="bloc"><h3>🔗 Liens externes</h3><p>Les liens vers les sites externes (AELF, BibleGateway, Prions en Église, etc.) relèvent de <strong>leurs propres politiques</strong> de confidentialité.</p></div>
-<div class="bloc"><h3>⚖️ Conformité RGPD</h3><p>Ce site ne collecte <strong>aucune donnée personnelle identifiable</strong>. Aucun cookie de suivi n'est déposé.</p></div>
-<div class="bloc" style="background:#eef6fa;border-left:4px solid #1f4b66;"><h3>🛡️ Vos droits</h3><p>Puisque nous ne stockons rien sur nos serveurs, il n'y a aucune donnée à consulter, modifier ou supprimer côté serveur. Vous gardez le <strong>contrôle total</strong> de ce qui reste sur votre appareil.</p></div>`
+<div class="bloc" style="background:#eef6fa;border-left:4px solid #1f4b66;">
+<h3>📋 Que devient ce que je confie au compagnon ?</h3>
+<table style="width:100%;border-collapse:collapse;font-size:0.9rem;margin-top:0.5rem;">
+<thead><tr style="background:#d7e9f3;"><th style="padding:8px;text-align:left;border:1px solid #b8d4e4;">Donnée</th><th style="padding:8px;text-align:left;border:1px solid #b8d4e4;">Où ?</th><th style="padding:8px;text-align:left;border:1px solid #b8d4e4;">Durée</th><th style="padding:8px;text-align:left;border:1px solid #b8d4e4;">Qui peut y accéder ?</th></tr></thead>
+<tbody>
+<tr><td style="padding:8px;border:1px solid #d4d4d4;"><strong>Votre situation écrite</strong></td><td style="padding:8px;border:1px solid #d4d4d4;">Envoyée à OpenAI via Netlify</td><td style="padding:8px;border:1px solid #d4d4d4;">Transitoire (non conservée)</td><td style="padding:8px;border:1px solid #d4d4d4;">Personne (usage unique)</td></tr>
+<tr><td style="padding:8px;border:1px solid #d4d4d4;"><strong>Votre carnet</strong></td><td style="padding:8px;border:1px solid #d4d4d4;">Navigateur (localStorage)</td><td style="padding:8px;border:1px solid #d4d4d4;">Jusqu'à effacement</td><td style="padding:8px;border:1px solid #d4d4d4;">Vous uniquement</td></tr>
+<tr><td style="padding:8px;border:1px solid #d4d4d4;"><strong>Vos témoignages</strong></td><td style="padding:8px;border:1px solid #d4d4d4;">Navigateur (localStorage)</td><td style="padding:8px;border:1px solid #d4d4d4;">Jusqu'à effacement</td><td style="padding:8px;border:1px solid #d4d4d4;">Vous uniquement</td></tr>
+<tr><td style="padding:8px;border:1px solid #d4d4d4;"><strong>Statistiques anonymes</strong></td><td style="padding:8px;border:1px solid #d4d4d4;">GoatCounter</td><td style="padding:8px;border:1px solid #d4d4d4;">30 jours</td><td style="padding:8px;border:1px solid #d4d4d4;">Nous (anonymisées)</td></tr>
+</tbody>
+</table>
+</div>
+<div class="bloc" style="background:#e8efe9;border-left:4px solid #2e6b47;"><h3>✅ En bref</h3><p><strong>Aucun compte.</strong> <strong>Aucun cookie de suivi.</strong> <strong>Aucune publicité.</strong> <strong>Aucune revente de données.</strong></p></div>
+<div class="bloc" style="background:#fdecea;border-left:4px solid #c0392b;"><h3>🚨 En cas d'urgence</h3><p>Ce site n'est <strong>pas un service d'urgence</strong>. Si vous êtes en danger immédiat, appelez les <strong>services d'urgence</strong> de votre pays (911, 112, 15, 17, 18…).</p></div>`
     },
     en: {
         sagesse: `<h2>📖 Wisdom</h2><p class="page-intro">Texts to nourish meditation and prayer.</p><div class="bloc"><h3>Words of Jesus</h3><p>« Come to me, all you who are weary. » — Mt 11:28</p></div>${CARLO_EN}<div class="bloc"><h3>Go further</h3><p>Return to the <a href="#/">home page</a> or take the <a href="#/examen">guided examen</a>.</p></div>`,
         commentCaMarche: COMMENT_EN,
         apropos: `<h2>📖 About</h2><div class="bloc"><h3>What is Home of Love?</h3><p>A space of peace, listening and prayer, rooted in the Christian tradition and Ignatian spirituality.</p></div>`,
-        sources: `<h2>📚 Sources</h2><div class="bloc"><h3>A project led by a Catholic priest</h3></div>`,
+        sources: `<h2>📚 Sources</h2><p class="page-intro">Clear and traceable hierarchy of our references.</p><div class="bloc" style="background:#e8efe9;border-left:4px solid #2e6b47;"><h3>📖 Level 1 — Primary sources</h3><ul style="line-height:1.9;"><li><strong>Francophone liturgical Bible</strong> : <a href="https://www.aelf.org" target="_blank" rel="noopener">AELF</a></li><li><strong>Bible in English</strong> : <a href="https://www.biblegateway.com" target="_blank" rel="noopener">BibleGateway</a></li><li><strong>Official documents</strong> : <a href="https://www.vatican.va" target="_blank" rel="noopener">vatican.va</a></li></ul></div><div class="bloc" style="background:#fdecea;border-left:4px solid #c0392b;"><h3>⚠️ Limits</h3><p>AI answers may contain approximations. Always verify with a priest.</p></div>`,
         contact: `<h2>✉️ Contact</h2><div class="bloc"><h3>Share your experience</h3><p>Leave an anonymous testimony from the <a href="#/">home page</a>.</p></div>`,
         confidentialite: `<h2>🔒 Privacy</h2>
 <p class="page-intro">Our transparent commitment to protecting your data.</p>
 <div class="bloc" style="background:#e8efe9;border-left:4px solid #2e6b47;"><h3>✅ In short</h3><p><strong>No account.</strong> <strong>No tracking cookies.</strong> <strong>No advertising.</strong> <strong>No data resale.</strong></p><p>We store <strong>nothing on our servers</strong> about you.</p></div>
-<div class="bloc"><h3>📱 What stays ONLY on your device</h3><p>This data is stored in your browser's <code>localStorage</code>. It <strong>never</strong> leaves your device:</p><ul style="line-height:1.9;"><li>✅ <strong>Your journal</strong> ("little lights")</li><li>✅ <strong>Your anonymous testimonies</strong></li><li>✅ <strong>Your chosen language</strong></li><li>✅ <strong>Your journal ID</strong></li></ul></div>
-<div class="bloc" style="background:#fff8f0;border-left:4px solid #c49a6c;"><h3>📤 What is transmitted</h3><p>When you click <strong>"Think with the companion"</strong>:</p><ul style="line-height:1.9;"><li>The <strong>text you write</strong></li><li>The <strong>chosen mode</strong></li><li>The <strong>active language</strong></li></ul><p>This data is sent to:</p><ul style="line-height:1.9;"><li><strong>Netlify Functions</strong> (secure relay, no storage)</li><li><strong>OpenAI</strong> (answer generation)</li></ul><p><strong>⚠️ Never write</strong> highly sensitive data.</p></div>
-<div class="bloc"><h3>⚖️ GDPR compliance</h3><p>This site collects <strong>no personally identifiable data</strong>.</p></div>`
+<div class="bloc"><h3>📱 What stays ONLY on your device</h3><ul style="line-height:1.9;"><li>✅ <strong>Your journal</strong></li><li>✅ <strong>Your anonymous testimonies</strong></li><li>✅ <strong>Your chosen language</strong></li></ul></div>
+<div class="bloc" style="background:#fff8f0;border-left:4px solid #c49a6c;"><h3>📤 What is transmitted</h3><p>When you click <strong>"Think with the companion"</strong>: the text you write, the chosen mode, the active language. Sent to Netlify Functions (secure relay, no storage) and OpenAI (answer generation).</p></div>
+<div class="bloc" style="background:#fdecea;border-left:4px solid #c0392b;"><h3>🚨 In case of emergency</h3><p>This site is <strong>not an emergency service</strong>. If in immediate danger, call your country's <strong>emergency services</strong>.</p></div>`
     }
 };
 ['zh','hi','es','ar'].forEach(l => { pageContent[l] = pageContent.fr; });
@@ -558,7 +622,7 @@ async function callDiscernAPI(payload) {
     try {
         const res = await fetchWithTimeout('/.netlify/functions/discern', {
             method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload)
-        }, 30000);
+        }, 45000);
         const ct = res.headers.get('content-type') || '';
         if (!ct.includes('application/json')) return { ok: false, error: 'Réponse non JSON' };
         const data = await res.json();
@@ -778,21 +842,22 @@ async function handleSubmit() {
         situation, role, lang: currentLang, mode: currentMode,
         lecturesJour
     });
-   if (r.ok && r.data && r.data.response) {
-    reponse = r.data.response;
-    // Si l'IA a détecté une situation sensible, afficher un avertissement renforcé
-    if (r.data.sensitive) {
-        const urgences = (translations[currentLang] || FR).ecouteList || [];
-        const urgentBlock = "\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n" +
-                            "🆘 RESSOURCES D'AIDE IMMÉDIATE\n" +
-                            "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n" +
-                            urgences.map(u => "• " + u).join("\n");
-        reponse += urgentBlock;
-        showToast('🆘 Situation grave détectée — Ressources d\'urgence ajoutées', 'warn', 7000);
+
+    if (r.ok && r.data && r.data.response) {
+        reponse = r.data.response;
+        // Si l'IA a détecté une situation sensible, afficher un avertissement renforcé
+        if (r.data.sensitive) {
+            const urgences = (translations[currentLang] || FR).ecouteList || [];
+            const urgentBlock = "\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n" +
+                                "🆘 RESSOURCES D'AIDE IMMÉDIATE\n" +
+                                "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n" +
+                                urgences.map(u => "• " + u).join("\n");
+            reponse += urgentBlock;
+            showToast('🆘 Situation grave détectée — Ressources d\'urgence ajoutées', 'warn', 7000);
+        }
     }
-}
-else if (r.error) { console.log('Fallback:', r.error); showToast('Mode autonome activé.', 'info', 3500); }
-if (!reponse) reponse = buildFallback(situation, t);
+    else if (r.error) { console.log('Fallback:', r.error); showToast('Mode autonome activé.', 'info', 3500); }
+    if (!reponse) reponse = buildFallback(situation, t);
 
     showResponse(reponse);
     updateRessources(currentSituationKey);
@@ -855,25 +920,49 @@ function detectAuthorContext(refStr, textStr) {
     return { lienAelf: 'https://www.aelf.org/bible' };
 }
 
+/* ============================================================
+   HOMÉLIE DOMINICALE — SCHÉMA EN 4 MOUVEMENTS (450 mots)
+   ============================================================ */
 function buildHomelieSunday(data) {
     const { evRef, l1Ref, l2Ref, evQuote, psalmRefrain } = data;
+
+    const exEv = getExegesisFor(evRef);
+    const exL1 = getExegesisFor(l1Ref);
+    const exL2 = getExegesisFor(l2Ref);
+
     let h = "";
+
+    // ━━━ MOUVEMENT 1 : ACCROCHE NARRATIVE ━━━
     h += "<p>Un homme avait planté un petit potager derrière sa maison. Il avait préparé la terre, semé avec soin, arrosé chaque jour et attendu patiemment. Un jour, son voisin lui demanda : <em>« Comment va ton potager ? »</em> L'homme répondit : <em>« Les feuilles poussent à merveille. Il n'y a qu'un problème : je ne vois encore aucun légume ! »</em> Le voisin sourit : <em>« Mais un jardin est fait pour produire quelque chose ! »</em></p>";
-    h += "<p>C'est exactement le message de nos lectures d'aujourd'hui : Dieu a planté pour nous une vigne et attend qu'elle produise de bons fruits.";
-    if (l1Ref) h += " La première lecture (<strong>" + escapeHtml(l1Ref) + "</strong>)";
-    h += ".";
-    if (evRef) h += " L'Évangile (<strong>" + escapeHtml(evRef) + "</strong>)";
-    if (evQuote) h += " prolonge : « <em>" + escapeHtml(evQuote) + "</em> »";
-    h += " Quels fruits portons-nous ?</p>";
-    h += "<p>";
-    if (l2Ref) h += "Saint Paul, dans la deuxième lecture (<strong>" + escapeHtml(l2Ref) + "</strong>), ";
-    else h += "L'Écriture ";
-    h += "nous invite à tourner nos cœurs vers ce qui est vrai, juste et digne d'éloge.";
-    if (psalmRefrain) h += " Comme le chante le psaume : « <em>" + escapeHtml(psalmRefrain) + "</em> »";
-    h += ".</p>";
-    h += "<p>Dieu nous a confié une vigne : notre vie, nos familles, notre communauté. Il attend de vrais fruits : un appel à un isolé, un pardon accordé, une parole encourageante.<br><br><em>Amen.</em></p>";
+
+    // ━━━ MOUVEMENT 2 : EXÉGÈSE DES LECTURES ━━━
+    h += "<p>C'est exactement le message de nos lectures d'aujourd'hui. Dans la première lecture";
+    if (l1Ref) h += " (<strong>" + escapeHtml(l1Ref) + "</strong>)";
+    h += ", " + exL1.contexte + " " + exL1.enseignement + ".</p>";
+
+    if (l2Ref) {
+        h += "<p>La deuxième lecture (<strong>" + escapeHtml(l2Ref) + "</strong>) nous donne la clé pour porter du fruit. " + exL2.contexte + " " + exL2.enseignement + "</p>";
+    }
+
+    h += "<p>Mais c'est l'Évangile";
+    if (evRef) h += " (<strong>" + escapeHtml(evRef) + "</strong>)";
+    h += " qui prolonge cette image de la vigne. " + exEv.contexte;
+    if (evQuote) h += " Jésus nous redit : « <em>" + escapeHtml(evQuote) + "</em> »";
+    h += " " + exEv.enseignement + "</p>";
+
+    if (psalmRefrain) {
+        h += "<p>Le psaume, quant à lui, nous fait prier avec les mots du peuple d'Israël : « <em>" + escapeHtml(psalmRefrain) + "</em> » Cette prière est la nôtre : nous avons besoin que Dieu visite notre vigne, car sans lui nous ne pouvons rien faire.</p>";
+    }
+
+    // ━━━ MOUVEMENT 3 : ACTUALISATION PASTORALE ━━━
+    h += "<p>Dieu nous a confié une vigne : notre vie, nos familles, notre communauté, notre monde. Il attend de vrais fruits — non des feuilles qui poussent à merveille, mais des fruits de justice, de paix, de pardon. Cette semaine, osons un geste concret : un appel à un isolé, un pardon accordé, une parole d'encouragement. Et quand nous échouons, revenons à lui avec confiance, car il est le vigneron patient qui ne se lasse jamais de nous attendre.</p>";
+
+    // ━━━ MOUVEMENT 4 : PRIÈRE FINALE ━━━
+    h += "<p><em>Seigneur, tu nous as plantés comme une vigne précieuse. Donne-nous la force de porter des fruits de justice et de paix. Que ta grâce nous transforme, afin que nos vies témoignent de ton amour. Amen.</em></p>";
+
     return h;
 }
+
 function buildHomelieWeekday(data) {
     const { evRef, evQuote, theme } = data;
     const title = theme || "Fidélité au cœur du quotidien";
@@ -886,12 +975,14 @@ function buildHomelieWeekday(data) {
     h += "<p><em>Prière : Seigneur, conduis nos pas dans ta paix aujourd'hui. Amen.</em></p>";
     return h;
 }
+
 function genererHomelieLocale(lecture1, psaume, lecture2, evangile, theme) {
     const p = parseAelfLectures(aelfLectures);
     const aEv = p.evangile, aL1 = p.lect1, aL2 = p.lect2, aPs = p.psaume;
     const evRef = (aEv && aEv.ref) || evangile || '';
     const l1Ref = (aL1 && aL1.ref) || lecture1 || '';
     const l2Ref = (aL2 && aL2.ref) || lecture2 || '';
+    const psRef = (aPs && aPs.ref) || psaume || '';
     const evText = aEv && aEv.contenu ? stripHtml(aEv.contenu) : '';
     const ctx = detectAuthorContext(evRef, evText);
     let evQuote = '';
@@ -907,7 +998,7 @@ function genererHomelieLocale(lecture1, psaume, lecture2, evangile, theme) {
     let isSunday = true;
     const di = document.getElementById('date-aelf');
     if (di && di.value) { const parts = di.value.split('-'); if (parts.length === 3) { const d = new Date(parseInt(parts[0], 10), parseInt(parts[1], 10) - 1, parseInt(parts[2], 10)); isSunday = (d.getDay() === 0); } }
-    const data = { evRef, l1Ref, l2Ref, evQuote, psalmRefrain, theme };
+    const data = { evRef, l1Ref, l2Ref, psRef, evQuote, psalmRefrain, theme };
     let html = isSunday ? buildHomelieSunday(data) : buildHomelieWeekday(data);
     const max = isSunday ? WORD_LIMITS.sunday : WORD_LIMITS.weekday;
     let wc = countWordsInHtml(html);
